@@ -803,17 +803,6 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 [appendix]
 == User Stories
-*As a new student user i can view more information about particular command, so that i can learn how to use various commands
-*As a student/couple user, i can view my friends/couple time table so i can plan a schedule/location to meet
-*As a student/couple user, i can schedule(add) a time slot for meetup at a location so there will not be any crashes
-*As a student/couple user, i can edit the schedule for meetup and edit the location (if there is changes) so that if there has been any last minute changes i still can edit
-*As a student/couple user, i can delete the scheduled meetup and reflect on affected people only so not everyone that sync with my timetable gets affected
-*As a student/couple user, i can add/list/delete/edit journal so i can note down everything in a journal that i would like to keep
-*As a couple user, i would like to receive a birthday notification a week earlier so i can have ample time to prepare the gift
-*As a new student user, i can search for the campus shortcuts and list out in ascending order so i won’t be late in future.
-*8As a new student user, i can search for the route when it rains from one location to another so i won’t get wet if i didn't bring my umbrella
-*As a couple user, i can calculate my diet of how many calories i have burnt this that day so my love won’t leave me.
-*As a new student user i can find a place to eat from that location (Faculty/School) so i will not feel hungry.
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
@@ -826,11 +815,29 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
+|`* * *` |As a couple (student) user| I can schedule for Add/Delete/view timetable with my partner.
+
+|`* * *` |As a couple (student) user |I can create Journal to add/view/delete|keep track on life couple event
+
+|`* * *` |As a new student user| I can search for campus shortcuts| So wont get lost or drenched from rain
+
+|`* * *` |As a couple (student) user| I can calculate my diet of how many calories i have burnt
+
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`*`| As a couple (student) user| I can receive birthday notification
+
+|`*`| As a couple (student) user| I can view my calendar|
+
+|`*`| As a couple (student) user| I can view my journal|
+
+|`*`| As a user who likes to customize thing| i can change the theme or customize text color|
+
+
 |=======================================================================
 
 _{More to be added}_
