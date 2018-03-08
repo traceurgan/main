@@ -78,6 +78,16 @@ public class AddressBookTest {
     }
 
     @Test
+    public void updatePerson_detailsChanged_personsAndTagsListUpdated() throws Exception {
+        AddressBook addressBookUpdatedToAmy = new AddressBookBuilder().withPerson(BOB).build();
+        addressBookUpdatedToAmy.updatePerson(BOB, AMY);
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(AMY).build();
+
+        assertEquals(expectedAddressBook, addressBookUpdatedToAmy);
+    }
+
+    @Test
     public void removeTag_nonExistentTag_addressBookUnchanged() throws Exception {
         addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_UNUSED));
 
