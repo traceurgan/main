@@ -10,7 +10,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2103JAN2018-T09-B4/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -863,6 +863,47 @@ Use case ends.
 +
 [none]
 ** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add Timetable to Person
+
+*MSS*
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User request to add a shortened NUSMODS url to a specific person in the list.
+4.  AddressBook adds the url to the person in the list.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. The specified person already has a timetable
++
+[none]
+** 3b1. AddressBook prompts user to override existing timetable.
+** 3b2. User confirms change.
++
+Use case resumes at step 4.
+
+* 3c. The given url is invalid.
++
+[none]
+** 3c1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
 
