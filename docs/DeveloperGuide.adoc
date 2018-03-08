@@ -815,13 +815,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
-|`* * *` |As a couple (student) user| I can schedule for Add/Delete/view timetable with my partner.
+|`* * *` |As a couple (student) user |Add/Delete/Compare timetable with my partner |keep track of my partner's free time
 
-|`* * *` |As a couple (student) user |I can create Journal to add/view/delete|keep track on life couple event
+|`* * *` |As a couple (student) user |create a Journal to Add/View/Delete |keep track on life couple event
 
-|`* * *` |As a new student user| I can search for campus shortcuts| So wont get lost or drenched from rain
+|`* * *` |As a new student user |search for campus shortcuts |avoid getting lost or drenched from rain
 
-|`* * *` |As a couple (student) user| I can calculate my diet of how many calories i have burnt
+|`* * *` |As a couple (student) user | |I can calculate my diet of how many calories i have burnt
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
@@ -829,13 +829,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 
-|`*`| As a couple (student) user| I can receive birthday notification
+|`*`| As a couple (student) user |receive birthday notifications |remember my partner's birthday
 
-|`*`| As a couple (student) user| I can view my calendar|
+|`*`| As a couple (student) user |view my calendar |take note of upcoming events
 
-|`*`| As a couple (student) user| I can view my journal|
+|`*`| As a couple (student) user |I can view my journal |
 
-|`*`| As a user who likes to customize thing| i can change the theme or customize text color|
+|`*`| As a user who likes to customize things |change the theme or customize text color |
 
 
 |=======================================================================
