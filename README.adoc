@@ -15,8 +15,9 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop application for Couples in National University of Singapore(NUS). It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* Features include:
+* This is a desktop application for Couples in National University of Singapore(NUS).
+* It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* Our Features:
 ** Compare NUS timetables and find your partner's location based on his/her timetable,
 ** Plan dates and be notified of special events (e.g. Valentine's day) with our built-in Scheduler,
 ** Start your personal diary to keep your memories with your significant other ... and more!
