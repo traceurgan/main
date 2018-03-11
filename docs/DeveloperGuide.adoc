@@ -839,8 +839,8 @@ _{More to be added}_
 
 *MSS*
 
-1.  User requests to list persons
-2.  NUSCouples shows a list of persons
+1.  User requests to list persons.
+2.  NUSCouples shows a list of persons.
 3.  User requests to delete a specific person in the list
 4.  NUSCouples deletes the person
 +
@@ -865,8 +865,8 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to list persons
-2.  NUSCouples shows a list of persons
+1.  User requests to list persons.
+2.  NUSCouples shows a list of persons.
 3.  User request to add a shortened http://nusmods.com[NUSMODS] timetable url to a specific person in the list.
 4.  NUSCouples adds the url to the person in the list.
 5.  NUSCouples displays the timetable.
@@ -887,7 +887,7 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-* 3b. The specified person already has a timetable
+* 3b. The specified person already has a timetable.
 +
 [none]
 ** 3b1. NUSCouples prompts user to override existing timetable.
@@ -899,6 +899,39 @@ Use case resumes at step 4.
 +
 [none]
 ** 3c1. NUSCouples shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: View Timetable of Person
+
+*MSS*
+
+1.  User requests to list persons.
+2.  NUSCouples shows a list of persons.
+3.  User request view timetable of a specified person in the list.
+4.  NUSCouples displays the timetable.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. NUSCouples shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. The specified person does not have a timetable.
++
+[none]
+** 3b1. NUSCouples shows an error message.
 +
 Use case resumes at step 2.
 
