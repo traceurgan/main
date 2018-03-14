@@ -3,8 +3,8 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://github.com/CS2103JAN2018-T09-B4/main/blob/master/docs/AboutUs.adoc[FreshieCouple] team. +
-_ +
+AddressBook - Level 4 was developed by the https://github.com/CS2103JAN2018-T09-B4/main[FreshieCouple] team. +
+ +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -16,6 +16,7 @@ image::samuel.jpeg[width="150", align="left"]
 
 Role: Developer +
 Responsibilities: Model
+
 '''
 
 === Marlene Koh
