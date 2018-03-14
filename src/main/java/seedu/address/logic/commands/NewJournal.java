@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.ui.JournalWindow;
