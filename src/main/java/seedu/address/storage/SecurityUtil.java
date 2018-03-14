@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
@@ -91,35 +92,19 @@ public class SecurityUtil {
     }
 
     /**
-     * Loads a key from the given path {@code AES_KEY_FILEPATH}.
-     * If the key does not exist, create a new SecretKey.
-     */
-    private static void loadKey() {
-        File keyFile = new File(AES_KEY_FILEPATH);
-        if (keyFile.exists()) {
-            readKey();
-        }
-        else {
-            logger.info("Key does not exist. Creating key.");
-            createKey();
-        }
-    }
-
-    /**
      * Reads the key from the path given by {@code AES_KEY_FILEPATH}
      */
-    private static void readKey() {
+    private static void loadKey() {
         try {
             ObjectInputStream ois =
                     new ObjectInputStream(new FileInputStream(AES_KEY_FILEPATH));
             secretKey = (SecretKey) ois.readObject();
-            ois.close();
         } catch (IOException oie) {
             logger.severe("Failed to read key from file");
-            System.exit(1);
+            createKey();
         } catch (ClassNotFoundException cnfe) {
             logger.severe("Failed to typecast to class SecretKey");
-            System.exit(1);
+            createKey();
         }
         logger.fine("Key successfully read from file");
     }
