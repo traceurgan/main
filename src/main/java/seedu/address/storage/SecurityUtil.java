@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.security.Security;
 import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
@@ -86,6 +85,7 @@ public class SecurityUtil {
 
         } catch (IllegalBlockSizeException e) {
             logger.warning("File data is not a multiple of the block-size");
+            encrypt(file);
         } catch (BadPaddingException e) {
             logger.warning("Key or File data is invalid " + StringUtil.getDetails(e));
         }
