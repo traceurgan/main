@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= NUSCouples - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -780,26 +780,19 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
-* Freshie Couples/Students in NUS School of Computing
-* - Time Table Sync to NUS Mods in order to find common breaks
-* - Notify on important dates
-* - Journal diary on the meeting
-* - Campus direction shortcuts for new students and when it rains
-* - Couples having diet issues
-* - Location on where to eat
-* has a need to manage a significant number of contacts
+*Target user profile*: Couples in NUS who:
+
+* want to plan dates, in and out of school
+* want to store their memories via private journal entries
 * prefer desktop apps over other types
 * can type fast
-* prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* prefer typing over mouse input
+* are reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
-*Our team visions to help new students to not get lost in their first day of school or when it rains. Because right now, there is no proper channel that helps them to solve this problem.
-*Our team visions to help new students to help them find a place to eat because they don’t know the nearest food centre they can eat at.
-*Our team visions to help students to find common breaks so they can form a meetup session easily
-*Our team visions to help students to jote down journals that happen on the meetup session so that everything is well stored together
-*Our team visions to help NUS couple to solve problem that they faced out of all the hectic workload in NUS which always leads to a disastrous break up.
+*Value proposition*: Help couples in NUS to create new memories and remember them through:
+
+* Providing features such as NUS timetable comparator to allow couples in NUS to plan dates more easily
+* Jot down journal entries to remember their dates
 
 [appendix]
 == User Stories
@@ -815,25 +808,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
-|`* * *` |As a couple (student) user |Add/Delete/Compare timetable with my partner |keep track of my partner's free time
+|`* * *` |As a part of a couple in NUS |view my partner's NUS timetable for the week |keep track of my partner's free time
 
-|`* * *` |As a couple (student) user |create a Journal to Add/View/Delete |keep track on life couple event
+|`* * *` |As a part of a couple in NUS |add and view special events (e.g. Valentine's day) in the same month |better plan for these dates
 
-|`* * *` |As a new student user |search for campus shortcuts |avoid getting lost or drenched from rain
+|`* * *` |As a part of a couple in NUS |add/view Journal entries |remember memories of our dates
 
-|`* * *` |As a couple (student) user | |I can calculate my diet of how many calories i have burnt
-
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |As a part of a couple in NUS |locate my partner from his NUS timetable |easily meet up with my partner on campus
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
+|`* *` |As a part of a couple in NUS |be notified of special events (e.g. Valentine's day) in my calendar |better plan for these dates
+
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
-
-|`*`| As a couple (student) user |receive birthday notifications |remember my partner's birthday
-
-|`*`| As a couple (student) user |view my calendar |take note of upcoming events
-
-|`*`| As a couple (student) user |I can view my journal |
 
 |`*`| As a user who likes to customize things |change the theme or customize text color |
 
@@ -852,10 +839,10 @@ _{More to be added}_
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
+1.  User requests to list persons.
+2.  NUSCouples shows a list of persons.
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  NUSCouples deletes the person
 +
 Use case ends.
 
@@ -869,7 +856,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. NUSCouples shows an error message.
 +
 Use case resumes at step 2.
 
@@ -878,10 +865,11 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User request to add a shortened NUSMODS url to a specific person in the list.
-4.  AddressBook adds the url to the person in the list.
+1.  User requests to list persons.
+2.  NUSCouples shows a list of persons.
+3.  User request to add a shortened http://nusmods.com[NUSMODS] timetable url to a specific person in the list.
+4.  NUSCouples adds the url to the person in the list.
+5.  NUSCouples displays the timetable.
 +
 Use case ends.
 
@@ -895,14 +883,14 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. NUSCouples shows an error message.
 +
 Use case resumes at step 2.
 
-* 3b. The specified person already has a timetable
+* 3b. The specified person already has a timetable.
 +
 [none]
-** 3b1. AddressBook prompts user to override existing timetable.
+** 3b1. NUSCouples prompts user to override existing timetable.
 ** 3b2. User confirms change.
 +
 Use case resumes at step 4.
@@ -910,7 +898,40 @@ Use case resumes at step 4.
 * 3c. The given url is invalid.
 +
 [none]
-** 3c1. AddressBook shows an error message.
+** 3c1. NUSCouples shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: View Timetable of Person
+
+*MSS*
+
+1.  User requests to list persons.
+2.  NUSCouples shows a list of persons.
+3.  User request view timetable of a specified person in the list.
+4.  NUSCouples displays the timetable.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. NUSCouples shows an error message.
++
+Use case resumes at step 2.
+
+* 3b. The specified person does not have a timetable.
++
+[none]
+** 3b1. NUSCouples shows an error message.
 +
 Use case resumes at step 2.
 
@@ -924,16 +945,13 @@ _{More to be added}_
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Should be usable by a novice after reading the <<UserGuide#, User Guide>>.
 .  Should be able to handle any invalid inputs.
-.  Commands used should be intuitive and comprehensible.
-.  Should respond within 2 seconds.
+.  Should respond to user inputs within 2 seconds.
 .  Should be able to work on both 32-bit and 64-bit environments.
 
 _{More to be added}_
 
 [appendix]
 == Glossary
-* Product survey, pros - able to gather feedback from couples from SOC for better enhancement cons- to get real consistent feedback as couples behave differently and expose differently
-
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
