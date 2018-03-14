@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyAddressBook;
  * Represents a command which can be undone and redone.
  */
 public abstract class UndoableCommand extends Command {
+
     private ReadOnlyAddressBook previousAddressBook;
 
     protected abstract CommandResult executeUndoableCommand() throws CommandException;
@@ -62,4 +63,5 @@ public abstract class UndoableCommand extends Command {
         preprocessUndoableCommand();
         return executeUndoableCommand();
     }
+
 }
