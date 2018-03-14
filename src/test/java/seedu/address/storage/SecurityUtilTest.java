@@ -14,16 +14,16 @@ public class SecurityUtilTest {
     public void encryptDecrypt_successful_emptyResult() throws Exception {
         File testFile = new File("./src/test/data/sandbox/temp.xml");
         PrintWriter writer = new PrintWriter(testFile);
-        String test = new String("testing encryption and decryption");
+        String plaintext = new String("testing encryption and decryption");
 
-        writer.write(test);
+        writer.write(plaintext);
         writer.close();
 
         SecurityUtil.encrypt(testFile);
         SecurityUtil.decrypt(testFile);
 
         BufferedReader br = new BufferedReader(new FileReader(testFile));
-        String stuff = br.readLine();
-        assertEquals(stuff, test);
+        String testResult = br.readLine();
+        assertEquals(testResult, plaintext);
     }
 }
