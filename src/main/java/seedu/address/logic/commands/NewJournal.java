@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.ui.JournalWindow;
 
+/**
+ * Creates a new window for typing journal entries
+ */
 public class NewJournal extends Command {
 
     public static final String COMMAND_WORD = "new";
