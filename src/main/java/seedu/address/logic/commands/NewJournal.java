@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
+import javax.swing.*;
+
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.ui.JournalWindow;
 
 public class NewJournal extends Command {
 
@@ -9,7 +12,13 @@ public class NewJournal extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        //do something
+        JFrame frame = new JournalWindow();
+        frame.setTitle("Journal");
+        frame.setVisible(true);
+        frame.setSize(720, 480);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
+        frame.setLocationRelativeTo(null);
         return null;
     }
 }
