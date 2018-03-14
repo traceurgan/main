@@ -37,7 +37,7 @@ Responsibilities: Storage
 '''
 
 === Danial Ng
-image::m133225.jpg[width="150", align="left"]
+image::daniel.jpeg[width="150", align="left"]
 {empty}[https://github.com/HEARTOFAL1ON[github]]
 
 Role: Developer +
