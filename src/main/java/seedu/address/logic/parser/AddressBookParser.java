@@ -84,6 +84,10 @@ public class AddressBookParser {
         case ExitCommand.COMMAND_ALIAS:
             return new ExitCommand();
 
+        case NewJournal.COMMAND_WORD:
+        case NewJournal.COMMAND_ALIAS:
+            return new NewJournal();
+
         case HelpCommand.COMMAND_WORD:
         case HelpCommand.COMMAND_ALIAS:
             return new HelpCommand();
