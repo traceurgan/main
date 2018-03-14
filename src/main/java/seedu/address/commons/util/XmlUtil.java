@@ -39,7 +39,6 @@ public class XmlUtil {
             throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
         }
 
-        SecurityUtil.decrypt(file);
 
         JAXBContext context = JAXBContext.newInstance(classToConvert);
         Unmarshaller um = context.createUnmarshaller();
@@ -65,13 +64,12 @@ public class XmlUtil {
             throw new FileNotFoundException("File not found : " + file.getAbsolutePath());
         }
 
+
         JAXBContext context = JAXBContext.newInstance(data.getClass());
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         m.marshal(data, file);
-
-        SecurityUtil.encrypt(file);
     }
 
 }
