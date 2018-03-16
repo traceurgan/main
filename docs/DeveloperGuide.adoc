@@ -785,9 +785,10 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * is currently a student of NUS
 * is in a relationship with a student of NUS
 * may have to travel to unfamiliar locations in NUS
-* want to remember special moments
-* want to remember special dates
-* want to schedule meetings
+* needs to remember special moments
+* needs to remember special dates
+* needs to schedule meetings
+* needs to find a good time to meet
 * prefer desktop apps over other types
 * can type fast
 * prefer typing over mouse input
@@ -797,10 +798,11 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Feature contribution:*
 
-* Timetable viewer: To help couples identify common breaks so they can plan meetings
-* Scheduler: To remind couples of planned meetings and important dates
+* Timetable viewer: To help couples identify common breaks during school term so they can plan meetings
+* Scheduler: To schedule meetings and remind couples of planned meetings and important dates
 * Journal: To record special memories
 * Location: To help couples locate each other's classes so they can plan meetings near that area or meet them immediately after class
+* Data encryption: To keep others from viewing personal information such as journal entries
 
 [appendix]
 == User Stories
@@ -816,13 +818,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
-|`* * *` |NUS student in a relationship |view my partner's NUS timetable for the week |keep track of my partner's free time
+|`* * *` |pair of NUS students in a relationship |view my partner's NUS timetable for the week |keep track of my partner's free time
 
 |`* * *` |person in a relationship |add and view special events (e.g. Valentine's day) in the same month |better plan for these dates
 
 |`* * *` |person in a relationship |add/view Journal entries |remember special memories
 
-|`* * *` |NUS student in a relationship |locate my partner from his NUS timetable |easily meet up with my partner on campus
+|`* * *` |pair of NUS students in a relationship |locate my partner from his NUS timetable |easily meet up with my partner on campus
 
 |`* * *` |user |encrypt my NUSCouples save data |prevent strangers from reading personal information such as my journal entries
 
