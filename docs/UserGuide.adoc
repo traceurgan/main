@@ -172,34 +172,82 @@ Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
 Alias: `hist`
 
-=== Creating a new journal entry : `new`
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
 
-Creates a new window that allows the user to input and save text. +
-Format: `new` +
-Alias: `n`
+=== Viewing a timetable : `tview`
 
-=== Scheduling new event : `schedule`
+Shows the current saved timetable. +
+Format: `tview` +
+Alias: `tv`
+
+=== Adding a timetable : `tadd`
+
+Imports a timetable from NUSMODS website. +
+Format: `tadd` +
+Alias: `ta`
+
+=== Replacing a timetable : `treplace`
+
+Replaces the current timetable with an updated version. +
+Format: `treplace` +
+Alias: `tr`
+
+=== Viewing all journal entries : `jview`
+
+View all journal entries. +
+Format: `jview` +
+Alias: `jv`
+
+=== Creating a new journal entry : `jnew`
+
+Creates a new window that allows the user to input and save journal entries. +
+Format: `jnew` +
+Alias: `jn`
+
+=== Deleting a journal entry : `jdelete`
+
+Deletes a journal entry on the specified date. +
+Format: `jdelete` +
+Alias: `jd`
+
+=== Filtering journal entries by date : `jfilter`
+
+Filters journal entries by the specified internal. +
+Format: `jfilter` +
+Alias: `jf`
+
+=== Viewing current calendar : `cview`
+
+View Google calander. +
+Format: `cview` +
+Alias: `cv`
+
+=== Adding new event to calendar : `cadd`
 
 Adds new event to Google calander. +
-Format: `schedule` +
-Alias: `shd`
+Format: `cadd` +
+Alias: `ca`
+
+=== Deleting event from Google Calendar: `cdelete`
+
+Delete specified event from Google calendar. +
+Format: `cdelete` +
+Alias: `cd`
+
+=== Editing event on Google Calendar : `cedit`
+
+Edit event on Google calander. +
+Format: `cedit` +
+Alias: `ce`
 
 === Finding building location : `location`
 
 Shows the location (by building) of the entered classroom name. +
 Format: `location` +
 Alias: `loc`
-
-=== Showing partner's timetable : `timetable`
-
-Shows the partner's timetable. +
-Format: `timetable` +
-Alias: `ttb`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
 
 // tag::undoredo[]
 === Undoing previous command : `undo`
@@ -299,7 +347,15 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *New* : `new`
-* *Schedule* : `schedule`
-* *Timetable* : `timetable`
+* *Timetable View* : `tview`
+* *Timetable Add* : `tadd`
+* *Timetable Replace* : `treplace`
+* *Journal View* : `jview`
+* *Journal New* : `jnew`
+* *Journal Delete* : `jdelete`
+* *Journal Filter* : `jfilter`
+* *Calendar View* : `cview`
+* *Calendar Add* : `cadd`
+* *Calendar Delete* : `cdelete`
+* *Calendar Edit* : `cedit`
 * *Location* : `location`
