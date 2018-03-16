@@ -782,8 +782,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile:*
 
-* are currently students of NUS
-* are in a relationship
+* is currently a student of NUS
+* is in a relationship with a student of NUS
 * may have to travel to unfamiliar locations in NUS
 * want to remember special moments
 * want to remember special dates
