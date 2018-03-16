@@ -213,33 +213,27 @@ Deletes a journal entry on the specified date. +
 Format: `jdelete` +
 Alias: `jd`
 
-=== Filtering journal entries by date : `jfilter`
-
-Filters journal entries by the specified internal. +
-Format: `jfilter` +
-Alias: `jf`
-
 === Viewing current calendar : `cview`
 
-View Google calander. +
+View Google calendar. +
 Format: `cview` +
 Alias: `cv`
 
-=== Adding new event to calendar : `cadd`
+=== Adding new event to Google calendar : `cadd`
 
-Adds new event to Google calander. +
+Adds new event to Google calendar. +
 Format: `cadd` +
 Alias: `ca`
 
-=== Deleting event from Google Calendar: `cdelete`
+=== Deleting event from Google calendar: `cdelete`
 
 Delete specified event from Google calendar. +
 Format: `cdelete` +
 Alias: `cd`
 
-=== Editing event on Google Calendar : `cedit`
+=== Editing event on Google calendar : `cedit`
 
-Edit event on Google calander. +
+Edit event on Google calendar. +
 Format: `cedit` +
 Alias: `ce`
 
@@ -335,6 +329,12 @@ _{explain how the user can add two timetables and highlight time slots with comm
 === Send Google Maps location to phone `[coming in v2.0]`
 
 _{explain how the user can use their phones to navigate to a location in NUS by sending the location to the user's phone from the Google Maps API}_
+
+=== Filtering journal entries by date `[coming in v2.0]`
+
+Filters journal entries by the specified interval. +
+Format: `jfilter` +
+Alias: `jf`
 
 == FAQ
 
