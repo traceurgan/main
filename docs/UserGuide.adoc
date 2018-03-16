@@ -324,6 +324,18 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+=== Archiving journal entries `[coming in v2.0]`
+
+_{explain how the user can export old journal entries to another storage location in their computer}_
+
+=== Comparing timetable `[coming in v2.0]`
+
+_{explain how the user can add two timetables and highlight time slots with common breaks}_
+
+=== Send Google Maps location to phone `[coming in v2.0]`
+
+_{explain how the user can use their phones to navigate to a location in NUS by sending the location to the user's phone from the Google Maps API}_
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
