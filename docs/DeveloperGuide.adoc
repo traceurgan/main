@@ -858,8 +858,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |experienced user |have shortcut keys| do the same thing in a shorter time
 
+|`*`| user with a romantic partner  | send motivational pictures | encourage my partner
+=======
 |`*` |user |receive notification of upcoming scheduled events| so i can get notified and prepare earlier
-
 
 |=======================================================================
 
