@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-T09-B4/main
 
-By: `Team NUSCouples`      Since: `Feb 2018`      Licence: `NUS School Of Computing `
+By: `Team T09-B4`      Since: `Feb 2018`      Licence: `NUS School Of Computing `
 
 == Setting up
 
@@ -794,6 +794,30 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Feature contribution:*
 
+
+|===
+|Assignee |Major|Minor
+
+|Chen Xing (Scheduler)
+|This app allows user to schedule/edit/delete/view planned meetings
+|This app allows user to receive notification about important dates from scheduled meetings
+
+|Marlene (Timetable viewer)
+|To help couples identify common breaks during school term so they can plan meetings during their free time
+|Data encryption to protect data and prevent people from accessing and reading plaintext files
+
+|Samuel (Journal)
+|Column 2, row 3
+|Column 3, row 3
+
+|Daniel (Location)
+|Column 2, row 4
+|Column 3, row 4
+
+|===
+
+
+
 * Timetable viewer: To help couples identify common breaks during school term so they can plan meetings
 * Scheduler: To schedule meetings and remind couples of planned meetings and important dates
 * Journal: To record special memories
@@ -810,17 +834,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
-
-|`* * *` |user |delete a person |remove entries that I no longer need
-
-|`* * *` |experienced user |have shortcut keys| do the same thing in a shorter time
-
 |`* * *` |pair of NUS students in a relationship |view my partner's NUS timetable for the week |keep track of my partner's free time
 
 |`* * *` |pair of NUS students in a relationship |replace my partner's NUS timetable |see the most updated timetable
 
-|`* * *` |person in a relationship |add and view special events (e.g. Valentine's day) in the same month |better plan for these dates
+|`* * *` |person in a relationship |add,edit,delete and view special events (e.g. Valentine's day) in the same month |better plan for these dates
 
 |`* * *` |person in a relationship |schedule meetings with my partner |
 
@@ -835,6 +853,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 
 |`*`|user who likes to customize things |change the theme or customize text color |
+
+|`*` |experienced user |have shortcut keys| do the same thing in a shorter time
 
 
 |=======================================================================
