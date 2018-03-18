@@ -807,8 +807,8 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 |Data encryption to protect data and prevent people from accessing and reading plaintext files
 
 |Samuel (Journal)
-|Column 2, row 3
-|Column 3, row 3
+|Allow couples to record their thoughts and feelings to remember the time spent with their partner
+|Add/ delete tags to journal entries (happy, sad, angry, funny)
 
 |Daniel (Location)
 |1. To allow the user to find the venue of a particular lesson of interest from their own timetable using a
@@ -828,14 +828,6 @@ i.e. there is consistency at the very least should be prioritized over optimizat
 
 |===
 
-
-
-* Timetable viewer: To help couples identify common breaks during school term so they can plan meetings
-* Scheduler: To schedule meetings and remind couples of planned meetings and important dates
-* Journal: To record special memories
-* Location: To help couples locate each other's classes so they can plan meetings near that area or meet them immediately after class
-* Data encryption: To keep others from viewing personal information such as journal entries
-
 [appendix]
 == User Stories
 
@@ -852,8 +844,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |person in a relationship |add,edit,delete and view special events (e.g. Valentine's day) in the same month |better plan for these dates
 
-|`* * *` |person in a relationship |schedule meetings with my partner |
-
 |`* * *` |person in a relationship |add/view Journal entries |remember special memories
 
 |`* * *` |pair of NUS students in a relationship |locate my partner from his NUS timetable |easily meet up with my partner on campus
@@ -869,6 +859,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |experienced user |have shortcut keys| do the same thing in a shorter time
 
 |`*`| user with a romantic partner  | send motivational pictures | encourage my partner
+=======
+|`*` |user |receive notification of upcoming scheduled events| so i can get notified and prepare earlier
+
 |=======================================================================
 
 
