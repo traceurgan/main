@@ -52,7 +52,6 @@ public class AddCommand extends UndoableCommand {
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         return getCommandResult();
-
     }
 
     private CommandResult getCommandResult() throws CommandException {
