@@ -810,14 +810,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 |Journal: Allow couples to record their thoughts and feelings to remember the time spent with their partner
 |Tag (emotions) : Add/delete tags to journal entries (happy, sad, angry, funny)
 
-|Daniel (Location)
-|1. To allow the user to find the venue of a particular lesson of interest from their own timetable using a
+|Daniel
+|Location: To allow the user to find the venue of a particular lesson of interest from their own timetable using a
 Google Maps search result, and also possibly allow the user to share that location with their partner who is
 also officially registered together with them as a _couple_ in the app. (How it is achieved is that NUSMods
 API will have to send the location of the venue, and then the user could possibly type the address via command
 line and then the app will then communicate with Google Maps API to give the search result) +
 
-2. (optional) User could also specify that he/she wants to send a motivational image to their partner by
+Send images via Google (optional): User could also specify that he/she wants to send a motivational image to their partner by
 simply typing "Motivational" (not case-sensitive) in the CLI. It will then communicate with Google Images API
 to randomly generate a suitable image. If user is not satisfied, type "search again" in CLI and finally if
 satisfied type "send". There is also an option to exit this feature by typing "exit feature".
