@@ -433,6 +433,8 @@ image::CalendarSequence.png[width="850"]
 * **Alternative 2:** Using Restful API (proprietary)
 ** Pros: Easier to implement due to everything is assisted
 ** Cons: Restrictive, need more money for more features to add on
+
+
 === [Proposed]
 
 === [Proposed]
