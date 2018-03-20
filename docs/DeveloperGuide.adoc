@@ -389,8 +389,8 @@ Certain properties of the application can be controlled (e.g App name, logging l
 ==== Current Implementation
 The Calendar Viewer mechanism is facilitated by `Google Calendar API` and reside in the `ModelManager`.
 It supports viewing/add/editing/deleting capability that modifies the state of the NUSCouples App.
-Firstly, it uses Outh 2.0 endpoints to allow users to share specific data with the application while keeping their usernames, passwords, and other information private. For example, an application can use OAuth 2.0 to obtain permission from users to store files in their Google Drives which sync to the calendar.
-The only downside to this implementation is that the user needs to connect to the internet because NUSCouples app needs to open the system browser and supply a local redirect URI to handle responses from Google's authorization server.
+Firstly, it uses OAuth 2.0 endpoints to allow users to share specific data with the application while keeping their usernames, passwords, and other information private. For example, an application can use OAuth 2.0 to obtain permission from users to store files in their Google Drives which sync to the calendar.
+This implementation requires the user to connect to the internet because NUSCouples app needs to open the system browser and supply a local redirect URI to handle responses from Google's authorization server.
 
 *Basic steps*
 
@@ -415,24 +415,24 @@ Access tokens have limited lifetimes. If your application needs access to a Goog
 
 The sequence diagram below shows interactions within the `Logic` Component for Outh 2.0 endpoints:
 
-image::CalendarSequence.png[width="850"]
+image::viewCalendarSeqDiagram.png[width="850"]
 
 ==== Design Considerations
 ===== Aspect: Implementation of view Calendar feature
-* **Alternative 1 (current choice):** Display only current month event
+* **Alternative 1 (current choice):** Display only current month event.
 ** Pros: Easier to implement and Neater rather than displaying more than 1 mth.
 ** Cons: Need to input cmd to filter through other month.
-* **Alternative 2:** Don't display any month until user defines
-** Pros: More interaction
-** Cons: The UI will be blank at initial stage which is ugly
+* **Alternative 2:** Don't display any month until user defines.
+** Pros: More interaction.
+** Cons: The UI will be blank at initial stage which is ugly.
 
-===== Aspect: Using Open source or proprietary Calendar API
+===== Aspect: Using Open-source or proprietary Calendar API
 * **Alternative 1 (current choice):** Using Google API (open source)
-** Pros: I will learnt more even i failed at the end and Google API is more versatile
-** Cons: Tedious to implement it
+** Pros: I will learnt more even if I failed at the end of the project and Google API is more versatile
+** Cons: Tedious to implement it.
 * **Alternative 2:** Using Restful API (proprietary)
-** Pros: Easier to implement due to everything is assisted
-** Cons: Restrictive, need more money for more features to add on
+** Pros: Easier to implement due to everything is assisted.
+** Cons: Restrictive, need more money for more features to add on.
 
 
 === [Proposed] Timetable Viewer feature
