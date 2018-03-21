@@ -3,11 +3,12 @@ package seedu.address.ui;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import guitests.guihandles.JournalWindowHandle;
-import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
+
+import guitests.guihandles.JournalWindowHandle;
+import javafx.stage.Stage;
 
 public class JournalWindowTest extends GuiUnitTest {
 
