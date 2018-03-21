@@ -29,6 +29,10 @@ public class JournalWindow extends UiPart<Stage> {
         root.initModality(Modality.APPLICATION_MODAL);
     }
 
+    public JournalWindow () {
+        this(new Stage());
+    }
+
     private void setAnchor(TextArea journalTextArea) {
         AnchorPane.setTopAnchor(journalTextArea,0.0);
         AnchorPane.setBottomAnchor(journalTextArea,0.0);
