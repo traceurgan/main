@@ -15,7 +15,6 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class CalendarDisplay extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(CalendarDisplay.class);
     private static final String FXML = "CalendarDisplay.fxml";
 
     private final StringProperty displayed = new SimpleStringProperty("");
