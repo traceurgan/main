@@ -440,11 +440,11 @@ image::viewCalendarSeqDiagram.png[width="850"]
 The Timetable Viewer feature is implemented by `Timetable`, which will reside in `ModelManager`.
 
 Users are able to add a shortened https://nusmods.com/[NUSMods] timetable URL to their existing partner in NUSCouples. +
-[none]
+
  Sample shortened NUSMods URL: http://modsn.us/wNuIW
 
 We pass the shortened URL through a `HttpURLConnection` to get the expanded URL. +
-[none]
+
  Sample expanded NUSMods URL: https://nusmods.com/timetable/sem-2/share?CS2101=SEC:C01&CS2103T=TUT:C01&…
 
 The expanded NUSMods URL can be generalised and represented in the format

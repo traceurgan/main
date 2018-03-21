@@ -70,15 +70,15 @@ public class TimetableUtil {
         String lessonType;
         String classType;
 
-//        for (String currentModule : modules) {
-//            moduleCode = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_INDEX];
-//            lessonType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
-//                    .split(SPLIT_COLON)[LESSON_TYPE_INDEX];
-//            classType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
-//                    .split(SPLIT_COLON)[CLASS_TYPE_INDEX];
-//
-//            listOfModules.add(new TimetableModule(moduleCode, lessonType, classType));
-//        }
+        for (String currentModule : modules) {
+            moduleCode = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_INDEX];
+            lessonType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
+                    .split(SPLIT_COLON)[LESSON_TYPE_INDEX];
+            classType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
+                    .split(SPLIT_COLON)[CLASS_TYPE_INDEX];
+
+            listOfModules.add(new TimetableModule(moduleCode, lessonType, classType));
+        }
         return listOfModules;
     }
 

@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -121,7 +120,8 @@ public class XmlAdaptedPerson {
         final Address address = new Address(this.address);
 
         if (this.timetable == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timetable.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Timetable.class.getSimpleName()));
         }
         if (!Timetable.isValidTimetable(this.timetable)) {
             throw new IllegalValueException(Timetable.MESSAGE_TIMETABLE_CONSTRAINTS);
