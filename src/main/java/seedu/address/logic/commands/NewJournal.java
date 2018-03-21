@@ -15,9 +15,9 @@ public class NewJournal extends Command {
 
     @Override
     public CommandResult execute() {
-        JournalWindow journalWindow = new JournalWindow();
-        Stage stage = new Stage();
-        journalWindow.makeBox(stage);
+        Stage secondaryStage = new Stage();
+        JournalWindow journalWindow = new JournalWindow(secondaryStage);
+        journalWindow.show();
 
         return new CommandResult(NEW_JOURNAL_ENTRY_CREATED);
     }
