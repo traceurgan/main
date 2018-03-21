@@ -59,4 +59,8 @@ public class JournalWindow extends UiPart<Stage> {
     public void show() {
         getRoot().show();
     }
+
+    public boolean isShowing() {
+        return getRoot().isShowing();
+    }
 }
