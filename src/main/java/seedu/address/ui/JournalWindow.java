@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class JournalWindow extends UiPart<Stage> {
 
-    private static final String FXML = "JournalWindow.FXML";
+    private static final String FXML = "JournalWindow.fxml";
 
     @FXML
     private AnchorPane journalTextPlaceholder;
