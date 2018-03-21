@@ -29,18 +29,21 @@ public class JournalWindowTest extends GuiUnitTest {
         assertTrue(journalWindow.isShowing());
     }
 
-    @Test
-    public void focus_journalWindowStaysFocused_focused() {
-        guiRobot.interact(() -> journalWindow.show());
-        assertTrue(journalWindow.getRoot().isFocused());
-
-        guiRobot.interact(() -> journalWindow.getRoot().hide());
-        assertFalse(journalWindow.getRoot().isFocused());
-
-        guiRobot.interact(() -> journalWindow.show());
-        guiRobot.removeFocus();
-        assertTrue(journalWindow.getRoot().isFocused());
-    }
+    //    @Test
+    //    public void focus_isFocusedIsWorking_focused() {
+    //        guiRobot.interact(() -> journalWindow.show());
+    //        assertTrue(journalWindow.isFocused());
+    //
+    //        guiRobot.interact(() -> journalWindow.getRoot().hide());
+    //        assertFalse(journalWindow.isFocused());
+    //    }
+    //
+    //    @Test
+    //    public void focus_journalWindowStaysFocused_focused() {
+    //        guiRobot.interact(() -> journalWindow.show());
+    //        guiRobot.removeFocus();
+    //        assertTrue(journalWindow.getRoot().isFocused());
+    //    }
 
     @Test
     public void isShowing_journalWindowIsHiding_false() {
