@@ -1,5 +1,7 @@
 package seedu.address.model.person.timetable;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -19,11 +21,27 @@ public class Timetable {
     public final String value;
 
     private int currentSemester;
-    private ArrayList<TimetableModuleInfo> listOfModules;
-    private ArrayList<TimetableDay> listOfDays;
+    private ArrayList<TimetableDayInfo> listOfDays;
+
+    private ArrayList<TimetableModule> listOfModules;
+    private String expandedUrl;
 
     public Timetable(String timetableUrl) {
+        requireNonNull(timetableUrl);
         this.value = timetableUrl;
+        TimetableUtil.setUpTimetableInfo(this);
+    }
+
+    public String getExpandedUrl() {
+        return expandedUrl;
+    }
+
+    public void setExpandedUrl(String expandedUrl) {
+        this.expandedUrl = expandedUrl;
+    }
+
+    public void setListOfModules(ArrayList<TimetableModule> listOfModules) {
+        this.listOfModules = listOfModules;
     }
 
     /**
