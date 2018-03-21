@@ -32,10 +32,5 @@ public class CalendarDisplay extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    @Subscribe
-    private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Platform.runLater(() -> displayed.setValue(event.message));
-    }
 
 }
