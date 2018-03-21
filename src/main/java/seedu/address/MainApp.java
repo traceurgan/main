@@ -206,7 +206,11 @@ public class MainApp extends Application {
         this.stop();
     }
 
+    /**
+     * Main
+     */
     public static void main(String[] args) {
+
         launch(args);
     }
 }
