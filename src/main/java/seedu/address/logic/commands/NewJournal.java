@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import javafx.stage.Stage;
 import seedu.address.ui.JournalWindow;
 
 /**
