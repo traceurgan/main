@@ -16,13 +16,14 @@ public class Timetable {
     private static final String CODE_PART_REGEX = "[\\w]+";
     public static final String TIMETABLE_VALIDATION_REGEX = SHORT_NUSMODS_URL_REGEX + CODE_PART_REGEX;
 
-    private String timetableUrl;
+    public final String value;
+
     private int currentSemester;
     private ArrayList<TimetableModuleInfo> listOfModules;
     private ArrayList<TimetableDay> listOfDays;
 
     public Timetable(String timetableUrl) {
-        this.timetableUrl = timetableUrl;
+        this.value = timetableUrl;
     }
 
     /**
@@ -32,5 +33,8 @@ public class Timetable {
         return test.matches(TIMETABLE_VALIDATION_REGEX);
     }
 
-
+    @Override
+    public String toString() {
+        return value;
+    }
 }
