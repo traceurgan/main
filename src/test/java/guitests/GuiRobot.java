@@ -3,10 +3,10 @@ package guitests;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
-import javafx.scene.input.KeyCode;
 import org.testfx.api.FxRobot;
 
 import guitests.guihandles.exceptions.StageNotFoundException;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
