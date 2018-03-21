@@ -29,7 +29,7 @@ public class Timetable {
     public Timetable(String timetableUrl) {
         requireNonNull(timetableUrl);
         this.value = timetableUrl;
-        TimetableUtil.setUpTimetableInfo(this);
+        //TimetableUtil.setUpTimetableInfo(this);
     }
 
     public String getExpandedUrl() {

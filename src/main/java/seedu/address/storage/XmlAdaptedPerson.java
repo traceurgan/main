@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -146,6 +147,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
+                && Objects.equals(timetable, otherPerson.timetable)
                 && tagged.equals(otherPerson.tagged);
     }
 }

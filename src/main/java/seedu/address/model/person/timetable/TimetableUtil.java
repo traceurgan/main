@@ -40,7 +40,7 @@ public class TimetableUtil {
      *
      * @param timetableUrl URL to be modified
      */
-    private static String expandShortTimetableUrl(String timetableUrl) {
+    public static String expandShortTimetableUrl(String timetableUrl) {
         String expandedUrl = null;
         try {
             final URL shortUrl = new URL(timetableUrl);
@@ -61,7 +61,7 @@ public class TimetableUtil {
      * @param timetableUrl
      * @return ArrayList of {@code TimetableModule}
      */
-    private static ArrayList<TimetableModule> splitLongTimetableUrl(String timetableUrl) {
+    public static ArrayList<TimetableModule> splitLongTimetableUrl(String timetableUrl) {
         String[] moduleInformation = timetableUrl.split(SPLIT_QUESTION_MARK);
         String[] modules = moduleInformation[MODULE_INFORMATION_INDEX].split(SPLIT_AMPERSAND);
 
@@ -70,19 +70,19 @@ public class TimetableUtil {
         String lessonType;
         String classType;
 
-        for (String currentModule : modules) {
-            moduleCode = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_INDEX];
-            lessonType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
-                    .split(SPLIT_COLON)[LESSON_TYPE_INDEX];
-            classType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
-                    .split(SPLIT_COLON)[CLASS_TYPE_INDEX];
-
-            listOfModules.add(new TimetableModule(moduleCode, lessonType, classType));
-        }
+//        for (String currentModule : modules) {
+//            moduleCode = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_INDEX];
+//            lessonType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
+//                    .split(SPLIT_COLON)[LESSON_TYPE_INDEX];
+//            classType = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX]
+//                    .split(SPLIT_COLON)[CLASS_TYPE_INDEX];
+//
+//            listOfModules.add(new TimetableModule(moduleCode, lessonType, classType));
+//        }
         return listOfModules;
     }
 
-    private static void getModuleInfoFromApi() {
+    public static void getModuleInfoFromApi() {
 
     }
 }
