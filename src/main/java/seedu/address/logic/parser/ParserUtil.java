@@ -146,13 +146,13 @@ public class ParserUtil {
      *
      * @throws IllegalValueException if the given {@code email} is invalid.
      */
-    public static Timetable parseTimetableUrl(String timetableUrl) throws IllegalValueException {
-        requireNonNull(timetableUrl);
-        String trimmedTimetableUrl = timetableUrl.trim();
-        if (!Timetable.isValidTimetable(trimmedTimetableUrl)) {
+    public static Timetable parseTimetable(String timetable) throws IllegalValueException {
+        requireNonNull(timetable);
+        String trimmedTimetable = timetable.trim();
+        if (!Timetable.isValidTimetable(trimmedTimetable)) {
             throw new IllegalValueException(Timetable.MESSAGE_TIMETABLE_CONSTRAINTS);
         }
-        return new Timetable(trimmedTimetableUrl);
+        return new Timetable(trimmedTimetable);
     }
 
     /**
@@ -160,9 +160,9 @@ public class ParserUtil {
      * is present.
      * See header comment of this class regarding the use of {@code Optional} parameters.
      */
-    public static Optional<Timetable> parseTimetableUrl(Optional<String> timetableUrl) throws IllegalValueException {
+    public static Optional<Timetable> parseTimetable(Optional<String> timetableUrl) throws IllegalValueException {
         requireNonNull(timetableUrl);
-        return timetableUrl.isPresent() ? Optional.of(parseTimetableUrl(timetableUrl.get())) : Optional.empty();
+        return timetableUrl.isPresent() ? Optional.of(parseTimetable(timetableUrl.get())) : Optional.empty();
     }
 
     /**
