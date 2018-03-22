@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -23,8 +28,18 @@ public class JournalWindow extends UiPart<Stage> {
         setAnchor(journalTextArea);
         journalTextPlaceholder.getChildren().add(journalTextArea);
 
-        root.setTitle("Journal");
+        String date = concatenateDate();
+
+        root.setTitle(date + " - Journal");
         root.initModality(Modality.APPLICATION_MODAL);
+    }
+
+    private String concatenateDate() {
+        LocalDate currentDate = LocalDate.now();
+        int dd = currentDate.getDayOfMonth();
+        int mm = currentDate.getMonth().getValue();
+        int yyyy = currentDate.getYear();
+        return String.format("%04d", yyyy) + String.format("%02d", mm) + String.format("%02d", dd);
     }
 
     public JournalWindow () {
