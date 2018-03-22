@@ -1,8 +1,6 @@
-package seedu.address.model.timetable;
+package seedu.address.model.person.timetable;
 
 import org.junit.Test;
-
-import seedu.address.model.person.timetable.TimetableUtil;
 
 public class TimetableUtilTest {
     @Test
