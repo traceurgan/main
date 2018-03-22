@@ -31,10 +31,11 @@ public class TimetableTest {
         assertFalse(Timetable.isValidTimetable("www.google.com")); // invalid host
         assertFalse(Timetable.isValidTimetable("http://www.facebook.com")); // invalid host
         assertFalse(Timetable.isValidTimetable("http://www.modsn.us/")); // invalid host
+        assertFalse(Timetable.isValidTimetable("http://www.modsn.us/q7cLP")); // invalid host
         assertFalse(Timetable.isValidTimetable("http://modsn.us/")); // code-part needs at least 1 character
 
         // valid timetables
-        assertTrue(Timetable.isValidTimetable("http://modsn.us/q7cLP")); // code-part can be alphanumeric
         assertTrue(Timetable.isValidTimetable("http://modsn.us/wNuIW"));
+        assertTrue(Timetable.isValidTimetable("http://modsn.us/q7cLP")); // code-part can be alphanumeric
     }
 }
