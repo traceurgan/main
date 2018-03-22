@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.util.Pair;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;

@@ -28,8 +28,9 @@ public class TimetableModule {
                 || (other instanceof TimetableModule // instanceof handles nulls
                 && this.moduleCode.equals(((TimetableModule) other).moduleCode))) { // state check
             for (int i = 0; i < listOfLessons.size(); i++) {
-                if (!listOfLessons.get(i).equals(((TimetableModule) other).listOfLessons.get(i)))
+                if (!listOfLessons.get(i).equals(((TimetableModule) other).listOfLessons.get(i))) {
                     return false;
+                }
             }
         }
         return true;
