@@ -1,6 +1,7 @@
 package seedu.address.model.person.timetable;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class Timetable {
 
     public Timetable(String timetableUrl) {
         requireNonNull(timetableUrl);
+        checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
         //TimetableUtil.setUpTimetableInfo(this);
     }

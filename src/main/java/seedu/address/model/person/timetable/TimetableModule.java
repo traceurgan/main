@@ -1,28 +1,38 @@
 package seedu.address.model.person.timetable;
 
+import java.util.ArrayList;
+
 /**
  * Represents a module from NUSMods timetable.
  */
 public class TimetableModule {
     private final String moduleCode;
-    private final String lessonType;
-    private final String classType;
+    private ArrayList<LessonPair> listOfLessons;
 
-    public TimetableModule(String moduleCode, String lessonType, String classNumber) {
+    public TimetableModule(String moduleCode, ArrayList<LessonPair> listOfLessons) {
         this.moduleCode = moduleCode;
-        this.lessonType = lessonType;
-        this.classType = classNumber;
+        this.listOfLessons = listOfLessons;
     }
 
     public String getModuleCode() {
         return moduleCode;
     }
 
-    public String getLessonType() {
-        return lessonType;
+    public ArrayList<LessonPair> getListOfLessons() {
+        return listOfLessons;
     }
 
-    public String getClassType() {
-        return classType;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this // short circuit if same object
+                || (other instanceof TimetableModule // instanceof handles nulls
+                && this.moduleCode.equals(((TimetableModule) other).moduleCode))) { // state check
+            for (int i = 0; i < listOfLessons.size(); i++) {
+                if (!listOfLessons.get(i).equals(((TimetableModule) other).listOfLessons.get(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
