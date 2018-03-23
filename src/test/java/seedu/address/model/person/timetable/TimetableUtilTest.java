@@ -120,6 +120,7 @@ public class TimetableUtilTest {
         expectedTimetable.setCurrentSemester(2);
 
         Timetable actualTimetable = new Timetable(validShortUrl);
+        actualTimetable.setExpandedUrl(validLongUrl);
         TimetableUtil.setSemNumFromExpandedUrl(actualTimetable);
 
         assertEquals(expectedTimetable.getCurrentSemester(), actualTimetable.getCurrentSemester());
