@@ -22,8 +22,8 @@ public class Timetable {
     public final String value;
 
     private int currentSemester;
-    private ArrayList<TimetableDayInfo> listOfDays;
-    private HashMap<String, TimetableModule> listOfModules; // HashMap of module code, timetable module
+    private HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays; // HashMap of <Day, TimetableModuleSlots>
+    private HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
     private String expandedUrl;
 
     public Timetable(String timetableUrl) {
@@ -55,6 +55,10 @@ public class Timetable {
 
     public void setCurrentSemester(int currentSemester) {
         this.currentSemester = currentSemester;
+    }
+
+    public void setListOfDays(HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays) {
+        this.listOfDays = listOfDays;
     }
 
     /**

@@ -3,7 +3,7 @@ package seedu.address.model.person.timetable;
 /**
  * Represents the module information of one module slot in one day
  */
-public class TimetableModuleSlot {
+public class TimetableModuleSlot implements Comparable<TimetableModuleSlot> {
     private String moduleCode;
     private String lessonType;
     private String classType;
@@ -23,6 +23,11 @@ public class TimetableModuleSlot {
         this.venue = venue;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    @Override
+    public int compareTo(TimetableModuleSlot other) {
+        return this.startTime.compareTo(other.startTime);
     }
 
     public String getModuleCode() {
