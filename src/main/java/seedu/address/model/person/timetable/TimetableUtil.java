@@ -108,14 +108,14 @@ public class TimetableUtil {
         String[] modules = moduleInformation[MODULE_INFORMATION_INDEX].split(SPLIT_AMPERSAND);
 
         HashMap<String, TimetableModule> listOfModules = new  HashMap<String, TimetableModule>();
-        ArrayList<LessonPair> listOfLessons;
+        HashMap<String, String> listOfLessons;
         String moduleCode;
         String lessonType;
         String classType;
         String[] lessons;
 
         for (String currentModule : modules) {
-            listOfLessons = new ArrayList<LessonPair>();
+            listOfLessons = new HashMap<String, String>();
 
             moduleCode = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_INDEX];
             lessons = currentModule.split(SPLIT_EQUALS)[MODULE_CODE_REMAINING_INDEX].split(SPLIT_COMMA);
@@ -123,7 +123,11 @@ public class TimetableUtil {
                 lessonType = currLesson.split(SPLIT_COLON)[LESSON_TYPE_INDEX];
                 classType = currLesson.split(SPLIT_COLON)[CLASS_TYPE_INDEX];
 
-                listOfLessons.add(new LessonPair(lessonType, classType));
+                try {
+                    listOfLessons.put(convertLessonType(lessonType), classType);
+                } catch (IllegalValueException e) {
+                    logger.warning("Unable to convert lesson type");
+                }
             }
             listOfModules.put(moduleCode, new TimetableModule(moduleCode, listOfLessons));
         }
@@ -220,7 +224,6 @@ public class TimetableUtil {
         Object object = jsonObject.get("");
         arrOfClassInformation = (JSONArray) object;
 
-        TimetableModule tempTimetableModule;
         String tempLessonType;
         String tempClassType;
         String tempWeekFreq;
@@ -229,21 +232,22 @@ public class TimetableUtil {
         String tempEndTime;
         String tempVenue;
         HashMap<String, TimetableModule> listOfModules = timetable.getListOfModules();
-        tempTimetableModule = listOfModules.get(moduleCode);
+        TimetableModule timetableModule = listOfModules.get(moduleCode);
+        HashMap<String, String> listOfLessons = timetableModule.getListOfLessons();
 
         ArrayList<TimetableModuleSlot> listOfModuleSlots = new ArrayList<TimetableModuleSlot>();
         for (Object t : arrOfClassInformation) {
-            // TODO: Parse information in json file to see which one matches the lesson pair in timetablemodule
-
             tempLessonType = ((JSONObject) t).get("LessonType").toString();
             tempClassType = ((JSONObject) t).get("ClassNo").toString();
-            tempWeekFreq = ((JSONObject) t).get("WeekText").toString();
-            tempDay = ((JSONObject) t).get("DayText").toString();
-            tempStartTime = ((JSONObject) t).get("StartTime").toString();
-            tempEndTime = ((JSONObject) t).get("EndTime").toString();
-            tempVenue = ((JSONObject) t).get("Venue").toString();
-            listOfModuleSlots.add(new TimetableModuleSlot(moduleCode, tempLessonType, tempClassType, tempWeekFreq,
-                    tempDay, tempVenue, tempStartTime, tempEndTime));
+            if (listOfLessons.get(tempLessonType).equals(tempClassType)) {
+                tempWeekFreq = ((JSONObject) t).get("WeekText").toString();
+                tempDay = ((JSONObject) t).get("DayText").toString();
+                tempStartTime = ((JSONObject) t).get("StartTime").toString();
+                tempEndTime = ((JSONObject) t).get("EndTime").toString();
+                tempVenue = ((JSONObject) t).get("Venue").toString();
+                listOfModuleSlots.add(new TimetableModuleSlot(moduleCode, tempLessonType, tempClassType, tempWeekFreq,
+                        tempDay, tempVenue, tempStartTime, tempEndTime));
+            }
         }
     }
 

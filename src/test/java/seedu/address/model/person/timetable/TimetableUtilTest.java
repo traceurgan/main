@@ -2,7 +2,6 @@ package seedu.address.model.person.timetable;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -23,39 +22,39 @@ public class TimetableUtilTest {
     @Before
     public void setUp() {
         expectedListOfModules = new HashMap<String, TimetableModule>();
-        ArrayList<LessonPair> tempLessonPair;
+        HashMap<String, String> tempLessonPair;
 
-        tempLessonPair = new ArrayList<LessonPair>();
-        tempLessonPair.add(new LessonPair("SEC", "C01"));
+        tempLessonPair = new HashMap<String, String>();
+        tempLessonPair.put("Sectional Teaching", "C01");
         expectedListOfModules.put("CS2101", new TimetableModule("CS2101",
                 tempLessonPair));
 
-        tempLessonPair = new ArrayList<LessonPair>();
-        tempLessonPair.add(new LessonPair("TUT", "C01"));
+        tempLessonPair = new HashMap<String, String>();
+        tempLessonPair.put("Tutorial", "C01");
         expectedListOfModules.put("CS2103T", new TimetableModule("CS2103T",
                 tempLessonPair));
 
-        tempLessonPair = new ArrayList<LessonPair>();
-        tempLessonPair.add(new LessonPair("LEC", "1"));
-        tempLessonPair.add(new LessonPair("TUT", "4"));
+        tempLessonPair = new HashMap<String, String>();
+        tempLessonPair.put("Lecture", "1");
+        tempLessonPair.put("Tutorial", "4");
         expectedListOfModules.put("CS3230", new TimetableModule("CS3230",
                 tempLessonPair));
 
-        tempLessonPair = new ArrayList<LessonPair>();
-        tempLessonPair.add(new LessonPair("LAB", "3"));
-        tempLessonPair.add(new LessonPair("LEC", "1"));
-        tempLessonPair.add(new LessonPair("TUT", "3"));
+        tempLessonPair = new HashMap<String, String>();
+        tempLessonPair.put("Laboratory", "3");
+        tempLessonPair.put("Lecture", "1");
+        tempLessonPair.put("Tutorial", "3");
         expectedListOfModules.put("CS3241", new TimetableModule("CS3241",
                 tempLessonPair));
 
-        tempLessonPair = new ArrayList<LessonPair>();
-        tempLessonPair.add(new LessonPair("LAB", "1"));
-        tempLessonPair.add(new LessonPair("LEC", "1"));
+        tempLessonPair = new HashMap<String, String>();
+        tempLessonPair.put("Laboratory", "1");
+        tempLessonPair.put("Lecture", "1");
         expectedListOfModules.put("CS3247", new TimetableModule("CS3247",
                 tempLessonPair));
 
-        tempLessonPair = new ArrayList<LessonPair>();
-        tempLessonPair.add(new LessonPair("LEC", "SL1"));
+        tempLessonPair = new HashMap<String, String>();
+        tempLessonPair.put("Lecture", "SL1");
         expectedListOfModules.put("GES1021", new TimetableModule("GES1021",
                 tempLessonPair));
     }
