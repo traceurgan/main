@@ -3,6 +3,7 @@ package seedu.address.model.person.timetable;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,45 +18,45 @@ public class TimetableUtilTest {
             + "CS3241=LAB:3,LEC:1,TUT:3&CS3247=LAB:1,LEC:1&GES1021=LEC:SL1";
     private final String validShortUrl = "http://modsn.us/wNuIW";
     private final String invalidShortUrl = "http://modsn.us/123";
-    private ArrayList<TimetableModule> expectedListOfModules;
+    private HashMap<String, TimetableModule> expectedListOfModules;
 
     @Before
     public void setUp() {
-        expectedListOfModules = new ArrayList<TimetableModule>();
+        expectedListOfModules = new HashMap<String, TimetableModule>();
         ArrayList<LessonPair> tempLessonPair;
 
         tempLessonPair = new ArrayList<LessonPair>();
         tempLessonPair.add(new LessonPair("SEC", "C01"));
-        expectedListOfModules.add(new TimetableModule("CS2101",
+        expectedListOfModules.put("CS2101", new TimetableModule("CS2101",
                 tempLessonPair));
 
         tempLessonPair = new ArrayList<LessonPair>();
         tempLessonPair.add(new LessonPair("TUT", "C01"));
-        expectedListOfModules.add(new TimetableModule("CS2103T",
+        expectedListOfModules.put("CS2103T", new TimetableModule("CS2103T",
                 tempLessonPair));
 
         tempLessonPair = new ArrayList<LessonPair>();
         tempLessonPair.add(new LessonPair("LEC", "1"));
         tempLessonPair.add(new LessonPair("TUT", "4"));
-        expectedListOfModules.add(new TimetableModule("CS3230",
+        expectedListOfModules.put("CS3230", new TimetableModule("CS3230",
                 tempLessonPair));
 
         tempLessonPair = new ArrayList<LessonPair>();
         tempLessonPair.add(new LessonPair("LAB", "3"));
         tempLessonPair.add(new LessonPair("LEC", "1"));
         tempLessonPair.add(new LessonPair("TUT", "3"));
-        expectedListOfModules.add(new TimetableModule("CS3241",
+        expectedListOfModules.put("CS3241", new TimetableModule("CS3241",
                 tempLessonPair));
 
         tempLessonPair = new ArrayList<LessonPair>();
         tempLessonPair.add(new LessonPair("LAB", "1"));
         tempLessonPair.add(new LessonPair("LEC", "1"));
-        expectedListOfModules.add(new TimetableModule("CS3247",
+        expectedListOfModules.put("CS3247", new TimetableModule("CS3247",
                 tempLessonPair));
 
         tempLessonPair = new ArrayList<LessonPair>();
         tempLessonPair.add(new LessonPair("LEC", "SL1"));
-        expectedListOfModules.add(new TimetableModule("GES1021",
+        expectedListOfModules.put("GES1021", new TimetableModule("GES1021",
                 tempLessonPair));
     }
 
@@ -89,7 +90,7 @@ public class TimetableUtilTest {
 
     @Test
     public void splitLongTimetableUrl () {
-        ArrayList<TimetableModule> actualListOfModules = TimetableUtil.splitLongTimetableUrl(validLongUrl);
+        HashMap<String, TimetableModule> actualListOfModules = TimetableUtil.splitLongTimetableUrl(validLongUrl);
         assertEquals(expectedListOfModules, actualListOfModules);
     }
 

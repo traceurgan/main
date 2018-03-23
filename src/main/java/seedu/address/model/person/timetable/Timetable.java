@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Represents the NUSMODS timetable of the partner
@@ -14,7 +15,6 @@ public class Timetable {
             + "and adhere to the following constraints:\n"
             + "1. The URL should start with http://modsn.us/\n"
             + "2. The code-part should only contain alphanumeric characters.";
-
     private static final String SHORT_NUSMODS_URL_REGEX = "http://modsn.us/";
     private static final String CODE_PART_REGEX = "[\\w]+";
     public static final String TIMETABLE_VALIDATION_REGEX = SHORT_NUSMODS_URL_REGEX + CODE_PART_REGEX;
@@ -23,8 +23,7 @@ public class Timetable {
 
     private int currentSemester;
     private ArrayList<TimetableDayInfo> listOfDays;
-
-    private ArrayList<TimetableModule> listOfModules;
+    private HashMap<String, TimetableModule> listOfModules; // HashMap of module code, timetable module
     private String expandedUrl;
 
     public Timetable(String timetableUrl) {
@@ -42,12 +41,20 @@ public class Timetable {
         this.expandedUrl = expandedUrl;
     }
 
-    public void setListOfModules(ArrayList<TimetableModule> listOfModules) {
+    public void setListOfModules(HashMap<String, TimetableModule> listOfModules) {
         this.listOfModules = listOfModules;
     }
 
-    public ArrayList<TimetableModule> getListOfModules() {
+    public HashMap<String, TimetableModule> getListOfModules() {
         return listOfModules;
+    }
+
+    public int getCurrentSemester() {
+        return currentSemester;
+    }
+
+    public void setCurrentSemester(int currentSemester) {
+        this.currentSemester = currentSemester;
     }
 
     /**

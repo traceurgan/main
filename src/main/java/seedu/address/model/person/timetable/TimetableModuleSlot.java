@@ -10,6 +10,50 @@ public class TimetableModuleSlot {
     private String weekFreq;
     private String day;
     private String venue;
-    private int startTime;
-    private int endTime;
+    private String startTime;
+    private String endTime;
+
+    public TimetableModuleSlot(String moduleCode, String lessonType, String classType, String weekFreq, String day,
+                               String venue, String startTime, String endTime) {
+        this.moduleCode = moduleCode;
+        this.lessonType = lessonType;
+        this.classType = classType;
+        this.weekFreq = weekFreq;
+        this.day = day;
+        this.venue = venue;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public String getModuleCode() {
+        return moduleCode;
+    }
+
+    public String getLessonType() {
+        return lessonType;
+    }
+
+    public String getClassType() {
+        return classType;
+    }
+
+    public String getWeekFreq() {
+        return weekFreq;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
 }
