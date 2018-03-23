@@ -114,9 +114,8 @@ public class TimetableUtil {
      * Sets listOfModules in {@code timetable}
      * Expanded timetable URL is in the format ...?[MODULE_CODE]=[LESSON_TYPE]:[CLASS_NUM]&...
      * @param timetable whose long url is to be split
-     * @return ArrayList of {@code TimetableModule}
      */
-    public static HashMap<String, TimetableModule> splitLongTimetableUrl(Timetable timetable) {
+    public static void splitLongTimetableUrl(Timetable timetable) {
         String expandedUrl = timetable.getExpandedUrl();
         requireNonNull(expandedUrl);
         String[] moduleInformation = expandedUrl.split(SPLIT_QUESTION_MARK);
@@ -147,7 +146,6 @@ public class TimetableUtil {
             listOfModules.put(moduleCode, new TimetableModule(moduleCode, listOfLessons));
         }
         timetable.setListOfModules(listOfModules);
-        return listOfModules;
     }
 
     public static void getModuleInfoFromApi(Timetable timetable) {
