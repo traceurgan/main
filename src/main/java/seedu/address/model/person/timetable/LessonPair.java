@@ -2,6 +2,8 @@ package seedu.address.model.person.timetable;
 
 /**
  * Represents the lesson type and class type of one module.
+ * Examples of lesson types: "SEC", "TUT"
+ * Examples of class types: "C01", "1"
  */
 public class LessonPair {
 

@@ -31,7 +31,7 @@ public class Timetable {
         requireNonNull(timetableUrl);
         checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
-        //TimetableUtil.setUpTimetableInfo(this);
+        TimetableUtil.setUpTimetableInfo(this);
     }
 
     public String getExpandedUrl() {
@@ -44,6 +44,10 @@ public class Timetable {
 
     public void setListOfModules(ArrayList<TimetableModule> listOfModules) {
         this.listOfModules = listOfModules;
+    }
+
+    public ArrayList<TimetableModule> getListOfModules() {
+        return listOfModules;
     }
 
     /**
