@@ -1,5 +1,6 @@
 package seedu.address.model.person.timetable;
 
+//@@author marlenekoh
 /**
  * Represents the module information of one module slot in one day
  */

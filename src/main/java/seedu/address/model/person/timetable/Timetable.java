@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//@@author marlenekoh
 /**
  * Represents the NUSMODS timetable of the partner
  */

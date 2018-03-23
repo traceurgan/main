@@ -2,6 +2,7 @@ package seedu.address.model.person.timetable;
 
 import java.util.HashMap;
 
+//@@author marlenekoh
 /**
  * Represents a module from NUSMods timetable.
  */

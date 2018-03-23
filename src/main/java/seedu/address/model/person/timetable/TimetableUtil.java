@@ -28,6 +28,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+//@@author marlenekoh
 /**
  * A class containing utility methods for Timetable
  */
@@ -171,8 +172,8 @@ public class TimetableUtil {
      * @param acadYear String representing academic year
      * @param semNum String representing semester number
      * @param moduleCode String representing module code
-     * Format: http://api.nusmods.com/[acadYear]/[semNum]/modules/[moduleCode]/timetable.json
-     * e.g. http://api.nusmods.com/2017-2018/2/modules/CS3241/timetable.json
+     * Format: http://api.nusmods.com/[acadYear]/[semNum]/modules/[moduleCode].json
+     * e.g. http://api.nusmods.com/2017-2018/2/modules/CS3241.json
      * @return String containing contents of json file
      */
     public static String getJsonContentsFromNusModsApi(String acadYear, String semNum, String moduleCode) {

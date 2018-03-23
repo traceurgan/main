@@ -52,6 +52,7 @@ public class Assert {
         void call() throws Exception;
     }
 
+    //@@author marlenekoh
     /**
      * Asserts that the {@code callable} does not throw any exception.
      */

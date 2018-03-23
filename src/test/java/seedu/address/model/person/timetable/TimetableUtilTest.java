@@ -10,6 +10,7 @@ import org.junit.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.Assert;
 
+//@@author marlenekoh
 public class TimetableUtilTest {
 
     private final String validLongUrl = "https://nusmods.com/timetable/sem-2/"
