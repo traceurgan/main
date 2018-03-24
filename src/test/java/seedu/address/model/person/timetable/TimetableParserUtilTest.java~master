@@ -97,8 +97,37 @@ public class TimetableParserUtilTest {
     }
 
     @Test
+<<<<<<< master:src/test/java/seedu/address/model/person/timetable/TimetableParserUtilTest.java
     public void setUpTimetableInfo() {
         Timetable actualTimetable = new Timetable(VALID_SHORT_URL);
+=======
+    public void splitLongTimetableUrl () {
+        Timetable timetable = new Timetable(validShortUrl);
+        timetable.setExpandedUrl(validLongUrl);
+        TimetableUtil.splitLongTimetableUrl(timetable);
+        assertEquals(expectedListOfModules, timetable.getListOfModules());
+    }
+
+    @Test
+    public void setAndExpandShortTimetableUrl() {
+        Timetable expectedTimetable = new Timetable(validShortUrl);
+        expectedTimetable.setExpandedUrl(validLongUrl);
+
+        Timetable actualTimetable = new Timetable(validShortUrl);
+
+        Assert.assertDoesNotThrow(() -> TimetableUtil.setAndExpandShortTimetableUrl(actualTimetable));
+        assertEquals(expectedTimetable.getExpandedUrl(), actualTimetable.getExpandedUrl());
+    }
+
+    @Test
+    public void setSemNumFromExpandedUrl() {
+        Timetable expectedTimetable = new Timetable(validShortUrl);
+        expectedTimetable.setCurrentSemester(2);
+
+        Timetable actualTimetable = new Timetable(validShortUrl);
+        actualTimetable.setExpandedUrl(validLongUrl);
+        TimetableUtil.setSemNumFromExpandedUrl(actualTimetable);
+>>>>>>> Minor fix to timetableutiltest:src/test/java/seedu/address/model/person/timetable/TimetableUtilTest.java
 
         Assert.assertDoesNotThrow(() -> TimetableParserUtil.setExpandedTimetableUrl(actualTimetable));
         assertEquals(VALID_LONG_URL, actualTimetable.getExpandedUrl());
