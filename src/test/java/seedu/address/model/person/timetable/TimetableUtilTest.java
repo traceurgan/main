@@ -18,6 +18,7 @@ public class TimetableUtilTest {
             + "CS3241=LAB:3,LEC:1,TUT:3&CS3247=LAB:1,LEC:1&GES1021=LEC:SL1";
     private final String validShortUrl = "http://modsn.us/wNuIW";
     private final String invalidShortUrl = "http://modsn.us/123";
+    private final int currentSemester = 2;
     private HashMap<String, TimetableModule> expectedListOfModules;
 
     @Before
@@ -96,33 +97,12 @@ public class TimetableUtilTest {
     }
 
     @Test
-    public void splitLongTimetableUrl () {
-        Timetable timetable = new Timetable(validShortUrl);
-        timetable.setExpandedUrl(validLongUrl);
-        TimetableUtil.splitLongTimetableUrl(timetable);
-        assertEquals(expectedListOfModules, timetable.getListOfModules());
-    }
-
-    @Test
-    public void setAndExpandShortTimetableUrl() {
-        Timetable expectedTimetable = new Timetable(validShortUrl);
-        expectedTimetable.setExpandedUrl(validLongUrl);
-
+    public void setUpTimetableInfo() {
         Timetable actualTimetable = new Timetable(validShortUrl);
 
         Assert.assertDoesNotThrow(() -> TimetableUtil.setAndExpandShortTimetableUrl(actualTimetable));
-        assertEquals(expectedTimetable.getExpandedUrl(), actualTimetable.getExpandedUrl());
-    }
-
-    @Test
-    public void setSemNumFromExpandedUrl() {
-        Timetable expectedTimetable = new Timetable(validShortUrl);
-        expectedTimetable.setCurrentSemester(2);
-
-        Timetable actualTimetable = new Timetable(validShortUrl);
-        actualTimetable.setExpandedUrl(validLongUrl);
-        TimetableUtil.setSemNumFromExpandedUrl(actualTimetable);
-
-        assertEquals(expectedTimetable.getCurrentSemester(), actualTimetable.getCurrentSemester());
+        assertEquals(validLongUrl, actualTimetable.getExpandedUrl());
+        assertEquals(expectedListOfModules, actualTimetable.getListOfModules());
+        assertEquals(currentSemester, actualTimetable.getCurrentSemester());
     }
 }
