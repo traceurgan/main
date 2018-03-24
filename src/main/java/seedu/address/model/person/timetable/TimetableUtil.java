@@ -403,19 +403,19 @@ public class TimetableUtil {
     private static int convertDayToInteger(String day) throws IllegalValueException {
         switch (day.toLowerCase()) {
         case "monday":
-            return 0;
+            return MONDAY_INDEX;
 
         case "tuesday":
-            return 1;
+            return TUESDAY_INDEX;
 
         case "wednesday":
-            return 2;
+            return WEDNESDAY_INDEX;
 
         case "thursday":
-            return 3;
+            return THURSDAY_INDEX;
 
         case "friday":
-            return 4;
+            return FRIDAY_INDEX;
 
         default:
             throw new IllegalValueException(MESSAGE_INVALID_DAY_TYPE);
