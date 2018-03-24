@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.journalEntry.JournalEntry;
 import seedu.address.model.journalEntry.UniqueJournalEntryList;
 import seedu.address.model.person.Person;
