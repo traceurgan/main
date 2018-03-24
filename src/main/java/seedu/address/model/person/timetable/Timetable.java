@@ -30,7 +30,7 @@ public class Timetable {
         requireNonNull(timetableUrl);
         checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
-        TimetableUtil.setUpTimetableInfo(this);
+        TimetableParserUtil.setUpTimetableInfo(this);
     }
 
     public String getExpandedUrl() {

@@ -31,7 +31,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * A class containing utility methods for Timetable
  */
-public class TimetableUtil {
+public class TimetableParserUtil {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String SPLIT_QUESTION_MARK = "\\?";
     private static final String SPLIT_AMPERSAND = "&";
