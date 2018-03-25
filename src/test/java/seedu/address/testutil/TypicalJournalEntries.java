@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Journal;
-import seedu.address.model.journalEntry.JournalEntry;
+import seedu.address.model.journalentry.JournalEntry;
 
 /**
  * A utility class containing a list of {@code JournalEntry} objects to be used in tests.

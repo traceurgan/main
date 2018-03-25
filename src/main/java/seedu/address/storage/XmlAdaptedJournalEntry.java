@@ -3,7 +3,7 @@ package seedu.address.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.journalEntry.JournalEntry;
+import seedu.address.model.journalentry.JournalEntry;
 
 /**
  * JAXB-friendly version of the JournalEntry.

@@ -7,7 +7,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Journal;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyJournal;
-import seedu.address.model.journalEntry.JournalEntry;
+import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;

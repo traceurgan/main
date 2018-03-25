@@ -9,7 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.SaveEntryEvent;
-import seedu.address.model.journalEntry.JournalEntry;
+import seedu.address.model.journalentry.JournalEntry;
 
 /**
  * Controller for a journal page
@@ -59,6 +59,9 @@ public class JournalWindow extends UiPart<Stage> {
         journalTextPlaceholder.getChildren().add(journalEntryText.getRoot());
     }
 
+    /**
+     * Raise JournalEntrySaveEvent on journal window close if text area is not empty
+     */
     @FXML
     private void handleJournalClose() throws Exception {
         logger.info(String.format(this.date + " " + journalEntryText.getText()));

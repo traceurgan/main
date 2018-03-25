@@ -1,9 +1,12 @@
-package seedu.address.model.journalEntry;
+package seedu.address.model.journalentry;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a JournalEntry in the journal.
+ */
 public class JournalEntry {
 
     private final String date;

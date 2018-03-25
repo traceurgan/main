@@ -1,4 +1,4 @@
-package seedu.address.model.journalEntry;
+package seedu.address.model.journalentry;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;

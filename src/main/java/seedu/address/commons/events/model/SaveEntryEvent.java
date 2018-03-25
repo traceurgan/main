@@ -1,7 +1,7 @@
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.journalEntry.JournalEntry;
+import seedu.address.model.journalentry.JournalEntry;
 
 /** Indicates a journal entry should be created/updated*/
 public class SaveEntryEvent extends BaseEvent {
