@@ -111,7 +111,7 @@ public class MainApp extends Application {
 
         try {
             journalOptional = storage.readJournal();
-            if (journalOptional.isPresent()){
+            if (journalOptional.isPresent()) {
                 logger.info("Data file found. Will be starting with current Journal");
             }
             if (!journalOptional.isPresent()) {

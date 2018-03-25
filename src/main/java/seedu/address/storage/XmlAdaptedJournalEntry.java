@@ -39,9 +39,14 @@ public class XmlAdaptedJournalEntry {
         text = source.getText();
     }
 
+    /**
+     * Converts this jaxb-friendly adapted journal entry object into the model's JournalEntry object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted journal entry
+     */
     public JournalEntry toModelType() throws IllegalValueException {
 
-        if (this.date == null) { //impossible date is generated when new journal entry is created
+        if (this.date == null) { //impossible, date is generated when new journal entry is created
             throw new IllegalValueException("Date missing");
         }
 

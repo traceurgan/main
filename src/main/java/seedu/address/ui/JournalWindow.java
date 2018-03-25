@@ -16,8 +16,6 @@ import seedu.address.model.journalEntry.JournalEntry;
  */
 public class JournalWindow extends UiPart<Stage> {
 
-    static String testDate = "1";
-
     private static final String FXML = "JournalWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
@@ -42,6 +40,9 @@ public class JournalWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
+    /**
+     * Gets current local date and concatenates into a String in the form "yyyymmdd"
+     */
     private String concatenateDate() {
         LocalDate currentDate = LocalDate.now();
         int dd = currentDate.getDayOfMonth();
@@ -50,17 +51,19 @@ public class JournalWindow extends UiPart<Stage> {
         return String.format("%04d", yyyy) + String.format("%02d", mm) + String.format("%02d", dd);
     }
 
-    void fillInnerParts() {
+    /**
+     * Fills placeholder with a editable TextArea
+     */
+    private void fillInnerParts() {
         journalEntryText = new JournalEntryText();
         journalTextPlaceholder.getChildren().add(journalEntryText.getRoot());
     }
 
     @FXML
     private void handleJournalClose() throws Exception {
-        testDate = String.valueOf(Integer.valueOf(testDate) + 1);
         logger.info(String.format(this.date + " " + journalEntryText.getText()));
         if (!journalEntryText.getText().isEmpty()) {
-            JournalEntry journalEntry = new JournalEntry(testDate, journalEntryText.getText());
+            JournalEntry journalEntry = new JournalEntry(this.date, journalEntryText.getText());
             raise(new SaveEntryEvent(journalEntry));
         }
     }

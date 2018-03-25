@@ -9,7 +9,14 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class UniqueJournalEntryList implements Iterable <JournalEntry>{
+/**
+ * A list of journal entries that enforces uniqueness between its elements and does not allow nulls.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see JournalEntry#equals(Object)
+ */
+public class UniqueJournalEntryList implements Iterable <JournalEntry> {
 
     private final ObservableList<JournalEntry> internalList = FXCollections.observableArrayList();
 

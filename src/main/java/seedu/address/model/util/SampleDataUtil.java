@@ -46,11 +46,11 @@ public class SampleDataUtil {
 
     public static JournalEntry[] getSampleJournalEntries() {
         return new JournalEntry[]{
-                new JournalEntry("20180205", "Sample Text One"),
+            new JournalEntry("20180205", "Sample Text One"),
 
-                new JournalEntry("20180301", "Sample Text Two"),
+            new JournalEntry("20180301", "Sample Text Two"),
 
-                new JournalEntry("20180305", "Sample Text Three")
+            new JournalEntry("20180305", "Sample Text Three")
         };
     }
 

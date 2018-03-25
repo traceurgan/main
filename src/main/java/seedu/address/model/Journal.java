@@ -2,27 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DuplicateDataException;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.journalEntry.JournalEntry;
 import seedu.address.model.journalEntry.UniqueJournalEntryList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Wraps all data at the address-book level
@@ -30,9 +18,9 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Journal implements ReadOnlyJournal {
 
-    private final UniqueJournalEntryList journalEntries;
-
     private static final Logger logger = LogsCenter.getLogger(Journal.class);
+
+    private final UniqueJournalEntryList journalEntries;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication

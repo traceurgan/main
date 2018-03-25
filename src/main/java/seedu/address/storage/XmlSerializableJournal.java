@@ -8,9 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Journal;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyJournal;
 
 /**
@@ -35,7 +33,8 @@ public class XmlSerializableJournal {
      */
     public XmlSerializableJournal (ReadOnlyJournal src) {
         this();
-        journalEntries.addAll(src.getJournalEntryList().stream().map(XmlAdaptedJournalEntry::new).collect(Collectors.toList()));
+        journalEntries.addAll(src.getJournalEntryList().stream().map(
+                XmlAdaptedJournalEntry::new).collect(Collectors.toList()));
     }
 
     /**
