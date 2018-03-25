@@ -16,6 +16,8 @@ import seedu.address.model.journalEntry.JournalEntry;
  */
 public class JournalWindow extends UiPart<Stage> {
 
+    static String testDate = "1";
+
     private static final String FXML = "JournalWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
@@ -55,8 +57,9 @@ public class JournalWindow extends UiPart<Stage> {
 
     @FXML
     private void handleJournalClose() throws Exception {
+        testDate = String.valueOf(Integer.valueOf(testDate) + 1);
         logger.info(String.format(this.date + " " + journalEntryText.getText()));
-        JournalEntry journalEntry = new JournalEntry(this.date, journalEntryText.getText());
+        JournalEntry journalEntry = new JournalEntry(testDate, journalEntryText.getText());
         raise(new SaveEntryEvent(journalEntry));
     }
 

@@ -80,6 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
         journal.addJournalEntry(journalEntry);
         logger.info("journal entry added?");
+        journal.getList();
     }
 
     @Override

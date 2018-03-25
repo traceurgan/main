@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DuplicateDataException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.journalEntry.JournalEntry;
@@ -29,6 +31,8 @@ import seedu.address.model.tag.UniqueTagList;
 public class Journal implements ReadOnlyJournal {
 
     private final UniqueJournalEntryList journalEntries;
+
+    private static final Logger logger = LogsCenter.getLogger(Journal.class);
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -63,6 +67,12 @@ public class Journal implements ReadOnlyJournal {
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return journalEntries.asObservableList();
+    }
+
+    public void getList () {
+        for (JournalEntry journalEntry : journalEntries) {
+            logger.info(journalEntry.getDate());
+        }
     }
 
 
