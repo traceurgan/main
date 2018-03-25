@@ -92,23 +92,41 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        ReadOnlyJournal journalData = new Journal();
+        Optional<ReadOnlyJournal> journalOptional;
+        ReadOnlyAddressBook addressBookData;
+        ReadOnlyJournal journalData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            addressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            addressBookData = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            addressBookData = new AddressBook();
         }
 
-        return new ModelManager(initialData, journalData, userPrefs);
+        try {
+            journalOptional = storage.readJournal();
+            if (journalOptional.isPresent()){
+                logger.info("Data file found. Will be starting with current Journal");
+            }
+            if (!journalOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample Journal");
+            }
+            journalData = journalOptional.orElseGet(SampleDataUtil::getSampleJournal);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            journalData = new Journal();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            journalData = new Journal();
+        }
+
+        return new ModelManager(addressBookData, journalData, userPrefs);
     }
 
     private void initLogging(Config config) {
