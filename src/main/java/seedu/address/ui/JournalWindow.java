@@ -1,9 +1,15 @@
 package seedu.address.ui;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.SaveEntryEvent;
+import seedu.address.model.journalEntry.JournalEntry;
 
 /**
  * Controller for a journal page
@@ -12,10 +18,19 @@ public class JournalWindow extends UiPart<Stage> {
 
     private static final String FXML = "JournalWindow.fxml";
 
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+
+    private JournalEntryText journalEntryText;
+    private String date;
+
+    @FXML
+    private AnchorPane journalTextPlaceholder;
+
     private JournalWindow (Stage root) {
         super (FXML, root);
 
-        String date = concatenateDate();
+        date = concatenateDate();
+        fillInnerParts();
 
         root.setTitle(date + " - Journal");
         root.initModality(Modality.APPLICATION_MODAL);
@@ -33,6 +48,18 @@ public class JournalWindow extends UiPart<Stage> {
         return String.format("%04d", yyyy) + String.format("%02d", mm) + String.format("%02d", dd);
     }
 
+    void fillInnerParts() {
+        journalEntryText = new JournalEntryText();
+        journalTextPlaceholder.getChildren().add(journalEntryText.getRoot());
+    }
+
+    @FXML
+    private void handleJournalClose() throws Exception {
+        logger.info(String.format(this.date + " " + journalEntryText.getText()));
+        JournalEntry journalEntry = new JournalEntry(this.date, journalEntryText.getText());
+        raise(new SaveEntryEvent(journalEntry));
+    }
+
     public void show() {
         getRoot().show();
     }
@@ -40,4 +67,5 @@ public class JournalWindow extends UiPart<Stage> {
     public boolean isShowing() {
         return getRoot().isShowing();
     }
+
 }

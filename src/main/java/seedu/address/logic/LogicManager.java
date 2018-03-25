@@ -7,10 +7,12 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SaveEntryCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.journalEntry.JournalEntry;
 import seedu.address.model.person.Person;
 
 /**
@@ -44,6 +46,19 @@ public class LogicManager extends ComponentManager implements Logic {
             history.add(commandText);
         }
     }
+
+    public CommandResult execute(JournalEntry journalEntry) throws CommandException {
+        try {
+            SaveEntryCommand command = new SaveEntryCommand(journalEntry);
+            command.setData(model, history, undoRedoStack);
+            CommandResult result = command.execute();
+            return result;
+        } finally {
+            history.add("Entry saved.");
+        }
+    }
+
+
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {

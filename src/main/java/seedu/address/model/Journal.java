@@ -41,7 +41,9 @@ public class Journal implements ReadOnlyJournal {
         journalEntries = new UniqueJournalEntryList();
     }
 
-    public Journal() {}
+    public Journal() {
+
+    }
 
     //// person-level operations
 
