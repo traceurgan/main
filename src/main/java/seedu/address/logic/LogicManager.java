@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.SaveEntryEvent;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;

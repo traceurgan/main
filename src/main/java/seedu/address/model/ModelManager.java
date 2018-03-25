@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.model.journalEntry.JournalEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -58,9 +59,14 @@ public class ModelManager extends ComponentManager implements Model {
         return addressBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /** Raises an event to indicate the address book model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(addressBook));
+    }
+
+    /** Raises an event to indicate the journal model has changed */
+    private void indicateJournalChanged() {
+        raise(new JournalChangedEvent(journal));
     }
 
     @Override
@@ -77,10 +83,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public ReadOnlyJournal getJournal() {
+        return journal;
+    }
+
+    @Override
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
         journal.addJournalEntry(journalEntry);
         logger.info("journal entry added?");
         journal.getList();
+        indicateJournalChanged();
     }
 
     @Override

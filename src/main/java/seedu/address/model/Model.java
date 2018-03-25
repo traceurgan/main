@@ -22,6 +22,9 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns the Journal */
+    ReadOnlyJournal getJournal();
+
     /** Deletes the given person. */
     void deletePerson(Person target) throws PersonNotFoundException;
 

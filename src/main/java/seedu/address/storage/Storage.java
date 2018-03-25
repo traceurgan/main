@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -35,4 +36,11 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, JournalSt
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
+    /**
+     * Saves the current version of the Journal Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleJournalChangedEvent(JournalChangedEvent jce);
 }
