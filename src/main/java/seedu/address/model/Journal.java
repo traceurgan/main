@@ -49,18 +49,44 @@ public class Journal implements ReadOnlyJournal {
 
     }
 
+    /**
+     * Creates an Journal using the Journal Entries {@code toBeCopied}
+     */
+    public Journal(ReadOnlyJournal toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    /**
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetData(ReadOnlyJournal newData) {
+        requireNonNull(newData);
+        List<JournalEntry> syncedJournalEntryList = newData.getJournalEntryList().stream()
+                .collect(Collectors.toList());
+
+        try {
+            setJournalEntries(syncedJournalEntryList);
+        } catch (Exception e) {
+            throw new AssertionError("Journal should not have duplicate entries");
+        }
+    }
+
     //// person-level operations
 
     /**
-     * Adds a person to the address book.
-     * Also checks the new person's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the person to point to those in {@link #tags}.
+     * Adds a journal entry to the journal.
      *
-     * @throws DuplicatePersonException if an equivalent person already exists.
+     * @throws Exception if an equivalent journal entry already exists.
      */
     public void addJournalEntry(JournalEntry j) throws Exception {
         journalEntries.add(j);
     }
+
+    public void setJournalEntries(List<JournalEntry> journalEntries) throws Exception {
+        this.journalEntries.setJournalEntries(journalEntries);
+    }
+
 
     //// util methods
 

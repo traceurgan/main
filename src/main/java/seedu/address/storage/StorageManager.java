@@ -113,6 +113,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public void saveJournal(ReadOnlyJournal journal) throws IOException {
         saveJournal(journal, journalStorage.getJournalFilePath());
+        logger.info(getJournalFilePath());
     }
 
     @Override
