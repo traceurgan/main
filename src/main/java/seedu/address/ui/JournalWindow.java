@@ -59,8 +59,10 @@ public class JournalWindow extends UiPart<Stage> {
     private void handleJournalClose() throws Exception {
         testDate = String.valueOf(Integer.valueOf(testDate) + 1);
         logger.info(String.format(this.date + " " + journalEntryText.getText()));
-        JournalEntry journalEntry = new JournalEntry(testDate, journalEntryText.getText());
-        raise(new SaveEntryEvent(journalEntry));
+        if (!journalEntryText.getText().isEmpty()) {
+            JournalEntry journalEntry = new JournalEntry(testDate, journalEntryText.getText());
+            raise(new SaveEntryEvent(journalEntry));
+        }
     }
 
     public void show() {
