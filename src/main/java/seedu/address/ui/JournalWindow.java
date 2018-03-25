@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -24,7 +24,7 @@ public class JournalWindow extends UiPart<Stage> {
     private String date;
 
     @FXML
-    private AnchorPane journalTextPlaceholder;
+    private StackPane journalTextPlaceholder;
 
     private JournalWindow (Stage root) {
         super (FXML, root);
