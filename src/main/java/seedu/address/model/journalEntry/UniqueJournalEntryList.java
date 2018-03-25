@@ -1,6 +1,7 @@
 package seedu.address.model.journalEntry;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -33,8 +34,23 @@ public class UniqueJournalEntryList implements Iterable <JournalEntry>{
         internalList.add(toAdd);
     }
 
-    public void setJournalEntries(List<JournalEntry> journalEntries) {
-        //do something
+    /**
+    * Replaces the journal entry {@code target} in the list with {@code editedPerson}.
+    *
+    * @throws Exception if the replacement is equivalent to another existing journal entry in the list.
+    * @throws Exception if {@code target} could not be found in the list.
+    */
+    public void setJournalEntries(UniqueJournalEntryList replacement) {
+        this.internalList.setAll(replacement.internalList);
+    }
+
+    public void setJournalEntries(List<JournalEntry> journalEntries) throws Exception {
+        requireAllNonNull(journalEntries);
+        final UniqueJournalEntryList replacement = new UniqueJournalEntryList();
+        for (final JournalEntry journalEntry : journalEntries) {
+            replacement.add(journalEntry);
+        }
+        setJournalEntries(replacement);
     }
 
     /**

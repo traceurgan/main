@@ -125,7 +125,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             journalData = new Journal();
         }
-
         return new ModelManager(addressBookData, journalData, userPrefs);
     }
 

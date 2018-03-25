@@ -35,7 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyJournal journal, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, journal, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
@@ -90,7 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
         journal.addJournalEntry(journalEntry);
-        logger.info("journal entry added?");
+        logger.info("journal entry added");
         journal.getList();
         indicateJournalChanged();
     }
