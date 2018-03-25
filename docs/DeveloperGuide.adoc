@@ -1005,7 +1005,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 1. User are required to generate and download their credential from google API credentials: https://console.developers.google.com/apis/dashboard?
 2. User are required to import their credential into the project resources directory.
-3. _NUSCouples_ adds the credential of the User to authenticate with Google.
+3. NUSCouples add the credential of the User to authenticate with Google.
 +
 Use case ends.
 
@@ -1015,7 +1015,7 @@ Use case ends.
 * 1a. The partner already has an existing google calendar hosted in google.
 +
 [none]
-** 1a1. _NUSCouples_ redirects to google calendar account to authenticate using the user credential.
+** 1a1. NUSCouples redirects to google calendar account to authenticate using the user credential.
 ** 1a2. User confirms change.
 +
 Use case resumes at step 2.
@@ -1023,7 +1023,7 @@ Use case resumes at step 2.
 * 1b. The given credential is invalid.
 +
 [none]
-** 1b1. _NUSCouples_ shows an error message and close.
+** 1b1. NUSCouples shows an error message and close.
 +
 Use case ends.
 
@@ -1091,11 +1091,12 @@ Use case ends.
 .  Should be able to work on both 32-bit and 64-bit environments.
 .  Should have commands that are intuitive and easy to remember.
 .  Should be able to control almost everything from the CLI.
+.  The application should be connected to the internet.
 
 [appendix]
 == Glossary
 [[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X
+Windows, Linux, Unix, OS-X, NUSMods, Google Calendar
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
