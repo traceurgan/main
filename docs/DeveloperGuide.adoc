@@ -1129,7 +1129,7 @@ Use case ends.
 .  Should respond to user inputs within 2 seconds.
 .  Should be able to work on both 32-bit and 64-bit environments.
 .  Should have commands that are intuitive and easy to remember.
-.  Should be able to control almost everything from the CLI.'
+.  Should be able to control almost everything from the CLI.
 .  The application should be connected to the internet.
 
 [appendix]
