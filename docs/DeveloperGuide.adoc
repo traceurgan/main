@@ -1014,7 +1014,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS*
 
-1. User are required to generate and download their credential from google API credentials: https://console.developers.google.com/apis/dashboard? and import into project resource directory.
+1. User are required to generate and download their credential from google API credentials: https://console.developers.google.com/apis/dashboard?[Google Dashboard] and import into project resource directory.
 2. NusCouples use the credential to authenticate with Google API using Auth2.0.
 
 +
