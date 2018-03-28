@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ShowJournalWindowRequestEvent;
-import seedu.address.ui.JournalWindow;
 
 /**
  * Creates a new window for typing journal entries
