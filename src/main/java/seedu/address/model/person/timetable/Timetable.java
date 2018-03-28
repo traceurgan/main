@@ -20,7 +20,7 @@ public class Timetable {
     private static final String CODE_PART_REGEX = "[\\w]+";
     private static final String TIMETABLE_VALIDATION_REGEX = SHORT_NUSMODS_URL_REGEX + CODE_PART_REGEX;
     private static int currentSemester;
-    private static HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays; // HashMap of <Day, TimetableModuleSlots>
+    private static HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
     private static HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
     private static String expandedUrl;
 

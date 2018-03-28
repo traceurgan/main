@@ -29,7 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author marlenekoh
 /**
- * A class containing utility methods for Timetable
+ * A class containing utility methods for parsing an NUSMods short URL and setting up a Timetable
  */
 public class TimetableParserUtil {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
