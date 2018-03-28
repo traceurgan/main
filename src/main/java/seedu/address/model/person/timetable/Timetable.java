@@ -61,6 +61,10 @@ public class Timetable {
         this.listOfDays = listOfDays;
     }
 
+    public static HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
+        return listOfDays;
+    }
+
     /**
      * Returns if a given string is a valid short NUSMods timetable URL.
      */
