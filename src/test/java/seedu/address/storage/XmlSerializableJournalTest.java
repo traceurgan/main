@@ -15,8 +15,10 @@ import seedu.address.testutil.TypicalJournalEntries;
 
 public class XmlSerializableJournalTest {
 
-    private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlSerializableJournalTest/");
-    private static final File TYPICAL_JOURNALENTRIES_FILE = new File(TEST_DATA_FOLDER + "typicalJournalEntriesJournalTest.xml");
+    private static final String TEST_DATA_FOLDER = FileUtil.getPath(
+            "src/test/data/XmlSerializableJournalTest/");
+    private static final File TYPICAL_JOURNALENTRIES_FILE =
+            new File(TEST_DATA_FOLDER + "typicalJournalEntriesJournalTest.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
