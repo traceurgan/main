@@ -18,6 +18,9 @@ public class TypicalJournalEntries {
 
     public static final JournalEntry SAMPLE_THREE = new JournalEntry("20181111", "Sample three text.");
 
+    //for manual adding during tests
+    public static final JournalEntry TEST = new JournalEntry("20180328", "Testing.");
+
     private TypicalJournalEntries() {} // prevents instantiation
 
     /**
