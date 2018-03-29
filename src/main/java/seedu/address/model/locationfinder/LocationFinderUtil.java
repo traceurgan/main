@@ -24,8 +24,6 @@ public class LocationFinderUtil {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String INVALID_URL_RESULT = "https://www.google.com/maps/search/?api=1&query=";
     private static final String MESSAGE_INVALID_URL = "Invalid Google Maps search query URL provided.";
-    private static final String HTTPS_METHOD_GET = "GET";
-    private static final int HTTPS_METHOD_RESPONSE_OK = 200;
 
     /**
      * Sets up attributes of a given {@code LocationFinder}.
@@ -49,7 +47,7 @@ public class LocationFinderUtil {
         String finalUrl = null;
         checkArgument(LocationFinder.isValidLocationQuery(locationFinderUrl),
                 LocationFinder.MESSAGE_LOCATION_FINDER_CONSTRAINTS);
-        String expandedUrl = null;
+
         try {
             URLEncoder.encode(locationFinderUrl);
             final URL lFUrl = new URL(locationFinderUrl);
