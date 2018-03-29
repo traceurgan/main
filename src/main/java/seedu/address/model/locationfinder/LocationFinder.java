@@ -10,22 +10,24 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class LocationFinder {
 
     public static final String MESSAGE_LOCATION_FINDER_CONSTRAINTS = "A Google Maps location search query"
-            + " should be of the following format https://www.google.com/maps/search/?api=1&parameters and"
+            + " should be of the following format https://www.google.com/maps/search/?api=1&query= and"
             + " adhere to the following constraints:\n"
-            + "1. The URL should start with https://www.google.com/maps/search/?api=1&\n"
-            + "2. The \"parameters\"-part can take any values, and it should not be blank. It also has to be"
-            + " a URL-escaped string but Java API has a dedicated URLEncoder class which contains methods to"
+            + "1. The URL should start with https://www.google.com/maps/search/?api=1&query=\n"
+            + "2. The part after that can take any values, and it should not be blank. It also has to be a"
+            + " URL-escaped string but Java API has a dedicated URLEncoder class which contains methods to"
             + " convert a string into HTML format.";
-    private static final String URL_REGEX = "https://www.google.com/maps/search/?api=1&";
+    private static final String GOOGLE_MAPS_SEARCH_URL_REGEX = "https://www.google.com/maps/search/?api=1&query=";
 
     /*
      * The first character of the parameters must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    private static final String PARAMETERS_VALIDATION_REGEX = "[^\\s].*";
+    private static final String QUERY_VALIDATION_REGEX = "[^\\s].*";
 
-    public static final String QUERY_VALIDATION_REGEX = URL_REGEX + PARAMETERS_VALIDATION_REGEX;
+    public static final String LOCATION_FINDER_VALIDATION_REGEX = GOOGLE_MAPS_SEARCH_URL_REGEX
+            + QUERY_VALIDATION_REGEX;
     public final String value;
+    private String url;
 
     /**
      * Constructs an {@code Address}.
@@ -38,11 +40,19 @@ public class LocationFinder {
         this.value = locationQuery;
     }
 
+    public String getLocationFinderUrl() {
+        return url;
+    }
+
+    public void setLocationFinderUrl(String url) {
+        this.url = url;
+    }
+
     /**
      * Returns true if a given string is a valid location query.
      */
     public static boolean isValidLocationQuery(String test) {
-        return test.matches(QUERY_VALIDATION_REGEX);
+        return test.matches(LOCATION_FINDER_VALIDATION_REGEX);
     }
 
     @Override
