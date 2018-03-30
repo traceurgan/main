@@ -80,7 +80,6 @@ public class JournalWindow extends UiPart<Stage> {
     private void fillInnerParts(String text) {
         journalEntryText = new JournalEntryText();
         journalEntryText.setText(text);
-        logger.info(text + "Not working set text");
         journalTextPlaceholder.getChildren().add(journalEntryText.getRoot());
     }
 
