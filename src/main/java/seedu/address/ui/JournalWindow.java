@@ -47,7 +47,7 @@ public class JournalWindow extends UiPart<Stage> {
 
     }
 
-    public JournalWindow(String date, String text){
+    public JournalWindow(String date, String text) {
         this(new Stage(), date, text);
     }
 
@@ -88,11 +88,12 @@ public class JournalWindow extends UiPart<Stage> {
      * Raise JournalEntrySaveEvent on journal window close if text area is not empty
      */
     @FXML
-    private void handleJournalClose() throws Exception {
+    private void handleJournalClose() {
         if (!journalEntryText.getText().isEmpty()) {
             JournalEntry journalEntry = new JournalEntry(this.date, journalEntryText.getText());
             raise(new SaveEntryEvent(journalEntry));
-        } else return;
+        }
+        return;
     }
 
     public void show() {
