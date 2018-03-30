@@ -22,4 +22,8 @@ public class JournalEntryText extends UiPart<Region> {
         return journalTextArea.getText();
     }
 
+    public void setText(String text) {
+        journalTextArea.setText(
+                "Saving failed. Please save your text using Ctr + C before attempting to save again.\n" + text);
+    }
 }
