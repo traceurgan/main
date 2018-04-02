@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
@@ -17,6 +18,7 @@ import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -113,7 +115,16 @@ public class CommandTestUtil {
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
         }
     }
+    /**
+     * Updates {@code model}'s filtered list to show only the first person in the {@code model}'s address book.
+     */
+    public static void showFirstPersonOnly(Model model) {
+        ReadOnlyPerson person = model.getAddressBook().getPersonList().get(0);
+        final String[] splitName = person.getName().fullName.split("\\s+");
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
+        assert model.getFilteredPersonList().size() == 1;
+    }
 
     /**
      * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
