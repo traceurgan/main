@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,7 +33,7 @@ public class UndoableCommandTest {
 
         // undo() should cause the model's filtered list to show all persons
         dummyCommand.undo();
-        expectedModel = new ModelManager(getTypicalAddressBook(),getTypicalJournal(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalJournal(), new UserPrefs());
         assertEquals(expectedModel, model);
     }
 

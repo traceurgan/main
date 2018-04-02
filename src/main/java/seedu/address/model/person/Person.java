@@ -146,21 +146,7 @@ public class Person implements ReadOnlyPerson {
     public boolean hasTag(Tag tag) {
         return tags.get().contains(tag);
     }
-    /**
-    @Override
-    public ObjectProperty<AppointmentList> appointmentProperty() {
-        return appointments;
-    }
 
-    @Override
-    public List<Appointment> getAppointments() {
-        return appointments.get().toList();
-    }
-
-    public void setAppointment(List<Appointment> appointments) {
-        this.appointments.set(new AppointmentList(appointments));
-    }
-     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

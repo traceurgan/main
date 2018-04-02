@@ -115,11 +115,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    /**
+     *
+     * Help to remove unwanted tags
+     */
     public void removeUnusedTags(Set<Tag> tagsToRemove) {
         Set<Tag> cleanedTagList = getTagsExcluding(tagsToRemove);
         tags.setTags(cleanedTagList);
         syncMasterTagListWith(persons);
     }
+    /**
+     *
+     * Help to exclude unwanted tags
+     */
     public Set<Tag> getTagsExcluding(Set<Tag> excludedTags) {
         Set<Tag> results = tags.toSet();
         for (Tag excludedTag : excludedTags) {
