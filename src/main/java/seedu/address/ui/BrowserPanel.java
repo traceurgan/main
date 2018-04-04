@@ -46,7 +46,7 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
 
-    private void loadTimetablePage(Person person) {
+    private void loadTimetablePage(ReadOnlyPerson person) {
         URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
         loadPage(timetablePage.toExternalForm());
     }

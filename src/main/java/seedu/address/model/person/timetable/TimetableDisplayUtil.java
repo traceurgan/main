@@ -94,8 +94,7 @@ public class TimetableDisplayUtil {
                 sb.append(", ");
                 sb.append(listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase()).get(i).toString());
                 sb.append(", ");
-            }
-            else {
+            } else {
                 sb.append(listOfDays.get(DAYS[MONDAY_INDEX].toUpperCase()).get(i).toString());
                 sb.append(", ");
                 sb.append(listOfDays.get(DAYS[TUESDAY_INDEX].toUpperCase()).get(i).toString());
@@ -107,6 +106,7 @@ public class TimetableDisplayUtil {
                 sb.append(listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase()).get(i).toString());
             }
         }
+        sb.append("\n");
         return sb.toString();
     }
 

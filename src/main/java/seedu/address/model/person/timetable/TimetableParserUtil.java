@@ -380,8 +380,7 @@ public class TimetableParserUtil {
                 }
                 j++;
                 i--;
-            }
-            else {
+            } else {
                 filled.add(new TimetableModuleSlot());
             }
         }
