@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -44,14 +45,14 @@ public class AddCommandIntegrationTest {
     @Ignore
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
+        ReadOnlyPerson personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(prepareCommand(personInList, model), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     /**
      * Generates a new {@code AddCommand} which upon execution, adds {@code person} into the {@code model}.
      */
-    private AddCommand prepareCommand(Person person, Model model) {
+    private AddCommand prepareCommand(ReadOnlyPerson person, Model model) {
         AddCommand command = new AddCommand(person);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
