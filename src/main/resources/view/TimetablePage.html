@@ -2,32 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type="text/javascript">
-        timetable = ["1000", "1130", "1330", "1530", "1730", "2030", "1145", "1315", "1515", "1730", "1930", "2205", "1210", "1340", "1540", "1800", "1950", "2230", "1330", "1500", "1700", "1915", "2100", "2345", "1435", "1600", "1810", "2030", "2220", "0100"];
-        var isTable = "";
-        var nRows = "";
-        var nCells = "";
-
-        function dispSched(){
-            for (i=0; i<nRows; i++)
-            {
-                for (n=0; n<nCells; n++)
-                {
-                    isTable.rows[i+1].cells[n+1].lastChild.data = timetable[n+(i*nCells)];
-                }
-            }
-        }
-
-        function mapTable(){
-
-            isTable = document.getElementById('myTimetable');
-            nRows = isTable.rows.length-1;
-            nCells = isTable.rows[0].cells.length-1;
-            dispSched();
-        }
-
-        onload=mapTable;
-    </script>
+    <script type="text/javascript" src="TimetablePageScript.js"></script>
     <link rel="stylesheet" type="text/css" href="TimetableStyle.css">
     <meta charset="UTF-8">
     <title>Timetable</title>

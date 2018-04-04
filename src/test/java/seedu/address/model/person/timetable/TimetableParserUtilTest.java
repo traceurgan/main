@@ -13,11 +13,11 @@ import seedu.address.testutil.Assert;
 //@@author marlenekoh
 public class TimetableParserUtilTest {
 
-    private static final String VALID_LONG_URL = "https://nusmods.com/timetable/sem-2/"
+    public static final String VALID_LONG_URL = "https://nusmods.com/timetable/sem-2/"
             + "share?CS2101=SEC:C01&CS2103T=TUT:C01&CS3230=LEC:1,TUT:4&"
             + "CS3241=LAB:3,LEC:1,TUT:3&CS3247=LAB:1,LEC:1&GES1021=LEC:SL1";
-    private static final String VALID_SHORT_URL = "http://modsn.us/wNuIW";
-    private static final String INVALID_SHORT_URL = "http://modsn.us/123";
+    public static final String VALID_SHORT_URL = "http://modsn.us/wNuIW";
+    public static final String INVALID_SHORT_URL = "http://modsn.us/123";
     private static final int CURRENT_SEMESTER = 2;
     private static HashMap<String, TimetableModule> expectedListOfModules;
 
