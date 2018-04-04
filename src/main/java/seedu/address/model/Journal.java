@@ -33,9 +33,7 @@ public class Journal implements ReadOnlyJournal {
         journalEntries = new UniqueJournalEntryList();
     }
 
-    public Journal() {
-
-    }
+    public Journal() {}
 
     /**
      * Creates an Journal using the Journal Entries {@code toBeCopied}
@@ -75,18 +73,11 @@ public class Journal implements ReadOnlyJournal {
         this.journalEntries.setJournalEntries(journalEntries);
     }
 
-
     //// util methods
 
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return journalEntries.asObservableList();
-    }
-
-    public void getList () {
-        for (JournalEntry journalEntry : journalEntries) {
-            logger.info(journalEntry.getDate());
-        }
     }
 
     @Override
