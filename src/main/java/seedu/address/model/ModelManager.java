@@ -91,7 +91,6 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
         journal.addJournalEntry(journalEntry);
         logger.info("journal entry added");
-        journal.getList();
         indicateJournalChanged();
     }
 
@@ -118,6 +117,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
+    }
+
+    @Override
+    public ObservableList<JournalEntry> getJournalEntryList() {
+        return FXCollections.unmodifiableObservableList(journal.getJournalEntryList());
     }
 
     @Override
