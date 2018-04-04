@@ -7,6 +7,7 @@ import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author chen xing
 /**
  * A read-only immutable interface for a Person in the addressbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
@@ -27,25 +28,25 @@ public interface ReadOnlyPerson {
     Set<Tag> getTags();
     //ObjectProperty<AppointmentList> appointmentProperty();
     // List<Appointment> getAppointments();
-    /**
-     * Returns true if both have the same state. (interfaces cannot override .equals)
+    /**Same state detected will return true.
      */
-    default boolean isSameStateAs(ReadOnlyPerson other) {
-        return other == this // short circuit if same object
-                || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress())
-                && other.getTimetable().equals((this.getTimetable())));
+    default boolean isSameStateAs(ReadOnlyPerson rp) {
+        return rp == this // short circuit if same object
+                || (rp != null // this is first to avoid NPE below
+                && rp.getName().equals(this.getName()) // state checks here onwards
+                && rp.getPhone().equals(this.getPhone())
+                && rp.getEmail().equals(this.getEmail())
+                && rp.getAddress().equals(this.getAddress())
+                && rp.getTimetable().equals((this.getTimetable())));
     }
 
+    //@@author chen xing
     /**
-     * Formats the person as text, showing all contact details.
+     * Show all contact in detail as text
      */
     default String getAsText() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        final StringBuilder b = new StringBuilder();
+        b.append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
@@ -55,8 +56,8 @@ public interface ReadOnlyPerson {
                 .append(" TimeTable: ")
                 .append(getTimetable())
                 .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
+        getTags().forEach(b::append);
+        return b.toString();
     }
 
 }

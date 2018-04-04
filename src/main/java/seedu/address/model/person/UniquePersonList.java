@@ -97,6 +97,7 @@ public class UniquePersonList implements Iterable<Person> {
         setPersons(replacement);
     }
 
+    //@@author chenxing1992
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -104,7 +105,7 @@ public class UniquePersonList implements Iterable<Person> {
         return FXCollections.unmodifiableObservableList(mappedList);
     }
 
-
+    //@@author chenxing1992
     /**
      * @return the list as an unmodifiable list and sorted by name in ascending order
      */
@@ -116,19 +117,20 @@ public class UniquePersonList implements Iterable<Person> {
         return FXCollections.unmodifiableObservableList(mappedList);
     }
 
+    //@@author chenxing1992
     /**
-     * @return the list as an unmodifiable list and sorted by name in descending order
+     * @return a unmodifiable list and will be sorted by name in descending order
      */
     public ObservableList<ReadOnlyPerson> asObservableListSortedByNameDsc() {
         internalList.sort((o1, o2) -> {
-            int output = (o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName) <= 0) ? 1 : -1;
-            return output;
+            int op = (o1.getName().fullName.compareToIgnoreCase(o2.getName().fullName) <= 0) ? 1 : -1;
+            return op;
         });
         return FXCollections.unmodifiableObservableList(mappedList);
     }
-
+    //@@author chenxing1992
     /**
-     * @return a reversed list
+     * @return list is reversed
      */
     public ObservableList<ReadOnlyPerson> asObservableListReversed() {
         FXCollections.reverse(internalList);

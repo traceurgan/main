@@ -115,31 +115,35 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    //@@author chenxing1992
     /**
      *
      * Help to remove unwanted tags
      */
-    public void removeUnusedTags(Set<Tag> tagsToRemove) {
-        Set<Tag> cleanedTagList = getTagsExcluding(tagsToRemove);
-        tags.setTags(cleanedTagList);
+    public void removeUnusedTags(Set<Tag> tagToRemove) {
+        Set<Tag> newTags = getTagsExcluding(tagToRemove);
+        tags.setTags(newTags);
         syncMasterTagListWith(persons);
     }
+
+    //@@author chenxing1992
     /**
      *
      * Help to exclude unwanted tags
      */
-    public Set<Tag> getTagsExcluding(Set<Tag> excludedTags) {
-        Set<Tag> results = tags.toSet();
-        for (Tag excludedTag : excludedTags) {
-            results.remove(excludedTag);
+    public Set<Tag> getTagsExcluding(Set<Tag> tagsToExclude) {
+        Set<Tag> output = tags.toSet();
+        for (Tag tagExcluded : tagsToExclude) {
+            output.remove(tagExcluded);
         }
-        return results;
+        return output;
     }
 
+    //@@author chenxing1992
     /**
-     * Ensures that every tag in these persons:
-     * - exists in the master list {@link #tags}
-     * - points to a Tag object in the master list
+     * Make sure that these people:
+     * - appear in the master list {@link #tags}
+     * - Tag objects are pointed in the master list
      *
      * @see #syncMasterTagListWith(Person)
      */
@@ -147,23 +151,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(this::syncMasterTagListWith);
     }
 
+    //@@author chenxing1992
     /**
-     * Ensures that every tag in this person:
-     * - exists in the master list {@link #tags}
-     * - points to a Tag object in the master list
+     * Make sure this person:
+     * - Appear in the master list {@link #tags}
+     * - Tag object is pointed in the master list
      */
     private void syncMasterTagListWith(Person person) {
-        final UniqueTagList personTags = new UniqueTagList(person.getTags());
-        tags.mergeFrom(personTags);
+        final UniqueTagList Tags = new UniqueTagList(person.getTags());
+        tags.mergeFrom(Tags);
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references
-        final Map<Tag, Tag> masterTagObjects = new HashMap<>();
-        tags.forEach(tag -> masterTagObjects.put(tag, tag));
+        final Map<Tag, Tag> mainTagObjects = new HashMap<>();
+        tags.forEach(tag -> mainTagObjects.put(tag, tag));
 
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        personTags.forEach(tag -> correctTagReferences.add(masterTagObjects.get(tag)));
+        Tags.forEach(tag -> correctTagReferences.add(mainTagObjects.get(tag)));
         person.setTags(correctTagReferences);
     }
 

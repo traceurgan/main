@@ -4,7 +4,7 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at http://gradle.org/docs/2.2.1/userguide/tutorial_java_projects.html
  */
-
+//@@author chenxing1992
 plugins {
     id 'java'
     id 'jacoco'
@@ -51,7 +51,7 @@ jacocoTestReport {
 
 dependencies {
     String testFxVersion = '4.0.7-alpha'
-
+    //@@author chenxing1992
     compile fileTree(dir: 'libs', include: '*.jar')
     compile group: 'org.fxmisc.easybind', name: 'easybind', version: '1.0.3'
     compile group: 'org.controlsfx', name: 'controlsfx', version: '8.40.11'

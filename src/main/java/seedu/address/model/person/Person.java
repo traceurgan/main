@@ -13,6 +13,7 @@ import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author chenxing1992
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -27,11 +28,10 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<UniqueTagList> tags;
 
 
-
+    //@@author chenxing1992
     /**
      * Every field must be present and not null.
      */
-
     public Person(Name name, Phone phone, Email email, Address address,
                   Timetable timetable, Set<Tag> tags) {
 
@@ -47,6 +47,7 @@ public class Person implements ReadOnlyPerson {
 
     }
 
+    //@@author chenxing1992
     /**
      * Creates a copy of the given ReadOnlyPerson.
      */
