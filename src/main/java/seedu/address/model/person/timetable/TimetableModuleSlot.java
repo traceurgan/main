@@ -40,17 +40,6 @@ public class TimetableModuleSlot implements Comparable<TimetableModuleSlot> {
         isEmpty = false;
     }
 
-    @Override
-    public int compareTo(TimetableModuleSlot other) {
-        return this.startTime.compareTo(other.startTime);
-    }
-
-    @Override
-    public String toString() {
-        return isEmpty
-                ? "{ }" : "{" + moduleCode + "," + lessonType + "," + classType + "," + venue + "," + weekFreq +"}";
-    }
-
     public String getModuleCode() {
         return moduleCode;
     }
@@ -81,5 +70,16 @@ public class TimetableModuleSlot implements Comparable<TimetableModuleSlot> {
 
     public String getEndTime() {
         return endTime;
+    }
+
+    @Override
+    public int compareTo(TimetableModuleSlot other) {
+        return this.startTime.compareTo(other.startTime);
+    }
+
+    @Override
+    public String toString() {
+        return isEmpty
+                ? "\"\"" : "\"" + moduleCode + "\"";
     }
 }

@@ -33,6 +33,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * A class containing utility methods for parsing an NUSMods short URL and setting up a Timetable
  */
 public class TimetableParserUtil {
+    public static final int MONDAY_INDEX = 0;
+    public static final int TUESDAY_INDEX = 1;
+    public static final int WEDNESDAY_INDEX = 2;
+    public static final int THURSDAY_INDEX = 3;
+    public static final int FRIDAY_INDEX = 4;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String SPLIT_QUESTION_MARK = "\\?";
     private static final String SPLIT_AMPERSAND = "&";
@@ -52,11 +57,6 @@ public class TimetableParserUtil {
     private static final int MODULE_CODE_REMAINING_INDEX = 1;
     private static final int LESSON_TYPE_INDEX = 0;
     private static final int CLASS_TYPE_INDEX = 1;
-    public static final int MONDAY_INDEX = 0;
-    public static final int TUESDAY_INDEX = 1;
-    public static final int WEDNESDAY_INDEX = 2;
-    public static final int THURSDAY_INDEX = 3;
-    public static final int FRIDAY_INDEX = 4;
 
     /**
      * Sets up attributes of a given {@code Timetable}.
@@ -367,16 +367,15 @@ public class TimetableParserUtil {
      * @param timetableModuleSlots the ArrayList to split into half hour slots
      * @return an ArrayList of TimetableModuleSlot with each slot representing one half-hour slot in the timetable
      */
-    private static ArrayList<TimetableModuleSlot> splitIntoHalfHourSlots(ArrayList<TimetableModuleSlot> timetableModuleSlots) {
+    private static ArrayList<TimetableModuleSlot> splitIntoHalfHourSlots(
+            ArrayList<TimetableModuleSlot> timetableModuleSlots) {
         ArrayList<TimetableModuleSlot> filled = new ArrayList<TimetableModuleSlot>();
-        StringBuilder sb = new StringBuilder();
 
         int j = 0;
         for (int i = 0; i < TIMES.length; i++) {
             if (j < timetableModuleSlots.size() && timetableModuleSlots.get(j).getStartTime().equals(TIMES[i])) {
                 while (!timetableModuleSlots.get(j).getEndTime().equals(TIMES[i])) {
                     filled.add(timetableModuleSlots.get(j));
-                    sb.append(timetableModuleSlots.get(j).toString());
                     i++;
                 }
                 j++;
@@ -384,7 +383,6 @@ public class TimetableParserUtil {
             }
             else {
                 filled.add(new TimetableModuleSlot());
-                sb.append(filled.get(i).toString());
             }
         }
         return filled;

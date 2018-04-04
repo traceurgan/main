@@ -18,30 +18,49 @@ import java.util.logging.Logger;
 
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 //@@author marlenekoh
 /**
- * A class containing utility methods for displaying a Timetable in the browser panel
+ * A class containing utility methods for displaying a Timetable in the browser panel.
  */
 public class TimetableDisplayUtil {
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     public static final String[] DAYS = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-    public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
     public static final String[] TIMES = {
-            "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130",
-            "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530",
-            "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930",
-            "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
+        "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130",
+        "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530",
+        "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930",
+        "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
-
+    public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
     public static final String TIMETABLE_INFO_FILE_PATH = "src/main/resources/timetableDisplayInfo";
     public static final String TIMETABLE_PAGE_JS_PATH = "src/main/resources/view/TimetablePageScript.js";
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+
+    /**
+     * Sets up the javascript file at path {@code TIMETABLE_PAGE_JS_PATH}
+     * @param timetable Timetable to be set up
+     */
+    public static void setUpTimetableDisplayInfo(Timetable timetable) {
+        setUpTimetableDisplayInfoFile(timetable);
+        setUpTimetablePageScriptFile();
+    }
+
+    /**
+     * Updates TimetablePageScript file at path {@code TIMETABLE_PAGE_JS_PATH} with new timetable module information
+     */
+    public static void setUpTimetablePageScriptFile() {
+        String oldContent = getFileContents(TIMETABLE_PAGE_JS_PATH);
+        String toReplace = getFileContents(TIMETABLE_INFO_FILE_PATH);
+        String newContent = replaceFirstLine(oldContent, toReplace);
+        writeToTimetablePageScriptFile(newContent);
+    }
 
     /**
      * Writes Timetable information to a text file
      * @param timetable the timetable to convert into string and write
      */
-    public static void writeToTimetableDisplayInfoFile(Timetable timetable) {
+    public static void setUpTimetableDisplayInfoFile(Timetable timetable) {
         File timetableDisplayInfo = new File(TIMETABLE_INFO_FILE_PATH);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
@@ -49,6 +68,8 @@ public class TimetableDisplayUtil {
             printWriter.close();
         } catch (FileNotFoundException e) {
             logger.warning("File not found");
+        } catch (IllegalValueException e) {
+            logger.warning(e.getMessage());
         }
     }
 
@@ -56,48 +77,45 @@ public class TimetableDisplayUtil {
      * Converts the {@code listOfDays} into a String object for parsing
      * @param timetable which contains schedule to convert into JSON object
      */
-    public static String convertTimetableToString(Timetable timetable) {
+    public static String convertTimetableToString(Timetable timetable) throws IllegalValueException {
         StringBuilder sb = new StringBuilder();
 
         HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays = timetable.getListOfDays();
         ArrayList<TimetableModuleSlot> slotsForTheDay = null;
-        for (int i = 0; i < DAYS.length; i++) {
-            switch (i) {
-            case 0:
-                slotsForTheDay = listOfDays.get(DAYS[MONDAY_INDEX].toUpperCase());
-                break;
-
-            case 1:
-                slotsForTheDay = listOfDays.get(DAYS[TUESDAY_INDEX].toUpperCase());
-                break;
-
-            case 2:
-                slotsForTheDay = listOfDays.get(DAYS[WEDNESDAY_INDEX].toUpperCase());
-                break;
-
-            case 3:
-                slotsForTheDay = listOfDays.get(DAYS[THURSDAY_INDEX].toUpperCase());
-                break;
-            case 4:
-                slotsForTheDay = listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase());
-                break;
+        for (int i = 0; i < TIMES.length; i++) {
+            if (i < TIMES.length - 1) {
+                sb.append(listOfDays.get(DAYS[MONDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[TUESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[WEDNESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[THURSDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
             }
-
-            sb.append("[");
-            for (TimetableModuleSlot t : slotsForTheDay) {
-                sb.append(t.toString());
+            else {
+                sb.append(listOfDays.get(DAYS[MONDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[TUESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[WEDNESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[THURSDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(", ");
+                sb.append(listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase()).get(i).toString());
             }
-            sb.append("]");
         }
         return sb.toString();
     }
 
     /**
-     * Gets file contents from {@code TIMETABLE_PAGE_JS_PATH}
-     * @return String containing file contents if file is valid
+     * Gets file contents from the file at the given path
+     * @return String containing file contents
      */
-    public static String getTimetablePageScriptFileContents() {
-        File timetablePageScript = new File(TIMETABLE_PAGE_JS_PATH);
+    public static String getFileContents(String path) {
+        File timetablePageScript = new File(path);
         try {
             BufferedReader br = new BufferedReader(new FileReader(timetablePageScript));
             StringBuilder sb = new StringBuilder();
@@ -132,13 +150,17 @@ public class TimetableDisplayUtil {
     }
 
     /**
-     * Replaces line containing {@code find} in the javascript file at {@code TIMETABLE_PAGE_JS_PATH} with
+     * Replaces first line of {@code contents} with {@code replace}
      * @param contents original content of the javascript file
-     * @param find line to replace
      * @param replace new line
      * @return new content
      */
-    public static String replaceTimetableArray(String contents, String find, String replace){
-        return contents.replace(find, replace);
+    public static String replaceFirstLine(String contents, String replace) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("timetable = [");
+        sb.append(replace);
+        int pos = contents.indexOf(';');
+        sb.append(contents.substring(pos - 1));
+        return sb.toString();
     }
 }
