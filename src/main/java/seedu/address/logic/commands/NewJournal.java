@@ -8,8 +8,8 @@ import seedu.address.commons.events.ui.ShowJournalWindowRequestEvent;
  */
 public class NewJournal extends Command {
 
-    public static final String COMMAND_WORD = "new";
-    public static final String COMMAND_ALIAS = "n";
+    public static final String COMMAND_WORD = "jnew";
+    public static final String COMMAND_ALIAS = "jn";
 
     public static final String NEW_JOURNAL_ENTRY_CREATED = "New Journal Entry Created.";
 
