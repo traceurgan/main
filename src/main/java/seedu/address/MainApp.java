@@ -233,7 +233,6 @@ public class MainApp extends Application {
      * Main
      */
     public static void main(String[] args) {
-
         launch(args);
     }
 }
