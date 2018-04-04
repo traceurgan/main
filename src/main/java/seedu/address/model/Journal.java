@@ -33,9 +33,7 @@ public class Journal implements ReadOnlyJournal {
         journalEntries = new UniqueJournalEntryList();
     }
 
-    public Journal() {
-
-    }
+    public Journal() {}
 
     /**
      * Creates an Journal using the Journal Entries {@code toBeCopied}
@@ -75,7 +73,6 @@ public class Journal implements ReadOnlyJournal {
         this.journalEntries.setJournalEntries(journalEntries);
     }
 
-
     //// util methods
 
     @Override
@@ -83,15 +80,14 @@ public class Journal implements ReadOnlyJournal {
         return journalEntries.asObservableList();
     }
 
-    public void getList () {
-        for (JournalEntry journalEntry : journalEntries) {
-            logger.info(journalEntry.getDate());
-        }
-    }
-
     @Override
     public String toString() {
         return journalEntries.asObservableList().size() + " journalEntries.";
+    }
+
+    @Override
+    public JournalEntry getLast() {
+        return journalEntries.getLast();
     }
 
     @Override
@@ -105,5 +101,9 @@ public class Journal implements ReadOnlyJournal {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(journalEntries);
+    }
+
+    public void updateJournalEntry(JournalEntry journalEntry, JournalEntry oldVersion) {
+        journalEntries.updateJournalEntry(journalEntry, oldVersion);
     }
 }

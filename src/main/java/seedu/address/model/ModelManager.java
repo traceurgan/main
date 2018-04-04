@@ -124,6 +124,10 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(journal.getJournalEntryList());
     }
 
+    public JournalEntry getLast() {
+        return journal.getLast();
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);

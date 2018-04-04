@@ -19,13 +19,19 @@ import javafx.collections.ObservableList;
 public class UniqueJournalEntryList implements Iterable <JournalEntry> {
 
     private final ObservableList<JournalEntry> internalList = FXCollections.observableArrayList();
-
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(JournalEntry toCheck) {
         requireNonNull(toCheck);
         return internalList.contains(toCheck);
+    }
+
+    /**
+     * Returns last entry
+     */
+    public JournalEntry getLast() {
+        return internalList.get(internalList.size() - 1);
     }
 
     /**
@@ -77,5 +83,9 @@ public class UniqueJournalEntryList implements Iterable <JournalEntry> {
         return other == this // short circuit if same object
                 || (other instanceof UniqueJournalEntryList // instanceof handles nulls
                 && this.internalList.equals(((UniqueJournalEntryList) other).internalList));
+    }
+
+    public void updateJournalEntry(JournalEntry journalEntry, JournalEntry oldVersion) {
+        JournalEntry.updateJournalEntry(journalEntry, oldVersion);
     }
 }
