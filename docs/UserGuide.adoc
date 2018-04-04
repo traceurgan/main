@@ -276,6 +276,15 @@ Alias: `jd`
 
 Return to <<toc,Table of Contents>>  +
 
+=== Motivational Picture
+==== Send motivational picture via app : `motivate`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `motivate` +
+_There is no alias for this feature currently._
+
+Return to <<toc,Table of Contents>>  +
+
 === Location
 ==== Finding building location : `location`
 
