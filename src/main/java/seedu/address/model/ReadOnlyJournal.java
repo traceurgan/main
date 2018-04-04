@@ -13,4 +13,6 @@ public interface ReadOnlyJournal {
      * This list will not contain any duplicate journal entries.
      */
     ObservableList<JournalEntry> getJournalEntryList();
+
+    JournalEntry getLast();
 }

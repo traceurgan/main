@@ -7,6 +7,12 @@ import seedu.address.commons.events.BaseEvent;
  */
 public class ShowJournalWindowRequestEvent extends BaseEvent {
 
+    public final String date;
+
+    public ShowJournalWindowRequestEvent (String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName();

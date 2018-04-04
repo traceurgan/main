@@ -86,6 +86,11 @@ public class Journal implements ReadOnlyJournal {
     }
 
     @Override
+    public JournalEntry getLast() {
+        return journalEntries.getLast();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Journal // instanceof handles nulls
@@ -96,5 +101,9 @@ public class Journal implements ReadOnlyJournal {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(journalEntries);
+    }
+
+    public void updateJournalEntry(JournalEntry journalEntry, JournalEntry oldVersion) {
+        journalEntries.updateJournalEntry(journalEntry, oldVersion);
     }
 }
