@@ -33,8 +33,8 @@ public class TimetableDisplayUtil {
         "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
-    public static String timetableInfoFilePath = "src/main/resources/timetableDisplayInfo";
-    public static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
+    private static String timetableInfoFilePath = "src/main/resources/timetableDisplayInfo";
+    private static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String DEFAULT_TIMETABLE_PAGE_SCRIPT = "//@@author marlenekoh\n"
             + "timetable = [\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"CS2103T\","
