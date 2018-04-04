@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -51,7 +52,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// list overwrite operations
 
-    public void setPersons(List<Person> persons) throws DuplicatePersonException {
+    public void setPersons(List<ReadOnlyPerson> persons) throws DuplicatePersonException {
         this.persons.setPersons(persons);
     }
 
@@ -65,7 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
-        List<Person> syncedPersonList = newData.getPersonList().stream()
+        List<ReadOnlyPerson> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
 
@@ -85,8 +86,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @throws DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Person p) throws DuplicatePersonException {
-        Person person = syncWithMasterTagList(p);
+    public void addPerson(ReadOnlyPerson p) throws DuplicatePersonException {
+        ReadOnlyPerson person = syncWithMasterTagList(p);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
@@ -94,36 +95,81 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedPerson}.
+     * Replaces the given person {@code target} in the list with {@code editedReadOnlyPerson}.
+     * {@code AddressBook}'s tag list will be updated with the tags of {@code editedReadOnlyPerson}.
      *
      * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
-     *      another existing person in the list.
-     * @throws PersonNotFoundException if {@code target} could not be found in the list.
-     *
-     * @see #syncWithMasterTagList(Person)
+     *                                  another existing person in the list.
+     * @throws PersonNotFoundException  if {@code target} could not be found in the list.
+     * @see #syncMasterTagListWith(Person)
      */
-    public void updatePerson(Person target, Person editedPerson)
+    public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedReadOnlyPerson)
             throws DuplicatePersonException, PersonNotFoundException {
-        requireNonNull(editedPerson);
+        requireNonNull(editedReadOnlyPerson);
 
-        Person syncedEditedPerson = syncWithMasterTagList(editedPerson);
+        Person editedPerson = new Person(editedReadOnlyPerson);
+        syncMasterTagListWith(editedPerson);
         // TODO: the tags master list will be updated even though the below line fails.
         // This can cause the tags master list to have additional tags that are not tagged to any person
         // in the person list.
-        persons.setPerson(target, syncedEditedPerson);
-        removeUnusedTags();
+        persons.setPerson(target, editedPerson);
     }
 
+    //@@author chenxing1992
     /**
-     * Removes all {@code Tag}s that are not used by any {@code Person} in this {@code AddressBook}.
+     *
+     * Help to remove unwanted tags
      */
-    private void removeUnusedTags() {
-        Set<Tag> tagsInPersons = persons.asObservableList().stream()
-                .map(Person::getTags)
-                .flatMap(Set::stream)
-                .collect(Collectors.toSet());
-        tags.setTags(tagsInPersons);
+    public void removeUnusedTags(Set<Tag> tagToRemove) {
+        Set<Tag> newTags = getTagsExcluding(tagToRemove);
+        tags.setTags(newTags);
+        syncMasterTagListWith(persons);
+    }
+
+    //@@author chenxing1992
+    /**
+     *
+     * Help to exclude unwanted tags
+     */
+    public Set<Tag> getTagsExcluding(Set<Tag> tagsToExclude) {
+        Set<Tag> output = tags.toSet();
+        for (Tag tagExcluded : tagsToExclude) {
+            output.remove(tagExcluded);
+        }
+        return output;
+    }
+
+    //@@author chenxing1992
+    /**
+     * Make sure that these people:
+     * - appear in the master list {@link #tags}
+     * - Tag objects are pointed in the master list
+     *
+     * @see #syncMasterTagListWith(Person)
+     */
+    private void syncMasterTagListWith(UniquePersonList persons) {
+        persons.forEach(this::syncMasterTagListWith);
+    }
+
+    //@@author chenxing1992
+    /**
+     * Make sure this person:
+     * - Appear in the master list {@link #tags}
+     * - Tag object is pointed in the master list
+     */
+    private void syncMasterTagListWith(Person person) {
+        final UniqueTagList Tags = new UniqueTagList(person.getTags());
+        tags.mergeFrom(Tags);
+
+        // Create map with values = tag object references in the master list
+        // used for checking person tag references
+        final Map<Tag, Tag> mainTagObjects = new HashMap<>();
+        tags.forEach(tag -> mainTagObjects.put(tag, tag));
+
+        // Rebuild the list of person tags to point to the relevant tags in the master tag list.
+        final Set<Tag> correctTagReferences = new HashSet<>();
+        Tags.forEach(tag -> correctTagReferences.add(mainTagObjects.get(tag)));
+        person.setTags(correctTagReferences);
     }
 
     /**
@@ -131,7 +177,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master
      *  list.
      */
-    private Person syncWithMasterTagList(Person person) {
+    private ReadOnlyPerson syncWithMasterTagList(ReadOnlyPerson person) {
         final UniqueTagList personTags = new UniqueTagList(person.getTags());
         tags.mergeFrom(personTags);
 
@@ -152,7 +198,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * @throws PersonNotFoundException if the {@code key} is not in this {@code AddressBook}.
      */
-    public boolean removePerson(Person key) throws PersonNotFoundException {
+    public boolean removePerson(ReadOnlyPerson key) throws PersonNotFoundException {
         if (persons.remove(key)) {
             return true;
         } else {
@@ -211,7 +257,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<ReadOnlyPerson> getPersonList() {
         return persons.asObservableList();
     }
 

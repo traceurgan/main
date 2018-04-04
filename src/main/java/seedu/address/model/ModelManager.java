@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final Journal journal;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<ReadOnlyPerson> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -70,13 +70,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(Person target) throws PersonNotFoundException {
+    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws DuplicatePersonException {
+    public synchronized void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
@@ -91,12 +91,11 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
         journal.addJournalEntry(journalEntry);
         logger.info("journal entry added");
-        journal.getList();
         indicateJournalChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson)
+    public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
         requireAllNonNull(target, editedPerson);
 
@@ -116,12 +115,17 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code addressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public ObservableList<JournalEntry> getJournalEntryList() {
+        return FXCollections.unmodifiableObservableList(journal.getJournalEntryList());
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
