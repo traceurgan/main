@@ -29,11 +29,26 @@ public class JournalWindow extends UiPart<Stage> {
     private JournalWindow (Stage root) {
         super (FXML, root);
 
-        date = concatenateDate();
+        this.date = concatenateDate();
         fillInnerParts();
 
         root.setTitle(date + " - Journal");
         root.initModality(Modality.APPLICATION_MODAL);
+    }
+
+    private JournalWindow (Stage root, String date, String text) {
+        super (FXML, root);
+
+        fillInnerParts(text);
+        this.date = date;
+
+        root.setTitle(date + " - Journal");
+        root.initModality(Modality.APPLICATION_MODAL);
+
+    }
+
+    public JournalWindow(String date, String text) {
+        this(new Stage(), date, text);
     }
 
     public JournalWindow () {
@@ -60,15 +75,24 @@ public class JournalWindow extends UiPart<Stage> {
     }
 
     /**
+     * Fills placeholder with a editable TextArea
+     */
+    private void fillInnerParts(String text) {
+        journalEntryText = new JournalEntryText();
+        journalEntryText.setText(text);
+        journalTextPlaceholder.getChildren().add(journalEntryText.getRoot());
+    }
+
+    /**
      * Raise JournalEntrySaveEvent on journal window close if text area is not empty
      */
     @FXML
-    private void handleJournalClose() throws Exception {
-        logger.info(String.format(this.date + " " + journalEntryText.getText()));
+    private void handleJournalClose() {
         if (!journalEntryText.getText().isEmpty()) {
             JournalEntry journalEntry = new JournalEntry(this.date, journalEntryText.getText());
             raise(new SaveEntryEvent(journalEntry));
         }
+        return;
     }
 
     public void show() {

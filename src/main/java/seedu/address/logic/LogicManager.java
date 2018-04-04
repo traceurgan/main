@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.ui.JournalWindow;
 
 /**
  * The main LogicManager of the app.
@@ -57,6 +58,9 @@ public class LogicManager extends ComponentManager implements Logic {
             model.addJournalEntry(event.journalEntry);
         } catch (Exception e) {
             logger.info("Save failed");
+            JournalWindow journalWindow =
+                    new JournalWindow(event.journalEntry.getDate(), event.journalEntry.getText());
+            journalWindow.show();
         }
     }
 
