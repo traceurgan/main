@@ -52,6 +52,7 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
+    //@@author traceurgan
     @Subscribe
     public void handleSaveEntryEvent(SaveEntryEvent event) {
         try {
@@ -83,11 +84,13 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFilteredPersonList();
     }
 
+    //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return model.getJournal().getJournalEntryList();
     }
 
+    //@@author
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());

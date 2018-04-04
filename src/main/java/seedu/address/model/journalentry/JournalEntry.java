@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+//@@author traceurgan
 /**
  * Represents a JournalEntry in the journal.
  */

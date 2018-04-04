@@ -64,11 +64,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(addressBook));
     }
 
+    //@@author traceurgan
     /** Raises an event to indicate the journal model has changed */
     private void indicateJournalChanged() {
         raise(new JournalChangedEvent(journal));
     }
 
+    //@@author
     @Override
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
@@ -82,6 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author traceurgan
     @Override
     public ReadOnlyJournal getJournal() {
         return journal;
@@ -98,6 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateJournalChanged();
     }
 
+    //@@author
     @Override
     public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
@@ -123,6 +127,7 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
+    //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return FXCollections.unmodifiableObservableList(journal.getJournalEntryList());
@@ -132,6 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
         return journal.getLast();
     }
 
+    //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);

@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.SaveEntryEvent;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /**
  * Controller for a journal page
  */

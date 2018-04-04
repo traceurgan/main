@@ -22,17 +22,22 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    //@@author traceurgan
     /** Returns the Journal */
     ReadOnlyJournal getJournal();
 
+    /** Adds the given person */
+    void addJournalEntry(JournalEntry journalEntry) throws Exception;
+
+    /** Returns an unmodifiable view of the journal entry list */
+    ObservableList<JournalEntry> getJournalEntryList();
+
+    //@@author
     /** Deletes the given person. */
     void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException;
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
-
-    /** Adds the given person */
-    void addJournalEntry(JournalEntry journalEntry) throws Exception;
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -50,8 +55,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the journal entry list */
-    ObservableList<JournalEntry> getJournalEntryList();
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

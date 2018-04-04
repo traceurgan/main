@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+//@@author traceurgan
 /**
  * A list of journal entries that enforces uniqueness between its elements and does not allow nulls.
  *
