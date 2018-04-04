@@ -18,10 +18,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 
 public class ListPanelTest extends GuiUnitTest {
-    private static final ObservableList<Person> TYPICAL_PERSONS =
+    private static final ObservableList<ReadOnlyPerson> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());
 
     private static final ObservableList<JournalEntry> TYPICAL_JOURNALENTRIES =
@@ -44,7 +44,7 @@ public class ListPanelTest extends GuiUnitTest {
     public void display() {
         for (int i = 0; i < TYPICAL_PERSONS.size(); i++) {
             personListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
-            Person expectedPerson = TYPICAL_PERSONS.get(i);
+            ReadOnlyPerson expectedPerson = TYPICAL_PERSONS.get(i);
             PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
 
             assertCardDisplaysPerson(expectedPerson, actualCard);

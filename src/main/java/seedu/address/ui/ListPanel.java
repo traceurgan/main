@@ -12,11 +12,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * Panel containing the list of persons.
@@ -31,13 +32,14 @@ public class ListPanel extends UiPart<Region> {
     @FXML
     private ListView<JournalEntryCard> journalEntryListView;
 
-    public ListPanel(ObservableList<Person> personList, ObservableList<JournalEntry> journalEntryList) {
+    public ListPanel(ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         super(FXML);
         setConnections(personList, journalEntryList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList, ObservableList<JournalEntry> journalEntryList) {
+    private void setConnections(
+              ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
                 personList, person -> new PersonCard(person, personList.indexOf(person) + 1));
 
