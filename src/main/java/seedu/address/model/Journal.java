@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.journalentry.UniqueJournalEntryList;
 
+//@@author traceurgan
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .equals comparison)

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /**
  * JAXB-friendly version of the JournalEntry.
  */
