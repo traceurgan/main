@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.SaveEntryEvent;
@@ -14,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.ui.JournalWindow;
 
 /**
@@ -62,11 +63,15 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
-
+    //@@author chenxing1992
+    @Override
+    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
+        return model.getFilteredPersonList();
+    }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<JournalEntry> getJournalEntryList() {
+        return model.getJournal().getJournalEntryList();
     }
 
     @Override

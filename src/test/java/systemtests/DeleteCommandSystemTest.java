@@ -19,7 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 @Ignore
@@ -36,7 +36,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
-        Person deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        ReadOnlyPerson deletedPerson = removePerson(expectedModel, INDEX_FIRST_PERSON);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -119,8 +119,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * Removes the {@code Person} at the specified {@code index} in {@code model}'s address book.
      * @return the removed person
      */
-    private Person removePerson(Model model, Index index) {
-        Person targetPerson = getPerson(model, index);
+    private ReadOnlyPerson removePerson(Model model, Index index) {
+        ReadOnlyPerson targetPerson = getPerson(model, index);
         try {
             model.deletePerson(targetPerson);
         } catch (PersonNotFoundException pnfe) {
@@ -136,7 +136,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Person deletedPerson = removePerson(expectedModel, toDelete);
+        ReadOnlyPerson deletedPerson = removePerson(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
 
         assertCommandSuccess(

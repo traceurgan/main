@@ -19,6 +19,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
@@ -48,17 +49,17 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
+        for (ReadOnlyPerson person : getTypicalPersons()) {
             try {
                 ab.addPerson(person);
             } catch (DuplicatePersonException e) {
-                throw new AssertionError("not possible");
+                assert false : "not possible";
             }
         }
         return ab;
     }
 
-    public static List<Person> getTypicalPersons() {
+    public static List<ReadOnlyPerson> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE));
     }
 }
