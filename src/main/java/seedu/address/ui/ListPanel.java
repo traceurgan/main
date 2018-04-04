@@ -38,7 +38,8 @@ public class ListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
+    private void setConnections(
+              ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
                 personList, person -> new PersonCard(person, personList.indexOf(person) + 1));
 
