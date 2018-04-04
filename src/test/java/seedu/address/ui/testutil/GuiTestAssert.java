@@ -11,6 +11,7 @@ import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.ui.PersonCard;
 
 /**
@@ -37,7 +38,7 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
      */
-    public static void assertCardDisplaysPerson(Person expectedPerson, PersonCardHandle actualCard) {
+    public static void assertCardDisplaysPerson(ReadOnlyPerson expectedPerson, PersonCardHandle actualCard) {
         assertEquals(expectedPerson.getName().fullName, actualCard.getName());
         assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
         assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
@@ -80,7 +81,7 @@ public class GuiTestAssert {
      * Asserts that the tags in {@code actualCard} matches all the tags in {@code expectedPerson}
      * with the correct color
      */
-    private static void assertTagsEqual(Person expectedPerson, PersonCardHandle actualCard) {
+    private static void assertTagsEqual(ReadOnlyPerson expectedPerson, PersonCardHandle actualCard) {
         List<String> expectedTags = expectedPerson.getTags().stream()
                 .map(tag -> tag.tagName).collect(Collectors.toList());
         assertEquals(expectedTags, actualCard.getTags());
@@ -103,7 +104,7 @@ public class GuiTestAssert {
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Person> persons) {
+    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<ReadOnlyPerson> persons) {
         assertListMatching(personListPanelHandle, persons.toArray(new Person[0]));
     }
 

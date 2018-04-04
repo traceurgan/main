@@ -1,87 +1,158 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
+//@@author chenxing1992
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements ReadOnlyPerson {
 
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
-    private final Address address;
-    private final Timetable timetable;
+    private ObjectProperty<Name> name;
+    private ObjectProperty<Phone> phone;
+    private ObjectProperty<Email> email;
+    private ObjectProperty<Address> address;
+    private ObjectProperty<Timetable> timetable;
+    private ObjectProperty<UniqueTagList> tags;
 
-    private final UniqueTagList tags;
 
+    //@@author chenxing1992
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Timetable timetable, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Timetable timetable, Set<Tag> tags) {
+
         requireAllNonNull(name, phone, email, address, timetable, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.timetable = timetable;
+
+        this.name = new SimpleObjectProperty<>(name);
+        this.phone = new SimpleObjectProperty<>(phone);
+        this.email = new SimpleObjectProperty<>(email);
+        this.address = new SimpleObjectProperty<>(address);
+        this.timetable = new SimpleObjectProperty<>(timetable);
         // protect internal tags from changes in the arg list
-        this.tags = new UniqueTagList(tags);
+        this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
+
     }
 
-    public Name getName() {
+    //@@author chenxing1992
+    /**
+     * Creates a copy of the given ReadOnlyPerson.
+     */
+    public Person(ReadOnlyPerson source) {
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),
+                source.getTimetable(), source.getTags());
+    }
+    public void setName(Name name) {
+        this.name.set(requireNonNull(name));
+    }
+
+    @Override
+    public ObjectProperty<Name> nameProperty() {
         return name;
     }
 
-    public Phone getPhone() {
+    @Override
+    public Name getName() {
+        return name.get();
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone.set(requireNonNull(phone));
+    }
+
+    @Override
+    public ObjectProperty<Phone> phoneProperty() {
         return phone;
     }
 
-    public Email getEmail() {
+    @Override
+    public Phone getPhone() {
+        return phone.get();
+    }
+
+    public void setEmail(Email email) {
+        this.email.set(requireNonNull(email));
+    }
+
+    @Override
+    public ObjectProperty<Email> emailProperty() {
         return email;
     }
 
-    public Address getAddress() {
+    @Override
+    public Email getEmail() {
+        return email.get();
+    }
+
+    public void setAddress(Address address) {
+        this.address.set(requireNonNull(address));
+    }
+
+    @Override
+    public ObjectProperty<Address> addressProperty() {
         return address;
     }
 
-    public Timetable getTimetable() {
+    @Override
+    public Address getAddress() {
+        return address.get();
+    }
+
+    public void setTimetable(Timetable timetable) {
+        this.timetable.set(requireNonNull(timetable));
+    }
+
+    @Override
+    public ObjectProperty<Timetable> timeTableProperty() {
         return timetable;
     }
 
+    @Override
+    public Timetable getTimetable() {
+        return timetable.get();
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
+    @Override
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags.toSet());
+        return Collections.unmodifiableSet(tags.get().toSet());
+    }
+
+    public ObjectProperty<UniqueTagList> tagProperty() {
+        return tags;
+    }
+
+    /**
+     * Replaces this person's tags with the tags in the argument tag set.
+     */
+    public void setTags(Set<Tag> replacement) {
+        tags.set(new UniqueTagList(replacement));
+    }
+
+    public boolean hasTag(Tag tag) {
+        return tags.get().contains(tag);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(this.getName())
-                && otherPerson.getPhone().equals(this.getPhone())
-                && otherPerson.getEmail().equals(this.getEmail())
-                && otherPerson.getAddress().equals(this.getAddress())
-                && otherPerson.getTimetable().equals(this.getTimetable());
+        return other == this // short circuit if same object
+                || (other instanceof ReadOnlyPerson // instanceof handles nulls
+                && this.isSameStateAs((ReadOnlyPerson) other));
     }
 
     @Override
@@ -92,19 +163,8 @@ public class Person {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
-                .append(" Timetable: ")
-                .append(getTimetable())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
+        return getAsText();
     }
 
 }
+

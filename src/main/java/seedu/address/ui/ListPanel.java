@@ -12,32 +12,43 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ListPanel extends UiPart<Region> {
+    private static final String FXML = "ListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ListPanel.class);
 
     @FXML
     private ListView<PersonCard> personListView;
 
-    public PersonListPanel(ObservableList<Person> personList) {
+    @FXML
+    private ListView<JournalEntryCard> journalEntryListView;
+
+    public ListPanel(ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(personList, journalEntryList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList) {
+    private void setConnections(
+              ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
-                personList, (person) -> new PersonCard(person, personList.indexOf(person) + 1));
+                personList, person -> new PersonCard(person, personList.indexOf(person) + 1));
+
+        ObservableList<JournalEntryCard> mappedListToo = EasyBind.map(journalEntryList, journalEntry ->
+                new JournalEntryCard(journalEntry, journalEntryList.indexOf(journalEntry) + 1));
         personListView.setItems(mappedList);
+        journalEntryListView.setItems(mappedListToo);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        journalEntryListView.setCellFactory(listView -> new JournalEntryListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -81,6 +92,24 @@ public class PersonListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 setGraphic(person.getRoot());
+            }
+        }
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
+     */
+    class JournalEntryListViewCell extends ListCell<JournalEntryCard> {
+
+        @Override
+        protected void updateItem(JournalEntryCard journalEntryCard, boolean empty) {
+            super.updateItem(journalEntryCard, empty);
+
+            if (empty || journalEntryCard == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(journalEntryCard.getRoot());
             }
         }
     }
