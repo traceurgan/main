@@ -157,6 +157,7 @@ public class TimetableDisplayUtil {
      */
     public static String replaceFirstLine(String contents, String replace) {
         StringBuilder sb = new StringBuilder();
+        sb.append("//@@author marlenekoh\n");
         sb.append("timetable = [");
         sb.append(replace);
         int pos = contents.indexOf(';');
