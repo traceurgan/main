@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * Selects a person identified using it's last displayed index from the address book.
+ * Selects your partner from NUSCouples.
  */
 public class SelectCommand extends Command {
 
@@ -18,16 +18,16 @@ public class SelectCommand extends Command {
     public static final String COMMAND_ALIAS = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Selects your partner and shows his/her timetable.\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
+    private static final int PARTNER_INDEX = 0;
     private final Index targetIndex;
 
-    public SelectCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public SelectCommand() {
+        this.targetIndex = Index.fromZeroBased(PARTNER_INDEX);
     }
 
     @Override
