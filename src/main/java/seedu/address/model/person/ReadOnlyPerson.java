@@ -7,7 +7,7 @@ import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
-//@@author chen xing
+//@@author chenxing
 /**
  * A read-only immutable interface for a Person in the addressbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
@@ -40,7 +40,7 @@ public interface ReadOnlyPerson {
                 && rp.getTimetable().equals((this.getTimetable())));
     }
 
-    //@@author chen xing
+    //@@author chenxing
     /**
      * Show all contact in detail as text
      */
