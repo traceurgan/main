@@ -22,4 +22,7 @@ public class JournalEntryText extends UiPart<Region> {
         return journalTextArea.getText();
     }
 
+    public void setText(String text) {
+        journalTextArea.setText(text);
+    }
 }

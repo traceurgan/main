@@ -21,12 +21,15 @@ public class JournalEntryCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label id;
+    @FXML
+    private Label text;
 
     public JournalEntryCard(JournalEntry journalEntry, int displayedIndex) {
         super(FXML);
         this.journalEntry = journalEntry;
         id.setText(displayedIndex + ". ");
         date.setText(journalEntry.getDate());
+        text.setText(journalEntry.getText());
     }
 
     @Override
