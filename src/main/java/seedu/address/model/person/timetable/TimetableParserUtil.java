@@ -2,6 +2,7 @@ package seedu.address.model.person.timetable;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.person.timetable.TimetableDisplayUtil.TIMES;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -30,9 +30,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 //@@author marlenekoh
 /**
- * A class containing utility methods for Timetable
+ * A class containing utility methods for parsing an NUSMods short URL and setting up a Timetable
  */
-public class TimetableUtil {
+public class TimetableParserUtil {
+    public static final int MONDAY_INDEX = 0;
+    public static final int TUESDAY_INDEX = 1;
+    public static final int WEDNESDAY_INDEX = 2;
+    public static final int THURSDAY_INDEX = 3;
+    public static final int FRIDAY_INDEX = 4;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String SPLIT_QUESTION_MARK = "\\?";
     private static final String SPLIT_AMPERSAND = "&";
@@ -52,11 +57,6 @@ public class TimetableUtil {
     private static final int MODULE_CODE_REMAINING_INDEX = 1;
     private static final int LESSON_TYPE_INDEX = 0;
     private static final int CLASS_TYPE_INDEX = 1;
-    private static final int MONDAY_INDEX = 0;
-    private static final int TUESDAY_INDEX = 1;
-    private static final int WEDNESDAY_INDEX = 2;
-    private static final int THURSDAY_INDEX = 3;
-    private static final int FRIDAY_INDEX = 4;
 
     /**
      * Sets up attributes of a given {@code Timetable}.
@@ -64,20 +64,31 @@ public class TimetableUtil {
      */
     public static void setUpTimetableInfo(Timetable timetable) {
         try {
-            setAndExpandShortTimetableUrl(timetable);
+            setExpandedTimetableUrl(timetable);
             setSemNumFromExpandedUrl(timetable);
-            splitLongTimetableUrl(timetable);
-            getModuleInfoFromApi(timetable);
+            setListOfModules(timetable);
+            setListOfDays(timetable);
         } catch (ParseException e) {
             logger.warning(MESSAGE_INVALID_SHORT_URL);
         }
     }
 
     /**
-     * Expands short NUSMods timetable URL to a long NUSMods timetable URL from {@timetable}.
      * Sets the expanded URL for {@code timetable}.
+     * @param timetable Timetable whose expanded URL is to be set
      */
-    public static void setAndExpandShortTimetableUrl(Timetable timetable) throws ParseException {
+    public static void setExpandedTimetableUrl(Timetable timetable) throws ParseException {
+        String expandedUrl = expandShortTimetableUrl(timetable);
+        timetable.setExpandedUrl(expandedUrl);
+    }
+
+    /**
+     * Expands short NUSMods timetable URL to a long NUSMods timetable URL from {@timetable}.
+     * @param timetable whose url is to be parsed
+     * @return expanded NUSMods timetable URL
+     * @throws ParseException if short url provided is invalid short NUSMods timetable URL
+     */
+    private static String expandShortTimetableUrl(Timetable timetable) throws ParseException {
         String timetableUrl = timetable.value;
         checkArgument(Timetable.isValidTimetable(timetableUrl), Timetable.MESSAGE_TIMETABLE_CONSTRAINTS);
         String expandedUrl = null;
@@ -95,28 +106,45 @@ public class TimetableUtil {
         } catch (IOException e) {
             logger.warning("Failed to open connection");
         }
-        timetable.setExpandedUrl(expandedUrl);
+        return expandedUrl;
     }
 
     /**
-     * Parses for {@code currentSemester} from expandedUrl and sets it for {@code timetable}
-     * @param timetable whose {@code currentSemester} is to be set
+     * Sets the {@code currentSemester} for {@code timetable}.
+     * @param timetable Timetable whose {@code currentSemester} is to be set
      */
     public static void setSemNumFromExpandedUrl(Timetable timetable) {
+        timetable.setCurrentSemester(getSemNumFromExpandedUrl(timetable));
+    }
+
+    /**
+     * Parses for {@code currentSemester} from expandedUrl of {@code timetable}
+     * @param timetable whose {@code currentSemester} is to be set
+     */
+    private static int getSemNumFromExpandedUrl(Timetable timetable) {
         String expandedUrl = timetable.getExpandedUrl();
         requireNonNull(expandedUrl);
         String[] moduleInformation = expandedUrl.split(SPLIT_QUESTION_MARK);
-        timetable.setCurrentSemester(Integer.valueOf(moduleInformation[SEM_NUMBER_INDEX]
-                .replaceAll(REPLACE_NON_DIGIT_CHARACTERS, "")));
+        return Integer.valueOf(moduleInformation[SEM_NUMBER_INDEX]
+                .replaceAll(REPLACE_NON_DIGIT_CHARACTERS, ""));
+    }
+
+    /**
+     * Sets listOfModules in {@code timetable}
+     * @param timetable whose long url is to be split
+     */
+    public static void setListOfModules(Timetable timetable) {
+        HashMap<String, TimetableModule> listOfModules = splitExpandedUrl(timetable);
+        timetable.setListOfModules(listOfModules);
     }
 
     /**
      * Splits expanded NUSMods timetable URL into the different {@code TimetableModule}s.
-     * Sets listOfModules in {@code timetable}
      * Expanded timetable URL is in the format ...?[MODULE_CODE]=[LESSON_TYPE]:[CLASS_NUM]&...
      * @param timetable whose long url is to be split
+     * @return HashMap containing list of modules
      */
-    public static void splitLongTimetableUrl(Timetable timetable) {
+    private static HashMap<String, TimetableModule> splitExpandedUrl(Timetable timetable) {
         String expandedUrl = timetable.getExpandedUrl();
         requireNonNull(expandedUrl);
         String[] moduleInformation = expandedUrl.split(SPLIT_QUESTION_MARK);
@@ -146,25 +174,36 @@ public class TimetableUtil {
             }
             listOfModules.put(moduleCode, new TimetableModule(moduleCode, listOfLessons));
         }
-        timetable.setListOfModules(listOfModules);
+        return listOfModules;
     }
 
-    public static void getModuleInfoFromApi(Timetable timetable) {
+    /**
+     * Sets {@code listOfDays} in {@code timetable} given
+     * @param timetable w
+     */
+    public static void setListOfDays(Timetable timetable) {
         requireNonNull(timetable.getListOfModules());
-
-        String currentModuleInfo;
-        ArrayList<TimetableModuleSlot> allTimetableModuleSlots = null;
-        Set entrySet = timetable.getListOfModules().entrySet();
-        Iterator it = entrySet.iterator();
-
-        while (it.hasNext()) {
-            Map.Entry currentModule = (Map.Entry) it.next();
-            currentModuleInfo = getJsonContentsFromNusModsApi("2017-2018",
-                    Integer.toString(timetable.getCurrentSemester()), currentModule.getKey().toString());
-            allTimetableModuleSlots = getAllTimetableModuleSlots(currentModuleInfo, timetable,
-                    currentModule.getKey().toString());
-        }
+        ArrayList<TimetableModuleSlot> allTimetableModuleSlots = retrieveModuleSlotsFromApi(timetable);
         timetable.setListOfDays(sortModuleSlotsByDay(allTimetableModuleSlots));
+    }
+
+    /**
+     * Gets module information from nusmods api for the all modules in listOfModules in {@code timetable}
+     * @param timetable containing list of all modules
+     */
+    private static ArrayList<TimetableModuleSlot> retrieveModuleSlotsFromApi(Timetable timetable) {
+        String currentModuleInfo;
+        ArrayList<TimetableModuleSlot> allTimetableModuleSlots = new ArrayList<TimetableModuleSlot>();
+        Set<Map.Entry<String, TimetableModule>> entrySet = timetable.getListOfModules().entrySet();
+
+        for (Map.Entry<String, TimetableModule> currentModule : entrySet) {
+            //TODO: Remove magic number acadYear
+            currentModuleInfo = getJsonContentsFromNusModsApiForModule("2017-2018",
+                    Integer.toString(timetable.getCurrentSemester()), currentModule.getKey().toString());
+            allTimetableModuleSlots.addAll(getAllTimetableModuleSlots(currentModuleInfo, timetable,
+                    currentModule.getKey().toString()));
+        }
+        return allTimetableModuleSlots;
     }
 
     /**
@@ -176,7 +215,7 @@ public class TimetableUtil {
      * e.g. http://api.nusmods.com/2017-2018/2/modules/CS3241.json
      * @return String containing contents of json file
      */
-    public static String getJsonContentsFromNusModsApi(String acadYear, String semNum, String moduleCode) {
+    private static String getJsonContentsFromNusModsApiForModule(String acadYear, String semNum, String moduleCode) {
         String contents = null;
         String nusmodsApiUrlString = "http://api.nusmods.com/" + acadYear + "/" + semNum + "/modules/" + moduleCode
                 + ".json";
@@ -202,12 +241,12 @@ public class TimetableUtil {
     }
 
     /**
-     * Read the responded result
+     * Read the responded result and stores in a String
      * @param inputStream from nusmods api
-     * @return string containing contents of nusmods api
+     * @return String containing contents of nusmods api
      * @throws IOException from readLine()
      */
-    public static String readStream(InputStream inputStream) throws IOException {
+    private static String readStream(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder stringBuilder = new StringBuilder();
         String inputLine;
@@ -232,44 +271,43 @@ public class TimetableUtil {
 
         JSONObject jsonObject = null;
         JSONParser parser = new JSONParser();
+        ArrayList<TimetableModuleSlot> listOfModuleSlots = new ArrayList<TimetableModuleSlot>();
 
         try {
             Object obj = parser.parse(contents);
             jsonObject = (JSONObject) obj;
+            JSONArray arrOfClassInformation = null;
+            Object object = jsonObject.get("Timetable");
+            arrOfClassInformation = (JSONArray) object;
+
+            String tempLessonType;
+            String tempClassType;
+            String tempWeekFreq;
+            String tempDay;
+            String tempStartTime;
+            String tempEndTime;
+            String tempVenue;
+
+            HashMap<String, TimetableModule> listOfModules = timetable.getListOfModules();
+            TimetableModule timetableModule = listOfModules.get(moduleCode);
+            HashMap<String, String> listOfLessons = timetableModule.getListOfLessons();
+
+            for (Object t : arrOfClassInformation) {
+                tempLessonType = ((JSONObject) t).get("LessonType").toString();
+                tempClassType = ((JSONObject) t).get("ClassNo").toString();
+
+                if (listOfLessons.get(tempLessonType).equals(tempClassType)) {
+                    tempWeekFreq = ((JSONObject) t).get("WeekText").toString();
+                    tempDay = ((JSONObject) t).get("DayText").toString();
+                    tempStartTime = ((JSONObject) t).get("StartTime").toString();
+                    tempEndTime = ((JSONObject) t).get("EndTime").toString();
+                    tempVenue = ((JSONObject) t).get("Venue").toString();
+                    listOfModuleSlots.add(new TimetableModuleSlot(moduleCode, tempLessonType, tempClassType,
+                            tempWeekFreq, tempDay, tempVenue, tempStartTime, tempEndTime));
+                }
+            }
         } catch (Exception e) {
             logger.warning("Exception caught in parsing JSONObject");
-        }
-
-        JSONArray arrOfClassInformation = null;
-        Object object = jsonObject.get("Timetable");
-        arrOfClassInformation = (JSONArray) object;
-
-        String tempLessonType;
-        String tempClassType;
-        String tempWeekFreq;
-        String tempDay;
-        String tempStartTime;
-        String tempEndTime;
-        String tempVenue;
-
-        HashMap<String, TimetableModule> listOfModules = timetable.getListOfModules();
-        TimetableModule timetableModule = listOfModules.get(moduleCode);
-        HashMap<String, String> listOfLessons = timetableModule.getListOfLessons();
-
-        ArrayList<TimetableModuleSlot> listOfModuleSlots = new ArrayList<TimetableModuleSlot>();
-        for (Object t : arrOfClassInformation) {
-            tempLessonType = ((JSONObject) t).get("LessonType").toString();
-            tempClassType = ((JSONObject) t).get("ClassNo").toString();
-
-            if (listOfLessons.get(tempLessonType).equals(tempClassType)) {
-                tempWeekFreq = ((JSONObject) t).get("WeekText").toString();
-                tempDay = ((JSONObject) t).get("DayText").toString();
-                tempStartTime = ((JSONObject) t).get("StartTime").toString();
-                tempEndTime = ((JSONObject) t).get("EndTime").toString();
-                tempVenue = ((JSONObject) t).get("Venue").toString();
-                listOfModuleSlots.add(new TimetableModuleSlot(moduleCode, tempLessonType, tempClassType,
-                        tempWeekFreq, tempDay, tempVenue, tempStartTime, tempEndTime));
-            }
         }
         return listOfModuleSlots;
     }
@@ -278,7 +316,7 @@ public class TimetableUtil {
      * Sorts TimetableModuleSlots
      * @return HashMap of {@code Day}, {@code list of TimetableModuleSlots sorted by time}
      */
-    public static HashMap<String, ArrayList<TimetableModuleSlot>> sortModuleSlotsByDay(
+    private static HashMap<String, ArrayList<TimetableModuleSlot>> sortModuleSlotsByDay(
             ArrayList<TimetableModuleSlot> unsortedTimetableModuleSlots) {
         ArrayList<ArrayList<TimetableModuleSlot>> listOfDays = new ArrayList<ArrayList<TimetableModuleSlot>>();
 
@@ -298,7 +336,9 @@ public class TimetableUtil {
         }
 
         for (ArrayList<TimetableModuleSlot> t : listOfDays) {
-            t = sortModuleSlotsByTime(t);
+            ArrayList<TimetableModuleSlot> temp = sortModuleSlotsByTime(t);
+            t.clear();
+            t.addAll(temp);
         }
 
         HashMap<String, ArrayList<TimetableModuleSlot>> sortedTimetableModuleSlots =
@@ -316,10 +356,35 @@ public class TimetableUtil {
      * @param timetableModuleSlots
      * @return
      */
-    public static ArrayList<TimetableModuleSlot> sortModuleSlotsByTime(
+    private static ArrayList<TimetableModuleSlot> sortModuleSlotsByTime(
             ArrayList<TimetableModuleSlot> timetableModuleSlots) {
         Collections.sort(timetableModuleSlots);
-        return timetableModuleSlots;
+        return splitIntoHalfHourSlots(timetableModuleSlots);
+    }
+
+    /**
+     * Splits each TimetableModuleSlots into half hour slots and adds empty slots to represent breaks
+     * @param timetableModuleSlots the ArrayList to split into half hour slots
+     * @return an ArrayList of TimetableModuleSlot with each slot representing one half-hour slot in the timetable
+     */
+    private static ArrayList<TimetableModuleSlot> splitIntoHalfHourSlots(
+            ArrayList<TimetableModuleSlot> timetableModuleSlots) {
+        ArrayList<TimetableModuleSlot> filled = new ArrayList<TimetableModuleSlot>();
+
+        int j = 0;
+        for (int i = 0; i < TIMES.length; i++) {
+            if (j < timetableModuleSlots.size() && timetableModuleSlots.get(j).getStartTime().equals(TIMES[i])) {
+                while (!timetableModuleSlots.get(j).getEndTime().equals(TIMES[i])) {
+                    filled.add(timetableModuleSlots.get(j));
+                    i++;
+                }
+                j++;
+                i--;
+            } else {
+                filled.add(new TimetableModuleSlot());
+            }
+        }
+        return filled;
     }
 
     /**
@@ -327,7 +392,7 @@ public class TimetableUtil {
      * @param lessonType shortened lesson type from URL
      * @return long lesson type in API
      */
-    public static String convertLessonType(String lessonType) throws IllegalValueException {
+    private static String convertLessonType(String lessonType) throws IllegalValueException {
         switch (lessonType) {
         case "LEC":
             return "Lecture";
@@ -363,22 +428,22 @@ public class TimetableUtil {
      * @param day in String
      * @return int representing day
      */
-    public static int convertDayToInteger(String day) throws IllegalValueException {
+    private static int convertDayToInteger(String day) throws IllegalValueException {
         switch (day.toLowerCase()) {
         case "monday":
-            return 0;
+            return MONDAY_INDEX;
 
         case "tuesday":
-            return 1;
+            return TUESDAY_INDEX;
 
         case "wednesday":
-            return 2;
+            return WEDNESDAY_INDEX;
 
         case "thursday":
-            return 3;
+            return THURSDAY_INDEX;
 
         case "friday":
-            return 4;
+            return FRIDAY_INDEX;
 
         default:
             throw new IllegalValueException(MESSAGE_INVALID_DAY_TYPE);
