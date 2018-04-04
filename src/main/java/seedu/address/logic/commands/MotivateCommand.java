@@ -10,15 +10,16 @@ public class MotivateCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends a motivational picture via Browser "
             + "Panel. ";
-    public static final String MESSAGE_SUCCESS = "Picture sent!";
+    public static final String MESSAGE_MOTIVATE_ACKNOWLEDGEMENT = "Picture sent!";
 
-    /**
-     * Creates an MotivateCommand to send to Browser Panel to motivate!
-     */
-    public MotivateCommand() { }
-
-    private CommandResult getCommandResult() {
-        return new CommandResult(MESSAGE_SUCCESS);
+    /*
+    @Override
+    public CommandResult execute() {
+        return new CommandResult(MESSAGE_MOTIVATE_ACKNOWLEDGEMENT);
+    }
+    */
+    public String execute() {
+        return MESSAGE_MOTIVATE_ACKNOWLEDGEMENT;
     }
 
 }
