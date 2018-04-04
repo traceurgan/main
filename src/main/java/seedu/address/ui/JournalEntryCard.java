@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -21,12 +22,15 @@ public class JournalEntryCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label id;
+    @FXML
+    private Label text;
 
     public JournalEntryCard(JournalEntry journalEntry, int displayedIndex) {
         super(FXML);
         this.journalEntry = journalEntry;
         id.setText(displayedIndex + ". ");
         date.setText(journalEntry.getDate());
+        text.setText(journalEntry.getText());
     }
 
     @Override

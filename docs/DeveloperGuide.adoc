@@ -801,7 +801,7 @@ Use case ends.
 
 *MSS*
 
-1.User inside browser panel enter's the command to view calendar.
+1.User inside browser panel enters the command to view calendar.
 2.NUSCouple redirects to google Calendar to retrieve data and display the UI accordingly.
 
 +

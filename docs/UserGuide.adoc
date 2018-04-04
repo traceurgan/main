@@ -49,7 +49,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command. +
 
-return to <<toc,Table of Contents>>
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 [[Features]]
 == Features
@@ -74,7 +76,7 @@ be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 Format: `help` +
 Alias: `hlp`
 
-==== Adding your partner: `add`
+==== Adding your partner : `add`
 
 Adds your partner to _NUSCouples_. +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL [t/TAG]...` +
@@ -134,6 +136,8 @@ Alias: `hist`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::undoredo[]
+
 ==== Undoing previous command : `undo`
 
 Restores _NUSCouples_ to the state before the previous "undoable command" was executed. +
@@ -183,6 +187,8 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `edit n/John Doe` command) +
 `redo` (reapplies the `delete` command) +
 
+// end::undoredo[]
+
 ==== Saving the data
 
 NUSCouples data are saved in the hard disk automatically after any command that changes the data. +
@@ -194,20 +200,27 @@ Exits the program. +
 Format: `exit` +
 Alias: `ex` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 === Timetable
 
-==== Adding your partner's timetable
-Refer to <<Adding your partner: `add`>>
+==== Adding your partner's timetable [Since v1.3]
 
-==== Viewing your partner's timetable : `tview`
+Refer to <<Adding your partner : `add`>>
+
+==== Editing your partner's timetable [Since v1.3]
+
+Refer to <<Editing your partner : `edit`>>
+
+==== Viewing your partner's timetable : `select`[Since v1.4]
 
 Shows the current saved timetable of your partner. +
-Format: `tview` +
-Alias: `tv`
+Format: `select` +
+Alias: `s`
 
-==== Comparing timetable : `tcompare`
+==== Comparing timetable : `tcompare` [Coming in v1.5]
 
 Displays the common breaks shared by the given timetable and your partner's timetable in a timetable format. +
 Format: `tcompare tt/TIMETABLE_URL` +
@@ -220,10 +233,12 @@ Alias: `tc tt/TIMETABLE_URL`
 
 Examples:
 
-* `tcompare tt/http://modsn.us/IO4n5`
+* `tcompare tt/http://modsn.us/IO4n5` +
 * `tc tt/http://modsn.us/wNuIW` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 === Calendar
 ==== Viewing current calendar : `cview`
@@ -248,9 +263,11 @@ Alias: `cd`
 
 Edit event on Google calendar. +
 Format: `cedit` +
-Alias: `ce`
+Alias: `ce` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 === Journal
 ==== Viewing all journal entries : `jview`
@@ -272,9 +289,11 @@ Alias: `jn`
 
 Deletes a journal entry in the specified index. +
 Format: `jdelete` +
-Alias: `jd`
+Alias: `jd` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 === Motivational Picture
 ==== Send motivational picture via app : `motivate`
@@ -290,10 +309,11 @@ Return to <<toc,Table of Contents>>  +
 
 Shows the location (by building) of the entered classroom name. +
 Format: `location` +
-Alias: `loc`
+Alias: `loc` +
 
-Return to <<toc,Table of Contents>>  +
-
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 === `Coming in v2.0`
 // tag::dataencryption[]
 ==== Encrypting data files `[coming in v2.0]`
@@ -313,16 +333,20 @@ _{explain how the user can use their phones to navigate to a location in NUS by 
 
 Filters journal entries by the specified interval. +
 Format: `jfilter` +
-Alias: `jf`
+Alias: `jf` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSCouples folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSCouples folder. +
 
-Return to <<toc,Table of Contents>>  +
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 == Command Summary
 
@@ -337,15 +361,13 @@ Return to <<toc,Table of Contents>>  +
 
 |delete, d |Delete your partner |`delete` |
 
-|select, s |Select your partner |`select` |
+|select, s |View your partner's timetable |`select` |
 
 |history, hist |View command history |`history` |
 
 |undo, u |Undo the previous undoable command |`undo` |
 
 |redo, r |Reverses the most recent undo command |`redo` |
-
-|tview, tv |View your partner's timetable |`tview` |
 
 |jview, jv |View your journal |`jview` |
 
@@ -367,5 +389,6 @@ Return to <<toc,Table of Contents>>  +
 
 |=======================================================================
 
-Return to <<toc,Table of Contents>>  +
-
+|===
+>| [.small]#Return to <<toc,Table of Contents>># +
+|===

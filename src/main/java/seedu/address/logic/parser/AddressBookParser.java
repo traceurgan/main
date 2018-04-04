@@ -16,10 +16,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.NewJournal;
+import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,9 +91,9 @@ public class AddressBookParser {
         case ExitCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new ExitCommand(); //@@author
 
-        case NewJournal.COMMAND_WORD:
-        case NewJournal.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new NewJournal(); //@@author
+        case NewJournalCommand.COMMAND_WORD:
+        case NewJournalCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+            return new NewJournalCommand(); //@@author
 
         case HelpCommand.COMMAND_WORD:
         case HelpCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
@@ -105,6 +106,10 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
         case RedoCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new RedoCommand(); //@@author
+
+        case ViewTimetableCommand.COMMAND_WORD:
+        case ViewTimetableCommand.COMMAND_ALIAS:
+            return new ViewTimetableCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
