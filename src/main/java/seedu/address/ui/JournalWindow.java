@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -26,10 +25,10 @@ public class JournalWindow extends UiPart<Stage> {
     @FXML
     private StackPane journalTextPlaceholder;
 
-    private JournalWindow (Stage root) {
+    private JournalWindow (Stage root, String date) {
         super (FXML, root);
 
-        this.date = concatenateDate();
+        this.date = date;
         fillInnerParts();
 
         root.setTitle(date + " - Journal");
@@ -39,8 +38,8 @@ public class JournalWindow extends UiPart<Stage> {
     private JournalWindow (Stage root, String date, String text) {
         super (FXML, root);
 
-        fillInnerParts(text);
         this.date = date;
+        fillInnerParts(text);
 
         root.setTitle(date + " - Journal");
         root.initModality(Modality.APPLICATION_MODAL);
@@ -51,19 +50,8 @@ public class JournalWindow extends UiPart<Stage> {
         this(new Stage(), date, text);
     }
 
-    public JournalWindow () {
-        this(new Stage());
-    }
-
-    /**
-     * Gets current local date and concatenates into a String in the form "yyyymmdd"
-     */
-    private String concatenateDate() {
-        LocalDate currentDate = LocalDate.now();
-        int dd = currentDate.getDayOfMonth();
-        int mm = currentDate.getMonth().getValue();
-        int yyyy = currentDate.getYear();
-        return String.format("%04d", yyyy) + String.format("%02d", mm) + String.format("%02d", dd);
+    public JournalWindow (String date) {
+        this(new Stage(), date);
     }
 
     /**
