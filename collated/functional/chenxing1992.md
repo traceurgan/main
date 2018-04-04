@@ -4,12 +4,6 @@
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the list of journal entries */
-    ObservableList<JournalEntry> getJournalEntryList();
-
-    /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
-    ListElementPointer getHistorySnapshot();
-}
 ```
 ###### \java\seedu\address\logic\LogicManager.java
 ``` java
@@ -18,16 +12,6 @@
         return model.getFilteredPersonList();
     }
 
-    @Override
-    public ObservableList<JournalEntry> getJournalEntryList() {
-        return model.getJournal().getJournalEntryList();
-    }
-
-    @Override
-    public ListElementPointer getHistorySnapshot() {
-        return new ListElementPointer(history.getHistory());
-    }
-}
 ```
 ###### \java\seedu\address\model\AddressBook.java
 ``` java

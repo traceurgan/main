@@ -3,6 +3,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /**
  * Unmodifiable view of an journal
  */
@@ -13,4 +14,6 @@ public interface ReadOnlyJournal {
      * This list will not contain any duplicate journal entries.
      */
     ObservableList<JournalEntry> getJournalEntryList();
+
+    JournalEntry getLast();
 }

@@ -18,7 +18,7 @@ public class JournalWindowTest extends GuiUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        guiRobot.interact(() -> journalWindow = new JournalWindow());
+        guiRobot.interact(() -> journalWindow = new JournalWindow("20180405"));
         Stage journalWindowStage = FxToolkit.setupStage((stage) -> stage.setScene(journalWindow.getRoot().getScene()));
         FxToolkit.showStage();
         journalWindowHandle = new JournalWindowHandle(journalWindowStage);

@@ -37,6 +37,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, JournalSt
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
 
+    //@@author traceurgan
     /**
      * Saves the current version of the Journal Book to the hard disk.
      *   Creates the data file if it is missing.

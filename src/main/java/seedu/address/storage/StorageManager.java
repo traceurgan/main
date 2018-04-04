@@ -96,6 +96,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     // ================ Journal methods ==============================
 
+    //@@author traceurgan
     @Override
     public String getJournalFilePath() {
         return journalStorage.getJournalFilePath();
