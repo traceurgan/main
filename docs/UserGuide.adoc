@@ -240,7 +240,7 @@ Examples:
 >| [.small]#Return to <<toc,Table of Contents>># +
 |===
 
-=== Calendar
+=== Calendar [Coming in v1.5]
 ==== Viewing current calendar : `cview`
 
 View Google calendar. +
