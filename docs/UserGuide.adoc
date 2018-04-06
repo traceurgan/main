@@ -271,8 +271,8 @@ Alias: `ce` +
 
 === Journal
 
-_NUSCouples_ provides you with a space to write, save and view journal entries. Read on for more details about how to
-use this feature.
+_NUSCouples_ provides you with a space to write, save and view journal entries. The list of saved journal entries will
+be shown in the main window. Read on for more details about how to use this feature.
 
 [NOTE]
 Saved journal entries can only be edited on the same day. Once saved, a journal entry also cannot be deleted.
