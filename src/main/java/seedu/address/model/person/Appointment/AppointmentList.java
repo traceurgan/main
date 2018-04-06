@@ -1,7 +1,6 @@
-package seedu.address.model.person;
+package seedu.address.model.person.Appointment;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -10,7 +9,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-//@@author EricLoh
+//@@author Chen Xing
+
 /**
  * A list of appointments of a person
  */

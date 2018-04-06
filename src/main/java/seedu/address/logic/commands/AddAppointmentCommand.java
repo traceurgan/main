@@ -10,11 +10,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-//@@author EricLoh
+//@@author Chen Xing
+
 /**
  * Command to add appointment to a person in addressBook
  */

@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.joestelmach.natty.DateGroup;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Appointment.Appointment;
 
 //@@author Chen Xing
+
 /**
  * Parse input arguments and creates a new AddAppointmentCommand Object
  */

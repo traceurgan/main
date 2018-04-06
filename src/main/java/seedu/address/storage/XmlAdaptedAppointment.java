@@ -1,14 +1,13 @@
 package seedu.address.storage;
 
 import java.text.ParseException;
-
 import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlElement;
-
-import seedu.address.model.person.Appointment;
+import seedu.address.model.person.Appointment.Appointment;
 
 //@@author Chen Xing
+
 /**
  * AXB-friendly version of the appointment list of a person
  */

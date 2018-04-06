@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -48,6 +49,7 @@ public class ModelManager extends ComponentManager implements Model {
         this(new AddressBook(), new Journal(), new UserPrefs());
     }
 
+
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         addressBook.resetData(newData);
@@ -68,13 +70,6 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the journal model has changed */
     private void indicateJournalChanged() {
         raise(new JournalChangedEvent(journal));
-    }
-
-    //@@author
-    @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        addressBook.removePerson(target);
-        indicateAddressBookChanged();
     }
 
     @Override
@@ -100,7 +95,11 @@ public class ModelManager extends ComponentManager implements Model {
         }
         indicateJournalChanged();
     }
-
+    @Override
+    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
+        addressBook.removePerson(target);
+        indicateAddressBookChanged();
+    }
     //@@author
     @Override
     public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
@@ -111,10 +110,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    @Override
-    public void deleteTag(Tag tag) {
-        addressBook.removeTag(tag);
-    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -137,6 +132,18 @@ public class ModelManager extends ComponentManager implements Model {
         return journal.getLast();
     }
 
+    @Override
+    public void addAppointment(ReadOnlyPerson target, Appointment appointments) throws PersonNotFoundException {
+        addressBook.addAppointment(target, appointments);
+        indicateAddressBookChanged();
+    }
+
+
+   // @Override
+    //public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+     //   addressBook.removeAppointment(target, appointment);
+     //   indicateAddressBookChanged();
+   // }
     //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {

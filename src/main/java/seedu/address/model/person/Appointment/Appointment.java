@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.Appointment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 //@@author chenxing1992
+
 /**
  *  Appointment class to hold all the start and end time of the appointment and the description
  *  */
