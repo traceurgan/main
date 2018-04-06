@@ -275,7 +275,7 @@ _NUSCouples_ provides you with a space to write, save and view journal entries. 
 be shown in the main window. Read on for more details about how to use this feature.
 
 [NOTE]
-Saved journal entries can only be edited on the same day. Once saved, a journal entry also cannot be deleted.
+Saved journal entries can only be edited on the same day. Once saved, a journal entry cannot be deleted.
 
 ==== Creating a new journal entry : `jnew`
 
@@ -287,7 +287,8 @@ journal window is closed. +
 
 [NOTE]
 If saving fails, a new window will appear containing your last session data with a warning above your text. You should
-copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will not lose your data if you need to restart the app.
+copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will not lose your data if you need to
+restart the app.
 
 Format: `jnew` +
 Alias: `jn`
@@ -377,8 +378,6 @@ Alias: `loc` +
 
 |jnew, jn |Create a new journal entry |`jnew` |
 
-|jdelete, jd |Delete a journal entry |`jdelete` |
-
 |cview, cv |Viewing your current calendar |`cview` |
 
 |cadd, ca |Adding a new event to your current calendar |`cadd` |
@@ -386,8 +385,6 @@ Alias: `loc` +
 |cdelete, cd |Deleting an event from your current calendar |`cdelete` |
 
 |cedit, ce |Editing an event from your current calendar |`cedit` |
-
-|location, loc |Finding building location |`location` |
 
 |exit, ex |Exits _NUSCouples_ |`exit` |
 
