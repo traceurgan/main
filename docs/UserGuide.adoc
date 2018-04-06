@@ -261,25 +261,25 @@ Examples:
 |===
 
 === Calendar
-==== Viewing current calendar : `cview`
+==== Viewing current calendar : `cview` [Coming in v1.5]
 
 View Google calendar. +
 Format: `cview` +
 Alias: `cv`
 
-==== Adding new event to Google calendar : `cadd`
+==== Adding new event to Google calendar : `cadd` [Coming in v1.5]
 
 Adds new event to Google calendar. +
 Format: `cadd` +
 Alias: `ca`
 
-==== Deleting event from Google calendar: `cdelete`
+==== Deleting event from Google calendar: `cdelete` [Coming in v1.5]
 
 Delete specified event from Google calendar. +
 Format: `cdelete` +
 Alias: `cd`
 
-==== Editing event on Google calendar : `cedit`
+==== Editing event on Google calendar : `cedit` [Coming in v1.5]
 
 Edit event on Google calendar. +
 Format: `cedit` +
@@ -295,19 +295,20 @@ _NUSCouples_ provides you with a space to write, save and view journal entries. 
 be shown in the main window. Read on for more details about how to use this feature.
 
 [NOTE]
-Saved journal entries can only be edited on the same day. Once saved, a journal entry also cannot be deleted.
+Saved journal entries can only be edited on the same day. Once saved, a journal entry cannot be deleted.
 
-==== Creating a new journal entry : `jnew`
+==== Creating a new journal entry : `jnew` [Since v1.2]
 
-Creates a new window that allows the user to input text. The window title will reflect the s identified by the date
-it was  created in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
+Creates a new window that allows the user to input text. The window title will reflect the date
+it was created on in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
  2018 will have a title of `20180305 - journal`. If an entry with that date already exists, it will open
-that entry in the new window. Saving not required as the journal entry will be automatically saved when the
+that entry in the window. Saving is not required as the journal entry will be automatically saved when the
 journal window is closed. +
 
 [NOTE]
 If saving fails, a new window will appear containing your last session data with a warning above your text. You should
-copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will not lose your data if you need to restart the app.
+copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will not lose your data if you need to
+restart the app.
 
 Format: `jnew` +
 Alias: `jn`
@@ -393,11 +394,9 @@ Alias: `loc` +
 
 |redo, r |Reverses the most recent undo command |`redo` |
 
-|jview, jv |View your journal |`jview` |
+|jview, jv |View a journal entry |`jview` |
 
-|jnew, jn |Create a new journal entry |`jnew` |
-
-|jdelete, jd |Delete a journal entry |`jdelete` |
+|jnew, jn |Create/edit a journal entry |`jnew` |
 
 |cview, cv |Viewing your current calendar |`cview` |
 
@@ -406,8 +405,6 @@ Alias: `loc` +
 |cdelete, cd |Deleting an event from your current calendar |`cdelete` |
 
 |cedit, ce |Editing an event from your current calendar |`cedit` |
-
-|location, loc |Finding building location |`location` |
 
 |exit, ex |Exits _NUSCouples_ |`exit` |
 
