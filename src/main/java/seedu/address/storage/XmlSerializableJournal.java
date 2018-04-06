@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Journal;
 import seedu.address.model.ReadOnlyJournal;
 
+//@@author traceurgan
 /**
  * An Immutable Journal that is serializable to XML format
  */

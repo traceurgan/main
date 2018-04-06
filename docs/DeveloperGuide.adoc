@@ -718,9 +718,8 @@ Return to <<toc,Table of Contents>>
 |Tag (emotions) : Add/delete tags to journal entries (happy, sad, angry, funny)
 
 |Daniel
-|Location Finder: To allow the user to find the venue of a particular lesson of interest from their own timetable using
-a Google Maps search result
-|Communication with Google API: Can communicate with different certain external APIs from Google such as Google Maps API
+|Send motivational picture: Motivate partner by sending a motivational picture via the browser panel
+|Command aliases: Enable shortcut keywords for commands
 
 |===
 
@@ -748,6 +747,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |As a part of a couple in NUS |encrypt _NUSCouples_ save data |prevent strangers from reading personal information such as my journal entries
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+
+|`* *` |partner |send a motivational picture via the app | keep their spirits up
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 

@@ -33,12 +33,33 @@ public class TimetableDisplayUtil {
         "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
-    public static final String TIMETABLE_INFO_FILE_PATH = "src/main/resources/timetableDisplayInfo";
-    public static final String TIMETABLE_PAGE_JS_PATH = "src/main/resources/view/TimetablePageScript.js";
+    private static String timetableInfoFilePath = "src/main/resources/timetableDisplayInfo";
+    private static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final String DEFAULT_TIMETABLE_PAGE_SCRIPT = "//@@author marlenekoh\n"
+            + "timetable = [\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"CS2103T\","
+            + " \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"\n"
+            + "];\n"
+            + "var myTimetable = \"\";\n"
+            + "var nRows = \"\";\n"
+            + "var nCells = \"\";\n"
+            + "function displaySchedule(){\n"
+            + "    for (i=0; i<nRows; i++) {\n"
+            + "        for (n=0; n<nCells; n++) {\n"
+            + "            myTimetable.rows[i+1].cells[n+1].lastChild.data = timetable[n+(i*nCells)];\n"
+            + "        }\n"
+            + "    }\n"
+            + "}\n"
+            + "function mapTable(){\n"
+            + "    myTimetable = document.getElementById('myTimetable');\n"
+            + "    nRows = myTimetable.rows.length-1;\n"
+            + "    nCells = myTimetable.rows[0].cells.length-1;\n"
+            + "    displaySchedule();\n"
+            + "}\n"
+            + "onload=mapTable;\n";
 
     /**
-     * Sets up the javascript file at path {@code TIMETABLE_PAGE_JS_PATH}
+     * Sets up the javascript file at path {@code timetablePageJsPath}
      * @param timetable Timetable to be set up
      */
     public static void setUpTimetableDisplayInfo(Timetable timetable) {
@@ -47,11 +68,11 @@ public class TimetableDisplayUtil {
     }
 
     /**
-     * Updates TimetablePageScript file at path {@code TIMETABLE_PAGE_JS_PATH} with new timetable module information
+     * Updates TimetablePageScript file at path {@code timetablePageJsPath} with new timetable module information
      */
     public static void setUpTimetablePageScriptFile() {
-        String oldContent = getFileContents(TIMETABLE_PAGE_JS_PATH);
-        String toReplace = getFileContents(TIMETABLE_INFO_FILE_PATH);
+        String oldContent = getFileContents(timetablePageJsPath);
+        String toReplace = getFileContents(timetableInfoFilePath);
         String newContent = replaceFirstLine(oldContent, toReplace);
         writeToTimetablePageScriptFile(newContent);
     }
@@ -61,13 +82,21 @@ public class TimetableDisplayUtil {
      * @param timetable the timetable to convert into string and write
      */
     public static void setUpTimetableDisplayInfoFile(Timetable timetable) {
-        File timetableDisplayInfo = new File(TIMETABLE_INFO_FILE_PATH);
+        File timetableDisplayInfo = new File(timetableInfoFilePath);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
             printWriter.write(convertTimetableToString(timetable));
             printWriter.close();
         } catch (FileNotFoundException e) {
-            logger.warning("File not found");
+            logger.warning("File not found, creating new file");
+            try {
+                timetableInfoFilePath = "timetableDisplayInfo";
+                timetableDisplayInfo = new File(timetableInfoFilePath);
+                timetableDisplayInfo.createNewFile();
+                setUpTimetableDisplayInfo(timetable);
+            } catch (IOException ioe) {
+                logger.severe("Unable to create new file");
+            }
         } catch (IllegalValueException e) {
             logger.warning(e.getMessage());
         }
@@ -115,19 +144,29 @@ public class TimetableDisplayUtil {
      * @return String containing file contents
      */
     public static String getFileContents(String path) {
-        File timetablePageScript = new File(path);
+        File file = new File(path);
         try {
-            BufferedReader br = new BufferedReader(new FileReader(timetablePageScript));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
 
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
+                while (line != null) {
+                    sb.append(line);
+                    sb.append("\n");
+                    line = br.readLine();
+                }
+                br.close();
+                return sb.toString();
+            } else {
+                timetablePageJsPath = "TimetablePageScript.js";
+                file = new File(timetablePageJsPath);
+                file.createNewFile();
+                PrintWriter printWriter = new PrintWriter(file);
+                printWriter.write(DEFAULT_TIMETABLE_PAGE_SCRIPT);
+                printWriter.close();
+                return DEFAULT_TIMETABLE_PAGE_SCRIPT;
             }
-            br.close();
-            return sb.toString();
         } catch (IOException e) {
             logger.warning("Exception in reading file");
         }
@@ -135,11 +174,11 @@ public class TimetableDisplayUtil {
     }
 
     /**
-     * Replaces file contents of file at {@code TIMETABLE_PAGE_JS_PATH} with {@code contents}
+     * Replaces file contents of file at {@code timetablePageJsPath} with {@code contents}
      * @param contents the new contents of the file
      */
     public static void writeToTimetablePageScriptFile(String contents) {
-        File timetablePageScript = new File(TIMETABLE_PAGE_JS_PATH);
+        File timetablePageScript = new File(timetablePageJsPath);
         try {
             PrintWriter printWriter = new PrintWriter(timetablePageScript);
             printWriter.write(contents);

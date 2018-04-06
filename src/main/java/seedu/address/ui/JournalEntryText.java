@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 
+//@@author traceurgan
 /**
  * The UI component that is responsible for receiving journal entry text.
  */
@@ -22,4 +23,7 @@ public class JournalEntryText extends UiPart<Region> {
         return journalTextArea.getText();
     }
 
+    public void setText(String text) {
+        journalTextArea.setText(text);
+    }
 }
