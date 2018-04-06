@@ -209,13 +209,12 @@ For example, if the .jar file is in `C:\Program Files (x86)\NUSCouples`, _NUSCou
 `C:\Program Files (x86)\NUSCouples\data`.
 
 [NOTE]
-If the .jar file is moved to another location, you should move the data folder as well. If this is not done, the app
-will not be able to locate the data and will start with the default settings. Refer to <<FAQ>>
+If the _NUSCouples_.jar file is moved to another location, you should move the data folder as well.  Refer to
+<<Data, FAQ Section 3.1, Questions about Data>> for more information.
 
 [WARNING]
 The data is stored as an editable xml file. If the user manually edits this file, _NUSCouples_ may not be able to read
-it properly. _NUSCouples_ takes no responsibility for data loss/ data corruption due to editing these files.
-Refer to <<FAQ>>
+it properly. Refer to <<Data, FAQ Section 3.1, Questions about Data>>  for more information.
 
 ==== Exiting the program : `exit`
 
@@ -388,11 +387,18 @@ the data of your previous NUSCouples folder. +
 *Q: Why is the app not showing my previous session data?* +
 
 *A:* Verify that the .jar file was not moved to a new directory recently. If you have done so, ensure that the data
-folder in the original directory was moved to the new directory. +
+folder in the original directory was moved to the new directory. For example, if you have moved _NUSCouples_.jar from
+`C:\Program Files (x86)\NUSCouples` to `C:\Users\[Username]\Desktop\NUSCouples`, you should move the data folder
+`C:\Program Files (x86)\NUSCouples\data` to `C:\Users\[Username]\Desktop\NUSCouples\data` +
 
 If the files in the data folder have been manually edited, _NUSCouples_ may not be able to read the data properly.
 _NUSCouples_ takes no responsibility for data loss/ data corruption due to unintended user behavior affecting the data
-folder, such as deletion or editing of files manually.+
+folder, such as deletion or editing of files manually. +
+
+If the solutions above are not related to your issue, it may be due to a bug. Please contact us at //CONTACT US
+and attach the log file that should be stored in the same location as the _NUSCouples_.jar file. The log file is named
+`_NUSCouples_.log.0`. The number at the end may be different. If there are multiple log files, you should attach the
+*latest* one or attach all of them to be safe. +
 
 |===
 >| [.small]#Return to <<toc,Table of Contents>># +
