@@ -194,12 +194,4 @@ public class MainWindow extends UiPart<Stage> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
     }
-
-    //@@author traceurgan
-    //    @Subscribe
-    //    private void handleShowJournalWindowRequestEvent (ShowJournalWindowRequestEvent event) {
-    //        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    //        JournalWindow journalWindow = new JournalWindow();
-    //        journalWindow.show();
-    //    }
 }

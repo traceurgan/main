@@ -290,26 +290,34 @@ Alias: `ce` +
 |===
 
 === Journal
-==== Viewing all journal entries : `jview`
 
-View all journal entries. +
-Format: `jview` +
-Alias: `jv`
+_NUSCouples_ provides you with a space to write, save and view journal entries. The list of saved journal entries will
+be shown in the main window. Read on for more details about how to use this feature.
+
+[NOTE]
+Saved journal entries can only be edited on the same day. Once saved, a journal entry also cannot be deleted.
 
 ==== Creating a new journal entry : `jnew`
 
-Creates a new window that allows the user to input and save journal entries. The journal entry is identified by
-the date it was created in the format `yyyymmdd`. If an entry with that date already exists, it will open
+Creates a new window that allows the user to input text. The window title will reflect the s identified by the date
+it was  created in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
+ 2018 will have a title of `20180305 - journal`. If an entry with that date already exists, it will open
 that entry in the new window. Saving not required as the journal entry will be automatically saved when the
 journal window is closed. +
+
+[NOTE]
+If saving fails, a new window will appear containing your last session data with a warning above your text. You should
+copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will not lose your data if you need to restart the app.
+
 Format: `jnew` +
 Alias: `jn`
 
-==== Deleting a journal entry : `jdelete`
+==== Viewing journal entries : `jview` [Coming in v1.5]
 
-Deletes a journal entry in the specified index. +
-Format: `jdelete` +
-Alias: `jd` +
+Selects a journal entry from the list seen in the GUI. The contents of the journal entry will be shown in the main
+window. +
+Format: `jview` +
+Alias: `jv`
 
 |===
 >| [.small]#Return to <<toc,Table of Contents>># +
@@ -324,17 +332,7 @@ _There is no alias for this feature currently._
 
 Return to <<toc,Table of Contents>>  +
 
-=== Location
-==== Finding building location : `location`
-
-Shows the location (by building) of the entered classroom name. +
-Format: `location` +
-Alias: `loc` +
-
-|===
->| [.small]#Return to <<toc,Table of Contents>># +
-|===
-=== `Coming in v2.0`
+=== Future Features
 // tag::dataencryption[]
 ==== Encrypting data files `[coming in v2.0]`
 
@@ -354,6 +352,12 @@ _{explain how the user can use their phones to navigate to a location in NUS by 
 Filters journal entries by the specified interval. +
 Format: `jfilter` +
 Alias: `jf` +
+
+==== Finding building location `[coming in v2.0]`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `location` +
+Alias: `loc` +
 
 |===
 >| [.small]#Return to <<toc,Table of Contents>># +
