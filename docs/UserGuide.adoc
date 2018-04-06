@@ -243,9 +243,17 @@ Examples:
 === Calendar [Coming in v1.5]
 ==== Viewing current calendar : `cview`
 
-View Google calendar. +
-Format: `cview` +
-Alias: `cv`
+View current calendar. in days from calendarFX +
+Format: `cal d/DAY` +
+Alias: `cv d/DAY`
+
+View current calendar. in months from calendarFX +
+Format: `cal m/MONTH` +
+Alias: `cv m/MONTH`
+
+View current calendar. in years from calendarFX +
+Format: `cal y/YEAR` +
+Alias: `cv y/YEAR`
 
 ==== Adding new event to Google calendar : `cadd`
 
