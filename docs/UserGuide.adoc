@@ -304,17 +304,7 @@ _There is no alias for this feature currently._
 
 Return to <<toc,Table of Contents>>  +
 
-=== Location
-==== Finding building location : `location`
-
-Shows the location (by building) of the entered classroom name. +
-Format: `location` +
-Alias: `loc` +
-
-|===
->| [.small]#Return to <<toc,Table of Contents>># +
-|===
-=== `Coming in v2.0`
+=== Future Features
 // tag::dataencryption[]
 ==== Encrypting data files `[coming in v2.0]`
 
@@ -334,6 +324,12 @@ _{explain how the user can use their phones to navigate to a location in NUS by 
 Filters journal entries by the specified interval. +
 Format: `jfilter` +
 Alias: `jf` +
+
+==== Finding building location `[coming in v2.0]`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `location` +
+Alias: `loc` +
 
 |===
 >| [.small]#Return to <<toc,Table of Contents>># +
