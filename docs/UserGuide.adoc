@@ -95,6 +95,12 @@ Examples:
 
 ==== Editing your partner : `edit`
 
+===== CURRENT IMPLEMENTATION
+Edits your existing partner in _NUSCouples_. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]...` +
+Alias: `ed INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]...`
+
+===== FUTURE IMPLEMENTATION [Coming in v1.5]
 Edits your existing partner in _NUSCouples_. +
 Format: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]...` +
 Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]...`
@@ -116,6 +122,12 @@ Edits the name of your partner to be `Betsy Crower` and clears all existing tags
 
 ==== Deleting your partner : `delete`
 
+===== CURRENT IMPLEMENTATION
+Deletes your partner from _NUSCouples_. +
+Format: `delete INDEX` +
+Alias: `d INDEX`
+
+===== FUTURE IMPLEMENTATION [Coming in v1.5]
 Deletes your partner from _NUSCouples_. +
 Format: `delete` +
 Alias: `d`
@@ -219,6 +231,14 @@ Refer to <<Editing your partner : `edit`>>
 Shows the current saved timetable of your partner. +
 Format: `select` +
 Alias: `s`
+
+===== CURRENT IMPLEMENTATION
+Only the timetable of the first person clicked will be loaded. This timetable will be shared among all persons.
+Timetable display will not be updated when editing timetable field. However, timetable link will be updated in the
+person card at the left.
+
+===== FUTURE IMPLEMENTATION [Coming in v1.5]
+NUSCouples will be modified to only hold one person. Timetable display will be updated after editing timetable field.
 
 ==== Comparing timetable : `tcompare` [Coming in v1.5]
 
