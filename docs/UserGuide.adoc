@@ -279,10 +279,10 @@ Saved journal entries can only be edited on the same day. Once saved, a journal 
 
 ==== Creating a new journal entry : `jnew`
 
-Creates a new window that allows the user to input text. The window title will reflect the s identified by the date
-it was  created in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
+Creates a new window that allows the user to input text. The window title will reflect the date
+it was created on in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
  2018 will have a title of `20180305 - journal`. If an entry with that date already exists, it will open
-that entry in the new window. Saving not required as the journal entry will be automatically saved when the
+that entry in the window. Saving is not required as the journal entry will be automatically saved when the
 journal window is closed. +
 
 [NOTE]
