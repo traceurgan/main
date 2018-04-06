@@ -374,9 +374,9 @@ Alias: `loc` +
 
 |redo, r |Reverses the most recent undo command |`redo` |
 
-|jview, jv |View your journal |`jview` |
+|jview, jv |View a journal entry |`jview` |
 
-|jnew, jn |Create a new journal entry |`jnew` |
+|jnew, jn |Create/edit a journal entry |`jnew` |
 
 |cview, cv |Viewing your current calendar |`cview` |
 
