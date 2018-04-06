@@ -241,25 +241,25 @@ Examples:
 |===
 
 === Calendar
-==== Viewing current calendar : `cview`
+==== Viewing current calendar : `cview` [Coming in v1.5]
 
 View Google calendar. +
 Format: `cview` +
 Alias: `cv`
 
-==== Adding new event to Google calendar : `cadd`
+==== Adding new event to Google calendar : `cadd` [Coming in v1.5]
 
 Adds new event to Google calendar. +
 Format: `cadd` +
 Alias: `ca`
 
-==== Deleting event from Google calendar: `cdelete`
+==== Deleting event from Google calendar: `cdelete` [Coming in v1.5]
 
 Delete specified event from Google calendar. +
 Format: `cdelete` +
 Alias: `cd`
 
-==== Editing event on Google calendar : `cedit`
+==== Editing event on Google calendar : `cedit` [Coming in v1.5]
 
 Edit event on Google calendar. +
 Format: `cedit` +
@@ -277,7 +277,7 @@ be shown in the main window. Read on for more details about how to use this feat
 [NOTE]
 Saved journal entries can only be edited on the same day. Once saved, a journal entry cannot be deleted.
 
-==== Creating a new journal entry : `jnew`
+==== Creating a new journal entry : `jnew` [Since v1.2]
 
 Creates a new window that allows the user to input text. The window title will reflect the date
 it was created on in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
