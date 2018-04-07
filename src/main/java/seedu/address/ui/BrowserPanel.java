@@ -54,7 +54,7 @@ public class BrowserPanel extends UiPart<Region> {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
-      //  getRoot().setOnKeyPressed(Event::consume);
+        //  getRoot().setOnKeyPressed(Event::consume);
 
         this.personList = personList;
 
@@ -71,6 +71,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     //@@author chenxing1992
+
     /**
      * Remove clutter from interface
      */
@@ -83,14 +84,13 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
-     *
      * Explicitly set the Root object to CalendarView
      */
     //@@author chenxing1992
     //public CalendarView getRoot() {
 
 
-      // return this.calendarView;
+    // return this.calendarView;
     //}
     //@@author chenxing1992
     private void setTime() {
@@ -98,6 +98,7 @@ public class BrowserPanel extends UiPart<Region> {
         calendarView.setTime(LocalTime.now());
         calendarView.getCalendarSources().clear();
     }
+
     //@@author chenxing1992
     private Calendar getCalendar(int styleNum, ReadOnlyPerson person) {
         Calendar calendar = new Calendar(person.getName().toString());
@@ -105,6 +106,7 @@ public class BrowserPanel extends UiPart<Region> {
         calendar.setLookAheadDuration(Duration.ofDays(365));
         return calendar;
     }
+
     //@@author chenxing1992
     private ArrayList<Entry> getEntries(ReadOnlyPerson person) {
         ArrayList<Entry> entries = new ArrayList<>();
@@ -121,6 +123,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     //@@author chenxing1992
+
     /**
      * Creates a new a calendar with the update information
      */

@@ -10,8 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -127,7 +125,8 @@ public class EditCommand extends UndoableCommand {
         Timetable updatedTimetable = editPersonDescriptor.getTimetable().orElse(personToEdit.getTimetable());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         List<Appointment> appointmentList = personToEdit.getAppointments();
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTimetable, updatedTags,appointmentList);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTimetable, updatedTags, appointmentList);
     }
 
     @Override

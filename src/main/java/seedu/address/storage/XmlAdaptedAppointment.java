@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlElement;
+
 import seedu.address.model.person.Appointment.Appointment;
 
 //@@author Chen Xing

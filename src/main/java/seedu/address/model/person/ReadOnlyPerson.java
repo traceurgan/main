@@ -6,9 +6,11 @@ import java.util.Set;
 import javafx.beans.property.ObjectProperty;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Appointment.AppointmentList;
+import seedu.address.model.tag.UniqueTagList;
+
+
 
 //@@author chenxing1992
 /**

@@ -34,13 +34,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons and Tags in the {@code toBeCopied}
@@ -64,9 +64,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.addAppointment(target, appointment);
     }
 
-   // public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
-       //persons.removeAppointment(target, appointment);
-   // }
+    // public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+    //persons.removeAppointment(target, appointment);
+    // }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -121,8 +122,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author chenxing1992
+
     /**
-     *
      * Help to remove unwanted tags
      */
     public void removeUnusedTags(Set<Tag> tagToRemove) {
@@ -132,8 +133,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author chenxing1992
+
     /**
-     *
      * Help to exclude unwanted tags
      */
     public Set<Tag> getTagsExcluding(Set<Tag> tagsToExclude) {
@@ -145,6 +146,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author chenxing1992
+
     /**
      * Make sure that these people:
      * - appear in the master list {@link #tags}
@@ -157,28 +159,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author chenxing1992
+
     /**
      * Make sure this person:
      * - Appear in the master list {@link #tags}
      * - Tag object is pointed in the master list
      */
     private void syncMasterTagListWith(Person person) {
-        final UniqueTagList Tags = new UniqueTagList(person.getTags());
-        tags.mergeFrom(Tags);
+        final UniqueTagList tags = new UniqueTagList(person.getTags());
+        this.tags.mergeFrom(tags);
 
         // Create map with values = tag object references in the master list
         // used for checking person tag references
         final Map<Tag, Tag> mainTagObjects = new HashMap<>();
-        tags.forEach(tag -> mainTagObjects.put(tag, tag));
+        this.tags.forEach(tag -> mainTagObjects.put(tag, tag));
 
         // Rebuild the list of person tags to point to the relevant tags in the master tag list.
         final Set<Tag> correctTagReferences = new HashSet<>();
-        Tags.forEach(tag -> correctTagReferences.add(mainTagObjects.get(tag)));
+        tags.forEach(tag -> correctTagReferences.add(mainTagObjects.get(tag)));
         person.setTags(correctTagReferences);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
+     *
      * @throws PersonNotFoundException if the {@code key} is not in this {@code AddressBook}.
      */
     public boolean removePerson(ReadOnlyPerson key) throws PersonNotFoundException {
@@ -196,13 +200,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-
-
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() +  " tags";
+        return persons.asObservableList().size() + " persons, " + tags.asObservableList().size() + " tags";
         // TODO: refine later
     }
 
@@ -213,8 +215,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //@Override
     //public ObservableList<Tag> getTagList() {
-      //  return tags.asObservableList();
-   // }
+    //  return tags.asObservableList();
+    // }
 
     @Override
     public boolean equals(Object other) {

@@ -18,7 +18,6 @@ import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -61,13 +60,18 @@ public class ModelManager extends ComponentManager implements Model {
         return addressBook;
     }
 
-    /** Raises an event to indicate the address book model has changed */
+    /**
+     * Raises an event to indicate the address book model has changed
+     */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(addressBook));
     }
 
     //@@author traceurgan
-    /** Raises an event to indicate the journal model has changed */
+
+    /**
+     * Raises an event to indicate the journal model has changed
+     */
     private void indicateJournalChanged() {
         raise(new JournalChangedEvent(journal));
     }
@@ -95,11 +99,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
         indicateJournalChanged();
     }
+
     @Override
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
         indicateAddressBookChanged();
     }
+
     //@@author
     @Override
     public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
@@ -139,11 +145,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-   // @Override
+    // @Override
     //public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
-     //   addressBook.removeAppointment(target, appointment);
-     //   indicateAddressBookChanged();
-   // }
+    //   addressBook.removeAppointment(target, appointment);
+    //   indicateAddressBookChanged();
+    // }
     //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {

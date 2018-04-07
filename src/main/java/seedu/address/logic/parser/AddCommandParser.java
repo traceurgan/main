@@ -23,8 +23,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -59,7 +60,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 appointment = AddAppointmentParser.getAppointmentFromString(argMultimap.getValue(PREFIX_DATE).get());
                 appointmentList.add(appointment);
             }
-            Person person = new Person(name, phone, email, address, timetable, tagList,appointmentList);
+
+            Person person = new Person(name, phone, email, address, timetable, tagList, appointmentList);
 
             return new AddCommand(person);
         } catch (IllegalValueException ive) {
