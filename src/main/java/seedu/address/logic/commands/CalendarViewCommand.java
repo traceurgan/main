@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
-//@@author chenxing1992
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.CalendarViewEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
-
+//@@author chenxing1992
 /**
  * Command to change calendar view
  */
@@ -24,7 +24,7 @@ public class CalendarViewCommand extends Command {
     public static final String MESSAGE_SUCCESS = "View changed.";
 
     private Character arg;
-
+    //@@author chenxing1992
     public CalendarViewCommand(Character c) {
         this.arg = c;
     }

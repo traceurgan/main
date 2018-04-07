@@ -14,7 +14,7 @@ import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-//@@author Chen Xing
+//@@author chenxing1992
 
 /**
  * Command to add Appointment to a person in addressBook
@@ -44,7 +44,7 @@ public class AddAppointmentCommand extends UndoableCommand {
         this.index = index;
         this.appointment = appointment;
     }
-
+    //@@author chenxing1992
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
 
@@ -72,7 +72,7 @@ public class AddAppointmentCommand extends UndoableCommand {
         return new CommandResult(MESSAGE_SUCCESS);
 
     }
-
+    //@@author chenxing1992
     /**
      * Checks if Appointment date set to after current time
      */
@@ -81,11 +81,12 @@ public class AddAppointmentCommand extends UndoableCommand {
         Calendar calendar = Calendar.getInstance();
         return !appointment.getDate().before(calendar.getTime());
     }
-
+    //@@author chenxing1992
     public Index getIndex() {
         return this.index;
     }
 
+    //@@author chenxing1992
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -94,6 +95,7 @@ public class AddAppointmentCommand extends UndoableCommand {
                 && (this.appointment.equals(((AddAppointmentCommand) other).appointment)));
     }
 
+    //@@author chenxing1992
     /**
      * For testing purposes
      *
