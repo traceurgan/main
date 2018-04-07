@@ -87,11 +87,11 @@ public class BrowserPanel extends UiPart<Region> {
      * Explicitly set the Root object to CalendarView
      */
     //@@author chenxing1992
-    //public CalendarView getRoot() {
+    public CalendarView getRoot() {
 
 
-    // return this.calendarView;
-    //}
+     return this.calendarView;
+    }
     //@@author chenxing1992
     private void setTime() {
         calendarView.setToday(LocalDate.now());

@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CalendarViewCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -55,64 +56,69 @@ public class AddressBookParser {
     private Command getCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-        case AddCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new AddCommandParser().parse(arguments); //@@author
+            case AddCommand.COMMAND_WORD:
+            case AddCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new AddCommandParser().parse(arguments); //@@author
 
-        case EditCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new EditCommandParser().parse(arguments); //@@author
+            case EditCommand.COMMAND_WORD:
+            case EditCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new EditCommandParser().parse(arguments); //@@author
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new SelectCommandParser().parse(arguments); //@@author
+            case SelectCommand.COMMAND_WORD:
+            case SelectCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new SelectCommandParser().parse(arguments); //@@author
 
-        case DeleteCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new DeleteCommandParser().parse(arguments); //@@author
+            case DeleteCommand.COMMAND_WORD:
+            case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new DeleteCommandParser().parse(arguments); //@@author
 
-        case ClearCommand.COMMAND_WORD:
-        case ClearCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new ClearCommand(); //@@author
+            case ClearCommand.COMMAND_WORD:
+            case ClearCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new ClearCommand(); //@@author
 
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new FindCommandParser().parse(arguments); //@@author
+            case FindCommand.COMMAND_WORD:
+            case FindCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new FindCommandParser().parse(arguments); //@@author
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new ListCommand(); //@@author
+            case ListCommand.COMMAND_WORD:
+            case ListCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new ListCommand(); //@@author
 
-        case HistoryCommand.COMMAND_WORD:
-        case HistoryCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new HistoryCommand(); //@@author
+            case HistoryCommand.COMMAND_WORD:
+            case HistoryCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new HistoryCommand(); //@@author
 
-        case ExitCommand.COMMAND_WORD:
-        case ExitCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new ExitCommand(); //@@author
+            case ExitCommand.COMMAND_WORD:
+            case ExitCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new ExitCommand(); //@@author
 
-        case NewJournalCommand.COMMAND_WORD:
-        case NewJournalCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new NewJournalCommand(); //@@author
+            case NewJournalCommand.COMMAND_WORD:
+            case NewJournalCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new NewJournalCommand(); //@@author
 
-        case HelpCommand.COMMAND_WORD:
-        case HelpCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new HelpCommand(); //@@author
+            case HelpCommand.COMMAND_WORD:
+            case HelpCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new HelpCommand(); //@@author
 
-        case UndoCommand.COMMAND_WORD:
-        case UndoCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new UndoCommand(); //@@author
+            case UndoCommand.COMMAND_WORD:
+            case UndoCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new UndoCommand(); //@@author
 
-        case RedoCommand.COMMAND_WORD:
-        case RedoCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new RedoCommand(); //@@author
+            case RedoCommand.COMMAND_WORD:
+            case RedoCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+                return new RedoCommand(); //@@author
 
-        case ViewTimetableCommand.COMMAND_WORD:
-        case ViewTimetableCommand.COMMAND_ALIAS:
-            return new ViewTimetableCommand();
+            case ViewTimetableCommand.COMMAND_WORD:
+            case ViewTimetableCommand.COMMAND_ALIAS:
+                return new ViewTimetableCommand();
 
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            case CalendarViewCommand.COMMAND_WORD:
+            case CalendarViewCommand.COMMAND_ALIAS:
+                return new CalendarViewParser().parse(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
         }
     }
