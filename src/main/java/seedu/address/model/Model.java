@@ -6,8 +6,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 
 /**
  * The API of the Model component.
