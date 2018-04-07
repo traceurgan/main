@@ -19,7 +19,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -28,8 +27,8 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
-    private final AddressBook addressBookWithBobAndAmy = new AddressBookBuilder().withPerson(BOB)
+    private final Person addressBook = new Person();
+    private final Person addressBookWithBobAndAmy = new AddressBookBuilder().withPerson(BOB)
             .withPerson(AMY).build();
 
     @Test
@@ -46,7 +45,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        Person newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -54,7 +53,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsAssertionError() {
         // Repeat ALICE twice
-        List<ReadOnlyPerson> newPersons = Arrays.asList(ALICE, ALICE);
+        List<seedu.address.model.person.ReadOnlyPerson> newPersons = Arrays.asList(ALICE, ALICE);
         List<Tag> newTags = new ArrayList<>(ALICE.getTags());
         AddressBookStub newData = new AddressBookStub(newPersons, newTags);
 
@@ -79,7 +78,7 @@ public class AddressBookTest {
     public void removeTag_nonExistentTag_addressBookUnchanged() throws Exception {
         addressBookWithBobAndAmy.removeTag(new Tag(VALID_TAG_UNUSED));
 
-        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(BOB).withPerson(AMY).build();
+        Person expectedAddressBook = new AddressBookBuilder().withPerson(BOB).withPerson(AMY).build();
 
         assertEquals(expectedAddressBook, addressBookWithBobAndAmy);
     }
@@ -87,19 +86,19 @@ public class AddressBookTest {
 
 
     /**
-     * A stub ReadOnlyAddressBook whose persons and tags lists can violate interface constraints.
+     * A stub ReadOnlyPerson whose persons and tags lists can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
+    private static class AddressBookStub implements ReadOnlyPerson {
+        private final ObservableList<seedu.address.model.person.ReadOnlyPerson> persons = FXCollections.observableArrayList();
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
+        AddressBookStub(Collection<seedu.address.model.person.ReadOnlyPerson> persons, Collection<? extends Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
         }
 
         @Override
-        public ObservableList<ReadOnlyPerson> getPersonList() {
+        public ObservableList<seedu.address.model.person.ReadOnlyPerson> getPersonList() {
             return persons;
         }
 

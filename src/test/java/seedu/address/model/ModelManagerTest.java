@@ -29,7 +29,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteTag_nonExistentTag_modelUnchanged() throws Exception {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        Person addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
         Journal journal = new Journal();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -42,9 +42,9 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        Person addressBook = new AddressBookBuilder().withPerson(ALICE).build();
         Journal journal = new Journal();
-        AddressBook differentAddressBook = new AddressBook();
+        Person differentAddressBook = new Person();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true

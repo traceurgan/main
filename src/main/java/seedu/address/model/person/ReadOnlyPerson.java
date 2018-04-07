@@ -15,22 +15,31 @@ import seedu.address.model.tag.UniqueTagList;
 public interface ReadOnlyPerson {
 
     ObjectProperty<Name> nameProperty();
-    Name getName();
     ObjectProperty<Phone> phoneProperty();
-    Phone getPhone();
     ObjectProperty<Email> emailProperty();
-    Email getEmail();
     ObjectProperty<Address> addressProperty();
-    Address getAddress();
     ObjectProperty<Timetable> timeTableProperty();
-    Timetable getTimetable();
     ObjectProperty<UniqueTagList> tagProperty();
-    Set<Tag> getTags();
     //ObjectProperty<AppointmentList> appointmentProperty();
+
+    Name getName();
+
+    Phone getPhone();
+
+    Email getEmail();
+
+    Address getAddress();
+
+    Timetable getTimetable();
+
+    Set<Tag> getTags();
+
     // List<Appointment> getAppointments();
-    /**Same state detected will return true.
+
+    /**
+     * Same state detected will return true.
      */
-    default boolean isSameStateAs(ReadOnlyPerson rp) {
+    default boolean equals(ReadOnlyPerson rp) {
         return rp == this // short circuit if same object
                 || (rp != null // this is first to avoid NPE below
                 && rp.getName().equals(this.getName()) // state checks here onwards

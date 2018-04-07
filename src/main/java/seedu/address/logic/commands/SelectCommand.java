@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
@@ -18,37 +18,29 @@ public class SelectCommand extends Command {
     public static final String COMMAND_ALIAS = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Selects the person shown in the main window\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
-
-    private final Index targetIndex;
-
-    public SelectCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
-    }
 
     @Override
     public CommandResult execute() throws CommandException {
 
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        try {
+            model.getPerson();
+        } catch (NullPointerException npe) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent());
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS));
 
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SelectCommand // instanceof handles nulls
-                && this.targetIndex.equals(((SelectCommand) other).targetIndex)); // state check
+                || (other instanceof SelectCommand); // instanceof handles nulls
     }
 
 }

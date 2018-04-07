@@ -20,7 +20,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
     public SelectCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new SelectCommand(index);
+            return new SelectCommand();
         } catch (IllegalValueException ive) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));

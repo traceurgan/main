@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -35,7 +34,7 @@ public class Person implements ReadOnlyPerson {
     public Person(Name name, Phone phone, Email email, Address address,
                   Timetable timetable, Set<Tag> tags) {
 
-        requireAllNonNull(name, phone, email, address, timetable, tags);
+        requireNonNull(name);
 
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -55,22 +54,10 @@ public class Person implements ReadOnlyPerson {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),
                 source.getTimetable(), source.getTags());
     }
-    public void setName(Name name) {
-        this.name.set(requireNonNull(name));
-    }
 
     @Override
     public ObjectProperty<Name> nameProperty() {
         return name;
-    }
-
-    @Override
-    public Name getName() {
-        return name.get();
-    }
-
-    public void setPhone(Phone phone) {
-        this.phone.set(requireNonNull(phone));
     }
 
     @Override
@@ -79,26 +66,8 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone.get();
-    }
-
-    public void setEmail(Email email) {
-        this.email.set(requireNonNull(email));
-    }
-
-    @Override
     public ObjectProperty<Email> emailProperty() {
         return email;
-    }
-
-    @Override
-    public Email getEmail() {
-        return email.get();
-    }
-
-    public void setAddress(Address address) {
-        this.address.set(requireNonNull(address));
     }
 
     @Override
@@ -107,23 +76,40 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public Address getAddress() {
-        return address.get();
-    }
-
-    public void setTimetable(Timetable timetable) {
-        this.timetable.set(requireNonNull(timetable));
+    public ObjectProperty<Timetable> timeTableProperty() {
+        return timetable;
     }
 
     @Override
-    public ObjectProperty<Timetable> timeTableProperty() {
-        return timetable;
+    public ObjectProperty<UniqueTagList> tagProperty() {
+        return tags;
+    }
+
+    @Override
+    public Name getName() {
+        return name.get();
+    }
+
+    @Override
+    public Phone getPhone() {
+        return phone.get();
+    }
+
+    @Override
+    public Email getEmail() {
+        return email.get();
+    }
+
+    @Override
+    public Address getAddress() {
+        return address.get();
     }
 
     @Override
     public Timetable getTimetable() {
         return timetable.get();
     }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -131,10 +117,6 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags.get().toSet());
-    }
-
-    public ObjectProperty<UniqueTagList> tagProperty() {
-        return tags;
     }
 
     /**
@@ -152,7 +134,7 @@ public class Person implements ReadOnlyPerson {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.isSameStateAs((ReadOnlyPerson) other));
+                && this.equals((ReadOnlyPerson) other));
     }
 
     @Override
@@ -163,7 +145,7 @@ public class Person implements ReadOnlyPerson {
 
     @Override
     public String toString() {
-        return getAsText();
+        return getName().toString();
     }
 
 }

@@ -17,6 +17,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.ui.JournalWindow;
 
@@ -78,16 +79,15 @@ public class LogicManager extends ComponentManager implements Logic {
         journalWindow.show();
     }
 
-    //@@author chenxing1992
-    @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return model.getFilteredPersonList();
-    }
-
     //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
-        return model.getJournal().getJournalEntryList();
+        return model.getJournalEntryList();
+    }
+
+    @Override
+    public ObservableList<ReadOnlyPerson> getPersonAsList() {
+        return model.getPersonAsList();
     }
 
     //@@author
