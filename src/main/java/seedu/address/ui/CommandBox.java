@@ -47,6 +47,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
+
     /**
      * Deletes chunk in the situation where caret is at the far right.
      *
@@ -59,6 +60,7 @@ public class CommandBox extends UiPart<Region> {
         }
         return shiftLeftIgnoringWords(newCaretPosition);
     }
+
     /**
      * Deletes the word or a chunk of blank spaces on the left.
      * Does not matter if caret is at end of text or between lines. Method will automatically
@@ -87,6 +89,7 @@ public class CommandBox extends UiPart<Region> {
         setNewWord(newCaretPosition, originalCaretPosition);
         commandTextField.positionCaret(newCaretPosition);
     }
+
     /**
      * Checks if caret is at either ends.
      *
@@ -98,10 +101,11 @@ public class CommandBox extends UiPart<Region> {
         boolean atFarRight = (originalCaretPosition == commandTextField.getText().length());
         return atFarLeft || atFarRight;
     }
+
     /**
      * Sets a new word with all string elements between the two parameters removed.
      *
-     * @param newCaretPosition Left boundary of the word.
+     * @param newCaretPosition      Left boundary of the word.
      * @param originalCaretPosition Right boundary of the word.
      */
     private void setNewWord(int newCaretPosition, int originalCaretPosition) {
@@ -115,6 +119,7 @@ public class CommandBox extends UiPart<Region> {
         }
         commandTextField.setText(answer);
     }
+
     /**
      * Handles KeyPress Commands that are keyed with Shift button held down.
      *
@@ -122,22 +127,23 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleShiftPress(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case ALT:
-                keyEvent.consume();
-                commandTextField.positionCaret(0);
-                break;
-            case CONTROL:
-                keyEvent.consume();
-                commandTextField.positionCaret(commandTextField.getText().length());
-                break;
-            case DELETE:
-            case BACK_SPACE:
-                keyEvent.consume();
-                deleteByChunk();
-                break;
-            default:
+        case ALT:
+            keyEvent.consume();
+            commandTextField.positionCaret(0);
+            break;
+        case CONTROL:
+            keyEvent.consume();
+            commandTextField.positionCaret(commandTextField.getText().length());
+            break;
+        case DELETE:
+        case BACK_SPACE:
+            keyEvent.consume();
+            deleteByChunk();
+            break;
+        default:
         }
     }
+
     /**
      * Handles the key press event, {@code keyEvent}.
      */
@@ -151,6 +157,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     //@@author chenxing1992
+
     /**
      * Handles KeyPress Commands that are not keyed with Shift button held down.
      *
@@ -158,37 +165,38 @@ public class CommandBox extends UiPart<Region> {
      */
     private void handleStandardPress(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case UP:
-                keyEvent.consume();
-                navigateToPreviousInput();
+        case UP:
+            keyEvent.consume();
+            navigateToPreviousInput();
+            break;
+        case DOWN:
+            keyEvent.consume();
+            navigateToNextInput();
+            break;
+        case ESCAPE:
+            keyEvent.consume();
+            commandTextField.setText("");
+            break;
+        case ALT:
+            keyEvent.consume();
+            shiftCaretLeftByWord();
+            break;
+        case CONTROL:
+            keyEvent.consume();
+            shiftCaretRightByWord();
+            break;
+        case RIGHT:
+            boolean isCaretWithin = commandTextField.getCaretPosition() < commandTextField.getText().length();
+            if (isCaretWithin) {
                 break;
-            case DOWN:
-                keyEvent.consume();
-                navigateToNextInput();
-                break;
-            case ESCAPE:
-                keyEvent.consume();
-                commandTextField.setText("");
-                break;
-            case ALT:
-                keyEvent.consume();
-                shiftCaretLeftByWord();
-                break;
-            case CONTROL:
-                keyEvent.consume();
-                shiftCaretRightByWord();
-                break;
-            case RIGHT:
-                boolean isCaretWithin = commandTextField.getCaretPosition() < commandTextField.getText().length();
-                if (isCaretWithin) {
-                    break;
-                }
-                addsNextPrefix();
-                break;
-            default:
+            }
+            addsNextPrefix();
+            break;
+        default:
         }
     }
     //@@author chenxing1992
+
     /**
      * Adds prefix string to existing text input.
      *
@@ -199,6 +207,7 @@ public class CommandBox extends UiPart<Region> {
         return commandTextField.getText().concat(" ").concat(prefix.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * Adds the next prefix required for the input
      */
@@ -212,11 +221,11 @@ public class CommandBox extends UiPart<Region> {
             finalText = concatPrefix(PREFIX_EMAIL);
         } else if (containsPrefix("address")) {
             finalText = concatPrefix(PREFIX_ADDRESS);
-        }  else if (containsPrefix("date")) {
+        } else if (containsPrefix("date")) {
             finalText = concatPrefix(PREFIX_DATE);
         } else if (containsPrefix("timetable")) {
             finalText = concatPrefix(PREFIX_TIMETABLE);
-        }else if (containsPrefix("all")) {
+        } else if (containsPrefix("all")) {
             finalText = concatPrefix(PREFIX_TAG);
         } else {
             return;
@@ -225,6 +234,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(finalText.length());
     }
     //@@author chenxing1992
+
     /**
      * Checks if add or edit KeyWord is in the input text. Also checks if prefix is in the input text.
      *
@@ -233,23 +243,24 @@ public class CommandBox extends UiPart<Region> {
      */
     private boolean containsPrefix(String element) {
         switch (element) {
-            case "name":
-                return (!containsName() && (addPollSuccessful() || editPollSuccessful()));
-            case "phone":
-                return (!containsPhone() && (addPollSuccessful() || editPollSuccessful()));
-            case "email":
-                return (!containsEmail() && (addPollSuccessful() || editPollSuccessful()));
-            case "address":
-                return (!containsAddress() && (addPollSuccessful() || editPollSuccessful()));
-            case "timetable":
-                return (!containsTimeTable() && (addPollSuccessful() || editPollSuccessful()));
-            case "date":
-                return (!containsDate() && (addPollSuccessful() || editPollSuccessful()));
-            default:
-                return (containsAllCompulsoryPrefix() && (addPollSuccessful() || editPollSuccessful()));
+        case "name":
+            return (!containsName() && (addPollSuccessful() || editPollSuccessful()));
+        case "phone":
+            return (!containsPhone() && (addPollSuccessful() || editPollSuccessful()));
+        case "email":
+            return (!containsEmail() && (addPollSuccessful() || editPollSuccessful()));
+        case "address":
+            return (!containsAddress() && (addPollSuccessful() || editPollSuccessful()));
+        case "timetable":
+            return (!containsTimeTable() && (addPollSuccessful() || editPollSuccessful()));
+        case "date":
+            return (!containsDate() && (addPollSuccessful() || editPollSuccessful()));
+        default:
+            return (containsAllCompulsoryPrefix() && (addPollSuccessful() || editPollSuccessful()));
         }
     }
     //@@author chenxing1992
+
     /**
      * Checks if the commandTextField all prefixes excluding tag.
      *
@@ -261,6 +272,7 @@ public class CommandBox extends UiPart<Region> {
                 && containsDate();
     }
     //@@author chenxing1992
+
     /**
      * Checks if sentence starts with " edit " or " e " and is followed by a valid INDEX.
      * Accounts for blank spaces in front.
@@ -281,6 +293,7 @@ public class CommandBox extends UiPart<Region> {
         return containsEditCommand && containsOnlyNumbers;
     }
     //@@author chenxing1992
+
     /**
      * Checks if sentence starts with " add " or " a ".
      * Accounts for blank space in front.
@@ -304,6 +317,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
     //@@author chenxing1992
+
     /**
      * Checks if the first two elements of the string are "a ".
      *
@@ -315,6 +329,7 @@ public class CommandBox extends UiPart<Region> {
                 && Character.toString(stringToEvaluate.charAt(1)).equals(" "));
     }
     //@@author chenxing1992
+
     /**
      * Checks if the first four elements of the string are "add ".
      *
@@ -326,6 +341,7 @@ public class CommandBox extends UiPart<Region> {
                 && Character.toString(stringToEvaluate.charAt(3)).equals(" "));
     }
     //@@author chenxing1992
+
     /**
      * @return True if existing input has Date Prefix String.
      */
@@ -334,6 +350,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_DATE.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * @return True if existing input has Address Prefix String.
      */
@@ -342,6 +359,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_ADDRESS.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * @return True if existing input has Address Prefix String.
      */
@@ -350,6 +368,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_TIMETABLE.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * @return True if existing input has Email Prefix String.
      */
@@ -358,6 +377,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_EMAIL.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * @return True if existing input has Phone Prefix String.
      */
@@ -366,6 +386,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_PHONE.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * @return True if existing input has Name Prefix String.
      */
@@ -374,6 +395,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_NAME.getPrefix());
     }
     //@@author chenxing1992
+
     /**
      * Shifts the caret right to the right of the last character of the next word
      * <p>
@@ -398,6 +420,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(newCaretPosition);
     }
     //@@author chenxing1992
+
     /**
      * Shifts the caret right, ignoring all empty space.
      * <p>
@@ -412,7 +435,7 @@ public class CommandBox extends UiPart<Region> {
      * Pre-Condition 2: newCaretPosition should never be in the situation where there is a possibility
      * of it being at most right position.
      *
-     * @param newCaretPosition Current caret position.
+     * @param newCaretPosition      Current caret position.
      * @param maxAchievablePosition Right most bound of word.
      * @return New caret position.
      */
@@ -427,6 +450,7 @@ public class CommandBox extends UiPart<Region> {
         return caretHolder;
     }
     //@@author chenxing1992
+
     /**
      * Shifts the caret right, ignoring all char.
      * <p>
@@ -441,7 +465,7 @@ public class CommandBox extends UiPart<Region> {
      * Pre-Condition 2: newCaretPosition should never be in the situation where there is a possibility
      * of it being at most right position.
      *
-     * @param newCaretPosition Current caret position.
+     * @param newCaretPosition      Current caret position.
      * @param maxAchievablePosition Right most caret position.
      * @return New caret position.
      */
@@ -456,6 +480,7 @@ public class CommandBox extends UiPart<Region> {
         return caretHolder;
     }
     //@@author chenxing1992
+
     /**
      * Checks if string element after currentCaretPosition index is empty.
      *
@@ -468,6 +493,7 @@ public class CommandBox extends UiPart<Region> {
         return (" ".equals(convertToString));
     }
     //@@author chenxing1992
+
     /**
      * Checks if string element before currentCaretPosition index is empty.
      *
@@ -480,6 +506,7 @@ public class CommandBox extends UiPart<Region> {
         return (" ".equals(convertToString));
     }
     //@@author chenxing1992
+
     /**
      * Shifts the caret left to the left of the first character of the next word
      * <p>
@@ -503,6 +530,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(newCaretPosition);
     }
     //@@author chenxing1992
+
     /**
      * Shifts the caret left, ignoring all char.
      * <p>
@@ -531,6 +559,7 @@ public class CommandBox extends UiPart<Region> {
         return caretHolder;
     }
     //@@author chenxing1992
+
     /**
      * Shifts the caret left, ignoring all empty spaces.
      * <p>
@@ -559,6 +588,7 @@ public class CommandBox extends UiPart<Region> {
         return caretHolder;
     }
     //@@author chenxing1992
+
     /**
      * Updates the text field with the previous input in {@code historySnapshot},
      * if there exists a previous input in {@code historySnapshot}
@@ -572,6 +602,7 @@ public class CommandBox extends UiPart<Region> {
         replaceText(historySnapshot.previous());
     }
     //@@author chenxing1992
+
     /**
      * Updates the text field with the next input in {@code historySnapshot},
      * if there exists a next input in {@code historySnapshot}
@@ -585,6 +616,7 @@ public class CommandBox extends UiPart<Region> {
         replaceText(historySnapshot.next());
     }
     //@@author chenxing1992
+
     /**
      * Sets {@code CommandBox}'s text field with {@code text} and
      * positions the caret to the end of the {@code text}.
@@ -594,6 +626,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(commandTextField.getText().length());
     }
     //@@author chenxing1992
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -617,6 +650,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
     //@@author chenxing1992
+
     /**
      * Initializes the history snapshot.
      */

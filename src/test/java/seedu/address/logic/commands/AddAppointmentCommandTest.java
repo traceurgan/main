@@ -11,6 +11,7 @@ import java.text.ParseException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddAppointmentParser;
@@ -76,7 +77,7 @@ public class AddAppointmentCommandTest {
      */
     private Command setCommand(Index index, Appointment appointment) {
         AddAppointmentCommand command = new AddAppointmentCommand(index, appointment);
-        Model model = new ModelManager(getTypicalAddressBook(),getTypicalJournal(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalJournal(), new UserPrefs());
         command.setData(model);
         return command;
     }

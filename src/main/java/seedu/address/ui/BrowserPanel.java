@@ -23,6 +23,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.CalendarViewEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -90,7 +91,29 @@ public class BrowserPanel extends UiPart<Region> {
     public CalendarView getRoot() {
 
 
-     return this.calendarView;
+        return this.calendarView;
+    }
+    /**
+     * Changes calendar view accordingly
+     */
+    private void showPage(Character c) {
+        switch(c) {
+        case ('d'):
+            calendarView.showDayPage();
+            return;
+        case ('w'):
+            calendarView.showWeekPage();
+            return;
+        case ('m'):
+            calendarView.showMonthPage();
+            return;
+        case ('y'):
+            calendarView.showYearPage();
+            return;
+        default:
+        //should not reach here
+        assert (false);
+        }
     }
     //@@author chenxing1992
     private void setTime() {
@@ -142,6 +165,12 @@ public class BrowserPanel extends UiPart<Region> {
             }
         }
         calendarView.getCalendarSources().add(calendarSource);
+    }
+    //@@author chenxing1992
+    @Subscribe
+    private void handleCalendarViewEvent(CalendarViewEvent event) {
+        Character c = event.c;
+        Platform.runLater(() -> showPage(c));
     }
 
     private void loadPersonPage(ReadOnlyPerson person) {

@@ -1,14 +1,9 @@
 package systemtests;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import org.junit.Test;
-import seedu.address.logic.commands.AddAppointmentCommand;
-import seedu.address.logic.commands.CalendarViewCommand;
 import seedu.address.model.Model;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+
 
 
 //@@author chenxing1992
@@ -28,15 +23,6 @@ public class AppointmentSystemTest extends AddressBookSystemTest {
     }
     */
 
-    @Test
-    public void changeCalendarView() {
-        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " d", CalendarViewCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " w", CalendarViewCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " m", CalendarViewCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " y", CalendarViewCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " q",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarViewCommand.MESSAGE_USAGE));
-    }
 
     /**
      * Performs verification that calendarview changed
