@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-//@@author Chen Xing
+//@@author chenxing1992
 
 /**
  * A list of appointments of a person

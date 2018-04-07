@@ -54,6 +54,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
+
+    //@@author chenxing1992
     /**
      * Adds appointment to a person
      */

@@ -18,7 +18,6 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
@@ -50,6 +49,7 @@ public class BrowserPanel extends UiPart<Region> {
     private CalendarView calendarView;
     private ObservableList<ReadOnlyPerson> personList;
 
+    //@@author chenxing1992
     public BrowserPanel(ObservableList<ReadOnlyPerson> personList) {
         super(FXML);
 
@@ -70,6 +70,7 @@ public class BrowserPanel extends UiPart<Region> {
         //registerAsAnEventHandler(this);
     }
 
+    //@@author chenxing1992
     /**
      * Remove clutter from interface
      */
@@ -81,23 +82,30 @@ public class BrowserPanel extends UiPart<Region> {
         calendarView.showDayPage();
     }
 
-    public CalendarView getRoot() {
+    /**
+     *
+     * Explicitly set the Root object to CalendarView
+     */
+    //@@author chenxing1992
+    //public CalendarView getRoot() {
 
 
-        return this.calendarView;
-    }
+      // return this.calendarView;
+    //}
+    //@@author chenxing1992
     private void setTime() {
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
         calendarView.getCalendarSources().clear();
     }
+    //@@author chenxing1992
     private Calendar getCalendar(int styleNum, ReadOnlyPerson person) {
         Calendar calendar = new Calendar(person.getName().toString());
         calendar.setStyle(Calendar.Style.getStyle(styleNum));
         calendar.setLookAheadDuration(Duration.ofDays(365));
         return calendar;
     }
-
+    //@@author chenxing1992
     private ArrayList<Entry> getEntries(ReadOnlyPerson person) {
         ArrayList<Entry> entries = new ArrayList<>();
         for (Appointment appointment : person.getAppointments()) {
@@ -111,6 +119,8 @@ public class BrowserPanel extends UiPart<Region> {
         }
         return entries;
     }
+
+    //@@author chenxing1992
     /**
      * Creates a new a calendar with the update information
      */

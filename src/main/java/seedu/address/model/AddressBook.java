@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Appointment.Appointment;
@@ -65,9 +64,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.addAppointment(target, appointment);
     }
 
-    //public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
-      //  persons.removeAppointment(target, appointment);
-    //}
+   // public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+       //persons.removeAppointment(target, appointment);
+   // }
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -212,10 +211,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asObservableList();
     }
 
-    @Override
-    public ObservableList<Tag> getTagList() {
-        return tags.asObservableList();
-    }
+    //@Override
+    //public ObservableList<Tag> getTagList() {
+      //  return tags.asObservableList();
+   // }
 
     @Override
     public boolean equals(Object other) {

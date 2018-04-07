@@ -27,18 +27,6 @@ public class ModelManagerTest {
         modelManager.getFilteredPersonList().remove(0);
     }
 
-    @Test
-    public void deleteTag_nonExistentTag_modelUnchanged() throws Exception {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
-        Journal journal = new Journal();
-        UserPrefs userPrefs = new UserPrefs();
-
-        ModelManager modelManager = new ModelManager(addressBook, journal, userPrefs);
-        modelManager.deleteTag(new Tag(VALID_TAG_UNUSED));
-
-        assertEquals(new ModelManager(addressBook, journal, userPrefs), modelManager);
-    }
-
 
     @Test
     public void equals() {
