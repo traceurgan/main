@@ -6,6 +6,7 @@ import seedu.address.model.Model;
 
 
 
+
 //@@author chenxing1992
 public class AppointmentSystemTest extends AddressBookSystemTest {
     /**
@@ -20,9 +21,18 @@ public class AppointmentSystemTest extends AddressBookSystemTest {
 
         command = CancelAppointmentCommand.COMMAND_WORD + " " + description + " with " + toAddAppointment.getName();
         assertCommandSuccess(command, toAddAppointment, AddAppointmentParser.getAppointmentFromString(str));
-    }
-    */
+    }*/
 
+    /**
+    @Test
+    public void changeCalendarView() {
+        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " d", CalendarViewCommand.MESSAGE_SUCCESS);
+        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " w", CalendarViewCommand.MESSAGE_SUCCESS);
+        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " m", CalendarViewCommand.MESSAGE_SUCCESS);
+        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " y", CalendarViewCommand.MESSAGE_SUCCESS);
+        assertCommandSuccess(CalendarViewCommand.COMMAND_WORD + " q",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CalendarViewCommand.MESSAGE_USAGE));
+    }*/
 
     /**
      * Performs verification that calendarview changed
