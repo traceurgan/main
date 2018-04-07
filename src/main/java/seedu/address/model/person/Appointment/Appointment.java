@@ -10,7 +10,7 @@ import java.util.Date;
 //@@author chenxing1992
 
 /**
- *  Appointment class to hold all the start and end time of the appointment and the description
+ *  Appointment class to hold all the start and end time of the Appointment and the description
  *  */
 public class Appointment {
 
@@ -50,19 +50,19 @@ public class Appointment {
         if (date != null) {
             return "Appointment on " + DATE_FORMATTER.format(date);
         } else {
-            return "No appointment";
+            return "No Appointment";
         }
     }
 
     /**
-     * @return starting appointment time in the format yyyy/MM/dd HH:mm
+     * @return starting Appointment time in the format yyyy/MM/dd HH:mm
      */
     public String getDateInStringFormat() {
         return DATE_FORMATTER.format(date);
     }
 
     /**
-     * @return ending appointment time in the format yyyy/MM/dd HH:mm
+     * @return ending Appointment time in the format yyyy/MM/dd HH:mm
      */
     public String getDateEndInStringFormat() {
         return DATE_FORMATTER.format(endDate);

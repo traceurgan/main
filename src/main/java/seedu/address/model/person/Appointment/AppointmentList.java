@@ -19,14 +19,14 @@ public class AppointmentList {
     private final ObservableList<Appointment> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty appointment list
+     * Constructs empty Appointment list
      */
     public AppointmentList() {
 
     }
 
     /**
-     * Contructs an appointment list with new appointments
+     * Contructs an Appointment list with new appointments
      */
     public AppointmentList(List<Appointment> appointments) {
         requireAllNonNull(appointments);
@@ -62,7 +62,7 @@ public class AppointmentList {
     }
 
     /**
-     * Returns true if list contains and equivalent appointment
+     * Returns true if list contains and equivalent Appointment
      */
     public boolean contains (Appointment appointment) {
         return internalList.contains(appointment);
@@ -86,9 +86,9 @@ public class AppointmentList {
     @Override
     public String toString() {
         if (internalList.isEmpty()) {
-            return "No appointment set";
+            return "No Appointment set";
         } else {
-            return internalList.size() == 1 ? "" + internalList.size() + " appointment set"
+            return internalList.size() == 1 ? "" + internalList.size() + " Appointment set"
                     : "" + internalList.size() + " appointments set";
         }
     }

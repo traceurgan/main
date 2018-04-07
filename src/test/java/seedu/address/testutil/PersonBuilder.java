@@ -1,13 +1,12 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -16,7 +15,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.model.person.Appointment.Appointment;
+
 
 /**
  * A utility class to help with building Person objects.
@@ -57,12 +56,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(ReadOnlyPerson personToCopy) {
         this.person = new Person(personToCopy);
-                //name = personToCopy.getName();
-                //phone = personToCopy.getPhone();
-                //email = personToCopy.getEmail();
-                // address = personToCopy.getAddress();
-                // timetable = personToCopy.getTimetable();
-                // tags = new HashSet<>(personToCopy.getTags());
+        //name = personToCopy.getName();
+        //phone = personToCopy.getPhone();
+        //email = personToCopy.getEmail();
+        // address = personToCopy.getAddress();
+        // timetable = personToCopy.getTimetable();
+        // tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -114,7 +113,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets appointment with Date of the person that we are building
+     * Sets Appointment with Date of the person that we are building
      */
     public PersonBuilder withAppointment(String... arg) {
         List<Appointment> list = new ArrayList<>();
@@ -130,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-         return this.person;
+        return this.person;
     }
 
 }

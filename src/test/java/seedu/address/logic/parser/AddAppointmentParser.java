@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.joestelmach.natty.DateGroup;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -44,7 +45,7 @@ public class AddAppointmentParser implements Parser<AddAppointmentCommand> {
             Appointment appointment = getAppointmentFromString(argumentMultimap.getValue(PREFIX_DATE).get());
             return new AddAppointmentCommand(index, appointment);
         } catch (NumberFormatException e) {
-            throw new ParseException("Please input an index for appointment.\n"
+            throw new ParseException("Please input an index for Appointment.\n"
                     + String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
@@ -59,13 +60,13 @@ public class AddAppointmentParser implements Parser<AddAppointmentCommand> {
     }
 
     /**
-     * Natty parser that takes in a string and returns an appointment
+     * Natty parser that takes in a string and returns an Appointment
      */
     public static Appointment getAppointmentFromString(String str) throws ParseException {
         String[] args = str.split(",");
 
         if (args.length != 2) {
-            throw new ParseException("Please follow format for adding appointment.\n"
+            throw new ParseException("Please follow format for adding Appointment.\n"
                     + AddAppointmentCommand.MESSAGE_USAGE);
         }
 
@@ -75,7 +76,7 @@ public class AddAppointmentParser implements Parser<AddAppointmentCommand> {
         List<DateGroup> groups = parser.parse(args[1]);
         Calendar calendar = Calendar.getInstance();
         if (groups.size() == 0) {
-            throw new ParseException("Please be more specific with your appointment time");
+            throw new ParseException("Please be more specific with your Appointment time");
         }
 
         //If there is a start and end time that is parsed

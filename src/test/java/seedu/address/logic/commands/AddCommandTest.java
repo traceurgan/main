@@ -21,9 +21,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -84,7 +84,7 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(null));
 
         // different person -> returns false
-       // assertFalse(addAliceCommand.equals(addBobCommand));
+        // assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**

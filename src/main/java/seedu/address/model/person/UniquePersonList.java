@@ -86,7 +86,7 @@ public class UniquePersonList implements Iterable<Person> {
         return personFoundAndDeleted;
     }
     /**
-     * Adds appointment to a person in the internal list.
+     * Adds Appointment to a person in the internal list.
      *
      * @throws PersonNotFoundException if no such person exist in the internal list
      */

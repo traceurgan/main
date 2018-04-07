@@ -29,7 +29,8 @@ public class BrowserPanelTest extends GuiUnitTest {
     public void setUp() {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(new PersonCard(ALICE, 0));
 
-        guiRobot.interact(() -> browserPanel = new BrowserPanel(TypicalPersons.getTypicalAddressBook().getPersonList()));
+        guiRobot.interact(() -> browserPanel =
+                new BrowserPanel(TypicalPersons.getTypicalAddressBook().getPersonList()));
         uiPartRule.setUiPart(browserPanel);
 
         browserPanelHandle = new BrowserPanelHandle(browserPanel.getRoot());

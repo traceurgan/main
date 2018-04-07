@@ -17,21 +17,21 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 //@@author Chen Xing
 
 /**
- * Command to add appointment to a person in addressBook
+ * Command to add Appointment to a person in addressBook
  */
 public class AddAppointmentCommand extends UndoableCommand {
 
-    public static final String COMMAND_WORD = "appointment";
+    public static final String COMMAND_WORD = "Appointment";
     public static final String COMMAND_ALIAS = "appt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to a person in address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Appointment to a person in address book. \n"
             + COMMAND_ALIAS + ": Shorthand equivalent for add. \n"
             + "Parameters: " + COMMAND_WORD + " INDEX "
             + PREFIX_DATE + "DESCRIPTION, TIME" + "\n"
             + "Example 1:" + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "Lunch, Next Monday 3pm";
 
-    public static final String MESSAGE_SUCCESS = "New appointment added. ";
+    public static final String MESSAGE_SUCCESS = "New Appointment added. ";
     public static final String INVALID_PERSON = "This person is not in your address book";
     public static final String INVALID_DATE = "Invalid Date. Please enter a valid date.";
     public static final String SORT_APPOINTMENT_FEEDBACK = "Rearranged contacts to show upcoming appointments.";
@@ -74,7 +74,7 @@ public class AddAppointmentCommand extends UndoableCommand {
     }
 
     /**
-     * Checks if appointment date set to after current time
+     * Checks if Appointment date set to after current time
      */
     private boolean isDateValid() {
         requireNonNull(appointment);

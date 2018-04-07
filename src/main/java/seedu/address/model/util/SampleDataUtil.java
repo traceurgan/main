@@ -100,7 +100,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns an appointment list containing the list of appointment given
+     * Returns an Appointment list containing the list of Appointment given
      */
     public static List<Appointment> getAppointmentList(String... strings) {
         List<Appointment> list = new ArrayList<Appointment>();

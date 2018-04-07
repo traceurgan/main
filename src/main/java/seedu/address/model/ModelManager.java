@@ -146,8 +146,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     // @Override
-    //public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
-    //   addressBook.removeAppointment(target, appointment);
+    //public void removeAppointment(ReadOnlyPerson target, Appointment Appointment) throws PersonNotFoundException {
+    //   addressBook.removeAppointment(target, Appointment);
     //   indicateAddressBookChanged();
     // }
     //@@author
