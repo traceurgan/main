@@ -24,7 +24,7 @@ public class Timetable {
             listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
     private HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
     private ArrayList<TimetableModuleSlot> allModulesSlots; //ArrayList Containing all TimetableModuleSlots
-    private static String expandedUrl;
+    private String expandedUrl;
 
     public final String value;
     private String timetableDisplayInfo;

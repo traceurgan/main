@@ -179,7 +179,7 @@ public class TimetableParserUtil {
 
     /**
      * Sets {@code listOfDays} in {@code timetable} given
-     * @param timetable w
+     * @param timetable timetable to set List of days
      */
     public static void setListOfDays(Timetable timetable) {
         requireNonNull(timetable.getListOfModules());
