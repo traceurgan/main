@@ -18,11 +18,11 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Person;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyPerson;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -99,7 +99,7 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(seedu.address.model.person.ReadOnlyPerson person) throws DuplicatePersonException {
+        public void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
             fail("This method should not be called.");
         }
 
@@ -131,7 +131,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updatePerson(seedu.address.model.person.ReadOnlyPerson target, seedu.address.model.person.ReadOnlyPerson editedPerson)
+        public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
                 throws DuplicatePersonException {
             fail("This method should not be called.");
         }
@@ -142,7 +142,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<seedu.address.model.person.ReadOnlyPerson> getFilteredPersonList() {
+        public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;
         }
@@ -154,7 +154,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<seedu.address.model.person.ReadOnlyPerson> predicate) {
+        public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
             fail("This method should not be called.");
         }
     }

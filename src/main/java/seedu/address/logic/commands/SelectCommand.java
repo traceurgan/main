@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -21,9 +19,9 @@ public class SelectCommand extends Command {
             + ": Selects the person shown in the main window\n"
             + "Example: " + COMMAND_WORD;
 
-    private ReadOnlyPerson personToSelect;
-
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: ";
+
+    private ReadOnlyPerson personToSelect;
 
     @Override
     public CommandResult execute() throws CommandException {

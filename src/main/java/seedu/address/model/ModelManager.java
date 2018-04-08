@@ -105,6 +105,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicatePersonChanged(person);
     }
 
+    /**
+     * Common method for making changes to person.
+     * */
     public Person updatePerson(ReadOnlyPerson editedPerson) {
         if (persons.isEmpty()) {
             persons.add(editedPerson);

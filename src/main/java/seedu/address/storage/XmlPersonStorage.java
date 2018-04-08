@@ -52,7 +52,7 @@ public class XmlPersonStorage implements PersonStorage {
         }
 
         XmlSerializablePerson xmlPerson = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
-        if (xmlPerson.getSize() == 0){
+        if (xmlPerson.getSize() == 0) {
             return Optional.empty();
         }
         try {
@@ -74,7 +74,7 @@ public class XmlPersonStorage implements PersonStorage {
      */
     public void savePerson(ReadOnlyPerson person, String filePath) throws IOException {
         XmlSerializablePerson xsp;
-        if (person == null){
+        if (person == null) {
             xsp = new XmlSerializablePerson();
         } else {
             requireNonNull(person);

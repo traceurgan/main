@@ -80,7 +80,7 @@ public class EditCommand extends UndoableCommand {
     protected void preprocessUndoableCommand() throws CommandException {
         try {
             this.personToEdit = model.getPerson();
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         }
 

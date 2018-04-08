@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import com.google.common.eventbus.Subscribe;
+
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;

@@ -8,8 +8,6 @@ import java.util.Set;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;

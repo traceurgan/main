@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * Represents a storage for {@link Person}.

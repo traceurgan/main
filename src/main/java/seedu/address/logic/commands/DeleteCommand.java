@@ -45,7 +45,7 @@ public class DeleteCommand extends UndoableCommand {
     protected void preprocessUndoableCommand() throws CommandException {
         try {
             this.personToDelete = model.getPerson();
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         }
     }

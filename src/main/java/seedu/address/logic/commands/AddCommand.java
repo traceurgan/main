@@ -39,7 +39,7 @@ public class AddCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_MULTIPLE_PERSON = "You can only have one person in NUSCouples.\n"
-            +"Use the edit command to change the existing person.\n";
+            + "Use the edit command to change the existing person.\n";
 
     private final ReadOnlyPerson toAdd;
 
