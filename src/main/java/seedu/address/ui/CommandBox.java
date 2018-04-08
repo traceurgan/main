@@ -587,7 +587,7 @@ public class CommandBox extends UiPart<Region> {
         }
         return caretHolder;
     }
-    //@@author chenxing1992
+
 
     /**
      * Updates the text field with the previous input in {@code historySnapshot},
@@ -615,7 +615,7 @@ public class CommandBox extends UiPart<Region> {
 
         replaceText(historySnapshot.next());
     }
-    //@@author chenxing1992
+
 
     /**
      * Sets {@code CommandBox}'s text field with {@code text} and
@@ -625,7 +625,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(text);
         commandTextField.positionCaret(commandTextField.getText().length());
     }
-    //@@author chenxing1992
+
 
     /**
      * Handles the Enter button pressed event.
@@ -649,7 +649,7 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage(), true));
         }
     }
-    //@@author chenxing1992
+
 
     /**
      * Initializes the history snapshot.
