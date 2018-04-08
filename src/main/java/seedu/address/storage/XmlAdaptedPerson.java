@@ -1,22 +1,21 @@
 package seedu.address.storage;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Person.
@@ -35,9 +34,8 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String timetable;
-
     @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    private List<XmlAdaptedAppointment> appointments = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -48,16 +46,12 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String timetable,
-                            List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String timetable) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.timetable = timetable;
-        if (tagged != null) {
-            this.tagged = new ArrayList<>(tagged);
-        }
     }
 
     /**
@@ -72,10 +66,6 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         timetable = source.getTimetable().value;
-        tagged = new ArrayList<>();
-        for (Tag tag : source.getTags()) {
-            tagged.add(new XmlAdaptedTag(tag));
-        }
     }
 
     /**
@@ -83,11 +73,7 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
+    public Person toModelType() throws IllegalValueException, ParseException {
 
         if (this.name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -130,8 +116,11 @@ public class XmlAdaptedPerson {
         }
         final Timetable timetable = new Timetable(this.timetable);
 
-        final Set<Tag> tags = new HashSet<>(personTags);
-        return new Person(name, phone, email, address, timetable, tags);
+        final List<Appointment> personAppointmentList = new ArrayList<>();
+        for (XmlAdaptedAppointment appointment : appointments) {
+            personAppointmentList.add(appointment.toModelType());
+        }
+        return new Person(name, phone, email, address, timetable, personAppointmentList);
     }
 
     @Override
@@ -149,7 +138,6 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
-                && Objects.equals(timetable, otherPerson.timetable)
-                && tagged.equals(otherPerson.tagged);
+                && Objects.equals(timetable, otherPerson.timetable);
     }
 }

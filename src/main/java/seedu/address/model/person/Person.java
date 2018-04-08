@@ -2,15 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.Appointment.AppointmentList;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 //@@author chenxing1992
 /**
@@ -24,24 +23,23 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
     private ObjectProperty<Timetable> timetable;
-    private ObjectProperty<UniqueTagList> tags;
+    private ObjectProperty<AppointmentList> appointments;
 
     //@@author chenxing1992
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Timetable timetable, Set<Tag> tags) {
+                  Timetable timetable, List<Appointment> appointments) {
 
-        requireAllNonNull(name, phone, email, address, timetable);
+        requireAllNonNull(name, phone, email, address, timetable, appointments);
 
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.timetable = new SimpleObjectProperty<>(timetable);
-        // protect internal tags from changes in the arg list
-        this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
+        this.appointments = new SimpleObjectProperty<>(new AppointmentList(appointments));
 
     }
 
@@ -51,7 +49,7 @@ public class Person implements ReadOnlyPerson {
      */
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),
-                source.getTimetable(), source.getTags());
+                source.getTimetable(), source.getAppointments());
     }
 
     @Override
@@ -75,8 +73,8 @@ public class Person implements ReadOnlyPerson {
         return timetable;
     }
     @Override
-    public ObjectProperty<UniqueTagList> tagProperty() {
-        return tags;
+    public ObjectProperty<AppointmentList> appointmentProperty() {
+        return appointments;
     }
 
     @Override
@@ -104,24 +102,13 @@ public class Person implements ReadOnlyPerson {
         return timetable.get();
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
     @Override
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags.get().toSet());
+    public List<Appointment> getAppointments() {
+        return appointments.get().toList();
     }
 
-    /**
-     * Replaces this person's tags with the tags in the argument tag set.
-     */
-    public void setTags(Set<Tag> replacement) {
-        tags.set(new UniqueTagList(replacement));
-    }
-
-    public boolean hasTag(Tag tag) {
-        return tags.get().contains(tag);
+    public void setAppointment(List<Appointment> appointments) {
+        this.appointments.set(new AppointmentList(appointments));
     }
 
     @Override
@@ -134,7 +121,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, timetable, tags);
+        return Objects.hash(name, phone, email, address, timetable);
     }
 
     @Override

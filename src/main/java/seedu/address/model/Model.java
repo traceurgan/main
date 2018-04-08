@@ -5,7 +5,6 @@ import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -49,9 +48,6 @@ public interface Model {
             throws NullPointerException;
 
     String checkDate(int last);
-
-    /** Removes the given {@code tag} from all {@code Person}s. */
-    void deleteTag(Tag tag);
 
     int getLast();
 }

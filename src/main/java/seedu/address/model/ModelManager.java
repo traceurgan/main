@@ -15,7 +15,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -81,7 +80,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author traceurgan
-    /** Raises an event to indicate the journal model has changed */
+
+    /**
+     * Raises an event to indicate the journal model has changed
+     */
     private void indicateJournalChanged() {
         raise(new JournalChangedEvent(journal));
     }
@@ -148,11 +150,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String checkDate(int last) {
         return journal.getDate(last);
-    }
-
-    @Override
-    public void deleteTag(Tag tag) {
-       // addressBook.removeTag(tag);
     }
 
     //=========== Filtered Journal List Accessors =============================================================

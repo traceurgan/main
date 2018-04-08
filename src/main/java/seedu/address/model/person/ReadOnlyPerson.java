@@ -1,11 +1,11 @@
 package seedu.address.model.person;
 
-import java.util.Set;
+import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
+import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.Appointment.AppointmentList;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 
 //@@author chenxing1992
 /**
@@ -19,8 +19,7 @@ public interface ReadOnlyPerson {
     ObjectProperty<Email> emailProperty();
     ObjectProperty<Address> addressProperty();
     ObjectProperty<Timetable> timeTableProperty();
-    ObjectProperty<UniqueTagList> tagProperty();
-    //ObjectProperty<AppointmentList> appointmentProperty();
+    ObjectProperty<AppointmentList> appointmentProperty();
 
     Name getName();
 
@@ -32,9 +31,7 @@ public interface ReadOnlyPerson {
 
     Timetable getTimetable();
 
-    Set<Tag> getTags();
-
-    // List<Appointment> getAppointments();
+    List<Appointment> getAppointments();
 
     /**
      * Same state detected will return true.
@@ -63,9 +60,8 @@ public interface ReadOnlyPerson {
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" TimeTable: ")
-                .append(getTimetable())
-                .append(" Tags: ");
-        getTags().forEach(b::append);
+                .append(getTimetable());
+
         return b.toString();
     }
 
