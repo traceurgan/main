@@ -56,7 +56,7 @@ public class AddCommandTest {
         seedu.address.model.person.Person validPerson = new PersonBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_MULTIPLE_PERSON);
 
         getAddCommandForPerson(validPerson, modelStub).execute();
     }

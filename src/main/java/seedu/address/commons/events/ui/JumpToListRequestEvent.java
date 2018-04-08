@@ -10,7 +10,7 @@ public class JumpToListRequestEvent extends BaseEvent {
     public final int targetIndex;
 
     public JumpToListRequestEvent() {
-        this.targetIndex = 1;
+        this.targetIndex = 0;
     }
 
     @Override

@@ -21,19 +21,21 @@ public class SelectCommand extends Command {
             + ": Selects the person shown in the main window\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
+    private ReadOnlyPerson personToSelect;
+
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: ";
 
     @Override
     public CommandResult execute() throws CommandException {
 
         try {
-            model.getPerson();
+            personToSelect = model.getPerson();
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent());
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS + personToSelect));
 
     }
 

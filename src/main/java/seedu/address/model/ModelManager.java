@@ -96,6 +96,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addPerson(ReadOnlyPerson newPerson) throws DuplicatePersonException {
+        if (this.person != null) {
+            throw new DuplicatePersonException();
+        }
         requireAllNonNull(newPerson);
         this.person = (Person) newPerson;
         updatePerson(person);
