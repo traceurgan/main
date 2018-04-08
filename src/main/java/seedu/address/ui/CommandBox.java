@@ -340,7 +340,7 @@ public class CommandBox extends UiPart<Region> {
         return (stringToEvaluate.substring(0, 3).equalsIgnoreCase(AddCommand.COMMAND_WORD)
                 && Character.toString(stringToEvaluate.charAt(3)).equals(" "));
     }
-    //@@author chenxing1992
+
 
     /**
      * @return True if existing input has Date Prefix String.
@@ -349,7 +349,7 @@ public class CommandBox extends UiPart<Region> {
         String currentInput = commandTextField.getText();
         return currentInput.contains(PREFIX_DATE.getPrefix());
     }
-    //@@author chenxing1992
+
 
     /**
      * @return True if existing input has Address Prefix String.
@@ -358,7 +358,7 @@ public class CommandBox extends UiPart<Region> {
         String currentInput = commandTextField.getText();
         return currentInput.contains(PREFIX_ADDRESS.getPrefix());
     }
-    //@@author chenxing1992
+
 
     /**
      * @return True if existing input has Address Prefix String.
@@ -367,7 +367,7 @@ public class CommandBox extends UiPart<Region> {
         String currentInput = commandTextField.getText();
         return currentInput.contains(PREFIX_TIMETABLE.getPrefix());
     }
-    //@@author chenxing1992
+
 
     /**
      * @return True if existing input has Email Prefix String.
@@ -376,7 +376,7 @@ public class CommandBox extends UiPart<Region> {
         String currentInput = commandTextField.getText();
         return currentInput.contains(PREFIX_EMAIL.getPrefix());
     }
-    //@@author chenxing1992
+
 
     /**
      * @return True if existing input has Phone Prefix String.
@@ -385,7 +385,7 @@ public class CommandBox extends UiPart<Region> {
         String currentInput = commandTextField.getText();
         return currentInput.contains(PREFIX_PHONE.getPrefix());
     }
-    //@@author chenxing1992
+
 
     /**
      * @return True if existing input has Name Prefix String.
@@ -625,7 +625,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(text);
         commandTextField.positionCaret(commandTextField.getText().length());
     }
-    //@@author chenxing1992
+
 
     /**
      * Handles the Enter button pressed event.
@@ -649,7 +649,7 @@ public class CommandBox extends UiPart<Region> {
             raise(new NewResultAvailableEvent(e.getMessage(), true));
         }
     }
-    //@@author chenxing1992
+
 
     /**
      * Initializes the history snapshot.

@@ -115,6 +115,13 @@ public class AddCommandTest {
         public void addAppointment(ReadOnlyPerson person, Appointment appointment) throws PersonNotFoundException {
             fail("This method should not be called");
         }
+
+        //@@author chenxing1992
+        @Override
+        public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+            fail("This method should not be called");
+        }
+
         @Override
         public void resetData(ReadOnlyAddressBook newData) {
             fail("This method should not be called.");

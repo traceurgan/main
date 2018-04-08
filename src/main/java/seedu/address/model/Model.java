@@ -61,6 +61,10 @@ public interface Model {
      */
     void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException;
 
+    /**
+     * Removes appointment from a person
+     */
+    void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException;
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
