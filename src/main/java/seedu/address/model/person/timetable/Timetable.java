@@ -19,10 +19,11 @@ public class Timetable {
     private static final String SHORT_NUSMODS_URL_REGEX = "http://modsn.us/";
     private static final String CODE_PART_REGEX = "[\\w]+";
     private static final String TIMETABLE_VALIDATION_REGEX = SHORT_NUSMODS_URL_REGEX + CODE_PART_REGEX;
-    private static int currentSemester;
-    private static HashMap<String, ArrayList<TimetableModuleSlot>>
+    private int currentSemester;
+    private HashMap<String, ArrayList<TimetableModuleSlot>>
             listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
-    private static HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
+    private HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
+    private ArrayList<TimetableModuleSlot> allModulesSlots; //ArrayList Containing all TimetableModuleSlots
     private static String expandedUrl;
 
     public final String value;
@@ -67,6 +68,14 @@ public class Timetable {
 
     public HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
         return listOfDays;
+    }
+
+    public ArrayList<TimetableModuleSlot> getAllModulesSlots() {
+        return allModulesSlots;
+    }
+
+    public void setAllModulesSlots(ArrayList<TimetableModuleSlot> allModulesSlots) {
+        this.allModulesSlots = allModulesSlots;
     }
 
     public void setTimetableDisplayInfo(String timetableDisplayInfo) {
