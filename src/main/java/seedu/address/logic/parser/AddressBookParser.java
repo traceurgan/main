@@ -67,7 +67,7 @@ public class AddressBookParser {
 
         case SelectCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new SelectCommandParser().parse(arguments); //@@author
+            return new SelectCommand(); //@@author
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON

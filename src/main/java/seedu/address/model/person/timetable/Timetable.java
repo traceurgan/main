@@ -24,6 +24,7 @@ public class Timetable {
             listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
     private static HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
     private static String expandedUrl;
+    private String timetableDisplayInfo;
 
     public final String value;
 
@@ -63,8 +64,12 @@ public class Timetable {
         this.listOfDays = listOfDays;
     }
 
-    public static HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
+    public HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
         return listOfDays;
+    }
+
+    public void setTimetableDisplayInfo(String timetableDisplayInfo) {
+        this.timetableDisplayInfo = timetableDisplayInfo;
     }
 
     /**

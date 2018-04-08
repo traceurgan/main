@@ -85,20 +85,20 @@ public class TimetableDisplayUtil {
         File timetableDisplayInfo = new File(timetableInfoFilePath);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
-            printWriter.write(convertTimetableToString(timetable));
+            String toWrite = convertTimetableToString(timetable);
+            printWriter.write(toWrite);
+            timetable.setTimetableDisplayInfo(toWrite);
             printWriter.close();
         } catch (FileNotFoundException e) {
             logger.warning("File not found, creating new file");
             try {
-                timetableInfoFilePath = "timetableDisplayInfo";
+                timetableInfoFilePath = "data/timetableDisplayInfo";
                 timetableDisplayInfo = new File(timetableInfoFilePath);
                 timetableDisplayInfo.createNewFile();
                 setUpTimetableDisplayInfo(timetable);
             } catch (IOException ioe) {
                 logger.severe("Unable to create new file");
             }
-        } catch (IllegalValueException e) {
-            logger.warning(e.getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ public class TimetableDisplayUtil {
      * Converts the {@code listOfDays} into a String object for parsing
      * @param timetable which contains schedule to convert into JSON object
      */
-    public static String convertTimetableToString(Timetable timetable) throws IllegalValueException {
+    public static String convertTimetableToString(Timetable timetable) {
         StringBuilder sb = new StringBuilder();
 
         HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays = timetable.getListOfDays();
@@ -159,7 +159,7 @@ public class TimetableDisplayUtil {
                 br.close();
                 return sb.toString();
             } else {
-                timetablePageJsPath = "TimetablePageScript.js";
+                timetablePageJsPath = "data/TimetablePageScript.js";
                 file = new File(timetablePageJsPath);
                 file.createNewFile();
                 PrintWriter printWriter = new PrintWriter(file);

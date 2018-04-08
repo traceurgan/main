@@ -17,7 +17,7 @@ public class ViewTimetableCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        EventsCenter.getInstance().post(new ReloadTimetableRequestEvent());
+        //EventsCenter.getInstance().post(new ReloadTimetableRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
