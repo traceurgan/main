@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.person.Person.PARTNER_INDEX;
+
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
@@ -22,7 +24,6 @@ public class DeselectCommand extends Command {
 
     public static final String MESSAGE_DESELECT_PERSON_SUCCESS = "Deselected Person: %1$s";
 
-    private static final int PARTNER_INDEX = 0;
     private final Index targetIndex;
 
     public DeselectCommand() {

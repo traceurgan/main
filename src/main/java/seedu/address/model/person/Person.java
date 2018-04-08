@@ -31,7 +31,7 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Timetable> timetable;
     private ObjectProperty<UniqueTagList> tags;
     private ObjectProperty<AppointmentList> appointments;
-
+    public static final int PARTNER_INDEX = 0;
 
     //@@author chenxing1992
     /**
