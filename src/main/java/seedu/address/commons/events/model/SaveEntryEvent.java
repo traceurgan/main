@@ -3,6 +3,7 @@ package seedu.address.commons.events.model;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /** Indicates a journal entry should be created/updated*/
 public class SaveEntryEvent extends BaseEvent {
 

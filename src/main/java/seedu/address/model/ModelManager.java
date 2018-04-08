@@ -64,11 +64,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(addressBook));
     }
 
+    //@@author traceurgan
     /** Raises an event to indicate the journal model has changed */
     private void indicateJournalChanged() {
         raise(new JournalChangedEvent(journal));
     }
 
+    //@@author
     @Override
     public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
         addressBook.removePerson(target);
@@ -82,6 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //@@author traceurgan
     @Override
     public ReadOnlyJournal getJournal() {
         return journal;
@@ -89,11 +92,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
-        journal.addJournalEntry(journalEntry);
-        logger.info("journal entry added");
+        if (journal.getLast().getDate().equals(journalEntry.getDate())) {
+            journal.updateJournalEntry(journalEntry, journal.getLast());
+        } else {
+            journal.addJournalEntry(journalEntry);
+            logger.info("journal entry added");
+        }
         indicateJournalChanged();
     }
 
+    //@@author
     @Override
     public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException {
@@ -119,11 +127,17 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
+    //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return FXCollections.unmodifiableObservableList(journal.getJournalEntryList());
     }
 
+    public JournalEntry getLast() {
+        return journal.getLast();
+    }
+
+    //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
         requireNonNull(predicate);
