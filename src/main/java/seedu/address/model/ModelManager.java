@@ -27,6 +27,8 @@ public class ModelManager extends ComponentManager implements Model {
     private Person person;
     private final Journal journal;
     private final ObservableList<ReadOnlyPerson> persons;
+    private ObservableList<JournalEntry> journalEntries;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,9 +43,11 @@ public class ModelManager extends ComponentManager implements Model {
         this.person = new Person(person);
         this.journal = new Journal(journal);
         this.persons = FXCollections.observableArrayList();
+        this.journalEntries = getJournalEntryList();
         if (person != null) {
             persons.add(person);
         }
+
     }
 
     public ModelManager() {
@@ -73,7 +77,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the address book model has changed */
     private void indicatePersonChanged(Person person) {
-        this.person = person;
         raise(new PersonChangedEvent(person));
     }
 
@@ -126,7 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
-        if (journal.getLast().getDate().equals(journalEntry.getDate())) {
+        if (checkDate(journal.getLast()).equals(journalEntry.getDate())) {
             journal.updateJournalEntry(journalEntry, journal.getLast());
             logger.info("Journal entry updated.");
         } else {
@@ -134,6 +137,11 @@ public class ModelManager extends ComponentManager implements Model {
             logger.info("Journal entry added.");
         }
         indicateJournalChanged();
+    }
+
+    @Override
+    public String checkDate(int last) {
+        return journal.getDate(last);
     }
 
     @Override
@@ -147,10 +155,11 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
-        return FXCollections.unmodifiableObservableList(journal.getJournalEntryList());
+        return journal.getJournalEntryList();
     }
 
-    public JournalEntry getLast() {
+    @Override
+    public int getLast() {
         return journal.getLast();
     }
 

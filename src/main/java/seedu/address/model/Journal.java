@@ -87,8 +87,13 @@ public class Journal implements ReadOnlyJournal {
     }
 
     @Override
-    public JournalEntry getLast() {
+    public int getLast() {
         return journalEntries.getLast();
+    }
+
+    @Override
+    public JournalEntry getJournalEntry(int index) {
+        return journalEntries.getJournalEntry(index);
     }
 
     @Override
@@ -104,7 +109,11 @@ public class Journal implements ReadOnlyJournal {
         return Objects.hash(journalEntries);
     }
 
-    void updateJournalEntry(JournalEntry journalEntry, JournalEntry oldVersion) {
-        journalEntries.updateJournalEntry(journalEntry, oldVersion);
+    void updateJournalEntry(JournalEntry journalEntry, int last) {
+        journalEntries.updateJournalEntry(journalEntry, last);
+    }
+
+    public String getDate(int last) {
+        return journalEntries.getDate(last);
     }
 }

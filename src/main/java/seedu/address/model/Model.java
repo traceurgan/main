@@ -51,7 +51,10 @@ public interface Model {
     void editPerson(ReadOnlyPerson editedPerson)
             throws NullPointerException;
 
+    String checkDate(int last);
+
     /** Removes the given {@code tag} from all {@code Person}s. */
     void deleteTag(Tag tag);
 
+    int getLast();
 }
