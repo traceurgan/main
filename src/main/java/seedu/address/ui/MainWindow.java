@@ -20,6 +20,9 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.HideTimetableRequestEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -124,8 +127,9 @@ public class MainWindow extends UiPart<Region> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        browserPlaceholder.getChildren().clear();
         browserPanel = new BrowserPanel(logic.getFilteredPersonList());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
 
         listPanel = new ListPanel(logic.getFilteredPersonList(), logic.getJournalEntryList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
@@ -182,6 +186,19 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
+    public void handleShowTimetable() {
+        browserPlaceholder.getChildren().clear();
+        browserPanel = new BrowserPanel(logic.getFilteredPersonList());
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        browserPanel.loadTimetablePage();
+    }
+
+    public void handleHideTimetable() {
+        browserPlaceholder.getChildren().clear();
+        browserPanel = new BrowserPanel(logic.getFilteredPersonList());
+        browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -206,5 +223,24 @@ public class MainWindow extends UiPart<Region> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleShowTimetableRequestEvent(ShowTimetableRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleShowTimetable();
+    }
+
+    @Subscribe
+    private void handleHideTimetableRequestEvent(HideTimetableRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleHideTimetable();
+    }
+
+    // TODO: Remove this since NUSCouples will only have 1 person
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleShowTimetable();
     }
 }

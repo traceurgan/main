@@ -2,9 +2,6 @@ package seedu.address.logic.commands;
 
 //@@author marlenekoh
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ReloadTimetableRequestEvent;
-
 /**
  * Displays Timetable of the specified person in browser panel
  */
@@ -17,7 +14,7 @@ public class ViewTimetableCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        //EventsCenter.getInstance().post(new ReloadTimetableRequestEvent());
+        //EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
