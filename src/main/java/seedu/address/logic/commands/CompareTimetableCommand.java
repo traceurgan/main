@@ -6,9 +6,11 @@ import static seedu.address.model.person.Person.PARTNER_INDEX;
 import java.util.List;
 
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.person.timetable.TimetableComparatorUtil;
 
+/**
+ * Compares the partner's timetable with a given timetable
+ */
 public class CompareTimetableCommand extends Command {
     public static final String COMMAND_WORD = "tcompare";
     public static final String COMMAND_ALIAS = "tc";

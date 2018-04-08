@@ -22,8 +22,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
@@ -187,6 +187,9 @@ public class MainWindow extends UiPart<Region> {
     }
 
     //@@author marlenekoh
+    /**
+     * Replaces the Calendar with Timetable Page in Browser Panel
+     */
     public void handleShowTimetable() {
         browserPlaceholder.getChildren().clear();
         browserPanel = new BrowserPanel(logic.getFilteredPersonList());
@@ -194,6 +197,9 @@ public class MainWindow extends UiPart<Region> {
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
     }
 
+    /**
+     * Replaces the Timetable Page with Calendar in Browser Panel
+     */
     public void handleHideTimetable() {
         browserPlaceholder.getChildren().clear();
         browserPanel = new BrowserPanel(logic.getFilteredPersonList());

@@ -173,6 +173,9 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     //@@author marlenekoh
+    /**
+     * Loads the timetable page of a person into browser panel
+     */
     public void loadTimetablePage() {
         URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
         loadPage(timetablePage.toExternalForm());

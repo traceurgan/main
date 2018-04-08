@@ -24,9 +24,10 @@ public class Timetable {
             listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
     private static HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
     private static String expandedUrl;
-    private String timetableDisplayInfo;
 
     public final String value;
+    private String timetableDisplayInfo;
+
 
     public Timetable(String timetableUrl) {
         requireNonNull(timetableUrl);
