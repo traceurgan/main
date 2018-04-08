@@ -26,6 +26,8 @@ public class Timetable {
     private static String expandedUrl;
 
     public final String value;
+    private String timetableDisplayInfo;
+
 
     public Timetable(String timetableUrl) {
         requireNonNull(timetableUrl);
@@ -63,8 +65,12 @@ public class Timetable {
         this.listOfDays = listOfDays;
     }
 
-    public static HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
+    public HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
         return listOfDays;
+    }
+
+    public void setTimetableDisplayInfo(String timetableDisplayInfo) {
+        this.timetableDisplayInfo = timetableDisplayInfo;
     }
 
     /**
