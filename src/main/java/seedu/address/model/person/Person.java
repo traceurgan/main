@@ -28,9 +28,6 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Timetable> timetable;
     private ObjectProperty<UniqueTagList> tags;
 
-    private final ObservableList<ReadOnlyPerson> persons = FXCollections.observableArrayList();
-
-
     //@@author chenxing1992
     /**
      * Every field must be present and not null.
@@ -69,7 +66,6 @@ public class Person implements ReadOnlyPerson {
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),
                 source.getTimetable(), source.getTags());
-        persons.add(source);
     }
 
     @Override
@@ -142,17 +138,6 @@ public class Person implements ReadOnlyPerson {
         return tags.get().contains(tag);
     }
 
-    public Person updatePerson(ReadOnlyPerson editedPerson) {
-        if (persons.isEmpty()) {
-            persons.add(editedPerson);
-        } else if (editedPerson == null) {
-            persons.remove(0);
-        } else {
-            persons.set(0, editedPerson);
-        }
-        return (Person) editedPerson;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -169,13 +154,6 @@ public class Person implements ReadOnlyPerson {
     @Override
     public String toString() {
         return getName().toString();
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<ReadOnlyPerson> asObservableList() {
-        return FXCollections.unmodifiableObservableList(persons);
     }
 }
 

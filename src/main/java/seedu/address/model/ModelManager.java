@@ -26,6 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private Person person;
     private final Journal journal;
+    private final ObservableList<ReadOnlyPerson> persons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +40,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         this.person = new Person(person);
         this.journal = new Journal(journal);
+        this.persons = FXCollections.observableArrayList();
+        if (person != null) {
+            persons.add(person);
+        }
     }
 
     public ModelManager() {
@@ -63,7 +68,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ObservableList <ReadOnlyPerson> getPersonAsList() {
-        return person.asObservableList();
+        return persons;
     }
 
     /** Raises an event to indicate the address book model has changed */
@@ -82,7 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deletePerson() throws PersonNotFoundException {
         requireAllNonNull(this.person);
-        person = person.updatePerson(null);
+        person = updatePerson(null);
         indicatePersonChanged(person);
     }
 
@@ -90,15 +95,26 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addPerson(ReadOnlyPerson newPerson) throws DuplicatePersonException {
         requireAllNonNull(newPerson);
         this.person = (Person) newPerson;
-        person.updatePerson(person);
+        updatePerson(person);
         indicatePersonChanged(person);
+    }
+
+    public Person updatePerson(ReadOnlyPerson editedPerson) {
+        if (persons.isEmpty()) {
+            persons.add(editedPerson);
+        } else if (editedPerson == null) {
+            persons.remove(0);
+        } else {
+            persons.set(0, editedPerson);
+        }
+        return (Person) editedPerson;
     }
 
     @Override
     public void editPerson(ReadOnlyPerson editedPerson)
             throws NullPointerException {
         requireAllNonNull(this.person, editedPerson);
-        person = person.updatePerson(editedPerson);
+        person = updatePerson(editedPerson);
         indicatePersonChanged(person);
     }
 

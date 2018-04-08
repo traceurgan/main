@@ -97,6 +97,9 @@ public class MainApp extends Application {
         ReadOnlyJournal journalData;
         try {
             personOptional = storage.readPerson();
+            if (personOptional.isPresent()) {
+                logger.info("Data file found. Will be starting with current Person");
+            }
             if (!personOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Person");
             }
