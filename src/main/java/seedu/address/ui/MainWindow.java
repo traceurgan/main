@@ -186,11 +186,12 @@ public class MainWindow extends UiPart<Region> {
         helpWindow.show();
     }
 
+    //@@author marlenekoh
     public void handleShowTimetable() {
         browserPlaceholder.getChildren().clear();
         browserPanel = new BrowserPanel(logic.getFilteredPersonList());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
         browserPanel.loadTimetablePage();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
     }
 
     public void handleHideTimetable() {
@@ -199,6 +200,7 @@ public class MainWindow extends UiPart<Region> {
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
     }
 
+    //@@author
     void show() {
         primaryStage.show();
     }
@@ -225,6 +227,7 @@ public class MainWindow extends UiPart<Region> {
         handleHelp();
     }
 
+    //@@author marlenekoh
     @Subscribe
     private void handleShowTimetableRequestEvent(ShowTimetableRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
