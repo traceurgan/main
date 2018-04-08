@@ -61,7 +61,7 @@ public class LogicManager extends ComponentManager implements Logic {
             logger.warning("Save failed");
             JournalWindow journalWindow =
                     new JournalWindow(event.journalEntry.getDate(), String.format(
-                            "Save failed. Copy your text and try again. " + event.journalEntry.getText()));
+                            "Save failed. Copy your text and try again.\n" + event.journalEntry.getText()));
             journalWindow.show();
         }
     }

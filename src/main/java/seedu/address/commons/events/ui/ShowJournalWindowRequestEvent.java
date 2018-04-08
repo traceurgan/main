@@ -4,7 +4,7 @@ import seedu.address.commons.events.BaseEvent;
 
 //@@author traceurgan
 /**
- * An event requesting to view the help page.
+ * An event requesting to view the Journal Window.
  */
 public class ShowJournalWindowRequestEvent extends BaseEvent {
 
