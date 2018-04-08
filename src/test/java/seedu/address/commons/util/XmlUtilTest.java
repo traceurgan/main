@@ -14,9 +14,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.Person;
+import seedu.address.model.person.Person;
 import seedu.address.storage.XmlAdaptedPerson;
-import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializablePerson;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -70,13 +69,6 @@ public class XmlUtilTest {
     }
 
     @Test
-    public void getDataFromFile_validFile_validResult() throws Exception {
-        Person dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializablePerson.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
-        assertEquals(0, dataFromFile.getTagList().size());
-    }
-
-    @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
@@ -106,7 +98,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new Person());
+        XmlUtil.saveDataToFile(null, new XmlSerializablePerson());
     }
 
     @Test
@@ -118,7 +110,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new Person());
+        XmlUtil.saveDataToFile(MISSING_FILE, new XmlSerializablePerson());
     }
 
     @Test

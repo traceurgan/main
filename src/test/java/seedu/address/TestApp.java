@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.function.Supplier;
 
-import javafx.collections.ObservableList;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -12,11 +11,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.Person;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyPerson;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializablePerson;
@@ -67,17 +65,17 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setAddressBookFilePath(saveFileLocation);
-        userPrefs.setAddressBookName(ADDRESS_BOOK_NAME);
+        userPrefs.setPersonFilePath(saveFileLocation);
+        userPrefs.setNuscouplesName(ADDRESS_BOOK_NAME);
         return userPrefs;
     }
 
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public Person readStorageAddressBook() {
+    public Person readStoragePerson() {
         try {
-            return new Person(storage.readAddressBook().get());
+            return new Person(storage.readPerson().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the AddressBook format.");
         } catch (IOException ioe) {
@@ -85,22 +83,19 @@ public class TestApp extends MainApp {
         }
     }
 
-    public ObservableList<ReadOnlyPerson> readStoragePerson() {
-    }
-
     /**
      * Returns the file path of the storage file.
      */
     public String getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getPersonFilePath();
     }
 
     /**
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), model.getJournal(), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
+        Model copy = new ModelManager((model.getPerson()), model.getJournal(), new UserPrefs());
+        ModelHelper.setFilteredList(copy, model.getPersonAsList());
         return copy;
     }
 
