@@ -34,7 +34,7 @@ public interface ReadOnlyPerson {
     List<Appointment> getAppointments();
 
     /**
-     * Same state detected will return true.
+    /**Same state detected will return true.
      */
     default boolean equals(ReadOnlyPerson rp) {
         return rp == this // short circuit if same object

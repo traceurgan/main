@@ -1,19 +1,14 @@
 package seedu.address.model;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -27,6 +22,7 @@ public class ModelManagerTest {
         modelManager.getFilteredPersonList().remove(0);
     }
 
+<<<<<<< HEAD
     @Test
     public void deleteTag_nonExistentTag_modelUnchanged() throws Exception {
         Person addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
@@ -39,6 +35,8 @@ public class ModelManagerTest {
         assertEquals(new ModelManager(addressBook, journal, userPrefs), modelManager);
     }
 
+=======
+>>>>>>> baseBranchDevMaster
 
     @Test
     public void equals() {

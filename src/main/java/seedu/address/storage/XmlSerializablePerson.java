@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -40,9 +41,8 @@ public class XmlSerializablePerson {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
      */
-    public Person toModelType() throws IllegalValueException {
-        Person p = persons.get(0).toModelType();
-        return p;
+    public Person toModelType() throws IllegalValueException, ParseException {
+        return persons.get(0).toModelType();
     }
 
     public int getSize() {

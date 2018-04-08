@@ -1,7 +1,9 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -11,6 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -59,6 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateJournalChanged();
     }
 
+
     @Override
     public void resetPersonData(ReadOnlyPerson newData) {
 
@@ -80,7 +84,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author traceurgan
-
     /**
      * Raises an event to indicate the journal model has changed
      */
@@ -145,6 +148,39 @@ public class ModelManager extends ComponentManager implements Model {
             logger.info("Journal entry added.");
         }
         indicateJournalChanged();
+    }
+
+    /**
+     * Adds Appointment to a person in the internal list.
+     *
+     * @throws PersonNotFoundException if no such person exist in the internal list
+     */
+    public void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+        requireNonNull(target);
+        requireNonNull(appointment);
+        Person person = new Person(target);
+        List<Appointment> list = target.getAppointments();
+        list.add(appointment);
+        person.setAppointment(list);
+        indicatePersonChanged(person);
+    }
+
+    /**
+     * Removes an appointment from a person in the internal list
+     *
+     * @throws PersonNotFoundException if no such person exist in the internal list
+     */
+    public void removeAppointment(ReadOnlyPerson target, Appointment appointment)
+            throws PersonNotFoundException {
+        requireNonNull(target);
+        requireNonNull(appointment);
+
+        Person person = new Person(target);
+        List<Appointment> newApptList = person.getAppointments();
+        newApptList.remove(appointment);
+        person.setAppointment(newApptList);
+        indicatePersonChanged(person);
+
     }
 
     @Override

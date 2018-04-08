@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -57,7 +58,7 @@ public class XmlPersonStorage implements PersonStorage {
         }
         try {
             return Optional.of(xmlPerson.toModelType());
-        } catch (IllegalValueException ive) {
+        } catch (IllegalValueException | ParseException ive) {
             logger.info("Illegal values found in " + personFile + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }

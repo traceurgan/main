@@ -34,6 +34,7 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String timetable;
+
     @XmlElement
     private List<XmlAdaptedAppointment> appointments = new ArrayList<>();
 
