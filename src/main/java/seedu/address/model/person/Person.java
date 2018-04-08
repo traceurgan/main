@@ -45,18 +45,6 @@ public class Person implements ReadOnlyPerson {
 
     }
 
-    /**
-     * Empty person
-     */
-    public Person() {
-        this.name = null;
-        this.phone = null;
-        this.email = null;
-        this.address = null;
-        this.timetable = null;
-        this.tags = null;
-    }
-
     //@@author chenxing1992
     /**
      * Creates a copy of the given ReadOnlyPerson.
