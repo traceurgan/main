@@ -67,7 +67,7 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new DeleteCommandParser().parse(arguments); //@@author
+            return new DeleteCommand(); //@@author
 
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON

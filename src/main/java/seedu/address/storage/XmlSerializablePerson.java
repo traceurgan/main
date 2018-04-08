@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,13 +16,14 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class XmlSerializablePerson {
 
     @XmlElement
-    private XmlAdaptedPerson person;
+    private ArrayList<XmlAdaptedPerson> persons;
 
     /**
      * Creates an empty XmlSerializablePerson.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializablePerson() {
+        persons = new ArrayList<XmlAdaptedPerson>();
     }
 
     /**
@@ -28,7 +31,7 @@ public class XmlSerializablePerson {
      */
     public XmlSerializablePerson(ReadOnlyPerson src) {
         this();
-        person = new XmlAdaptedPerson(src);
+        persons.add(new XmlAdaptedPerson(src));
     }
 
     /**
@@ -38,9 +41,12 @@ public class XmlSerializablePerson {
      * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
      */
     public Person toModelType() throws IllegalValueException {
-        Person person = this.person.toModelType();
+        Person p = persons.get(0).toModelType();
+        return p;
+    }
 
-        return person;
+    public int getSize() {
+        return persons.size();
     }
 
     @Override
@@ -53,7 +59,11 @@ public class XmlSerializablePerson {
             return false;
         }
 
-        XmlSerializablePerson xmlSerializablePerson = (XmlSerializablePerson) other;
-        return person.equals(xmlSerializablePerson.person);
+        XmlSerializablePerson xsp = (XmlSerializablePerson) other;
+        if (persons.size() != 0) {
+            return persons.get(0).equals(xsp.persons.get(0));
+        } else {
+            return persons.size() == (xsp.persons.size());
+        }
     }
 }

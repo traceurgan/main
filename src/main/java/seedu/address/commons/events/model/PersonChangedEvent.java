@@ -14,6 +14,10 @@ public class PersonChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "Current person" + data.getName().toString();
+        if (data != null) {
+            return "Current person" + data.getName().toString();
+        } else {
+            return "There is no person saved.";
+        }
     }
 }

@@ -52,6 +52,9 @@ public class XmlPersonStorage implements PersonStorage {
         }
 
         XmlSerializablePerson xmlPerson = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        if (xmlPerson.getSize() == 0){
+            return Optional.empty();
+        }
         try {
             return Optional.of(xmlPerson.toModelType());
         } catch (IllegalValueException ive) {
@@ -70,12 +73,19 @@ public class XmlPersonStorage implements PersonStorage {
      * @param filePath location of the data. Cannot be null
      */
     public void savePerson(ReadOnlyPerson person, String filePath) throws IOException {
-        requireNonNull(person);
+        XmlSerializablePerson xsp;
+        if (person == null){
+            xsp = new XmlSerializablePerson();
+        } else {
+            requireNonNull(person);
+            xsp = new XmlSerializablePerson(person);
+        }
         requireNonNull(filePath);
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializablePerson(person));
+        XmlFileStorage.saveDataToFile(file, xsp);
+
     }
 
 }

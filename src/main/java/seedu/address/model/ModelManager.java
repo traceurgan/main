@@ -26,7 +26,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private Person person;
     private final Journal journal;
-    private final ObservableList<ReadOnlyPerson> personAsList = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -64,12 +63,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ObservableList <ReadOnlyPerson> getPersonAsList() {
-        personAsList.add(this.person);
-        return personAsList;
+        return person.asObservableList();
     }
 
     /** Raises an event to indicate the address book model has changed */
-    private void indicatePersonChanged() {
+    private void indicatePersonChanged(Person person) {
+        this.person = person;
         raise(new PersonChangedEvent(person));
     }
 
@@ -83,27 +82,24 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deletePerson() throws PersonNotFoundException {
         requireAllNonNull(this.person);
-        updatePerson(null);
+        person = person.updatePerson(null);
+        indicatePersonChanged(person);
     }
 
     @Override
     public synchronized void addPerson(ReadOnlyPerson newPerson) throws DuplicatePersonException {
         requireAllNonNull(newPerson);
-
-        updatePerson(newPerson);
+        this.person = (Person) newPerson;
+        person.updatePerson(person);
+        indicatePersonChanged(person);
     }
 
     @Override
     public void editPerson(ReadOnlyPerson editedPerson)
             throws NullPointerException {
         requireAllNonNull(this.person, editedPerson);
-        updatePerson(editedPerson);
-    }
-
-    //@@author
-    private void updatePerson(ReadOnlyPerson editedPerson) {
-        person = (Person) editedPerson;
-        indicatePersonChanged();
+        person = person.updatePerson(editedPerson);
+        indicatePersonChanged(person);
     }
 
     //@@author traceurgan
@@ -116,9 +112,10 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
         if (journal.getLast().getDate().equals(journalEntry.getDate())) {
             journal.updateJournalEntry(journalEntry, journal.getLast());
+            logger.info("Journal entry updated.");
         } else {
             journal.addJournalEntry(journalEntry);
-            logger.info("journal entry added");
+            logger.info("Journal entry added.");
         }
         indicateJournalChanged();
     }
