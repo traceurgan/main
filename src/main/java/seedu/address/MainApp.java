@@ -101,15 +101,15 @@ public class MainApp extends Application {
                 logger.info("Data file found. Will be starting with current Person");
             }
             if (!personOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Person");
+                logger.info("Data file not found. Will be starting with a empty Person");
             }
-            personData = personOptional.orElseGet(SampleDataUtil::getSamplePerson);
+            personData = personOptional.orElse(null);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            personData = new Person(null);
+            logger.warning("Data file not in the correct format. Will be starting with an empty Person");
+            personData = null;
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            personData = new Person(null);
+            logger.warning("Problem while reading from the file. Will be starting with an empty Person");
+            personData = null;
         }
 
         try {
@@ -122,10 +122,10 @@ public class MainApp extends Application {
             }
             journalData = journalOptional.orElseGet(SampleDataUtil::getSampleJournal);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Journal");
             journalData = new Journal();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Journal");
             journalData = new Journal();
         }
         return new ModelManager(personData, journalData, userPrefs);

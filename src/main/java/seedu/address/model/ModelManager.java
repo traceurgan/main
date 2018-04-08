@@ -42,7 +42,11 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine(
                 "Initializing with partner: " + person + " , journal" + journal + " and user prefs " + userPrefs);
 
-        this.person = new Person(person);
+        if (person == null) {
+            person = null;
+        } else {
+            this.person = new Person(person);
+        }
         this.journal = new Journal(journal);
         this.persons = FXCollections.observableArrayList();
         this.journalEntries = getJournalEntryList();
