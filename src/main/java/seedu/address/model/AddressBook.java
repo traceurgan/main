@@ -58,9 +58,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.addAppointment(target, appointment);
     }
 
-    // public void removeAppointment(ReadOnlyPerson target, Appointment Appointment) throws PersonNotFoundException {
-    //persons.removeAppointment(target, Appointment);
-    // }
+    public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+        persons.removeAppointment(target, appointment);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.

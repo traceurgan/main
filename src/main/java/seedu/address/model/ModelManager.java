@@ -144,12 +144,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-
-    // @Override
-    //public void removeAppointment(ReadOnlyPerson target, Appointment Appointment) throws PersonNotFoundException {
-    //   addressBook.removeAppointment(target, Appointment);
-    //   indicateAddressBookChanged();
-    // }
+    @Override
+    public void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
+        addressBook.removeAppointment(target, appointment);
+        indicateAddressBookChanged();
+    }
     //@@author
     @Override
     public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
