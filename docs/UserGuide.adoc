@@ -203,8 +203,18 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 ==== Saving the data
 
-NUSCouples data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+_NUSCouples_ data is saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually. Data is stored in a data folder created in the same directory as _NUSCouples_.jar.
+For example, if the .jar file is in `C:\Program Files (x86)\NUSCouples`, _NUSCouples_ data will be stored in
+`C:\Program Files (x86)\NUSCouples\data`.
+
+[NOTE]
+If the _NUSCouples_.jar file is moved to another location, you should move the data folder as well.  Refer to
+<<Data, FAQ Section 3.1, Questions about Data>> for more information.
+
+[WARNING]
+The data is stored as an editable xml file. If the user manually edits this file, _NUSCouples_ may not be able to read
+it properly. Refer to <<Data, FAQ Section 3.1, Questions about Data>>  for more information.
 
 ==== Exiting the program : `exit`
 
@@ -366,8 +376,29 @@ Alias: `loc` +
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSCouples folder. +
+=== Data
+This section is for questions related to _NUSCouples_ data. For more information, refer to <<Saving the data>> +
+
+*Q: How do I transfer my data to another Computer?* +
+
+*A:* Install the app in the other computer and overwrite the empty data folder it creates with the folder that contains
+the data of your previous NUSCouples folder. +
+
+*Q: Why is the app not showing my previous session data?* +
+
+*A:* Verify that the .jar file was not moved to a new directory recently. If you have done so, ensure that the data
+folder in the original directory was moved to the new directory. For example, if you have moved _NUSCouples_.jar from
+`C:\Program Files (x86)\NUSCouples` to `C:\Users\[Username]\Desktop\NUSCouples`, you should move the data folder
+`C:\Program Files (x86)\NUSCouples\data` to `C:\Users\[Username]\Desktop\NUSCouples\data` +
+
+If the files in the data folder have been manually edited, _NUSCouples_ may not be able to read the data properly.
+_NUSCouples_ takes no responsibility for data loss/ data corruption due to unintended user behavior affecting the data
+folder, such as deletion or editing of files manually. +
+
+If the solutions above are not related to your issue, it may be due to a bug. Please contact us at //CONTACT US
+and attach the log file that should be stored in the same location as the _NUSCouples_.jar file. The log file is named
+`_NUSCouples_.log.0`. The number at the end may be different. If there are multiple log files, you should attach the
+*latest* one or attach all of them to be safe. +
 
 |===
 >| [.small]#Return to <<toc,Table of Contents>># +
