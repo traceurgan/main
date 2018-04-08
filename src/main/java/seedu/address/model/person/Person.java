@@ -24,6 +24,8 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Person implements ReadOnlyPerson {
 
+    public static final int PARTNER_INDEX = 0;
+
     private ObjectProperty<Name> name;
     private ObjectProperty<Phone> phone;
     private ObjectProperty<Email> email;
@@ -31,7 +33,6 @@ public class Person implements ReadOnlyPerson {
     private ObjectProperty<Timetable> timetable;
     private ObjectProperty<UniqueTagList> tags;
     private ObjectProperty<AppointmentList> appointments;
-
 
     //@@author chenxing1992
     /**

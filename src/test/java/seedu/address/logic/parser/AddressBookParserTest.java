@@ -184,15 +184,15 @@ public class AddressBookParserTest {
     @Test //@@author
     public void parseCommand_select() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+                SelectCommand.COMMAND_WORD);
+        assertEquals(new SelectCommand(), command);
     }
 
     @Test //@@author HEARTOFAL1ON
     public void parseCommand_selectAlias() throws Exception {
         SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
+                SelectCommand.COMMAND_ALIAS);
+        assertEquals(new SelectCommand(), command);
     }
 
     @Test //@@author
