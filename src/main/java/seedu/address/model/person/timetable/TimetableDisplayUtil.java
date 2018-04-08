@@ -159,11 +159,7 @@ public class TimetableDisplayUtil {
                 return sb.toString();
             } else {
                 timetablePageJsPath = "data/TimetablePageScript.js";
-                file = new File(timetablePageJsPath);
-                file.createNewFile();
-                PrintWriter printWriter = new PrintWriter(file);
-                printWriter.write(DEFAULT_TIMETABLE_PAGE_SCRIPT);
-                printWriter.close();
+                writeToTimetablePageScriptFile(DEFAULT_TIMETABLE_PAGE_SCRIPT);
                 return DEFAULT_TIMETABLE_PAGE_SCRIPT;
             }
         } catch (IOException e) {
