@@ -70,10 +70,15 @@ public class TimetableDisplayUtil {
      * Updates TimetablePageScript file at path {@code timetablePageJsPath} with new timetable module information
      */
     public static void setUpTimetablePageScriptFile() {
-        String oldContent = getFileContents(timetablePageJsPath);
-        String toReplace = getFileContents(timetableInfoFilePath);
-        String newContent = replaceFirstLine(oldContent, toReplace);
-        writeToTimetablePageScriptFile(newContent);
+        try {
+            String oldContent = getFileContents(timetablePageJsPath);
+            String toReplace = getFileContents(timetableInfoFilePath);
+            String newContent = replaceFirstLine(oldContent, toReplace);
+            writeToTimetablePageScriptFile(newContent);
+        } catch (FileNotFoundException e) {
+            timetablePageJsPath = "data/TimetablePageScript.js";
+            writeToTimetablePageScriptFile(DEFAULT_TIMETABLE_PAGE_SCRIPT);
+        }
     }
 
     /**
@@ -172,7 +177,7 @@ public class TimetableDisplayUtil {
      * Gets file contents from the file at the given path
      * @return String containing file contents
      */
-    public static String getFileContents(String path) {
+    public static String getFileContents(String path) throws FileNotFoundException {
         File file = new File(path);
         try {
             if (file.exists()) {
@@ -188,9 +193,7 @@ public class TimetableDisplayUtil {
                 br.close();
                 return sb.toString();
             } else {
-                timetablePageJsPath = "data/TimetablePageScript.js";
-                writeToTimetablePageScriptFile(DEFAULT_TIMETABLE_PAGE_SCRIPT);
-                return DEFAULT_TIMETABLE_PAGE_SCRIPT;
+                throw new FileNotFoundException("File does not exist");
             }
         } catch (IOException e) {
             logger.warning("Exception in reading file");
