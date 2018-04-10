@@ -29,8 +29,8 @@ public class TimetableComparatorUtil {
                 TimetableDisplayUtil.setUpUnsortedModuleSlotsForComparing(first, second);
         HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
                 TimetableParserUtil.sortModuleSlotsByDay(allUnsortedModulesSlots);
-        String timetableString = TimetableDisplayUtil.convertTimetableToString(sortedModuleSlots);
-        TimetableDisplayUtil.setUpTimetableDisplayInfoFile(timetableString);
+
+        TimetableDisplayUtil.setUpTimetableDisplayInfo(sortedModuleSlots);
         TimetableDisplayUtil.setUpTimetablePageScriptFile();
     }
 

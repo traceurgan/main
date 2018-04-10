@@ -46,7 +46,7 @@ public class SelectCommand extends Command {
         ReadOnlyPerson readOnlyPartner = lastShownList.get(targetIndex.getZeroBased());
         Person partner = new Person(readOnlyPartner);
         TimetableDisplayUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
-        TimetableDisplayUtil.setUpTimetableDisplayInfo(partner.getTimetable());
+        TimetableDisplayUtil.setUpTimetableDisplayFiles(partner.getTimetable());
         EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
 

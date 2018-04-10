@@ -32,8 +32,8 @@ public class TimetableDisplayUtil {
         "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
-    private static String timetableInfoFilePath = "src/main/resources/timetableDisplayInfo";
-    private static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
+    private static String timetableInfoFilePath = "data/timetableDisplayInfo";
+    private static String timetablePageJsPath = "data/TimetablePageScript.js";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String DEFAULT_TIMETABLE_PAGE_SCRIPT = "//@@author marlenekoh\n"
             + "timetable = [\n"
@@ -60,9 +60,28 @@ public class TimetableDisplayUtil {
      * Sets up the javascript file at path {@code timetablePageJsPath}
      * @param timetable Timetable to be set up
      */
-    public static void setUpTimetableDisplayInfo(Timetable timetable) {
-        setUpTimetableDisplayInfoFile(timetable);
+    public static void setUpTimetableDisplayFiles(Timetable timetable) {
+        setUpTimetableDisplayInfo(timetable);
         setUpTimetablePageScriptFile();
+    }
+
+    /**
+     * Converts Timetable to String for parsing in {@code TimetablePageScript.js}
+     * @param timetable to set up for
+     */
+    public static void setUpTimetableDisplayInfo(Timetable timetable) {
+        String toWrite = convertTimetableToString(timetable);
+        timetable.setTimetableDisplayInfo(toWrite);
+        writeToFile(toWrite, timetableInfoFilePath);
+    }
+
+    /**
+     * Converts listOfDays to String for parsing in {@code TimetablePageScript.js}
+     * @param listOfDays to write to {@code timetableInfoFilePath}
+     */
+    public static void setUpTimetableDisplayInfo(HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays) {
+        String toWrite = convertTimetableToString(listOfDays);
+        writeToFile(toWrite, timetableInfoFilePath);
     }
 
     /**
@@ -73,65 +92,32 @@ public class TimetableDisplayUtil {
             String oldContent = getFileContents(timetablePageJsPath);
             String toReplace = getFileContents(timetableInfoFilePath);
             String newContent = replaceFirstLine(oldContent, toReplace);
-            writeToTimetablePageScriptFile(newContent);
+            writeToFile(newContent, timetablePageJsPath);
         } catch (FileNotFoundException e) {
-            timetablePageJsPath = "data/TimetablePageScript.js";
-            writeToTimetablePageScriptFile(DEFAULT_TIMETABLE_PAGE_SCRIPT);
+            writeToFile(DEFAULT_TIMETABLE_PAGE_SCRIPT, timetablePageJsPath);
         }
     }
 
     /**
-     * Writes Timetable information to a text file
-     * @param timetable the timetable to convert into string and write
-     */
-    public static void setUpTimetableDisplayInfoFile(Timetable timetable) {
-        File timetableDisplayInfo = new File(timetableInfoFilePath);
-        try {
-            PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
-            String toWrite = convertTimetableToString(timetable);
-            printWriter.write(toWrite);
-            timetable.setTimetableDisplayInfo(toWrite);
-            printWriter.close();
-        } catch (FileNotFoundException e) {
-            logger.warning("File not found, creating new file");
-            try {
-                timetableInfoFilePath = "data/timetableDisplayInfo";
-                timetableDisplayInfo = new File(timetableInfoFilePath);
-                timetableDisplayInfo.createNewFile();
-                setUpTimetableDisplayInfo(timetable);
-            } catch (IOException ioe) {
-                logger.severe("Unable to create new file");
-            }
-        }
-    }
-
-    /**
-     * Writes a string to the file at {@code timetableInfoFilePath}
+     * Writes a string to the file at {@code path}
      * @param toWrite the String to write
+     * @param path the path of the file
      */
-    public static void setUpTimetableDisplayInfoFile(String toWrite) {
-        File timetableDisplayInfo = new File(timetableInfoFilePath);
+    public static void writeToFile(String toWrite, String path) {
+        File timetableDisplayInfo = new File(path);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
             printWriter.write(toWrite);
             printWriter.close();
         } catch (FileNotFoundException e) {
-            logger.warning("File not found, creating new file");
-            try {
-                timetableInfoFilePath = "data/timetableDisplayInfo";
-                timetableDisplayInfo = new File(timetableInfoFilePath);
-                timetableDisplayInfo.createNewFile();
-                setUpTimetableDisplayInfoFile(toWrite);
-            } catch (IOException ioe) {
-                logger.severe("Unable to create new file");
-            }
+            logger.warning("File not found");
         }
     }
 
     /**
      * Processes the given timetable for viewing.
      * @param timetable to view
-     * @return an ArrayList containing the combined {@code TimetableModuleSlots} from both Timetables.
+     * @return an ArrayList containing the {@code TimetableModuleSlots} from the Timetable.
      */
     public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForViewing(Timetable timetable) {
         ArrayList<TimetableModuleSlot> allUnsortedModulesSlots = timetable.getAllModulesSlots();
@@ -230,21 +216,6 @@ public class TimetableDisplayUtil {
             logger.warning("Exception in reading file");
         }
         return null;
-    }
-
-    /**
-     * Replaces file contents of file at {@code timetablePageJsPath} with {@code contents}
-     * @param contents the new contents of the file
-     */
-    public static void writeToTimetablePageScriptFile(String contents) {
-        File timetablePageScript = new File(timetablePageJsPath);
-        try {
-            PrintWriter printWriter = new PrintWriter(timetablePageScript);
-            printWriter.write(contents);
-            printWriter.close();
-        } catch (FileNotFoundException e) {
-            logger.warning("File not found");
-        }
     }
 
     /**
