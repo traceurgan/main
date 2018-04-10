@@ -15,18 +15,18 @@ public class Timetable {
             + "http://modsn.us/code-part "
             + "and adhere to the following constraints:\n"
             + "1. The URL should start with http://modsn.us/\n"
-            + "2. The code-part should only contain alphanumeric characters.";
+            + "2. The code-part should not be empty and should only contain alphanumeric characters.";
     private static final String SHORT_NUSMODS_URL_REGEX = "http://modsn.us/";
     private static final String CODE_PART_REGEX = "[\\w]+";
     private static final String TIMETABLE_VALIDATION_REGEX = SHORT_NUSMODS_URL_REGEX + CODE_PART_REGEX;
+
+    public final String value;
     private int currentSemester;
     private HashMap<String, ArrayList<TimetableModuleSlot>>
             listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
     private HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
     private ArrayList<TimetableModuleSlot> allModulesSlots; //ArrayList Containing all TimetableModuleSlots
     private String expandedUrl;
-
-    public final String value;
     private String timetableDisplayInfo;
 
 

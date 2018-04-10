@@ -148,7 +148,8 @@ public class TimetableDisplayUtil {
      * @param second Timetable to compare
      * @return an ArrayList containing the combined {@code TimetableModuleSlots} from both Timetables.
      */
-    public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForComparing(Timetable first, Timetable second) {
+    public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForComparing(Timetable first,
+                                                                                      Timetable second) {
         ArrayList<TimetableModuleSlot> allUnsortedModulesSlots = new ArrayList<TimetableModuleSlot>();
         allUnsortedModulesSlots.addAll(first.getAllModulesSlots());
         allUnsortedModulesSlots.addAll(second.getAllModulesSlots());

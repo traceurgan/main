@@ -116,12 +116,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    //@@author marlenekoh
-    public void updateTimetable() {
-        indicateAddressBookChanged();
-    }
-
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**

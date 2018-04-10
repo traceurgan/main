@@ -19,7 +19,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
@@ -49,9 +48,6 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private CalendarView calendarView;
     private ObservableList<ReadOnlyPerson> personList;
-
-    @FXML
-    BorderPane stackPane = new BorderPane();
 
     //@@author chenxing1992
     public BrowserPanel(ObservableList<ReadOnlyPerson> personList) {
@@ -180,7 +176,6 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads the timetable page of a person into browser panel
      */
     public void loadTimetablePage() {
-        loadPage("javascript:document.open();document.close();");
         URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
         loadPage(timetablePage.toExternalForm());
     }

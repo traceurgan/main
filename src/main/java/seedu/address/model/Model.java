@@ -50,13 +50,6 @@ public interface Model {
     void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
             throws DuplicatePersonException, PersonNotFoundException;
 
-
-    /**
-     * Updates TimetableDisplayInfo and TimetablePageScript.js
-     */
-    void updateTimetable();
-
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ReadOnlyPerson> getFilteredPersonList();
 
