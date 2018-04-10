@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Person.PARTNER_INDEX;
+
 import java.util.logging.Logger;
 
 import org.fxmisc.easybind.EasyBind;
@@ -91,7 +93,7 @@ public class ListPanel extends UiPart<Region> {
     @Subscribe
     private void handleHideTimetableRequestEvent (HideTimetableRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        deselect(event.targetIndex);
+        deselect(PARTNER_INDEX);
     }
 
     /**

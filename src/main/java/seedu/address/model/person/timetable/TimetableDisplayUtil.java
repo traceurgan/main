@@ -36,8 +36,7 @@ public class TimetableDisplayUtil {
     private static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String DEFAULT_TIMETABLE_PAGE_SCRIPT = "//@@author marlenekoh\n"
-            + "timetable = [\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"CS2103T\","
-            + " \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"\n"
+            + "timetable = [\n"
             + "];\n"
             + "var myTimetable = \"\";\n"
             + "var nRows = \"\";\n"
@@ -127,6 +126,37 @@ public class TimetableDisplayUtil {
                 logger.severe("Unable to create new file");
             }
         }
+    }
+
+    /**
+     * Processes the given timetable for viewing.
+     * @param timetable to view
+     * @return an ArrayList containing the combined {@code TimetableModuleSlots} from both Timetables.
+     */
+    public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForViewing(Timetable timetable) {
+        ArrayList<TimetableModuleSlot> allUnsortedModulesSlots = timetable.getAllModulesSlots();
+
+        for (TimetableModuleSlot t : allUnsortedModulesSlots) {
+            t.setComparing(false);
+        }
+        return allUnsortedModulesSlots;
+    }
+
+    /**
+     * Combines the two lists of {@code TimetableModuleSlots} from each timetable and process them for comparing.
+     * @param first Timetable to compare
+     * @param second Timetable to compare
+     * @return an ArrayList containing the combined {@code TimetableModuleSlots} from both Timetables.
+     */
+    public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForComparing(Timetable first, Timetable second) {
+        ArrayList<TimetableModuleSlot> allUnsortedModulesSlots = new ArrayList<TimetableModuleSlot>();
+        allUnsortedModulesSlots.addAll(first.getAllModulesSlots());
+        allUnsortedModulesSlots.addAll(second.getAllModulesSlots());
+
+        for (TimetableModuleSlot t : allUnsortedModulesSlots) {
+            t.setComparing(true);
+        }
+        return allUnsortedModulesSlots;
     }
 
     /**

@@ -26,7 +26,7 @@
     </MenuBar>
 
     <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-        <VBox fx:id="personList" minWidth="500" prefWidth="500" SplitPane.resizableWithParent="false">
+        <VBox fx:id="personList" minWidth="300" prefWidth="500" SplitPane.resizableWithParent="false">
             <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
             </padding>
@@ -48,7 +48,7 @@
 
     <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets left="20.0" right="20.0" top="20.0" />
+            <Insets left="20.0" right="20.0" top="5.0" />
         </padding>
         <VBox.margin>
             <Insets />

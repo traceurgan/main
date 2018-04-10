@@ -7,10 +7,10 @@ import java.util.List;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.TimetableDisplayUtil;
 
@@ -43,7 +43,9 @@ public class SelectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        ReadOnlyPerson partner = lastShownList.get(targetIndex.getZeroBased());
+        ReadOnlyPerson readOnlyPartner = lastShownList.get(targetIndex.getZeroBased());
+        Person partner = new Person(readOnlyPartner);
+        TimetableDisplayUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
         TimetableDisplayUtil.setUpTimetableDisplayInfo(partner.getTimetable());
         EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));

@@ -9,6 +9,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.person.timetable.TimetableComparatorUtil;
@@ -37,7 +38,9 @@ public class CompareTimetableCommand extends Command {
     @Override
     public CommandResult execute() {
         List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-        TimetableComparatorUtil.compareTimetable(lastShownList.get(PARTNER_INDEX).getTimetable(), otherTimetable);
+        ReadOnlyPerson readOnlyPartner = lastShownList.get(PARTNER_INDEX);
+        Person partner = new Person(readOnlyPartner);
+        TimetableComparatorUtil.compareTimetable(partner.getTimetable(), otherTimetable);
 
         EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(Index.fromZeroBased(PARTNER_INDEX)));

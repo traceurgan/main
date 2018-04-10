@@ -19,13 +19,13 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.CalendarViewEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -49,6 +49,9 @@ public class BrowserPanel extends UiPart<Region> {
     @FXML
     private CalendarView calendarView;
     private ObservableList<ReadOnlyPerson> personList;
+
+    @FXML
+    BorderPane stackPane = new BorderPane();
 
     //@@author chenxing1992
     public BrowserPanel(ObservableList<ReadOnlyPerson> personList) {
@@ -177,6 +180,7 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads the timetable page of a person into browser panel
      */
     public void loadTimetablePage() {
+        loadPage("javascript:document.open();document.close();");
         URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
         loadPage(timetablePage.toExternalForm());
     }
@@ -214,9 +218,4 @@ public class BrowserPanel extends UiPart<Region> {
         browser = null;
     }
 
-    @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadTimetablePage();
-    }
 }
