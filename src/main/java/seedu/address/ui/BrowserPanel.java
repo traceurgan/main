@@ -135,6 +135,7 @@ public class BrowserPanel extends UiPart<Region> {
     private ArrayList<Entry> getEntries(ReadOnlyPerson person) {
         ArrayList<Entry> entries = new ArrayList<>();
         for (Appointment appointment : person.getAppointments()) {
+            logger.info("im king: "+appointment.getDescription());
             LocalDateTime ldtstart = LocalDateTime.ofInstant(appointment.getDate().toInstant(),
                     ZoneId.systemDefault());
             LocalDateTime ldtend = LocalDateTime.ofInstant(appointment.getEndDate().toInstant(),
