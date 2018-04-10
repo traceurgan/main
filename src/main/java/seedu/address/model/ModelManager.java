@@ -94,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author
     @Override
-    public synchronized void deletePerson() throws PersonNotFoundException {
+    public synchronized void deletePerson() {
         requireAllNonNull(this.person);
         person = updatePerson(null);
         indicatePersonChanged(person);

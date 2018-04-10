@@ -36,7 +36,7 @@ public interface Model {
     ObservableList<JournalEntry> getJournalEntryList();
 
     //@@author
-    void deletePerson() throws PersonNotFoundException;
+    void deletePerson();
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;

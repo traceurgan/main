@@ -27,10 +27,11 @@ public class DeselectCommand extends Command {
 
         try {
             partner = model.getPerson();
+            partner.getTimetable();
+            EventsCenter.getInstance().post(new HideTimetableRequestEvent());
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-        EventsCenter.getInstance().post(new HideTimetableRequestEvent());
 
         return new CommandResult(String.format(MESSAGE_DESELECT_PERSON_SUCCESS, partner));
     }

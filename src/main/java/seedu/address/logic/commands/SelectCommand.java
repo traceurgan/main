@@ -29,13 +29,11 @@ public class SelectCommand extends Command {
 
         try {
             partner = model.getPerson();
+            EventsCenter.getInstance().post(new ShowTimetableRequestEvent(partner.getTimetable()));
+            EventsCenter.getInstance().post(new JumpToListRequestEvent());
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-
-        EventsCenter.getInstance().post(new JumpToListRequestEvent());
-        EventsCenter.getInstance().post(new ShowTimetableRequestEvent(partner.getTimetable()));
-        EventsCenter.getInstance().post(new JumpToListRequestEvent());
 
         return new CommandResult(MESSAGE_SELECT_PERSON_SUCCESS + partner);
     }
