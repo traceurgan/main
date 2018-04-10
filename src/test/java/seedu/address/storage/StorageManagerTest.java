@@ -3,6 +3,8 @@ package seedu.address.storage;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
 
 import java.io.IOException;
 
@@ -11,9 +13,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.model.Person;
-import seedu.address.model.ReadOnlyPerson;
+import seedu.address.commons.events.model.PersonChangedEvent;
+import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
@@ -27,10 +31,10 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlPersonStorage addressBookStorage = new XmlPersonStorage(getTempFilePath("ab"));
+        XmlPersonStorage personStorage = new XmlPersonStorage(getTempFilePath("p"));
         XmlJournalStorage journalStorage = new XmlJournalStorage(getTempFilePath("j"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, journalStorage, userPrefsStorage);
+        storageManager = new StorageManager(personStorage, journalStorage, userPrefsStorage);
     }
 
     private String getTempFilePath(String fileName) {
@@ -51,28 +55,24 @@ public class StorageManagerTest {
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
     }
-    /**
+
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void personReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlPersonStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
-<<<<<<< HEAD
          */
-        Person original = getTypicalAddressBook();
-=======
+        Person original = getTypicalPerson();
 
-        AddressBook original = getTypicalAddressBook();
->>>>>>> baseBranchDevMaster
-        storageManager.saveAddressBook(original);
-        ReadOnlyPerson retrieved = storageManager.readAddressBook().get();
+        storageManager.savePerson(original);
+        ReadOnlyPerson retrieved = storageManager.readPerson().get();
         assertEquals(original, new Person(retrieved));
     }
-    */
+
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getPersonFilePath() {
+        assertNotNull(storageManager.getPersonFilePath());
     }
 
     @Test
@@ -80,7 +80,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(
                 "dummy"), new XmlJournalStorage("Dummy"), new JsonUserPrefsStorage("dummy"));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new Person()));
+        storage.handlePersonChangedEvent(new PersonChangedEvent(new Person(ALICE)));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -95,7 +95,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyPerson addressBook, String filePath) throws IOException {
+        public void savePerson(ReadOnlyPerson person, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

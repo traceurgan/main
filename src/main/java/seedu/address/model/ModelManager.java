@@ -29,8 +29,6 @@ public class ModelManager extends ComponentManager implements Model {
     private Person person;
     private final Journal journal;
     private final ObservableList<ReadOnlyPerson> persons;
-    private ObservableList<JournalEntry> journalEntries;
-
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -49,7 +47,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         this.journal = new Journal(journal);
         this.persons = FXCollections.observableArrayList();
-        this.journalEntries = getJournalEntryList();
         if (person != null) {
             persons.add(person);
         }

@@ -5,10 +5,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -104,6 +104,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void editPerson(ReadOnlyPerson editedPerson) throws NullPointerException {
+
+        }
+
+        @Override
+        public String checkDate(int last) {
+            return null;
+        }
+
+        @Override
+        public Person updatePerson(ReadOnlyPerson editedPerson) throws DuplicatePersonException,
+                PersonNotFoundException {
+            return null;
+        }
+
+        @Override
         public void addJournalEntry(JournalEntry journalEntry) throws Exception {
             fail("This method should not be called.");
         }
@@ -121,37 +137,35 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyPerson newData) {
+        public int getLast() {
+            fail("This method should not be called.");
+            return 0;
+        }
+
+        @Override
+        public void resetPersonData(ReadOnlyPerson newData) {
             fail("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyPerson getAddressBook() {
+        public ReadOnlyPerson getPerson() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
+        public void resetJournalData(ReadOnlyJournal newData) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ReadOnlyPerson> getPersonAsList() {
             fail("This method should not be called.");
             return null;
         }
 
         @Override
         public ReadOnlyJournal getJournal() {
-            fail("This method should not be called.");
-            return null;
-        }
-        //@@author chenxing1992
-        @Override
-        public void deletePerson(seedu.address.model.person.ReadOnlyPerson target) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
-                throws DuplicatePersonException {
-            fail("This method should not be called.");
-        }
-
-
-
-        @Override
-        public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;
         }
@@ -163,7 +177,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
+        public void deletePerson() throws PersonNotFoundException {
             fail("This method should not be called.");
         }
     }
@@ -178,8 +192,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyPerson getAddressBook() {
-            return new Person();
+        public ReadOnlyPerson getPerson() {
+            return new Person(ALICE);
         }
     }
 
@@ -187,17 +201,17 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<seedu.address.model.person.ReadOnlyPerson> personsAdded = new ArrayList<>();
+        final ArrayList<ReadOnlyPerson> personsAdded = new ArrayList<>();
 
         @Override
-        public void addPerson(seedu.address.model.person.ReadOnlyPerson person) throws DuplicatePersonException {
+        public void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
             requireNonNull(person);
             personsAdded.add(person);
         }
 
         @Override
-        public ReadOnlyPerson getAddressBook() {
-            return new Person();
+        public ReadOnlyPerson getPerson() {
+            return new Person(ALICE);
         }
     }
 
