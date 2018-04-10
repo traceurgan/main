@@ -141,7 +141,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
-        if (checkDate(journal.getLast()).equals(journalEntry.getDate())) {
+        if ((this.getJournalEntryList().size() != 0) && (
+                checkDate(journal.getLast()).equals(journalEntry.getDate()))) {
             journal.updateJournalEntry(journalEntry, journal.getLast());
             logger.info("Journal entry updated.");
         } else {
