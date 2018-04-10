@@ -35,7 +35,7 @@ public class Timetable {
         checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
         TimetableParserUtil.setUpTimetableInfo(this);
-        TimetableDisplayUtil.setUpTimetableDisplayInfo(this);
+        TimetableDisplayUtil.setUpTimetableDisplayFiles(this);
     }
 
     public String getExpandedUrl() {

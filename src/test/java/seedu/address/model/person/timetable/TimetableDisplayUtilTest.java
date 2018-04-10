@@ -12,6 +12,6 @@ public class TimetableDisplayUtilTest {
     @Test
     public void writeToTimetableFile_assertsSameFileContents() {
         //TODO: Write TimetableDisplayUtilTest
-        TimetableDisplayUtil.setUpTimetableDisplayInfo(timetable);
+        TimetableDisplayUtil.setUpTimetableDisplayFiles(timetable);
     }
 }
