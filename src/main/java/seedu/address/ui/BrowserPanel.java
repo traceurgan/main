@@ -26,8 +26,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.ui.CalendarViewEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 
 /**
  * The Browser Panel of the App.

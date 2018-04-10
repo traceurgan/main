@@ -13,9 +13,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -153,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Adds Appointment to a person in the internal list.
+     * Adds appointment to a person in the internal list.
      *
      * @throws PersonNotFoundException if no such person exist in the internal list
      */

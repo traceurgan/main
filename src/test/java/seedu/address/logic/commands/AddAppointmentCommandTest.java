@@ -18,7 +18,7 @@ import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 
 //@@author chenxing1992
 public class AddAppointmentCommandTest {

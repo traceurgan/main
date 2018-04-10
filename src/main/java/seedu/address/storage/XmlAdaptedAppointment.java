@@ -5,12 +5,12 @@ import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 
 //@@author Chen Xing
 
 /**
- * AXB-friendly version of the Appointment list of a person
+ * AXB-friendly version of the appointment list of a person
  */
 public class XmlAdaptedAppointment {
 
@@ -30,7 +30,7 @@ public class XmlAdaptedAppointment {
     public XmlAdaptedAppointment() {}
 
     /**
-     * Converts a given Appointment into this class for JAXB use
+     * Converts a given appointment into this class for JAXB use
      */
     public XmlAdaptedAppointment(Appointment source) {
         description = source.getDescription();
@@ -39,7 +39,7 @@ public class XmlAdaptedAppointment {
     }
 
     /**
-     * Converts this jaxb-friendly adapted Appointment object into the model's Appointment object.
+     * Converts this jaxb-friendly adapted appointment object into the model's appointment object.
      *
      * @throws ParseException if there were any data constraints violated in the adapted person
      */

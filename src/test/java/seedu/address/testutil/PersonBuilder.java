@@ -6,7 +6,7 @@ import java.util.Set;
 
 import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -113,7 +113,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets Appointment with Date of the person that we are building
+     * Sets appointment with Date of the person that we are building
      */
     public PersonBuilder withAppointment(String... arg) {
         List<Appointment> list = new ArrayList<>();

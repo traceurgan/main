@@ -9,7 +9,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 
 //@@author chenxing1992
 public class AddAppointmentParserTest {
