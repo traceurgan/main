@@ -25,7 +25,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.ui.CalendarViewEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -35,7 +34,6 @@ import seedu.address.model.person.ReadOnlyPerson;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    //public static final String DEFAULT_PAGE = "BrowserPanel.fxml";
     public static final String TIMETABLE_PAGE = "TimetablePage.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
@@ -89,11 +87,10 @@ public class BrowserPanel extends UiPart<Region> {
      * Explicitly set the Root object to CalendarView
      */
     //@@author chenxing1992
-    public CalendarView getRoot() {
-
-
+    public CalendarView getCalendarRoot() {
         return this.calendarView;
     }
+
     /**
      * Changes calendar view accordingly
      */
@@ -174,23 +171,28 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(() -> showPage(c));
     }
 
-    private void loadPersonPage(ReadOnlyPerson person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
-    }
-
-    private void loadTimetablePage(ReadOnlyPerson person) {
+    //@@author marlenekoh
+    /**
+     * Loads the timetable page of a person into browser panel
+     */
+    public void loadTimetablePage() {
         URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
         loadPage(timetablePage.toExternalForm());
     }
 
-    public void loadPage(String url) {
+    //@@author
+    private void loadPersonPage(ReadOnlyPerson person) {
+        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+    }
+
+    private void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));
     }
 
     /**
      * Loads a default HTML file with a background that matches the general theme.
      */
-    private void loadDefaultPage() {
+    public void loadDefaultPage() {
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
         loadPage(defaultPage.toExternalForm());
     }
@@ -211,9 +213,4 @@ public class BrowserPanel extends UiPart<Region> {
         browser = null;
     }
 
-    @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadTimetablePage(event.getNewSelection().person);
-    }
 }
