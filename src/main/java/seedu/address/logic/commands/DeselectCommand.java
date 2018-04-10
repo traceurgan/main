@@ -40,7 +40,7 @@ public class DeselectCommand extends Command {
         }
 
         ReadOnlyPerson partner = lastShownList.get(targetIndex.getZeroBased());
-        EventsCenter.getInstance().post(new HideTimetableRequestEvent(targetIndex));
+        EventsCenter.getInstance().post(new HideTimetableRequestEvent());
 
         return new CommandResult(String.format(MESSAGE_DESELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
