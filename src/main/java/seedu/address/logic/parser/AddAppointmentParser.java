@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.joestelmach.natty.DateGroup;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Appointment.Appointment;

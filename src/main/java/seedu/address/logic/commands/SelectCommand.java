@@ -4,11 +4,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
- * Selects a person identified using it's last displayed index from the address book.
+ * Selects your partner from NUSCouples.
  */
 public class SelectCommand extends Command {
 
@@ -16,25 +17,27 @@ public class SelectCommand extends Command {
     public static final String COMMAND_ALIAS = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person shown in the main window\n"
+            + ": Selects your partner and shows his/her timetable.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: ";
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Showing timetable of: ";
 
-    private ReadOnlyPerson personToSelect;
+    private ReadOnlyPerson partner;
 
     @Override
     public CommandResult execute() throws CommandException {
 
         try {
-            personToSelect = model.getPerson();
+            partner = model.getPerson();
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent());
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS + personToSelect));
+        EventsCenter.getInstance().post(new ShowTimetableRequestEvent(partner.getTimetable()));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent());
 
+        return new CommandResult(MESSAGE_SELECT_PERSON_SUCCESS + partner);
     }
 
     @Override

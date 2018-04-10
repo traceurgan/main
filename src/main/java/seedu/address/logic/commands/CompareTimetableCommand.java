@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
-import static seedu.address.model.person.Person.PARTNER_INDEX;
-
-import java.util.List;
 
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.TimetableComparatorUtil;
@@ -30,8 +27,8 @@ public class CompareTimetableCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
-        TimetableComparatorUtil.compareTimetable(lastShownList.get(PARTNER_INDEX).getTimetable(), otherTimetableUrl);
+        ReadOnlyPerson partner = model.getPerson();
+        TimetableComparatorUtil.compareTimetable(partner.getTimetable(), otherTimetableUrl);
         return new CommandResult(MESSAGE_TIMETABLE_COMPARE_SUCCESS);
     }
 
