@@ -5,7 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,6 +24,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class AddAppointmentCommand extends UndoableCommand {
 
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     public static final String COMMAND_WORD = "Appointment";
     public static final String COMMAND_ALIAS = "appt";
 
@@ -39,6 +43,7 @@ public class AddAppointmentCommand extends UndoableCommand {
     private final Appointment appointment;
 
     public AddAppointmentCommand(Appointment appointment) {
+        logger.info("appt is: "+appointment.getDescription());
         this.appointment = appointment;
     }
     //@@author chenxing1992
@@ -46,6 +51,7 @@ public class AddAppointmentCommand extends UndoableCommand {
     protected CommandResult executeUndoableCommand() throws CommandException {
 
         ReadOnlyPerson personToAddAppointment = model.getPerson();
+        logger.info("person to add appt: "+model.getPerson());
 
         if (appointment.getDate() != null && !isDateValid()) {
             return new CommandResult(INVALID_DATE);
