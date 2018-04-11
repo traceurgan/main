@@ -186,11 +186,7 @@ public class TimetableUtil {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/timetable/TimetableParserUtil.java
-     * Sets {@code listOfDays} in {@code timetable} given
-=======
      * Sets {@code listOfDays} in {@code timetable} given using the NUSMods short url
->>>>>>> timetable:src/main/java/seedu/address/model/person/timetable/TimetableUtil.java
      * @param timetable timetable to set List of days
      */
     public static void setListOfDays(Timetable timetable) {
@@ -200,8 +196,6 @@ public class TimetableUtil {
         HashMap<String, ArrayList<TimetableModuleSlot>> sortedTimetableModuleSlots =
                 sortModuleSlotsByDay(allTimetableModuleSlots);
         timetable.setListOfDays(sortedTimetableModuleSlots);
-<<<<<<< HEAD:src/main/java/seedu/address/model/person/timetable/TimetableParserUtil.java
-=======
     }
 
     public static void setTimetableDisplayInfo(Timetable timetable) {
@@ -240,7 +234,6 @@ public class TimetableUtil {
         }
         sb.append("\n");
         return sb.toString();
->>>>>>> timetable:src/main/java/seedu/address/model/person/timetable/TimetableUtil.java
     }
 
     /**
