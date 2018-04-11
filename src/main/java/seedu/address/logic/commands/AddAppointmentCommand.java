@@ -42,7 +42,7 @@ public class AddAppointmentCommand extends UndoableCommand {
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
 
-        ReadOnlyPerson personToAddAppointment = model.getPerson();
+        ReadOnlyPerson personToAddAppointment = model.getPartner();
 
         if (appointment.getDate() != null && !isDateValid()) {
             return new CommandResult(INVALID_DATE);

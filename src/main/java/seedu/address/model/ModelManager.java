@@ -26,29 +26,29 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private Person person;
+    private Person partner;
     private final Journal journal;
     private final ObservableList<ReadOnlyPerson> persons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyPerson person, ReadOnlyJournal journal, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPerson partner, ReadOnlyJournal journal, UserPrefs userPrefs) {
         super();
         requireAllNonNull(journal, userPrefs);
 
         logger.fine(
-                "Initializing with partner: " + person + " , journal" + journal + " and user prefs " + userPrefs);
+                "Initializing with partner: " + partner + " , journal" + journal + " and user prefs " + userPrefs);
 
-        if (person == null) {
-            person = null;
+        if (partner == null) {
+            partner = null;
         } else {
-            this.person = new Person(person);
+            this.partner = new Person(partner);
         }
         this.journal = new Journal(journal);
         this.persons = FXCollections.observableArrayList();
-        if (person != null) {
-            persons.add(person);
+        if (partner != null) {
+            persons.add(partner);
         }
 
     }
@@ -70,12 +70,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyPerson getPerson() {
-        return person;
+    public ReadOnlyPerson getPartner() {
+        return partner;
     }
 
     @Override
-    public ObservableList <ReadOnlyPerson> getPersonAsList() {
+    public ObservableList <ReadOnlyPerson> getPartnerAsList() {
         return persons;
     }
 
@@ -95,20 +95,20 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
     @Override
     public synchronized void deletePerson() {
-        requireAllNonNull(this.person);
-        person = updatePerson(null);
-        indicatePersonChanged(person);
+        requireAllNonNull(this.partner);
+        partner = updatePerson(null);
+        indicatePersonChanged(partner);
     }
 
     @Override
     public synchronized void addPerson(ReadOnlyPerson newPerson) throws DuplicatePersonException {
-        if (this.person != null) {
+        if (this.partner != null) {
             throw new DuplicatePersonException();
         }
         requireAllNonNull(newPerson);
-        this.person = (Person) newPerson;
-        updatePerson(person);
-        indicatePersonChanged(person);
+        this.partner = (Person) newPerson;
+        updatePerson(partner);
+        indicatePersonChanged(partner);
     }
 
     /**
@@ -128,9 +128,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void editPerson(ReadOnlyPerson editedPerson)
             throws NullPointerException {
-        requireAllNonNull(this.person, editedPerson);
-        person = updatePerson(editedPerson);
-        indicatePersonChanged(person);
+        requireAllNonNull(this.partner, editedPerson);
+        partner = updatePerson(editedPerson);
+        indicatePersonChanged(partner);
     }
 
     //@@author traceurgan
@@ -218,7 +218,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return person.equals(other.person)
+        return partner.equals(other.partner)
                 && journal.equals(other.journal);
     }
 

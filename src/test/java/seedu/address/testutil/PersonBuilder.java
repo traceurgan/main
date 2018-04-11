@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -31,7 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Timetable timetable;
-    private Appointment
+    private List<Appointment> appointments;
     private Person person;
 
     public PersonBuilder() {
@@ -102,9 +101,8 @@ public class PersonBuilder {
     /**
      * Sets appointment with Date of the person that we are building
      */
-    public PersonBuilder withAppointment(String... arg) {
-
-        this.appsetAppointment(list);
+    public PersonBuilder withAppointment (String ... appointment) {
+        this.appointments = SampleDataUtil.getAppointmentList(appointment);
         return this;
     }
 

@@ -35,7 +35,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         /* Case: redo selecting last card in the list -> rejected */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
-        assertCommandFailure(command, expectedResultMessage);\
+        assertCommandFailure(command, expectedResultMessage);
 
         /* Case: select the current selected card -> selected */
         assertCommandSuccess(command, middleIndex);

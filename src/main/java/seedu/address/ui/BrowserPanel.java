@@ -17,7 +17,6 @@ import com.calendarfx.view.CalendarView;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
@@ -26,7 +25,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.ui.CalendarViewEvent;
 
-import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 
@@ -65,7 +63,10 @@ public class BrowserPanel extends UiPart<Region> {
         calendarView.setRequestedTime(LocalTime.now());
         calendarView.setToday(LocalDate.now());
         calendarView.setTime(LocalTime.now());
-        updateCalendar();
+        if (partner != null) {
+            updateCalendar();
+        }
+
         disableViews();
         registerAsAnEventHandler(this);
 
@@ -156,14 +157,12 @@ public class BrowserPanel extends UiPart<Region> {
         setTime();
         CalendarSource calendarSource = new CalendarSource("Appointments");
         int styleNum = 0;
-
-            Calendar calendar = getCalendar(styleNum,  partner);
-            calendarSource.getCalendars().add(calendar);
-            ArrayList<Entry> entries = getEntries( partner);
-            for (Entry entry : entries) {
-                logger.info("im king: "+entry);
-                calendar.addEntry(entry);
-            }
+        Calendar calendar = getCalendar(styleNum,  partner);
+        calendarSource.getCalendars().add(calendar);
+        ArrayList<Entry> entries = getEntries( partner);
+        for (Entry entry : entries) {
+            calendar.addEntry(entry);
+        }
 
         calendarView.getCalendarSources().add(calendarSource);
     }

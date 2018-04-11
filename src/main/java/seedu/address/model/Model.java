@@ -20,10 +20,10 @@ public interface Model {
     void resetPersonData(ReadOnlyPerson newData);
 
     /** Returns the Person */
-    ReadOnlyPerson getPerson();
+    ReadOnlyPerson getPartner();
 
     /** Returns the Person as Observable list */
-    ObservableList<ReadOnlyPerson> getPersonAsList();
+    ObservableList<ReadOnlyPerson> getPartnerAsList();
 
     //@@author traceurgan
     /** Returns the Journal */

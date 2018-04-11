@@ -29,7 +29,7 @@ public class SelectCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         try {
-            partner = model.getPerson();
+            partner = model.getPartner();
             TimetableDisplayUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
             TimetableDisplayUtil.setUpTimetableDisplayInfo(partner.getTimetable());
             EventsCenter.getInstance().post(new ShowTimetableRequestEvent());

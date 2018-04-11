@@ -49,7 +49,7 @@ public class DeleteCommand extends UndoableCommand {
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
         try {
-            this.personToDelete = model.getPerson();
+            this.personToDelete = model.getPartner();
         } catch (NullPointerException npe) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         }

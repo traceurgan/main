@@ -17,7 +17,6 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.ui.JournalWindow;
 
@@ -87,13 +86,13 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> partner() {
-        return model.getPersonAsList();
+    public ObservableList<ReadOnlyPerson> getPartnerAsList() {
+        return model.getPartnerAsList();
     }
 
     @Override
     public ReadOnlyPerson getPartner() {
-        return  model.getPerson();
+        return  model.getPartner();
     }
     //@@author
     @Override

@@ -32,7 +32,7 @@ public class CompareTimetableCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        ReadOnlyPerson partner = model.getPerson();
+        ReadOnlyPerson partner = model.getPartner();
         TimetableComparatorUtil.compareTimetable(partner.getTimetable(), otherTimetable);
 
         EventsCenter.getInstance().post(new ShowTimetableRequestEvent());

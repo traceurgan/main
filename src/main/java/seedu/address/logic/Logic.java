@@ -26,8 +26,7 @@ public interface Logic {
     ObservableList<JournalEntry> getJournalEntryList();
 
     //@@author
-
-    ObservableList<ReadOnlyPerson> partner();
+    ObservableList<ReadOnlyPerson> getPartnerAsList();
 
     ReadOnlyPerson getPartner();
 

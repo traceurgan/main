@@ -26,7 +26,7 @@ public class DeselectCommand extends Command {
     public CommandResult execute() throws CommandException {
 
         try {
-            partner = model.getPerson();
+            partner = model.getPartner();
             partner.getTimetable();
             EventsCenter.getInstance().post(new HideTimetableRequestEvent());
         } catch (NullPointerException npe) {

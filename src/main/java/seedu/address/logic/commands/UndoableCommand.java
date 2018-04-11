@@ -22,10 +22,10 @@ public abstract class UndoableCommand extends Command {
      */
     private void saveAddressBookSnapshot() {
         requireNonNull(model);
-        if (model.getPerson() == null) {
+        if (model.getPartner() == null) {
             this.previousPerson = null;
         } else {
-            this.previousPerson = new Person(model.getPerson());
+            this.previousPerson = new Person(model.getPartner());
         }
     }
 
