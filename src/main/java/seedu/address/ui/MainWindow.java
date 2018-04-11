@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static javafx.scene.input.KeyCode.TAB;
+
 import java.util.logging.Logger;
 
 import com.calendarfx.view.CalendarView;
@@ -43,7 +45,10 @@ public class MainWindow extends UiPart<Region> {
     // Independent Ui parts residing in this Ui container
     private CalendarView calendarView;
     private BrowserPanel browserPanel;
+    private ResultDisplay resultDisplay;
     private ListPanel listPanel;
+    private CommandBox commandBox;
+    private StatusBarFooter statusBarFooter;
     private Config config;
     private UserPrefs prefs;
 
@@ -134,13 +139,13 @@ public class MainWindow extends UiPart<Region> {
         listPanel = new ListPanel(logic.getPersonAsList(), logic.getJournalEntryList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getPersonFilePath());
+        statusBarFooter = new StatusBarFooter(prefs.getPersonFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
+        commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         Platform.runLater(() -> commandBox.getCommandTextField().requestFocus());
@@ -220,6 +225,22 @@ public class MainWindow extends UiPart<Region> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    /**
+     * Handles the key press event, {@code keyEvent}.
+     */
+    @FXML
+    private void handleKeyPress(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == TAB) {
+            keyEvent.consume();
+            commandBoxRequestFocus();
+        }
+
+    }
+
+    void commandBoxRequestFocus() {
+        this.commandBox.getCommandTextField().requestFocus();
     }
 
     public ListPanel getPersonListPanel() {

@@ -687,4 +687,7 @@ public class CommandBox extends UiPart<Region> {
         return commandTextField;
     }
 
+    public void commandBoxRequestFocus() {
+        this.commandTextField.requestFocus();
+    }
 }
