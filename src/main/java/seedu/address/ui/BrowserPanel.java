@@ -158,7 +158,7 @@ public class BrowserPanel extends UiPart<Region> {
         int styleNum = 0;
         Calendar calendar = getCalendar(styleNum,  partner);
         calendarSource.getCalendars().add(calendar);
-        ArrayList<Entry> entries = getEntries( partner);
+        ArrayList<Entry> entries = getEntries(partner);
         for (Entry entry : entries) {
             calendar.addEntry(entry);
         }

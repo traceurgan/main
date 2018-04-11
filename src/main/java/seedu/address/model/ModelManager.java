@@ -160,7 +160,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException {
         requireNonNull(target);
         requireNonNull(appointment);
-        Person person = new Person(target);
+        Person person = (Person) getPartner();
         List<Appointment> list = target.getAppointments();
         list.add(appointment);
         person.setAppointment(list);
@@ -177,7 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(target);
         requireNonNull(appointment);
 
-        Person person = new Person(target);
+        Person person = (Person) getPartner();
         List<Appointment> newApptList = person.getAppointments();
         newApptList.remove(appointment);
         person.setAppointment(newApptList);
