@@ -116,7 +116,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
