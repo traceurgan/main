@@ -107,12 +107,22 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the partner in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deletePerson(Model model) {
-        ReadOnlyPerson firstPerson = model.getPartner();
         try {
             model.deletePerson();
+        } catch (NullPointerException npe) {
+            throw new AssertionError("Person in does not exist in model.", npe);
+        }
+    }
+
+    /**
+     * Edits the partner in {@code model}'s filtered list from {@code model}'s address book.
+     */
+    public static void editPerson(Model model) {
+        try {
+            model.editPerson(new Person(model.getPartner()));
         } catch (NullPointerException npe) {
             throw new AssertionError("Person in does not exist in model.", npe);
         }
