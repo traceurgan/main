@@ -23,7 +23,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.Logic;
@@ -269,11 +268,5 @@ public class MainWindow extends UiPart<Region> {
     private void handleHideTimetableRequestEvent(HideTimetableRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHideTimetable();
-    }
-
-    @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleShowTimetable();
     }
 }
