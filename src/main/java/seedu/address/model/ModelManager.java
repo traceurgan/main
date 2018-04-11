@@ -69,7 +69,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetPersonData(ReadOnlyPerson newData) {
-
+        partner = new Person(newData);
+        updatePerson(partner);
+        indicatePersonChanged(partner);
     }
 
     @Override
