@@ -136,7 +136,6 @@ public class BrowserPanel extends UiPart<Region> {
     private ArrayList<Entry> getEntries(ReadOnlyPerson person) {
         ArrayList<Entry> entries = new ArrayList<>();
         for (Appointment appointment : person.getAppointments()) {
-
             LocalDateTime ldtstart = LocalDateTime.ofInstant(appointment.getDate().toInstant(),
                     ZoneId.systemDefault());
             LocalDateTime ldtend = LocalDateTime.ofInstant(appointment.getEndDate().toInstant(),
@@ -163,7 +162,6 @@ public class BrowserPanel extends UiPart<Region> {
         for (Entry entry : entries) {
             calendar.addEntry(entry);
         }
-
         calendarView.getCalendarSources().add(calendarSource);
     }
     //@@author chenxing1992

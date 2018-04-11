@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Region> {
         browserPanel = new BrowserPanel(logic.getPartner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
 
-        listPanel = new ListPanel(logic.getPartnerAsList(), logic.getJournalEntryList());
+        listPanel = new ListPanel(logic.getPersonAsList(), logic.getJournalEntryList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();

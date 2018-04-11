@@ -75,7 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList <ReadOnlyPerson> getPartnerAsList() {
+    public ObservableList <ReadOnlyPerson> getPersonAsList() {
         return persons;
     }
 

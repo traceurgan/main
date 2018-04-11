@@ -22,9 +22,6 @@ public interface Model {
     /** Returns the Person */
     ReadOnlyPerson getPartner();
 
-    /** Returns the Person as Observable list */
-    ObservableList<ReadOnlyPerson> getPartnerAsList();
-
     //@@author traceurgan
     /** Returns the Journal */
     ReadOnlyJournal getJournal();
@@ -34,6 +31,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the journal entry list */
     ObservableList<JournalEntry> getJournalEntryList();
+
+    ObservableList <ReadOnlyPerson> getPersonAsList();
 
     //@@author
     void deletePerson();
