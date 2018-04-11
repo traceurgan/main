@@ -6,21 +6,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.ObjectUtils;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -97,16 +93,16 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        Person expectedPerson = new Person(actualModel.getAddressBook());
-        List<ReadOnlyPerson> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        Person expectedPerson = new Person(actualModel.getPartner());
+        List<ReadOnlyPerson> expectedFilteredList = new ArrayList<>(actualModel.getPersonAsList());
 
         try {
             command.execute();
             fail("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedPerson, actualModel.getPartner());
+            assertEquals(expectedFilteredList, actualModel.getPersonAsList());
         }
     }
 
@@ -114,7 +110,7 @@ public class CommandTestUtil {
      * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deletePerson(Model model) {
-        ReadOnlyPerson firstPerson = model.getPerson();
+        ReadOnlyPerson firstPerson = model.getPartner();
         try {
             model.deletePerson();
         } catch (NullPointerException npe) {

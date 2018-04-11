@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
 import static seedu.address.logic.commands.CommandTestUtil.showFirstPersonOnly;
 import static seedu.address.testutil.TypicalJournalEntries.getTypicalJournal;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,15 +19,15 @@ import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 @Ignore
 public class UndoableCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalJournal(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalPerson(), getTypicalJournal(), new UserPrefs());
     private final DummyCommand dummyCommand = new DummyCommand(model);
 
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalJournal(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalPerson(), getTypicalJournal(), new UserPrefs());
 
     @Test
     public void executeUndo() throws Exception {
         dummyCommand.execute();
-        deleteFirstPerson(expectedModel);
+        delete(expectedModel);
         assertEquals(expectedModel, model);
 
         showFirstPersonOnly(model);
