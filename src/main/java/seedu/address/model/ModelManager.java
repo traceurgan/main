@@ -13,9 +13,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -29,8 +29,6 @@ public class ModelManager extends ComponentManager implements Model {
     private Person person;
     private final Journal journal;
     private final ObservableList<ReadOnlyPerson> persons;
-    private ObservableList<JournalEntry> journalEntries;
-
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -49,7 +47,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         this.journal = new Journal(journal);
         this.persons = FXCollections.observableArrayList();
-        this.journalEntries = getJournalEntryList();
         if (person != null) {
             persons.add(person);
         }
@@ -97,7 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author
     @Override
-    public synchronized void deletePerson() throws PersonNotFoundException {
+    public synchronized void deletePerson() {
         requireAllNonNull(this.person);
         person = updatePerson(null);
         indicatePersonChanged(person);
@@ -144,7 +141,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
-        if (checkDate(journal.getLast()).equals(journalEntry.getDate())) {
+        if ((this.getJournalEntryList().size() != 0) && (
+                checkDate(journal.getLast()).equals(journalEntry.getDate()))) {
             journal.updateJournalEntry(journalEntry, journal.getLast());
             logger.info("Journal entry updated.");
         } else {
@@ -155,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     * Adds Appointment to a person in the internal list.
+     * Adds appointment to a person in the internal list.
      *
      * @throws PersonNotFoundException if no such person exist in the internal list
      */

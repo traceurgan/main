@@ -2,9 +2,9 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -36,7 +36,7 @@ public interface Model {
     ObservableList<JournalEntry> getJournalEntryList();
 
     //@@author
-    void deletePerson() throws PersonNotFoundException;
+    void deletePerson();
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
@@ -56,7 +56,7 @@ public interface Model {
 
     //@@author chenxing1992
     /**
-     * Adds Appointment to a person
+     * Adds appointment to a person
      */
     void addAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException;
 

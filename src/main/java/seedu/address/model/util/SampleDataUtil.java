@@ -9,12 +9,12 @@ import seedu.address.model.Journal;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.timetable.Timetable;
 
 /**
@@ -50,7 +50,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns an Appointment list containing the list of Appointment given
+     * Returns an appointment list containing the list of appointment given
      */
     public static List<Appointment> getAppointmentList(String... strings) {
         List<Appointment> list = new ArrayList<Appointment>();

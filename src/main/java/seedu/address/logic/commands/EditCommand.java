@@ -18,12 +18,12 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Appointment.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.timetable.Timetable;
 
 /**
@@ -52,6 +52,7 @@ public class EditCommand extends UndoableCommand {
     private final EditPersonDescriptor editPersonDescriptor;
 
     private ReadOnlyPerson personToEdit;
+    private Name name;
     private ReadOnlyPerson editedPerson;
 
     /**
@@ -72,14 +73,15 @@ public class EditCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
         model.editPerson(editedPerson);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        this.name = editedPerson.getName();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, name));
     }
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        try {
-            this.personToEdit = model.getPerson();
-        } catch (NullPointerException npe) {
+
+        this.personToEdit = model.getPerson();
+        if (personToEdit == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON);
         }
 

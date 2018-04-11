@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -24,21 +27,23 @@ public class DeleteCommand extends UndoableCommand {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private ReadOnlyPerson personToDelete;
+    private Name name;
 
     @Override
-    public CommandResult executeUndoableCommand() {
-        requireNonNull(personToDelete);
+    public CommandResult executeUndoableCommand() throws CommandException {
         return getCommandResult();
     }
 
-    private CommandResult getCommandResult() {
+    private CommandResult getCommandResult() throws CommandException {
         try {
+            this.name = personToDelete.getName();
             model.deletePerson();
-        } catch (PersonNotFoundException pnfe) {
-            throw new AssertionError("There is no one to delete.");
+        } catch (NullPointerException npe) {
+            throw new CommandException("There is no one to delete.");
         }
+        requireNonNull(personToDelete);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, name));
     }
 
     @Override

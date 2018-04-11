@@ -67,12 +67,12 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Subscribe
-    private void handleShowJournalWindowRequestEvent (ShowJournalWindowRequestEvent event) {
+    private void handleShowJournalWindowRequestEvent(ShowJournalWindowRequestEvent event) {
         JournalWindow journalWindow;
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (model.checkDate(model.getLast()).equals(event.date)) {
+        if ((model.getJournalEntryList().size() != 0) && (model.checkDate(model.getLast()).equals(event.date))) {
             journalWindow = new JournalWindow(
-                    event.date, model.getJournal().getJournalEntry(model.getLast()).getText());
+                        event.date, model.getJournal().getJournalEntry(model.getLast()).getText());
         } else {
             journalWindow = new JournalWindow(event.date);
         }

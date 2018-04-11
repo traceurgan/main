@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.IllegalValueException;
 
 //@@author marlenekoh
 /**
@@ -37,8 +36,7 @@ public class TimetableDisplayUtil {
     private static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private static final String DEFAULT_TIMETABLE_PAGE_SCRIPT = "//@@author marlenekoh\n"
-            + "timetable = [\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"CS2103T\","
-            + " \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"\n"
+            + "timetable = [\n"
             + "];\n"
             + "var myTimetable = \"\";\n"
             + "var nRows = \"\";\n"
@@ -71,10 +69,15 @@ public class TimetableDisplayUtil {
      * Updates TimetablePageScript file at path {@code timetablePageJsPath} with new timetable module information
      */
     public static void setUpTimetablePageScriptFile() {
-        String oldContent = getFileContents(timetablePageJsPath);
-        String toReplace = getFileContents(timetableInfoFilePath);
-        String newContent = replaceFirstLine(oldContent, toReplace);
-        writeToTimetablePageScriptFile(newContent);
+        try {
+            String oldContent = getFileContents(timetablePageJsPath);
+            String toReplace = getFileContents(timetableInfoFilePath);
+            String newContent = replaceFirstLine(oldContent, toReplace);
+            writeToTimetablePageScriptFile(newContent);
+        } catch (FileNotFoundException e) {
+            timetablePageJsPath = "data/TimetablePageScript.js";
+            writeToTimetablePageScriptFile(DEFAULT_TIMETABLE_PAGE_SCRIPT);
+        }
     }
 
     /**
@@ -85,31 +88,93 @@ public class TimetableDisplayUtil {
         File timetableDisplayInfo = new File(timetableInfoFilePath);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
-            printWriter.write(convertTimetableToString(timetable));
+            String toWrite = convertTimetableToString(timetable);
+            printWriter.write(toWrite);
+            timetable.setTimetableDisplayInfo(toWrite);
             printWriter.close();
         } catch (FileNotFoundException e) {
             logger.warning("File not found, creating new file");
             try {
-                timetableInfoFilePath = "timetableDisplayInfo";
+                timetableInfoFilePath = "data/timetableDisplayInfo";
                 timetableDisplayInfo = new File(timetableInfoFilePath);
                 timetableDisplayInfo.createNewFile();
                 setUpTimetableDisplayInfo(timetable);
             } catch (IOException ioe) {
                 logger.severe("Unable to create new file");
             }
-        } catch (IllegalValueException e) {
-            logger.warning(e.getMessage());
         }
     }
 
     /**
-     * Converts the {@code listOfDays} into a String object for parsing
+     * Writes a string to the file at {@code timetableInfoFilePath}
+     * @param toWrite the String to write
+     */
+    public static void setUpTimetableDisplayInfoFile(String toWrite) {
+        File timetableDisplayInfo = new File(timetableInfoFilePath);
+        try {
+            PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
+            printWriter.write(toWrite);
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            logger.warning("File not found, creating new file");
+            try {
+                timetableInfoFilePath = "data/timetableDisplayInfo";
+                timetableDisplayInfo = new File(timetableInfoFilePath);
+                timetableDisplayInfo.createNewFile();
+                setUpTimetableDisplayInfoFile(toWrite);
+            } catch (IOException ioe) {
+                logger.severe("Unable to create new file");
+            }
+        }
+    }
+
+    /**
+     * Processes the given timetable for viewing.
+     * @param timetable to view
+     * @return an ArrayList containing the combined {@code TimetableModuleSlots} from both Timetables.
+     */
+    public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForViewing(Timetable timetable) {
+        ArrayList<TimetableModuleSlot> allUnsortedModulesSlots = timetable.getAllModulesSlots();
+
+        for (TimetableModuleSlot t : allUnsortedModulesSlots) {
+            t.setComparing(false);
+        }
+        return allUnsortedModulesSlots;
+    }
+
+    /**
+     * Combines the two lists of {@code TimetableModuleSlots} from each timetable and process them for comparing.
+     * @param first Timetable to compare
+     * @param second Timetable to compare
+     * @return an ArrayList containing the combined {@code TimetableModuleSlots} from both Timetables.
+     */
+    public static ArrayList<TimetableModuleSlot> setUpUnsortedModuleSlotsForComparing(Timetable first,
+                                                                                      Timetable second) {
+        ArrayList<TimetableModuleSlot> allUnsortedModulesSlots = new ArrayList<TimetableModuleSlot>();
+        allUnsortedModulesSlots.addAll(first.getAllModulesSlots());
+        allUnsortedModulesSlots.addAll(second.getAllModulesSlots());
+
+        for (TimetableModuleSlot t : allUnsortedModulesSlots) {
+            t.setComparing(true);
+        }
+        return allUnsortedModulesSlots;
+    }
+
+    /**
+     * Converts the {@code listOfDays} belonging to {@code timetable} into a String object for parsing
      * @param timetable which contains schedule to convert into JSON object
      */
-    public static String convertTimetableToString(Timetable timetable) throws IllegalValueException {
+    public static String convertTimetableToString(Timetable timetable) {
+        return convertTimetableToString(timetable.getListOfDays());
+    }
+
+    /**
+     * Converts the {@code listOfDays} into a String object for parsing
+     * @param listOfDays ArrayLists of timetableModuleSlots sorted by time
+     */
+    public static String convertTimetableToString(HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays) {
         StringBuilder sb = new StringBuilder();
 
-        HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays = timetable.getListOfDays();
         ArrayList<TimetableModuleSlot> slotsForTheDay = null;
         for (int i = 0; i < TIMES.length; i++) {
             if (i < TIMES.length - 1) {
@@ -143,7 +208,7 @@ public class TimetableDisplayUtil {
      * Gets file contents from the file at the given path
      * @return String containing file contents
      */
-    public static String getFileContents(String path) {
+    public static String getFileContents(String path) throws FileNotFoundException {
         File file = new File(path);
         try {
             if (file.exists()) {
@@ -159,13 +224,7 @@ public class TimetableDisplayUtil {
                 br.close();
                 return sb.toString();
             } else {
-                timetablePageJsPath = "TimetablePageScript.js";
-                file = new File(timetablePageJsPath);
-                file.createNewFile();
-                PrintWriter printWriter = new PrintWriter(file);
-                printWriter.write(DEFAULT_TIMETABLE_PAGE_SCRIPT);
-                printWriter.close();
-                return DEFAULT_TIMETABLE_PAGE_SCRIPT;
+                throw new FileNotFoundException("File does not exist");
             }
         } catch (IOException e) {
             logger.warning("Exception in reading file");
