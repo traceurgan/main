@@ -8,12 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.TimetableChangedEvent;
-import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.util.SampleDataUtil;
 
 public class FileTimetableStorage implements TimetableStorage {
@@ -38,6 +33,7 @@ public class FileTimetableStorage implements TimetableStorage {
     @Override
     public void setUpTimetableDisplayFiles(String toWrite) {
         writeToFile(toWrite, timetableInfoFilePath);
+        setUpTimetablePageScriptFile();
     }
 
     @Override
