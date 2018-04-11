@@ -419,7 +419,7 @@ Return to <<toc,Table of Contents>>
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
 Return to <<toc,Table of Contents>>
-
+// tag::calendar[]
 === [Proposed] Calendar Viewer Feature
 ==== Current Implementation
 The Calendar Viewer mechanism is facilitated by `Google Calendar API` and reside in the `ModelManager`.
