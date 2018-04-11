@@ -156,7 +156,7 @@ background {
 
 .status-bar .label { /* Status bar font */
     -fx-font-family: sans-serif;
-    -fx-text-fill: white;
+    -fx-text-fill: dimgray;
 }
 
 .status-bar-with-border {
