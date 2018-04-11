@@ -9,7 +9,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.SaveEntryEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowJournalWindowRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,8 +19,8 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.timetable.TimetableUtil;
 import seedu.address.ui.JournalWindow;
 
 /**
@@ -53,6 +55,15 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
+    //@@author marlenekoh
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        TimetableUtil.setUpTimetableInfoView(model.getPartner().getTimetable());
+        model.indicateTimetableChanged(model.getPartner().getTimetable());
+        raise(new ShowTimetableRequestEvent());
+    }
+
     //@@author traceurgan
     @Subscribe
     public void handleSaveEntryEvent(SaveEntryEvent event) {
@@ -80,7 +91,6 @@ public class LogicManager extends ComponentManager implements Logic {
         journalWindow.show();
     }
 
-    //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return model.getJournalEntryList();

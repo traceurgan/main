@@ -32,17 +32,7 @@ public class SelectCommand extends Command {
         try {
             partner = model.getPartner();
             Timetable timetable = partner.getTimetable();
-
-            ArrayList<TimetableModuleSlot> unsortedModuleSlots =
-                    TimetableUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
-            timetable.setAllModulesSlots(unsortedModuleSlots);
-
-            HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
-                    TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
-            timetable.setListOfDays(sortedModuleSlots);
-
-            TimetableUtil.setTimetableDisplayInfo(timetable);
-            TimetableUtil.setUpTimetableInfo(timetable);
+            TimetableUtil.setUpTimetableInfoView(timetable);
 
             model.indicateTimetableChanged(timetable);
             model.requestShowTimetable();

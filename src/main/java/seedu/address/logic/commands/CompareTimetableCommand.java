@@ -28,6 +28,7 @@ public class CompareTimetableCommand extends Command {
 
     public static final String MESSAGE_TIMETABLE_COMPARE_SUCCESS = "Compared timetable";
 
+    private ReadOnlyPerson partner;
     private Timetable otherTimetable;
 
     public CompareTimetableCommand(Timetable otherTimetable) {
@@ -36,18 +37,11 @@ public class CompareTimetableCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        ReadOnlyPerson partner = model.getPartner();
+        partner = model.getPartner();
+        otherTimetable = TimetableUtil.setUpTimetableInfoCompare(partner.getTimetable(), otherTimetable);
 
-        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
-                TimetableUtil.setUpUnsortedModuleSlotsForComparing(partner.getTimetable(), otherTimetable);
-        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
-                TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
-        otherTimetable.setListOfDays(sortedModuleSlots);
-        TimetableUtil.setTimetableDisplayInfo(otherTimetable);
-
-        EventsCenter.getInstance().post(new TimetableChangedEvent(otherTimetable));
-        EventsCenter.getInstance().post(new JumpToListRequestEvent());
-
+        model.indicateTimetableChanged(otherTimetable);
+        model.requestShowTimetable();
         return new CommandResult(MESSAGE_TIMETABLE_COMPARE_SUCCESS);
     }
 
