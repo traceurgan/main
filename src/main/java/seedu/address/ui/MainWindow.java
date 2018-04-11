@@ -131,10 +131,10 @@ public class MainWindow extends UiPart<Region> {
      */
     void fillInnerParts() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel((ReadOnlyPerson) logic.Partner());
+        browserPanel = new BrowserPanel(logic.getPartner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
 
-        listPanel = new ListPanel(logic.Partner(), logic.getJournalEntryList());
+        listPanel = new ListPanel(logic.partner(), logic.getJournalEntryList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
@@ -196,7 +196,7 @@ public class MainWindow extends UiPart<Region> {
      */
     public void handleShowTimetable() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel((Person) logic.Partner());
+        browserPanel = new BrowserPanel(logic.getPartner());
         browserPanel.loadTimetablePage();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
     }
@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Region> {
      */
     public void handleHideTimetable() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel((Person) logic.Partner());
+        browserPanel = new BrowserPanel(logic.getPartner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
     }
 

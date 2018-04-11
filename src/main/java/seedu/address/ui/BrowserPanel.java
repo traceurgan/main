@@ -42,6 +42,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     private static final String FXML = "BrowserPanel.fxml";
 
+
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     @FXML
@@ -134,7 +135,7 @@ public class BrowserPanel extends UiPart<Region> {
     private ArrayList<Entry> getEntries(ReadOnlyPerson person) {
         ArrayList<Entry> entries = new ArrayList<>();
         for (Appointment appointment : person.getAppointments()) {
-            logger.info("im king: "+appointment.getDescription());
+
             LocalDateTime ldtstart = LocalDateTime.ofInstant(appointment.getDate().toInstant(),
                     ZoneId.systemDefault());
             LocalDateTime ldtend = LocalDateTime.ofInstant(appointment.getEndDate().toInstant(),
@@ -156,12 +157,11 @@ public class BrowserPanel extends UiPart<Region> {
         CalendarSource calendarSource = new CalendarSource("Appointments");
         int styleNum = 0;
 
-            Calendar calendar = getCalendar(styleNum, partner);
+            Calendar calendar = getCalendar(styleNum,  partner);
             calendarSource.getCalendars().add(calendar);
-            ArrayList<Entry> entries = getEntries(partner);
-            styleNum++;
-            styleNum = styleNum % 5;
+            ArrayList<Entry> entries = getEntries( partner);
             for (Entry entry : entries) {
+                logger.info("im king: "+entry);
                 calendar.addEntry(entry);
             }
 

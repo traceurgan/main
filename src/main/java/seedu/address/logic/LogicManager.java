@@ -87,10 +87,14 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> Partner() {
-        return (ObservableList<ReadOnlyPerson>) model.getPerson();
+    public ObservableList<ReadOnlyPerson> partner() {
+        return model.getPersonAsList();
     }
 
+    @Override
+    public ReadOnlyPerson getPartner() {
+        return  model.getPerson();
+    }
     //@@author
     @Override
     public ListElementPointer getHistorySnapshot() {
