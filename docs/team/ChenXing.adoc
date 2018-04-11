@@ -24,6 +24,10 @@ It aims to help these couples create and remember new memories during their time
 
 * *Minor enhancement*: added commands to the command box to ease the user by managing the caret to jump from last index to first index and vice versa.
 
+* *Future enhancement*: will be implementing Google Calendar to sync the Calendar in the App currently.
+include::../userGuide.adoc[tag=googleAPI]
+
+
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
@@ -63,7 +67,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=calendar]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
 

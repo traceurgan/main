@@ -345,10 +345,16 @@ Return to <<toc,Table of Contents>>  +
 
 === Future Features
 // tag::dataencryption[]
+// tag::googleAPI[]
 ==== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+==== Sync the calendar with Google API `[coming in v2.0]`
+
+_{explain how the user can authentic with google API and view and retrieve events from Google}_
+
 
 ==== Archiving journal entries `[coming in v2.0]`
 
