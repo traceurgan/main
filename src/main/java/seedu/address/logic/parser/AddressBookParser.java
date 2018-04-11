@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CalendarViewCommand;
 import seedu.address.logic.commands.CancelAppointmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CompareTimetableCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeselectCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -70,6 +71,10 @@ public class AddressBookParser {
         case DeselectCommand.COMMAND_WORD:
         case DeselectCommand.COMMAND_ALIAS:
             return new DeselectCommand();
+
+        case CompareTimetableCommand.COMMAND_WORD:
+        case CompareTimetableCommand.COMMAND_ALIAS:
+            return new CompareTimetableCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON

@@ -4,6 +4,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefWidth="283.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="personListView" prefHeight="200.0" prefWidth="283.0" VBox.vgrow="ALWAYS" />
-   <ListView fx:id="journalEntryListView" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+  <ListView fx:id="personListView" prefHeight="0.0" prefWidth="283.0" VBox.vgrow="ALWAYS" />
+   <ListView fx:id="journalEntryListView" prefHeight="0.0" VBox.vgrow="ALWAYS" />
 </VBox>

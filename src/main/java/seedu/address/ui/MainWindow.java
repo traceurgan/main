@@ -83,6 +83,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setScene(scene);
         setAccelerators();
         registerAsAnEventHandler(this);
+
     }
 
     public Stage getPrimaryStage() {
@@ -169,6 +170,7 @@ public class MainWindow extends UiPart<Region> {
         primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.setMinWidth(MIN_WIDTH);
     }
+
     /**
      * Returns the current size and the position of the main Window.
      */
@@ -246,7 +248,6 @@ public class MainWindow extends UiPart<Region> {
         handleHideTimetable();
     }
 
-    // TODO: Remove this since NUSCouples will only have 1 person
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));

@@ -7,6 +7,9 @@ import seedu.address.commons.events.BaseEvent;
  */
 public class HideTimetableRequestEvent extends BaseEvent {
 
+    public HideTimetableRequestEvent() {
+    }
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName();

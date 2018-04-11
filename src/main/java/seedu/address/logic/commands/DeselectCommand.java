@@ -32,7 +32,6 @@ public class DeselectCommand extends Command {
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-
         return new CommandResult(String.format(MESSAGE_DESELECT_PERSON_SUCCESS, partner));
     }
 

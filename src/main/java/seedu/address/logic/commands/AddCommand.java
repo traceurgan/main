@@ -26,16 +26,13 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_TIMETABLE + "TIMETABLE_URL "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_TIMETABLE + "TIMETABLE_URL\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TIMETABLE + "http://modsn.us/wNuIW "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TIMETABLE + "http://modsn.us/wNuIW ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_MULTIPLE_PERSON = "You can only have one person in NUSCouples.\n"
