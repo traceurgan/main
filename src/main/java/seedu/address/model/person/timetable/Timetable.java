@@ -34,9 +34,10 @@ public class Timetable {
         requireNonNull(timetableUrl);
         checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
-        TimetableParserUtil.setUpTimetableInfo(this);
-        TimetableDisplayUtil.setUpTimetableDisplayFiles(this);
+        TimetableUtil.setUpTimetableInfo(this);
     }
+
+    // ================ Getter and Setter methods ==============================
 
     public String getExpandedUrl() {
         return expandedUrl;
@@ -80,6 +81,10 @@ public class Timetable {
 
     public void setTimetableDisplayInfo(String timetableDisplayInfo) {
         this.timetableDisplayInfo = timetableDisplayInfo;
+    }
+
+    public String getTimetableDisplayInfo() {
+        return timetableDisplayInfo;
     }
 
     /**
