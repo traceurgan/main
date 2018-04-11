@@ -37,12 +37,12 @@ public class TimetableUtil {
     public static final int WEDNESDAY_INDEX = 2;
     public static final int THURSDAY_INDEX = 3;
     public static final int FRIDAY_INDEX = 4;
-    public static final String[] DAYS = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    public static final String[] DAYS = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
     public static final String[] TIMES = {
-            "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130",
-            "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530",
-            "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930",
-            "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
+        "0800", "0830", "0900", "0930", "1000", "1030", "1100", "1130",
+        "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530",
+        "1600", "1630", "1700", "1730", "1800", "1830", "1900", "1930",
+        "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
@@ -85,7 +85,7 @@ public class TimetableUtil {
      * Sets the expanded URL for {@code timetable}.
      * @param timetable Timetable whose expanded URL is to be set
      */
-    private static void setExpandedTimetableUrl(Timetable timetable) throws ParseException {
+    public static void setExpandedTimetableUrl(Timetable timetable) throws ParseException {
         String expandedUrl = expandShortTimetableUrl(timetable);
         timetable.setExpandedUrl(expandedUrl);
     }
@@ -208,29 +208,28 @@ public class TimetableUtil {
     private static String convertListOfDaysToString(HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays) {
         StringBuilder sb = new StringBuilder();
 
-        ArrayList<TimetableModuleSlot> slotsForTheDay = null;
         for (int i = 0; i < TIMES.length; i++) {
             if (i < TIMES.length - 1) {
-                sb.append(listOfDays.get(DAYS[MONDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[MONDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[TUESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[TUESDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[WEDNESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[WEDNESDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[THURSDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[THURSDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[FRIDAY_INDEX]).get(i).toString());
                 sb.append(", ");
             } else {
-                sb.append(listOfDays.get(DAYS[MONDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[MONDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[TUESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[TUESDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[WEDNESDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[WEDNESDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[THURSDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[THURSDAY_INDEX]).get(i).toString());
                 sb.append(", ");
-                sb.append(listOfDays.get(DAYS[FRIDAY_INDEX].toUpperCase()).get(i).toString());
+                sb.append(listOfDays.get(DAYS[FRIDAY_INDEX]).get(i).toString());
             }
         }
         sb.append("\n");
@@ -428,17 +427,16 @@ public class TimetableUtil {
 
         HashMap<String, ArrayList<TimetableModuleSlot>> sortedTimetableModuleSlots =
                 new HashMap<String, ArrayList<TimetableModuleSlot>>();
-        sortedTimetableModuleSlots.put("MONDAY", listOfDays.get(MONDAY_INDEX));
-        sortedTimetableModuleSlots.put("TUESDAY", listOfDays.get(TUESDAY_INDEX));
-        sortedTimetableModuleSlots.put("WEDNESDAY", listOfDays.get(WEDNESDAY_INDEX));
-        sortedTimetableModuleSlots.put("THURSDAY", listOfDays.get(THURSDAY_INDEX));
-        sortedTimetableModuleSlots.put("FRIDAY", listOfDays.get(FRIDAY_INDEX));
+        sortedTimetableModuleSlots.put(DAYS[MONDAY_INDEX], listOfDays.get(MONDAY_INDEX));
+        sortedTimetableModuleSlots.put(DAYS[TUESDAY_INDEX], listOfDays.get(TUESDAY_INDEX));
+        sortedTimetableModuleSlots.put(DAYS[WEDNESDAY_INDEX], listOfDays.get(WEDNESDAY_INDEX));
+        sortedTimetableModuleSlots.put(DAYS[THURSDAY_INDEX], listOfDays.get(THURSDAY_INDEX));
+        sortedTimetableModuleSlots.put(DAYS[FRIDAY_INDEX], listOfDays.get(FRIDAY_INDEX));
         return sortedTimetableModuleSlots;
     }
 
     /**
      * Sorts Module Slots by time
-     *
      * @param timetableModuleSlots
      * @return a list of sorted TimetableModuleSlots
      */
@@ -527,20 +525,20 @@ public class TimetableUtil {
      * @return int representing day
      */
     public static int convertDayToInteger(String day) throws IllegalValueException {
-        switch (day.toLowerCase()) {
-        case "monday":
+        switch (day.toUpperCase()) {
+        case "MONDAY":
             return MONDAY_INDEX;
 
-        case "tuesday":
+        case "TUESDAY":
             return TUESDAY_INDEX;
 
-        case "wednesday":
+        case "WEDNESDAY":
             return WEDNESDAY_INDEX;
 
-        case "thursday":
+        case "THURSDAY":
             return THURSDAY_INDEX;
 
-        case "friday":
+        case "FRIDAY":
             return FRIDAY_INDEX;
 
         default:

@@ -1,11 +1,11 @@
 package seedu.address.storage;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import seedu.address.model.person.timetable.TimetableModuleSlot;
-
+//@@author marlenekoh
+/**
+ * Represents a storage for {@link seedu.address.model.person.timetable}.
+ */
 public interface TimetableStorage {
 
     /**

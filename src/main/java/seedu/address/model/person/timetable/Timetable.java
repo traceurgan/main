@@ -34,6 +34,10 @@ public class Timetable {
         requireNonNull(timetableUrl);
         checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
+        setUpTimetable();
+    }
+
+    private void setUpTimetable() {
         TimetableUtil.setUpTimetableInfo(this);
     }
 

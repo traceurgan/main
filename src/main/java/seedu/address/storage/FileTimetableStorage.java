@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.util.SampleDataUtil;
 
+//@@author marlenekoh
+/**
+ * A class to write and read Timetable data stored on the hard disk.
+ */
 public class FileTimetableStorage implements TimetableStorage {
     private static final Logger logger = LogsCenter.getLogger(FileTimetableStorage.class);
 
