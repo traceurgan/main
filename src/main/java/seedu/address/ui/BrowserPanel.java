@@ -17,7 +17,6 @@ import com.calendarfx.view.CalendarView;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
@@ -48,16 +47,16 @@ public class BrowserPanel extends UiPart<Region> {
 
     @FXML
     private CalendarView calendarView;
-    private ObservableList<ReadOnlyPerson> personList;
+    private ReadOnlyPerson partner;
 
     //@@author chenxing1992
-    public BrowserPanel(ObservableList<ReadOnlyPerson> personList) {
+    public BrowserPanel(ReadOnlyPerson partner) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
         //  getRoot().setOnKeyPressed(Event::consume);
 
-        this.personList = personList;
+        this.partner = partner;
 
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
@@ -152,17 +151,16 @@ public class BrowserPanel extends UiPart<Region> {
     private void updateCalendar() {
         setTime();
         CalendarSource calendarSource = new CalendarSource("Appointments");
-        int styleNum = 0;
-        for (ReadOnlyPerson person : personList) {
-            Calendar calendar = getCalendar(styleNum, person);
+
+
+            Calendar calendar = getCalendar(0, partner);
             calendarSource.getCalendars().add(calendar);
-            ArrayList<Entry> entries = getEntries(person);
-            styleNum++;
-            styleNum = styleNum % 5;
+            ArrayList<Entry> entries = getEntries(partner);
+
             for (Entry entry : entries) {
                 calendar.addEntry(entry);
             }
-        }
+
         calendarView.getCalendarSources().add(calendarSource);
     }
     //@@author chenxing1992
