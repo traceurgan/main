@@ -26,6 +26,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.ui.CalendarViewEvent;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 
@@ -48,16 +49,16 @@ public class BrowserPanel extends UiPart<Region> {
 
     @FXML
     private CalendarView calendarView;
-    private ObservableList<ReadOnlyPerson> personList;
+    private ReadOnlyPerson partner;
 
     //@@author chenxing1992
-    public BrowserPanel(ObservableList<ReadOnlyPerson> personList) {
+    public BrowserPanel(ReadOnlyPerson partner) {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
         //  getRoot().setOnKeyPressed(Event::consume);
 
-        this.personList = personList;
+        this.partner = partner;
 
         calendarView = new CalendarView();
         calendarView.setRequestedTime(LocalTime.now());
@@ -154,16 +155,16 @@ public class BrowserPanel extends UiPart<Region> {
         setTime();
         CalendarSource calendarSource = new CalendarSource("Appointments");
         int styleNum = 0;
-        for (ReadOnlyPerson person : personList) {
-            Calendar calendar = getCalendar(styleNum, person);
+
+            Calendar calendar = getCalendar(styleNum, partner);
             calendarSource.getCalendars().add(calendar);
-            ArrayList<Entry> entries = getEntries(person);
+            ArrayList<Entry> entries = getEntries(partner);
             styleNum++;
             styleNum = styleNum % 5;
             for (Entry entry : entries) {
                 calendar.addEntry(entry);
             }
-        }
+
         calendarView.getCalendarSources().add(calendarSource);
     }
     //@@author chenxing1992

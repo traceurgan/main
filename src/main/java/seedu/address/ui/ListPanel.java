@@ -18,6 +18,7 @@ import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
@@ -40,9 +41,9 @@ public class ListPanel extends UiPart<Region> {
     }
 
     private void setConnections(
-            ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
+            ObservableList<ReadOnlyPerson> partner, ObservableList<JournalEntry> journalEntryList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
-                personList, person -> new PersonCard(person, personList.indexOf(person) + 1));
+                partner, person -> new PersonCard(person, partner.indexOf(person) + 1));
 
         ObservableList<JournalEntryCard> mappedListToo = EasyBind.map(journalEntryList, journalEntry ->
                 new JournalEntryCard(journalEntry, journalEntryList.indexOf(journalEntry) + 1));

@@ -26,6 +26,8 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -129,10 +131,10 @@ public class MainWindow extends UiPart<Region> {
      */
     void fillInnerParts() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel(logic.getPersonAsList());
+        browserPanel = new BrowserPanel((ReadOnlyPerson) logic.Partner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
 
-        listPanel = new ListPanel(logic.getPersonAsList(), logic.getJournalEntryList());
+        listPanel = new ListPanel(logic.Partner(), logic.getJournalEntryList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
@@ -194,7 +196,7 @@ public class MainWindow extends UiPart<Region> {
      */
     public void handleShowTimetable() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel(logic.getPersonAsList());
+        browserPanel = new BrowserPanel((Person) logic.Partner());
         browserPanel.loadTimetablePage();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
     }
@@ -204,7 +206,7 @@ public class MainWindow extends UiPart<Region> {
      */
     public void handleHideTimetable() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel(logic.getPersonAsList());
+        browserPanel = new BrowserPanel((Person) logic.Partner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
     }
 
