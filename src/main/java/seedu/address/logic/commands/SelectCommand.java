@@ -2,13 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.person.timetable.TimetableModuleSlot;
 import seedu.address.model.person.timetable.TimetableUtil;
 
 /**

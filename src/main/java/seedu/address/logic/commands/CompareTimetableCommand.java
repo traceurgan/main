@@ -2,15 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.model.TimetableChangedEvent;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.person.timetable.TimetableModuleSlot;
 import seedu.address.model.person.timetable.TimetableUtil;
 
 /**
