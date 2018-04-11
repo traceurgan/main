@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.FileTimetableStorage;
 import seedu.address.storage.JournalStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.PersonStorage;
@@ -66,7 +67,9 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         PersonStorage personStorage = new XmlPersonStorage(userPrefs.getPersonFilePath());
         JournalStorage journalStorage = new XmlJournalStorage(userPrefs.getJournalFilePath());
-        storage = new StorageManager(personStorage, journalStorage, userPrefsStorage);
+        FileTimetableStorage timetableStorage = new FileTimetableStorage(userPrefs.getTimetablePageJsPath(),
+                userPrefs.getTimetableInfoFilePath());
+        storage = new StorageManager(personStorage, journalStorage, userPrefsStorage, timetableStorage);
 
         initLogging(config);
 

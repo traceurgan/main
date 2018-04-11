@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.events.ui.HideTimetableRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.timetable.Timetable;
 
 /**
  * The API of the Model component.
@@ -39,20 +41,15 @@ public interface Model {
     void deletePerson();
 
     /** Adds the given person */
-    void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
+    void addPerson(ReadOnlyPerson person);
 
-    /** Edits the given person
-     *
-     * @throws NullPointerException
-     *
-     * */
-    void editPerson(ReadOnlyPerson editedPerson)
-            throws NullPointerException;
+    /** Edits the given person */
+    void editPerson(ReadOnlyPerson editedPerson) throws NullPointerException;
 
     String checkDate(int last);
 
-    Person updatePerson(ReadOnlyPerson editedPerson)
-            throws DuplicatePersonException, PersonNotFoundException;
+    /** Updates the given person */
+    Person updatePerson(ReadOnlyPerson editedPerson) throws PersonNotFoundException;
 
     //@@author chenxing1992
     /**
@@ -65,5 +62,21 @@ public interface Model {
      */
     void removeAppointment(ReadOnlyPerson target, Appointment appointment) throws PersonNotFoundException;
 
+    //@@author marlenekoh
+    /**
+     * Raises an event to indicate the timetable storage has changed.
+     */
+    void indicateTimetableChanged(Timetable timetable);
+    /**
+     * Raises an event to hide timetable.
+     */
+    void requestHideTimetable();
+
+    /**
+     * Raises an event to show timetable.
+     */
+    void requestShowTimetable();
+
+    //@@author
     int getLast();
 }

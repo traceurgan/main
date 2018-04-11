@@ -4,13 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -38,6 +35,7 @@ public class DeleteCommand extends UndoableCommand {
         try {
             this.name = personToDelete.getName();
             model.deletePerson();
+            model.requestHideTimetable();
         } catch (NullPointerException npe) {
             throw new CommandException("There is no one to delete.");
         }

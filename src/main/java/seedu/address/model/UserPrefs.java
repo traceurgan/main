@@ -13,6 +13,8 @@ public class UserPrefs {
     private String personFilePath = "data/person.xml";
     private String journalFilePath = "data/journal.xml";
     private String nusCouplesName = "NUSCouples";
+    private String timetablePageJsPath = "data/TimetablePageScript.js";
+    private String timetableInfoFilePath = "data/timetableDisplayInfo";
 
     public UserPrefs() {
         this.setGuiSettings(500, 500, 0, 0);
@@ -50,6 +52,14 @@ public class UserPrefs {
         this.nusCouplesName = nuscouplesName;
     }
 
+    public String getTimetablePageJsPath() {
+        return timetablePageJsPath;
+    }
+
+    public String getTimetableInfoFilePath() {
+        return timetableInfoFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -64,7 +74,9 @@ public class UserPrefs {
         return Objects.equals(guiSettings, o.guiSettings)
                 && Objects.equals(personFilePath, o.personFilePath)
                 && Objects.equals(journalFilePath, o.journalFilePath)
-                && Objects.equals(nusCouplesName, o.nusCouplesName);
+                && Objects.equals(nusCouplesName, o.nusCouplesName)
+                && Objects.equals(timetableInfoFilePath, o.timetableInfoFilePath)
+                && Objects.equals(timetablePageJsPath, o.timetablePageJsPath);
     }
 
     @Override

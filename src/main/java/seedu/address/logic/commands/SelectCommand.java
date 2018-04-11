@@ -1,13 +1,15 @@
 package seedu.address.logic.commands;
 
+import seedu.address.model.person.ReadOnlyPerson;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.timetable.TimetableDisplayUtil;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.timetable.Timetable;
+import seedu.address.model.person.timetable.TimetableModuleSlot;
+import seedu.address.model.person.timetable.TimetableUtil;
 
 /**
  * Selects your partner from NUSCouples.
@@ -16,28 +18,40 @@ public class SelectCommand extends Command {
 
     public static final String COMMAND_WORD = "select";
     public static final String COMMAND_ALIAS = "s";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects your partner and shows his/her timetable.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Showing timetable of: ";
-
     private ReadOnlyPerson partner;
+
+    public SelectCommand() { }
 
     @Override
     public CommandResult execute() throws CommandException {
-
         try {
-            partner = model.getPerson();
-            TimetableDisplayUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
-            TimetableDisplayUtil.setUpTimetableDisplayInfo(partner.getTimetable());
-            EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
-            EventsCenter.getInstance().post(new JumpToListRequestEvent());
-        } catch (NullPointerException npe) {
+            ReadOnlyPerson readOnlyPartner = model.getPerson();
+            Person partner = new Person(readOnlyPartner);
+
+            Timetable timetable = partner.getTimetable();
+
+            ArrayList<TimetableModuleSlot> unsortedModuleSlots =
+                    TimetableUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
+            timetable.setAllModulesSlots(unsortedModuleSlots);
+
+            HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
+                    TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
+            timetable.setListOfDays(sortedModuleSlots);
+
+            TimetableUtil.setTimetableDisplayInfo(timetable);
+            TimetableUtil.setUpTimetableInfo(timetable);
+
+            model.indicateTimetableChanged(timetable);
+            model.requestShowTimetable();
+        } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-        return new CommandResult(MESSAGE_SELECT_PERSON_SUCCESS + partner);
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, partner));
     }
 
     @Override
