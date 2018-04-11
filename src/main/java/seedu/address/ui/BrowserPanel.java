@@ -151,16 +151,20 @@ public class BrowserPanel extends UiPart<Region> {
      * Creates a new a calendar with the update information
      */
     private void updateCalendar() {
-        setTime();
-        CalendarSource calendarSource = new CalendarSource("Appointments");
-        int styleNum = 0;
-        Calendar calendar = getCalendar(styleNum,  partner);
-        calendarSource.getCalendars().add(calendar);
-        ArrayList<Entry> entries = getEntries(partner);
-        for (Entry entry : entries) {
-            calendar.addEntry(entry);
+        try {
+            setTime();
+            CalendarSource calendarSource = new CalendarSource("Appointments");
+            int styleNum = 0;
+            Calendar calendar = getCalendar(styleNum,  partner);
+            calendarSource.getCalendars().add(calendar);
+            ArrayList<Entry> entries = getEntries(partner);
+            for (Entry entry : entries) {
+                calendar.addEntry(entry);
+            }
+            calendarView.getCalendarSources().add(calendarSource);
+        } catch (NullPointerException npe) {
+            return;
         }
-        calendarView.getCalendarSources().add(calendarSource);
     }
     //@@author chenxing1992
     @Subscribe
