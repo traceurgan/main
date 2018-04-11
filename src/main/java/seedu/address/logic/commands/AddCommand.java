@@ -50,10 +50,6 @@ public class AddCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
-        return getCommandResult();
-    }
-
-    private CommandResult getCommandResult() throws CommandException {
         try {
             model.addPerson(toAdd);
         } catch (DuplicatePersonException dpe) {

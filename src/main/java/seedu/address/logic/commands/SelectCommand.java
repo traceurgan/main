@@ -49,7 +49,7 @@ public class SelectCommand extends Command {
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, partner));
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS + partner.getName()));
     }
 
     @Override
