@@ -4,7 +4,6 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 import static seedu.address.testutil.TypicalJournalEntries.getTypicalJournal;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.text.ParseException;
 
@@ -12,7 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.model.Model;
@@ -26,9 +24,8 @@ public class AddAppointmentCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-
     @Test
-    public void equals() throws ParseException, seedu.address.logic.parser.exceptions.ParseException {
+    public void equals() throws ParseException, ParseException {
         String arg = "Lunch, tomorrow 5pm";
 
         AddAppointmentCommand command = new AddAppointmentCommand(Index.fromOneBased(1), setAppointment(arg));
