@@ -18,6 +18,8 @@ import seedu.address.model.person.timetable.Timetable;
  */
 public class Person implements ReadOnlyPerson {
 
+    public static final int PARTNER_INDEX = 0;
+
     private ObjectProperty<Name> name;
     private ObjectProperty<Phone> phone;
     private ObjectProperty<Email> email;

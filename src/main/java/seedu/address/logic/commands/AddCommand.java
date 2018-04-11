@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -57,10 +56,10 @@ public class AddCommand extends UndoableCommand {
     private CommandResult getCommandResult() throws CommandException {
         try {
             model.addPerson(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (DuplicatePersonException e) {
-            throw new CommandException(MESSAGE_MULTIPLE_PERSON);
+        } catch (DuplicatePersonException dpe) {
+            return new CommandResult(MESSAGE_MULTIPLE_PERSON);
         }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

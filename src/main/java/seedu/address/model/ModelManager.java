@@ -12,12 +12,16 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
+import seedu.address.commons.events.model.TimetableChangedEvent;
+import seedu.address.commons.events.ui.HideTimetableRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.timetable.Timetable;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -63,7 +67,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateJournalChanged();
     }
 
-
     @Override
     public void resetPersonData(ReadOnlyPerson newData) {
 
@@ -84,9 +87,25 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new PersonChangedEvent(person));
     }
 
+    //@@author marlenekoh
+    @Override
+    public void indicateTimetableChanged(Timetable timetable) {
+        raise(new TimetableChangedEvent(timetable));
+    }
+
+    @Override
+    public void requestHideTimetable() {
+        raise(new HideTimetableRequestEvent());
+    }
+
+    @Override
+    public void requestShowTimetable() {
+        raise(new ShowTimetableRequestEvent());
+    }
+
     //@@author traceurgan
     /**
-     * Raises an event to indicate the journal model has changed
+     * Raises an event to indicate the journal model has changed.
      */
     private void indicateJournalChanged() {
         raise(new JournalChangedEvent(journal));
@@ -98,6 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(this.partner);
         partner = updatePerson(null);
         indicatePersonChanged(partner);
+        requestHideTimetable();
     }
 
     @Override
@@ -109,6 +129,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.partner = (Person) newPerson;
         updatePerson(partner);
         indicatePersonChanged(partner);
+        indicateTimetableChanged(partner.getTimetable());
     }
 
     /**
@@ -131,6 +152,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(this.partner, editedPerson);
         partner = updatePerson(editedPerson);
         indicatePersonChanged(partner);
+        indicateTimetableChanged(partner.getTimetable());
     }
 
     //@@author traceurgan

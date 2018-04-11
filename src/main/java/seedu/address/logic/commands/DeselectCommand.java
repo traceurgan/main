@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
+import seedu.address.model.person.ReadOnlyPerson;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.ReadOnlyPerson;
 
 /**
  * Deselects your partner from NUSCouples.
@@ -22,13 +20,15 @@ public class DeselectCommand extends Command {
 
     private ReadOnlyPerson partner;
 
+    public DeselectCommand() {
+    }
+
     @Override
     public CommandResult execute() throws CommandException {
-
         try {
             partner = model.getPartner();
             partner.getTimetable();
-            EventsCenter.getInstance().post(new HideTimetableRequestEvent());
+            model.requestHideTimetable();
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }

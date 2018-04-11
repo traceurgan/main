@@ -17,6 +17,7 @@ import com.calendarfx.view.CalendarView;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
@@ -24,7 +25,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.ui.CalendarViewEvent;
-
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 
@@ -55,7 +55,7 @@ public class BrowserPanel extends UiPart<Region> {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
-        //  getRoot().setOnKeyPressed(Event::consume);
+        getRoot().setOnKeyPressed(Event::consume);
 
         this.partner = partner;
 
@@ -70,8 +70,6 @@ public class BrowserPanel extends UiPart<Region> {
         disableViews();
         registerAsAnEventHandler(this);
 
-        //loadDefaultPage();
-        //registerAsAnEventHandler(this);
     }
 
     //@@author chenxing1992

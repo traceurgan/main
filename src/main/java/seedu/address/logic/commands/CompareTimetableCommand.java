@@ -2,12 +2,16 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.person.timetable.TimetableComparatorUtil;
+import seedu.address.model.person.timetable.TimetableModuleSlot;
+import seedu.address.model.person.timetable.TimetableUtil;
 
 /**
  * Compares the partner's timetable with a given timetable
@@ -33,10 +37,17 @@ public class CompareTimetableCommand extends Command {
     @Override
     public CommandResult execute() {
         ReadOnlyPerson partner = model.getPartner();
-        TimetableComparatorUtil.compareTimetable(partner.getTimetable(), otherTimetable);
 
-        EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
+        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
+                TimetableUtil.setUpUnsortedModuleSlotsForComparing(partner.getTimetable(), otherTimetable);
+        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
+                TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
+        otherTimetable.setListOfDays(sortedModuleSlots);
+        TimetableUtil.setTimetableDisplayInfo(otherTimetable);
+
+        EventsCenter.getInstance().post(new TimetableChangedEvent(otherTimetable));
         EventsCenter.getInstance().post(new JumpToListRequestEvent());
+
         return new CommandResult(MESSAGE_TIMETABLE_COMPARE_SUCCESS);
     }
 
