@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.model.person.Person.PARTNER_INDEX;
-
 import java.util.logging.Logger;
 
 import org.fxmisc.easybind.EasyBind;
@@ -42,7 +40,7 @@ public class ListPanel extends UiPart<Region> {
     }
 
     private void setConnections(
-              ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
+            ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
                 personList, person -> new PersonCard(person, personList.indexOf(person) + 1));
 
@@ -87,7 +85,7 @@ public class ListPanel extends UiPart<Region> {
     /**
      * Deselects the {@code PersonCard} at the {@code index}.
      */
-    private void deselect(int index) {
+    private void deselect() {
         Platform.runLater(() -> {
             personListView.getSelectionModel().clearSelection();
         });
@@ -96,7 +94,7 @@ public class ListPanel extends UiPart<Region> {
     @Subscribe
     private void handleHideTimetableRequestEvent (HideTimetableRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        deselect(PARTNER_INDEX);
+        deselect();
     }
 
     /**

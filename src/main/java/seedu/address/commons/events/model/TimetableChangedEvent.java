@@ -13,5 +13,7 @@ public class TimetableChangedEvent extends BaseEvent {
     }
 
     @Override
-    public String toString() { return null; }
+    public String toString() {
+        return null;
+    }
 }

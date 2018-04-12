@@ -82,6 +82,41 @@ public class TimetableUtil {
     }
 
     /**
+     * Sets up timetable for viewing.
+     * @param timetable to set up
+     * @return a timetable containing the timetableDisplayInfo
+     */
+    public static Timetable setUpTimetableInfoView(Timetable timetable) {
+        requireNonNull(timetable);
+        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
+                TimetableUtil.setUpUnsortedModuleSlotsForViewing(timetable);
+        timetable.setAllModulesSlots(unsortedModuleSlots);
+
+        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
+                TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
+        timetable.setListOfDays(sortedModuleSlots);
+
+        TimetableUtil.setTimetableDisplayInfo(timetable);
+        return timetable;
+    }
+
+    /**
+     * Sets up timetable for comparing.
+     * @param first timetable to compare
+     * @param second timetable to compare
+     * @return a timetable containing the combined timetableDisplayInfo
+     */
+    public static Timetable setUpTimetableInfoCompare(Timetable first, Timetable second) {
+        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
+                setUpUnsortedModuleSlotsForComparing(first, second);
+        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
+                sortModuleSlotsByDay(unsortedModuleSlots);
+        second.setListOfDays(sortedModuleSlots);
+        setTimetableDisplayInfo(second);
+        return second;
+    }
+
+    /**
      * Sets the expanded URL for {@code timetable}.
      * @param timetable Timetable whose expanded URL is to be set
      */

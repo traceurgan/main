@@ -5,10 +5,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,12 +18,10 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -44,7 +42,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        seedu.address.model.person.Person validPerson = new PersonBuilder().build();
 
         CommandResult commandResult = getAddCommandForPerson(validPerson, modelStub).execute();
 
@@ -55,18 +53,18 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
         ModelStub modelStub = new ModelStubThrowingDuplicatePersonException();
-        Person validPerson = new PersonBuilder().build();
+        seedu.address.model.person.Person validPerson = new PersonBuilder().build();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_MULTIPLE_PERSON);
 
         getAddCommandForPerson(validPerson, modelStub).execute();
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        seedu.address.model.person.Person alice = new PersonBuilder().withName("Alice").build();
+        seedu.address.model.person.Person bob = new PersonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -90,7 +88,7 @@ public class AddCommandTest {
     /**
      * Generates a new AddCommand with the details of the given person.
      */
-    private AddCommand getAddCommandForPerson(Person person, Model model) {
+    private AddCommand getAddCommandForPerson(seedu.address.model.person.Person person, Model model) {
         AddCommand command = new AddCommand(person);
         command.setData(model, new CommandHistory(), new UndoRedoStack());
         return command;
@@ -103,6 +101,22 @@ public class AddCommandTest {
         @Override
         public void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
             fail("This method should not be called.");
+        }
+
+        @Override
+        public void editPerson(ReadOnlyPerson editedPerson) throws NullPointerException {
+
+        }
+
+        @Override
+        public String checkDate(int last) {
+            return null;
+        }
+
+        @Override
+        public Person updatePerson(ReadOnlyPerson editedPerson) throws DuplicatePersonException,
+                PersonNotFoundException {
+            return null;
         }
 
         @Override
@@ -123,37 +137,35 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public int getLast() {
+            fail("This method should not be called.");
+            return 0;
+        }
+
+        @Override
+        public void resetPersonData(ReadOnlyPerson newData) {
             fail("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPerson getPerson() {
+            fail("This method should not be called.");
+            return null;
+        }
+
+        @Override
+        public void resetJournalData(ReadOnlyJournal newData) {
+            fail("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ReadOnlyPerson> getPersonAsList() {
             fail("This method should not be called.");
             return null;
         }
 
         @Override
         public ReadOnlyJournal getJournal() {
-            fail("This method should not be called.");
-            return null;
-        }
-        //@@author chenxing1992
-        @Override
-        public void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-            fail("This method should not be called.");
-        }
-
-        @Override
-        public void updatePerson(ReadOnlyPerson target, ReadOnlyPerson editedPerson)
-                throws DuplicatePersonException {
-            fail("This method should not be called.");
-        }
-
-
-
-        @Override
-        public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
             fail("This method should not be called.");
             return null;
         }
@@ -165,7 +177,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<ReadOnlyPerson> predicate) {
+        public void deletePerson() throws PersonNotFoundException {
             fail("This method should not be called.");
         }
     }
@@ -175,13 +187,13 @@ public class AddCommandTest {
      */
     private class ModelStubThrowingDuplicatePersonException extends ModelStub {
         @Override
-        public void addPerson(ReadOnlyPerson person) throws DuplicatePersonException {
+        public void addPerson(seedu.address.model.person.ReadOnlyPerson person) throws DuplicatePersonException {
             throw new DuplicatePersonException();
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPerson getPerson() {
+            return new Person(ALICE);
         }
     }
 
@@ -198,8 +210,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPerson getPerson() {
+            return new Person(ALICE);
         }
     }
 

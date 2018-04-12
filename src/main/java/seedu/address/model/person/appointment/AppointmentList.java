@@ -1,4 +1,4 @@
-package seedu.address.model.person.Appointment;
+package seedu.address.model.person.appointment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -19,14 +19,14 @@ public class AppointmentList {
     private final ObservableList<Appointment> internalList = FXCollections.observableArrayList();
 
     /**
-     * Constructs empty Appointment list
+     * Constructs empty appointment list
      */
     public AppointmentList() {
 
     }
 
     /**
-     * Contructs an Appointment list with new appointments
+     * Contructs an appointment list with new appointments
      */
     public AppointmentList(List<Appointment> appointments) {
         requireAllNonNull(appointments);
@@ -62,7 +62,7 @@ public class AppointmentList {
     }
 
     /**
-     * Returns true if list contains and equivalent Appointment
+     * Returns true if list contains and equivalent appointment
      */
     public boolean contains (Appointment appointment) {
         return internalList.contains(appointment);
@@ -86,9 +86,9 @@ public class AppointmentList {
     @Override
     public String toString() {
         if (internalList.isEmpty()) {
-            return "No Appointment set";
+            return "No appointment set";
         } else {
-            return internalList.size() == 1 ? "" + internalList.size() + " Appointment set"
+            return internalList.size() == 1 ? "" + internalList.size() + " appointment set"
                     : "" + internalList.size() + " appointments set";
         }
     }
