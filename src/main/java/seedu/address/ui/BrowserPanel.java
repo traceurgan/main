@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -40,7 +41,9 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
-    private static final String DATA_FILE_FOLDER = "/data/";
+    private static final String JAR_DATA_FILE_FOLDER = "/data/";
+    private static final String INTELLIJ_DATA_FILE_FOLDER = "\\data\\";
+    private static final String FILE_PREFIX = "file:";
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
@@ -180,8 +183,21 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads the timetable page of a person into browser panel.
      */
     public void loadTimetablePage() {
-        String timetablePageUrl = getJarDir() + DATA_FILE_FOLDER + TIMETABLE_PAGE;
+        String timetablePageUrl;
+        if (runningFromIntelliJ()) {
+            timetablePageUrl = FILE_PREFIX + getIntellijRootDir() + INTELLIJ_DATA_FILE_FOLDER + TIMETABLE_PAGE;
+        } else {
+            timetablePageUrl = getJarDir() + JAR_DATA_FILE_FOLDER + TIMETABLE_PAGE;
+        }
         loadPage(timetablePageUrl);
+    }
+
+    /**
+     * Gets the directory containing the root folder
+     * @return a String containing the directory path
+     */
+    private String getIntellijRootDir() {
+        return System.getProperty("user.dir");
     }
 
     /**
@@ -196,6 +212,19 @@ public class BrowserPanel extends UiPart<Region> {
             logger.warning("The Character Encoding is not supported.");
         }
         return jarPath.substring(0, jarPath.lastIndexOf('/'));
+    }
+
+    /**
+     * Checks if the current code is running from IntelliJ (for debugging) or from the jar file.
+     * @return true if running from IntelliJ
+     */
+    private static boolean runningFromIntelliJ() {
+        String classPath = System.getProperty("java.class.path");
+        Logger logger = LogsCenter.getLogger(MainApp.class);
+        logger.info("====================================");
+        logger.info(classPath);
+        logger.info("====================================");
+        return classPath.contains("idea_rt.jar");
     }
 
     //@@author
