@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,9 +43,9 @@ public class BrowserPanel extends UiPart<Region> {
 
     private static final String FXML = "BrowserPanel.fxml";
 
-
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
+    private final String DATA_FILE_FOLDER = "/data/";
     @FXML
     private WebView browser;
 
@@ -175,11 +178,25 @@ public class BrowserPanel extends UiPart<Region> {
 
     //@@author marlenekoh
     /**
-     * Loads the timetable page of a person into browser panel
+     * Loads the timetable page of a person into browser panel.
      */
     public void loadTimetablePage() {
-        URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
-        loadPage(timetablePage.toExternalForm());
+        String timetablePageUrl = getJarDir() + DATA_FILE_FOLDER + TIMETABLE_PAGE;
+        loadPage(timetablePageUrl);
+    }
+
+    /**
+     * Gets the directory containing the executing jar.
+     * @return a String containing the directory path
+     */
+    private String getJarDir() {
+        String jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+        try {
+            jarPath = URLDecoder.decode(jarPath, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            logger.warning("The Character Encoding is not supported.");
+        }
+        return jarPath.substring(0, jarPath.lastIndexOf('/'));
     }
 
     //@@author
@@ -204,7 +221,6 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(
                 this::updateCalendar
         );
-
     }
 
     /**

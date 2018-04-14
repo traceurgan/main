@@ -18,38 +18,56 @@ import seedu.address.model.util.SampleDataUtil;
 public class FileTimetableStorage implements TimetableStorage {
     private static final Logger logger = LogsCenter.getLogger(FileTimetableStorage.class);
 
-    private String timetablePageJsPath;
+    private String timetablePageHtmlPath;
+    private String timetablePageCssPath;
     private String timetableInfoFilePath;
 
-    public FileTimetableStorage(String timetablePageJsPath, String timetableInfoFilePath) {
-        this.timetablePageJsPath = timetablePageJsPath;
+    public FileTimetableStorage(String timetablePageHtmlPath, String timetablePageCssPath, String timetableInfoFilePath) {
+        this.timetablePageHtmlPath = timetablePageHtmlPath;
+        this.timetablePageCssPath = timetablePageCssPath;
         this.timetableInfoFilePath = timetableInfoFilePath;
     }
 
-    public String getTimetablePageJsPath() {
-        return timetablePageJsPath;
+    public String getTimetablePageHtmlPath() {
+        return timetablePageHtmlPath;
     }
 
     public String getTimetableInfoFilePath() {
         return timetableInfoFilePath;
     }
 
-    @Override
-    public void setUpTimetableDisplayFiles(String toWrite) {
-        writeToFile(toWrite, timetableInfoFilePath);
-        setUpTimetablePageScriptFile();
+    public String getTimetablePageCssPath() {
+        return timetablePageCssPath;
     }
 
     @Override
-    public void setUpTimetablePageScriptFile() {
+    public void setUpTimetableDisplayFiles(String toWrite) {
+        writeToFile(toWrite, timetableInfoFilePath);
+        createTimetablePageCssFile();
+        setUpTimetablePageHtmlFile();
+    }
+
+    @Override
+    public void createTimetablePageCssFile() {
         try {
-            writeToFile(SampleDataUtil.getDefaultTimetablePageScript(), timetablePageJsPath);
-            String oldContent = getFileContents(timetablePageJsPath);
+            writeToFile(SampleDataUtil.getDefaultTimetablePageCss(), timetablePageCssPath);
+        } catch (IOException e) {
+            logger.severe("Unable to get default timetable style");
+        }
+    }
+
+    @Override
+    public void setUpTimetablePageHtmlFile() {
+        try {
+            writeToFile(SampleDataUtil.getDefaultTimetablePageHtml(), timetablePageHtmlPath);
+            String oldContent = getFileContents(timetablePageHtmlPath);
             String toReplace = getFileContents(timetableInfoFilePath);
-            String newContent = replaceFirstLine(oldContent, toReplace);
-            writeToFile(newContent, timetablePageJsPath);
+            String newContent = replaceLine(oldContent, toReplace, "timetable", "];");
+            writeToFile(newContent, timetablePageHtmlPath);
         } catch (FileNotFoundException e) {
             logger.warning("File not found");
+        } catch (IOException e) {
+            logger.severe("Unable to get default timetable page");
         }
     }
 
@@ -91,14 +109,13 @@ public class FileTimetableStorage implements TimetableStorage {
     }
 
     @Override
-    public String replaceFirstLine(String contents, String replace) {
+    public String replaceLine(String contents, String replace, String startLine, String endLine) {
         StringBuilder sb = new StringBuilder();
-        //TODO: Get rid of this
-        sb.append("//@@author marlenekoh\n");
-        sb.append("timetable = [");
+        int startPos = contents.indexOf(startLine);
+        int endPos = contents.indexOf(endLine);
+        sb.append(contents.substring(0, startPos));
         sb.append(replace);
-        int pos = contents.indexOf(';');
-        sb.append(contents.substring(pos - 1));
+        sb.append(contents.substring(endPos + 2));
         return sb.toString();
     }
 }

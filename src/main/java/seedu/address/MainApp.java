@@ -72,13 +72,13 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         PersonStorage personStorage = new XmlPersonStorage(userPrefs.getPersonFilePath());
         JournalStorage journalStorage = new XmlJournalStorage(userPrefs.getJournalFilePath());
-        FileTimetableStorage timetableStorage = new FileTimetableStorage(userPrefs.getTimetablePageJsPath(),
-                userPrefs.getTimetableInfoFilePath());
+        FileTimetableStorage timetableStorage = new FileTimetableStorage(userPrefs.getTimetablePageHtmlPath(),
+                userPrefs.getTimetablePageCssPath(), userPrefs.getTimetableInfoFilePath());
         storage = new StorageManager(personStorage, journalStorage, userPrefsStorage, timetableStorage);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs, timetableStorage);
+        model = initModelManager(storage, userPrefs);
 
         logic = new LogicManager(model);
 
@@ -97,7 +97,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs, FileTimetableStorage timetableStorage) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyPerson> personOptional;
         Optional<ReadOnlyJournal> journalOptional;
         ReadOnlyPerson personData;
@@ -135,19 +135,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty Journal");
             journalData = new Journal();
         }
-
-        Timetable timetable = personData.getTimetable();
-
-        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
-                TimetableUtil.setUpUnsortedModuleSlotsForViewing(personData.getTimetable());
-        timetable.setAllModulesSlots(unsortedModuleSlots);
-
-        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
-                TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
-        timetable.setListOfDays(sortedModuleSlots);
-
-        TimetableUtil.setTimetableDisplayInfo(timetable);
-        TimetableUtil.setUpTimetableInfo(timetable);
 
         return new ModelManager(personData, journalData, userPrefs);
     }

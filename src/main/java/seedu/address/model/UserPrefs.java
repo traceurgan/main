@@ -13,7 +13,8 @@ public class UserPrefs {
     private String personFilePath = "data/person.xml";
     private String journalFilePath = "data/journal.xml";
     private String nusCouplesName = "NUSCouples";
-    private String timetablePageJsPath = "data/TimetablePageScript.js";
+    private String timetablePageHtmlPath = "data/TimetablePage.html";
+    private String timetablePageCssPath = "data/TimetableStyle.css";
     private String timetableInfoFilePath = "data/timetableDisplayInfo";
 
     public UserPrefs() {
@@ -52,12 +53,16 @@ public class UserPrefs {
         this.nusCouplesName = nuscouplesName;
     }
 
-    public String getTimetablePageJsPath() {
-        return timetablePageJsPath;
+    public String getTimetablePageHtmlPath() {
+        return timetablePageHtmlPath;
     }
 
     public String getTimetableInfoFilePath() {
         return timetableInfoFilePath;
+    }
+
+    public String getTimetablePageCssPath() {
+        return timetablePageCssPath;
     }
 
     @Override
@@ -76,7 +81,7 @@ public class UserPrefs {
                 && Objects.equals(journalFilePath, o.journalFilePath)
                 && Objects.equals(nusCouplesName, o.nusCouplesName)
                 && Objects.equals(timetableInfoFilePath, o.timetableInfoFilePath)
-                && Objects.equals(timetablePageJsPath, o.timetablePageJsPath);
+                && Objects.equals(timetablePageHtmlPath, o.timetablePageHtmlPath);
     }
 
     @Override

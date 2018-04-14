@@ -234,7 +234,17 @@ public class TimetableUtil {
     }
 
     public static void setTimetableDisplayInfo(Timetable timetable) {
-        timetable.setTimetableDisplayInfo(convertListOfDaysToString(timetable.getListOfDays()));
+        timetable.setTimetableDisplayInfo(formatTimetableDisplayInfo(
+                convertListOfDaysToString(timetable.getListOfDays())));
+    }
+
+    /**
+     * Formats timetable display info string for use in {@code TimetablePage.html}
+     * @param timetableDisplayInfo the String to format
+     * @return the formatted String
+     */
+    private static String formatTimetableDisplayInfo(String timetableDisplayInfo) {
+        return "timetable = [" + timetableDisplayInfo + "];\n";
     }
 
     /**
@@ -267,7 +277,6 @@ public class TimetableUtil {
                 sb.append(listOfDays.get(DAYS[FRIDAY_INDEX]).get(i).toString());
             }
         }
-        sb.append("\n");
         return sb.toString();
     }
 
