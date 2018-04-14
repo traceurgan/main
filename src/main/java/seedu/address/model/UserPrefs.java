@@ -44,12 +44,12 @@ public class UserPrefs {
         this.personFilePath = personFilePath;
     }
 
-    public String getNuscouplesName() {
+    public String getNusCouplesName() {
         return nusCouplesName;
     }
 
-    public void setNuscouplesName(String nuscouplesName) {
-        this.nusCouplesName = nuscouplesName;
+    public void setNusCouplesName(String nusCouplesName) {
+        this.nusCouplesName = nusCouplesName;
     }
 
     public String getTimetablePageJsPath() {

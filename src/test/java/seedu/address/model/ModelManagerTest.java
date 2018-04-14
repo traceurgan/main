@@ -48,7 +48,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setNuscouplesName("differentName");
+        differentUserPrefs.setNusCouplesName("differentName");
         assertTrue(modelManager.equals(new ModelManager(person, journal, differentUserPrefs)));
     }
 }

@@ -66,7 +66,7 @@ public class TestApp extends MainApp {
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
         userPrefs.setPersonFilePath(saveFileLocation);
-        userPrefs.setNuscouplesName(ADDRESS_BOOK_NAME);
+        userPrefs.setNusCouplesName(ADDRESS_BOOK_NAME);
         return userPrefs;
     }
 

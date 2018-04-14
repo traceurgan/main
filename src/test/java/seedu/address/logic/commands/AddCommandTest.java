@@ -21,11 +21,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.journalentry.JournalEntry;
-import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.timetable.Timetable;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -114,8 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person updatePerson(ReadOnlyPerson editedPerson) throws DuplicatePersonException,
-                PersonNotFoundException {
+        public Person updatePerson(ReadOnlyPerson editedPerson) {
             return null;
         }
 
@@ -137,6 +137,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void indicateTimetableChanged(Timetable timetable) {
+
+        }
+
+        @Override
+        public void requestHideTimetable() {
+
+        }
+
+        @Override
+        public void requestShowTimetable() {
+
+        }
+
+        @Override
         public int getLast() {
             fail("This method should not be called.");
             return 0;
@@ -148,7 +163,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyPerson getPerson() {
+        public ReadOnlyPerson getPartner() {
             fail("This method should not be called.");
             return null;
         }
@@ -177,7 +192,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson() throws PersonNotFoundException {
+        public void deletePerson() {
             fail("This method should not be called.");
         }
     }
@@ -192,7 +207,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyPerson getPerson() {
+        public ReadOnlyPerson getPartner() {
             return new Person(ALICE);
         }
     }
@@ -210,7 +225,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyPerson getPerson() {
+        public ReadOnlyPerson getPartner() {
             return new Person(ALICE);
         }
     }

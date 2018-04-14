@@ -47,7 +47,7 @@ public interface Model {
     String checkDate(int last);
 
     /** Updates the given person */
-    Person updatePerson(ReadOnlyPerson editedPerson) throws PersonNotFoundException;
+    Person updatePerson(ReadOnlyPerson editedPerson);
 
     //@@author chenxing1992
     /**
