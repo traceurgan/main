@@ -72,6 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
         partner = new Person(newData);
         updatePerson(partner);
         indicatePersonChanged(partner);
+        indicateTimetableChanged(partner.getTimetable());
     }
 
     @Override
