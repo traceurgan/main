@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -233,13 +234,17 @@ public class TimetableUtil {
         timetable.setListOfDays(sortedTimetableModuleSlots);
     }
 
+    /**
+     * Sets {@code timetableDisplayInfo} in {@code timetable} given using the {@code listOfDays}
+     * @param timetable timetable to set timetableDisplayInfo
+     */
     public static void setTimetableDisplayInfo(Timetable timetable) {
         timetable.setTimetableDisplayInfo(formatTimetableDisplayInfo(
                 convertListOfDaysToString(timetable.getListOfDays())));
     }
 
     /**
-     * Formats timetable display info string for use in {@code TimetablePage.html}
+     * Formats timetable display info string for use in {@code TimetablePage.html}.
      * @param timetableDisplayInfo the String to format
      * @return the formatted String
      */
@@ -281,22 +286,38 @@ public class TimetableUtil {
     }
 
     /**
-     * Gets module information from nusmods api for the all modules in listOfModules in {@code timetable}
+     * Gets module information from nusmods api for the all modules in listOfModules in {@code timetable}.
      * @param timetable containing list of all modules
      */
     private static ArrayList<TimetableModuleSlot> retrieveModuleSlotsFromApi(Timetable timetable) {
         String currentModuleInfo;
         ArrayList<TimetableModuleSlot> allTimetableModuleSlots = new ArrayList<TimetableModuleSlot>();
         Set<Map.Entry<String, TimetableModule>> entrySet = timetable.getListOfModules().entrySet();
+        String acadYear = getAcadYear();
 
         for (Map.Entry<String, TimetableModule> currentModule : entrySet) {
-            //TODO: Remove magic number acadYear
-            currentModuleInfo = getJsonContentsFromNusModsApiForModule("2017-2018",
+            currentModuleInfo = getJsonContentsFromNusModsApiForModule(acadYear,
                     Integer.toString(timetable.getCurrentSemester()), currentModule.getKey());
             allTimetableModuleSlots.addAll(getAllTimetableModuleSlots(currentModuleInfo, timetable,
                     currentModule.getKey()));
         }
         return allTimetableModuleSlots;
+    }
+
+    /**
+     * Calculates the current Academic Year for NUS students.
+     * @return a String containing the current academic year.
+     */
+    private static String getAcadYear() {
+        LocalDate currentDate = LocalDate.now();
+        String acadYear;
+
+        if (currentDate.getMonthValue() <= 6) {
+            acadYear = (currentDate.getYear() - 1) + "-" + (currentDate.getYear());
+        } else {
+            acadYear = currentDate.getYear() + "-" + (currentDate.getYear() + 1);
+        }
+        return acadYear;
     }
 
     /**

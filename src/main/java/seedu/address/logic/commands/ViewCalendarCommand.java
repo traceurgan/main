@@ -14,10 +14,10 @@ public class ViewCalendarCommand extends Command {
     public static final String COMMAND_ALIAS = "cv";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deselects your partner and shows your calendar view.\n"
+            + ": Shows your calendar view.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_DESELECT_PERSON_SUCCESS = "Deselected Person: %1$s";
+    public static final String MESSAGE_DESELECT_PERSON_SUCCESS = "Calendar view displayed.";
 
     private ReadOnlyPerson partner;
 
@@ -33,7 +33,7 @@ public class ViewCalendarCommand extends Command {
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-        return new CommandResult(String.format(MESSAGE_DESELECT_PERSON_SUCCESS, partner));
+        return new CommandResult(MESSAGE_DESELECT_PERSON_SUCCESS);
     }
 
     @Override
