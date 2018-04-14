@@ -82,15 +82,16 @@ public class LogicManager extends ComponentManager implements Logic {
     private void handleShowJournalWindowRequestEvent(ShowJournalWindowRequestEvent event) {
         JournalWindow journalWindow;
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if ((model.getJournalEntryList().size() != 0) && (model.checkDate(model.getLast()).equals(event.date))) {
+        if ((model.getJournalEntryList().size() != 0) && (model.contains(event.date))) {
             journalWindow = new JournalWindow(
-                        event.date, model.getJournal().getJournalEntry(model.getLast()).getText());
+                        event.date, model.getJournal().getJournalEntry(event.date).getText());
         } else {
             journalWindow = new JournalWindow(event.date);
         }
         journalWindow.show();
     }
 
+    //@@author
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return model.getJournalEntryList();

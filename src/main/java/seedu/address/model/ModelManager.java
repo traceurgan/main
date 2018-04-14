@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
+import seedu.address.model.journalentry.Date;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -105,12 +106,9 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ShowTimetableRequestEvent());
     }
 
-    //@@author traceurgan
-    /**
-     * Raises an event to indicate the journal model has changed.
-     */
-    private void indicateJournalChanged() {
-        raise(new JournalChangedEvent(journal));
+    @Override
+    public int getLast() {
+        return journal.getLast();
     }
 
     //@@author
@@ -156,25 +154,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTimetableChanged(partner.getTimetable());
     }
 
-    //@@author traceurgan
-    @Override
-    public ReadOnlyJournal getJournal() {
-        return journal;
-    }
-
-    @Override
-    public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
-        if ((this.getJournalEntryList().size() != 0) && (
-                checkDate(journal.getLast()).equals(journalEntry.getDate()))) {
-            journal.updateJournalEntry(journalEntry, journal.getLast());
-            logger.info("Journal entry updated.");
-        } else {
-            journal.addJournalEntry(journalEntry);
-            logger.info("Journal entry added.");
-        }
-        indicateJournalChanged();
-    }
-
     /**
      * Adds appointment to a person in the internal list.
      *
@@ -208,13 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    @Override
-    public String checkDate(int last) {
-        return journal.getDate(last);
-    }
-
-    //=========== Filtered Journal List Accessors =============================================================
-
+    //=========== Journal Methods =============================================================
 
     //@@author traceurgan
     @Override
@@ -222,9 +195,43 @@ public class ModelManager extends ComponentManager implements Model {
         return journal.getJournalEntryList();
     }
 
+    //@@author traceurgan
+    /**
+     * Raises an event to indicate the journal model has changed.
+     */
+    private void indicateJournalChanged() {
+        raise(new JournalChangedEvent(journal));
+    }
+
     @Override
-    public int getLast() {
-        return journal.getLast();
+    public boolean contains(Date date) {
+        return journal.containsJournalEntry(date);
+    }
+
+    //@@author traceurgan
+    @Override
+    public ReadOnlyJournal getJournal() {
+        return journal;
+    }
+
+    @Override
+    public synchronized void addJournalEntry(JournalEntry journalEntry) throws Exception {
+        if ((this.getJournalEntryList().size() != 0) && (
+                contains(journalEntry.getDate()))) {
+            journal.updateJournalEntry(journalEntry, journal.getLast());
+            logger.info("Journal entry updated.");
+        } else {
+            journal.addJournalEntry(journalEntry);
+            logger.info("Journal entry added.");
+        }
+        indicateJournalChanged();
+    }
+
+    @Override
+    public JournalEntry getJournalEntry(Date date) {
+        return journal.getJournalEntry(date);
+    }
+
     }
 
     @Override
