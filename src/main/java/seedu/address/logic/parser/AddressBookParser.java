@@ -14,15 +14,15 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompareTimetableCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ViewCalendarCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.ViewTimetableCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewCalendarCommand;
+import seedu.address.logic.commands.ViewTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
