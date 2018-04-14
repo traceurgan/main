@@ -27,6 +27,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.journalentry.JournalEntry;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -196,7 +197,7 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Replaces the Calendar with Timetable Page in Browser Panel
      */
-    public void handleShowTimetable() {
+    private void handleShowTimetable() {
         browserPlaceholder.getChildren().clear();
         browserPanel = new BrowserPanel(logic.getPartner());
         browserPanel.loadTimetablePage();
@@ -208,7 +209,25 @@ public class MainWindow extends UiPart<Region> {
     /**
      * Replaces the Timetable Page with Calendar in Browser Panel
      */
-    public void handleHideTimetable() {
+    private void handleHideTimetable() {
+        browserPlaceholder.getChildren().clear();
+        browserPanel = new BrowserPanel(logic.getPartner());
+        browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
+    }
+
+    /**
+     * Shows journal entry.
+     */
+    private void handleShowJournalEntry(JournalEntry journalEntry) {
+        browserPlaceholder.getChildren().clear();
+        JournalEntryView journalEntryView= new JournalEntryView(journalEntry);
+        browserPlaceholder.getChildren().add(journalEntryView.getRoot());
+    }
+
+    /**
+     * Hides journal entry.
+     */
+    private void handleHideJournalEntry() {
         browserPlaceholder.getChildren().clear();
         browserPanel = new BrowserPanel(logic.getPartner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
@@ -239,7 +258,7 @@ public class MainWindow extends UiPart<Region> {
 
     }
 
-    void commandBoxRequestFocus() {
+    private void commandBoxRequestFocus() {
         this.commandBox.getCommandTextField().requestFocus();
     }
 
