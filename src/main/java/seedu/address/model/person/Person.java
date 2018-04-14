@@ -7,8 +7,8 @@ import java.util.Objects;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import seedu.address.model.person.Appointment.Appointment;
-import seedu.address.model.person.Appointment.AppointmentList;
+import seedu.address.model.person.appointment.Appointment;
+import seedu.address.model.person.appointment.AppointmentList;
 import seedu.address.model.person.timetable.Timetable;
 
 //@@author chenxing1992

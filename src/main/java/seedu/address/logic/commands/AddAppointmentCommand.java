@@ -3,16 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import com.calendarfx.model.Entry;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Appointment.AppointmentList;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Appointment.Appointment;
-import seedu.address.model.person.exceptions.DuplicateAppointmentFoundException;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 //@@author chenxing1992
@@ -35,7 +30,7 @@ public class AddAppointmentCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New appointment added. ";
     public static final String INVALID_PERSON = "This person is not in your address book";
     public static final String INVALID_DATE = "Invalid Date. Please enter a valid date.";
-    public static final String DUPlICATE_APPT = "Duplicate Event found on same timing. Please select other time.";
+    public static final String DUPLICATE_APPT = "Duplicate Event found on same timing. Please select other time.";
 
     private final Appointment appointment;
 
@@ -79,15 +74,6 @@ public class AddAppointmentCommand extends UndoableCommand {
         return other == this // short circuit if same object
                 || (other instanceof AddAppointmentCommand // instanceof handles nulls
                 && (this.appointment.equals(((AddAppointmentCommand) other).appointment)));
-    }
-
-    //@@author chenxing1992
-
-    /**
-     * For testing purposes
-     */
-    public void setData(Model model) {
-        this.model = model;
     }
 
 }

@@ -1,8 +1,6 @@
 package seedu.address;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -28,9 +26,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.person.timetable.TimetableModuleSlot;
-import seedu.address.model.person.timetable.TimetableUtil;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.FileTimetableStorage;
 import seedu.address.storage.JournalStorage;
@@ -135,19 +130,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty Journal");
             journalData = new Journal();
         }
-
-        Timetable timetable = personData.getTimetable();
-
-        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
-                TimetableUtil.setUpUnsortedModuleSlotsForViewing(personData.getTimetable());
-        timetable.setAllModulesSlots(unsortedModuleSlots);
-
-        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
-                TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
-        timetable.setListOfDays(sortedModuleSlots);
-
-        TimetableUtil.setTimetableDisplayInfo(timetable);
-        TimetableUtil.setUpTimetableInfo(timetable);
 
         return new ModelManager(personData, journalData, userPrefs);
     }

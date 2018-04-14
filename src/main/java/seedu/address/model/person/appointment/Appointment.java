@@ -1,4 +1,4 @@
-package seedu.address.model.person.Appointment;
+package seedu.address.model.person.appointment;
 
 import static java.util.Objects.requireNonNull;
 

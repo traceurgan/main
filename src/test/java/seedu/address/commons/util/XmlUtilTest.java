@@ -3,7 +3,6 @@ package seedu.address.commons.util;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,9 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
-
-import seedu.address.model.person.Appointment.AppointmentList;
 import seedu.address.model.person.Person;
 import seedu.address.storage.XmlAdaptedAppointment;
 import seedu.address.storage.XmlAdaptedPerson;
@@ -79,7 +75,7 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMETABLE, VALID_APPOINTMENT );
+                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMETABLE, VALID_APPOINTMENT);
         assertEquals(expectedPerson, actualPerson);
     }
 

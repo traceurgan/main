@@ -4,7 +4,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.CalendarViewEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.AppointmentNotFoundException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
