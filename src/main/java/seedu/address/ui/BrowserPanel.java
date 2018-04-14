@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,8 +40,10 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
+    private static final String JAR_DATA_FILE_FOLDER = "/data/";
+    private static final String INTELLIJ_DATA_FILE_FOLDER = "\\data\\";
+    private static final String FILE_PREFIX = "file:";
     private static final String FXML = "BrowserPanel.fxml";
-
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
@@ -175,11 +179,48 @@ public class BrowserPanel extends UiPart<Region> {
 
     //@@author marlenekoh
     /**
-     * Loads the timetable page of a person into browser panel
+     * Loads the timetable page of a person into browser panel.
      */
     public void loadTimetablePage() {
-        URL timetablePage = MainApp.class.getResource(FXML_FILE_FOLDER + TIMETABLE_PAGE);
-        loadPage(timetablePage.toExternalForm());
+        String timetablePageUrl;
+        if (runningFromIntelliJ()) {
+            timetablePageUrl = FILE_PREFIX + getIntellijRootDir() + INTELLIJ_DATA_FILE_FOLDER + TIMETABLE_PAGE;
+        } else {
+            timetablePageUrl = getJarDir() + JAR_DATA_FILE_FOLDER + TIMETABLE_PAGE;
+        }
+        loadPage(timetablePageUrl);
+    }
+
+    /**
+     * Gets the directory containing the root folder
+     * @return a String containing the directory path
+     */
+    private String getIntellijRootDir() {
+        return System.getProperty("user.dir");
+    }
+
+    /**
+     * Gets the directory containing the executing jar.
+     * @return a String containing the directory path
+     */
+    private String getJarDir() {
+        String jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+        try {
+            jarPath = URLDecoder.decode(jarPath, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            logger.warning("The Character Encoding is not supported.");
+        }
+        return jarPath.substring(0, jarPath.lastIndexOf('/'));
+    }
+
+    /**
+     * Checks if the current code is running from IntelliJ (for debugging) or from the jar file.
+     * @return true if running from IntelliJ
+     */
+    private static boolean runningFromIntelliJ() {
+        String classPath = System.getProperty("java.class.path");
+        Logger logger = LogsCenter.getLogger(MainApp.class);
+        return classPath.contains("idea_rt.jar");
     }
 
     //@@author
@@ -204,7 +245,6 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(
                 this::updateCalendar
         );
-
     }
 
     /**
