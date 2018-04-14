@@ -2,14 +2,14 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.model.person.Person;
 
 public class ModelManagerTest {
     @Rule
@@ -19,20 +19,19 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         ModelManager modelManager = new ModelManager();
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getFilteredPersonList().remove(0);
+        modelManager.getPersonAsList().remove(0);
     }
-
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).build();
+        Person person = new Person(ALICE);
         Journal journal = new Journal();
-        AddressBook differentAddressBook = new AddressBook();
+        Person differentPerson = new Person(AMY);
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        ModelManager modelManager = new ModelManager(addressBook, journal, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, journal, userPrefs);
+        ModelManager modelManager = new ModelManager(person, journal, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(person, journal, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -45,14 +44,11 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, journal, userPrefs)));
-
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        assertFalse(modelManager.equals(new ModelManager(differentPerson, journal, userPrefs)));
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookName("differentName");
-        assertTrue(modelManager.equals(new ModelManager(addressBook, journal, differentUserPrefs)));
+        differentUserPrefs.setNusCouplesName("differentName");
+        assertTrue(modelManager.equals(new ModelManager(person, journal, differentUserPrefs)));
     }
 }

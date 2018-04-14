@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalJournalEntries.getTypicalJournal;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -28,7 +28,7 @@ public class SelectCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalJournal(), new UserPrefs());
+        model = new ModelManager(getTypicalPerson(), getTypicalJournal(), new UserPrefs());
     }
 
     //TODO: SelectCommandTest

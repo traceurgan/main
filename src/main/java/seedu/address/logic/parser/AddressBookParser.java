@@ -17,10 +17,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeselectCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -80,19 +78,11 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new DeleteCommandParser().parse(arguments); //@@author
+            return new DeleteCommand(); //@@author
 
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new ClearCommand(); //@@author
-
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new FindCommandParser().parse(arguments); //@@author
-
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new ListCommand(); //@@author
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON

@@ -1,4 +1,4 @@
-package seedu.address.model.person.Appointment;
+package seedu.address.model.person.appointment;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 //@@author chenxing1992
 
 /**
- *  Appointment class to hold all the start and end time of the Appointment and the description
+ *  appointment class to hold all the start and end time of the appointment and the description
  *  */
 public class Appointment {
 
@@ -48,21 +48,21 @@ public class Appointment {
     @Override
     public String toString() {
         if (date != null) {
-            return "Appointment on " + DATE_FORMATTER.format(date);
+            return "appointment on " + DATE_FORMATTER.format(date);
         } else {
-            return "No Appointment";
+            return "No appointment";
         }
     }
 
     /**
-     * @return starting Appointment time in the format yyyy/MM/dd HH:mm
+     * @return starting appointment time in the format yyyy/MM/dd HH:mm
      */
     public String getDateInStringFormat() {
         return DATE_FORMATTER.format(date);
     }
 
     /**
-     * @return ending Appointment time in the format yyyy/MM/dd HH:mm
+     * @return ending appointment time in the format yyyy/MM/dd HH:mm
      */
     public String getDateEndInStringFormat() {
         return DATE_FORMATTER.format(endDate);

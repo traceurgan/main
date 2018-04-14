@@ -9,7 +9,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.SaveEntryEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowJournalWindowRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.timetable.TimetableUtil;
 import seedu.address.ui.JournalWindow;
 
 /**
@@ -52,6 +55,15 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
+    //@@author marlenekoh
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        TimetableUtil.setUpTimetableInfoView(model.getPartner().getTimetable());
+        model.indicateTimetableChanged(model.getPartner().getTimetable());
+        raise(new ShowTimetableRequestEvent());
+    }
+
     //@@author traceurgan
     @Subscribe
     public void handleSaveEntryEvent(SaveEntryEvent event) {
@@ -70,26 +82,29 @@ public class LogicManager extends ComponentManager implements Logic {
     private void handleShowJournalWindowRequestEvent(ShowJournalWindowRequestEvent event) {
         JournalWindow journalWindow;
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (model.getJournal().getLast().getDate().equals(event.date)) {
-            journalWindow = new JournalWindow(event.date, model.getJournal().getLast().getText());
+        if ((model.getJournalEntryList().size() != 0) && (model.checkDate(model.getLast()).equals(event.date))) {
+            journalWindow = new JournalWindow(
+                        event.date, model.getJournal().getJournalEntry(model.getLast()).getText());
         } else {
             journalWindow = new JournalWindow(event.date);
         }
         journalWindow.show();
     }
 
-    //@@author chenxing1992
-    @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return model.getFilteredPersonList();
-    }
-
-    //@@author traceurgan
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
-        return model.getJournal().getJournalEntryList();
+        return model.getJournalEntryList();
     }
 
+    @Override
+    public ObservableList<ReadOnlyPerson> getPersonAsList() {
+        return model.getPersonAsList();
+    }
+
+    @Override
+    public ReadOnlyPerson getPartner() {
+        return  model.getPartner();
+    }
     //@@author
     @Override
     public ListElementPointer getHistorySnapshot() {

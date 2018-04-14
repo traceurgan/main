@@ -1,6 +1,8 @@
 package seedu.address;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -20,22 +22,25 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Journal;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.timetable.Timetable;
+import seedu.address.model.person.timetable.TimetableModuleSlot;
+import seedu.address.model.person.timetable.TimetableUtil;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.FileTimetableStorage;
 import seedu.address.storage.JournalStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.PersonStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.storage.XmlJournalStorage;
+import seedu.address.storage.XmlPersonStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -44,7 +49,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 1, 0, true);
+    public static final Version VERSION = new Version(1, 4, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -65,13 +70,15 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        PersonStorage personStorage = new XmlPersonStorage(userPrefs.getPersonFilePath());
         JournalStorage journalStorage = new XmlJournalStorage(userPrefs.getJournalFilePath());
-        storage = new StorageManager(addressBookStorage, journalStorage, userPrefsStorage);
+        FileTimetableStorage timetableStorage = new FileTimetableStorage(userPrefs.getTimetablePageJsPath(),
+                userPrefs.getTimetableInfoFilePath());
+        storage = new StorageManager(personStorage, journalStorage, userPrefsStorage, timetableStorage);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, timetableStorage);
 
         logic = new LogicManager(model);
 
@@ -90,23 +97,26 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, FileTimetableStorage timetableStorage) {
+        Optional<ReadOnlyPerson> personOptional;
         Optional<ReadOnlyJournal> journalOptional;
-        ReadOnlyAddressBook addressBookData;
+        ReadOnlyPerson personData;
         ReadOnlyJournal journalData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            personOptional = storage.readPerson();
+            if (personOptional.isPresent()) {
+                logger.info("Data file found. Will be starting with current Person");
             }
-            addressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            if (!personOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a empty Person");
+            }
+            personData = personOptional.orElse(null);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            addressBookData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty Person");
+            personData = null;
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            addressBookData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty Person");
+            personData = null;
         }
 
         try {
@@ -119,13 +129,27 @@ public class MainApp extends Application {
             }
             journalData = journalOptional.orElseGet(SampleDataUtil::getSampleJournal);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty Journal");
             journalData = new Journal();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty Journal");
             journalData = new Journal();
         }
-        return new ModelManager(addressBookData, journalData, userPrefs);
+
+        Timetable timetable = personData.getTimetable();
+
+        ArrayList<TimetableModuleSlot> unsortedModuleSlots =
+                TimetableUtil.setUpUnsortedModuleSlotsForViewing(personData.getTimetable());
+        timetable.setAllModulesSlots(unsortedModuleSlots);
+
+        HashMap<String, ArrayList<TimetableModuleSlot>> sortedModuleSlots =
+                TimetableUtil.sortModuleSlotsByDay(unsortedModuleSlots);
+        timetable.setListOfDays(sortedModuleSlots);
+
+        TimetableUtil.setTimetableDisplayInfo(timetable);
+        TimetableUtil.setUpTimetableInfo(timetable);
+
+        return new ModelManager(personData, journalData, userPrefs);
     }
 
     private void initLogging(Config config) {
