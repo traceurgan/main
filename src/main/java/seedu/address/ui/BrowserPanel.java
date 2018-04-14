@@ -221,9 +221,6 @@ public class BrowserPanel extends UiPart<Region> {
     private static boolean runningFromIntelliJ() {
         String classPath = System.getProperty("java.class.path");
         Logger logger = LogsCenter.getLogger(MainApp.class);
-        logger.info("====================================");
-        logger.info(classPath);
-        logger.info("====================================");
         return classPath.contains("idea_rt.jar");
     }
 
