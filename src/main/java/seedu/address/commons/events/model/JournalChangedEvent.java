@@ -3,6 +3,7 @@ package seedu.address.commons.events.model;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyJournal;
 
+//@@author traceurgan
 /** Indicates the Journal in the model has changed*/
 public class JournalChangedEvent extends BaseEvent {
 

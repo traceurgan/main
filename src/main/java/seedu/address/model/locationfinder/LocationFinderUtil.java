@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.logging.Logger;
@@ -22,14 +23,17 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class LocationFinderUtil {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final String HTTPS_METHOD_GET = "GET";
     private static final String INVALID_URL_RESULT = "https://www.google.com/maps/search/?api=1&query=";
     private static final String MESSAGE_INVALID_URL = "Invalid Google Maps search query URL provided.";
+
+    private static final int HTTP_METHOD_RESPONSE_OK = 200;
 
     /**
      * Sets up attributes of a given {@code LocationFinder}.
      * @param locationFinder LocationFinder to be set up
      */
-    public static void setUpTimetableInfo(LocationFinder locationFinder) {
+    public static void setUpLocationFinderInfo(LocationFinder locationFinder) {
         try {
             setLocationFinderUrl(locationFinder);
             setLocationFinderUrl(locationFinder);
@@ -73,9 +77,28 @@ public class LocationFinderUtil {
     /**
      * Retrieves json file from Google Maps API and converts to String
      */
-    public static String getJsonContentsFromNusModsApi() {
-        // dummy method
-        return null;
+    public static String getJsonContentsFromGoogleMapsApi() {
+        String contents = null;
+        String googleMapsApiUrlString = "" + "" + ".json";
+        try {
+            URL googleMapsApiUrl = new URL(googleMapsApiUrlString);
+            HttpsURLConnection urlConnection = (HttpsURLConnection) googleMapsApiUrl.openConnection();
+            urlConnection.setRequestMethod(HTTPS_METHOD_GET);
+            int responseCode = urlConnection.getResponseCode();
+
+            if (responseCode == HTTP_METHOD_RESPONSE_OK) {
+                contents = readStream(urlConnection.getInputStream());
+            } else {
+                contents = "Error in accessing API - " + readStream(urlConnection.getErrorStream());
+            }
+        } catch (MalformedURLException e) {
+            logger.warning("URL provided is malformed");
+        } catch (ProtocolException e) {
+            logger.warning("Protocol exception");
+        } catch (IOException e) {
+            logger.warning("Failed to open connection");
+        }
+        return contents;
     }
 
     /**

@@ -5,10 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
@@ -28,7 +30,7 @@ public class DeleteCommand extends UndoableCommand {
 
     private final Index targetIndex;
 
-    private Person personToDelete;
+    private ReadOnlyPerson personToDelete;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -43,6 +45,7 @@ public class DeleteCommand extends UndoableCommand {
     private CommandResult getCommandResult() {
         try {
             model.deletePerson(personToDelete);
+            EventsCenter.getInstance().post(new HideTimetableRequestEvent());
         } catch (PersonNotFoundException pnfe) {
             throw new AssertionError("The target person cannot be missing");
         }
@@ -52,7 +55,7 @@ public class DeleteCommand extends UndoableCommand {
 
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<ReadOnlyPerson> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

@@ -49,7 +49,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command. +
 
-return to <<toc,Table of Contents>>
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 [[Features]]
 == Features
@@ -61,9 +63,7 @@ return to <<toc,Table of Contents>>
 _NUSCouples_, you can type either `add n/John Doe` or `a n/John Doe`.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a
  parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can
-be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items in square brackets are optional e.g `n/NAME [p/PHONE_NUMBER]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`,
 `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
@@ -74,14 +74,13 @@ be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 Format: `help` +
 Alias: `hlp`
 
-==== Adding your partner: `add`
+==== Adding your partner : `add`
 
 Adds your partner to _NUSCouples_. +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL [t/TAG]...` +
-Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
+Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL`
 
 ****
-* Your partner can have any number of tags (including 0).
 * The timetable url provided has to be a valid https://nusmods.com[NUSMods] short URL.
 * You can only have one partner in _NUSCouples_ at any one time.
 ****
@@ -89,19 +88,17 @@ Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL [t/TAG]...`
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 tt/http://modsn.us/IO4n5`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 tt/http://modsn.us/wNuIW t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 tt/http://modsn.us/wNuIW`
 
 ==== Editing your partner : `edit`
 
 Edits your existing partner in _NUSCouples_. +
-Format: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]...` +
-Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]...`
+Format: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
+Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]`
 
 ****
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of your partner will be removed i.e adding of tags is not cumulative.
-* You can remove all tags of your partner by typing `t/` without specifying any tags after it.
 * Your partner must exist in _NUSCouples_ before this command can be executed.
 ****
 
@@ -109,8 +106,8 @@ Examples:
 
 * `edit p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of your partner to be `91234567` and `johndoe@example.com` respectively.
-* `edit n/Betsy Crower t/` +
-Edits the name of your partner to be `Betsy Crower` and clears all existing tags.
+* `edit n/Betsy Crower` +
+Edits the name of your partner to be `Betsy Crower`.
 
 ==== Deleting your partner : `delete`
 
@@ -133,6 +130,8 @@ Alias: `hist`
 ====
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
+
+// tag::undoredo[]
 
 ==== Undoing previous command : `undo`
 
@@ -183,10 +182,22 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `edit n/John Doe` command) +
 `redo` (reapplies the `delete` command) +
 
+// end::undoredo[]
+
 ==== Saving the data
 
-NUSCouples data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+_NUSCouples_ data is saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually. Data is stored in a data folder created in the same directory as _NUSCouples_.jar.
+For example, if the .jar file is in `C:\Program Files (x86)\NUSCouples`, _NUSCouples_ data will be stored in
+`C:\Program Files (x86)\NUSCouples\data`.
+
+[NOTE]
+If the _NUSCouples_.jar file is moved to another location, you should move the data folder as well.  Refer to
+<<Data, FAQ Section 3.1, Questions about Data>> for more information.
+
+[WARNING]
+The data is stored as an editable xml file. If the user manually edits this file, _NUSCouples_ may not be able to read
+it properly. Refer to <<Data, FAQ Section 3.1, Questions about Data>>  for more information.
 
 ==== Exiting the program : `exit`
 
@@ -194,20 +205,30 @@ Exits the program. +
 Format: `exit` +
 Alias: `ex` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
+// tag::timetable[]
 === Timetable
 
-==== Adding your partner's timetable
-Refer to <<Adding your partner: `add`>>
+==== Adding your partner's timetable [Since v1.3]
 
-==== Viewing your partner's timetable : `tview`
+Refer to <<Adding your partner : `add`>>
+
+==== Editing your partner's timetable [Since v1.3]
+
+Refer to <<Editing your partner : `edit`>>
+
+==== Viewing your partner's timetable : `select`[Since v1.4]
 
 Shows the current saved timetable of your partner. +
-Format: `tview` +
-Alias: `tv`
+Format: `select` +
+Alias: `s`
 
-==== Comparing timetable : `tcompare`
+Timetable display will be shown.
+
+==== Comparing timetable : `tcompare` [Coming in v1.5]
 
 Displays the common breaks shared by the given timetable and your partner's timetable in a timetable format. +
 Format: `tcompare tt/TIMETABLE_URL` +
@@ -220,77 +241,101 @@ Alias: `tc tt/TIMETABLE_URL`
 
 Examples:
 
-* `tcompare tt/http://modsn.us/IO4n5`
+* `tcompare tt/http://modsn.us/IO4n5` +
 * `tc tt/http://modsn.us/wNuIW` +
+// end::timetable[]
 
-Return to <<toc,Table of Contents>>  +
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 === Calendar
-==== Viewing current calendar : `cview`
+==== Viewing current calendar : `cview` [Coming in v1.5]
 
 View Google calendar. +
 Format: `cview` +
 Alias: `cv`
 
-==== Adding new event to Google calendar : `cadd`
+==== Adding new event to Google calendar : `cadd` [Coming in v1.5]
 
 Adds new event to Google calendar. +
 Format: `cadd` +
 Alias: `ca`
 
-==== Deleting event from Google calendar: `cdelete`
+==== Deleting event from Google calendar: `cdelete` [Coming in v1.5]
 
 Delete specified event from Google calendar. +
 Format: `cdelete` +
 Alias: `cd`
 
-==== Editing event on Google calendar : `cedit`
+==== Editing event on Google calendar : `cedit` [Coming in v1.5]
 
 Edit event on Google calendar. +
 Format: `cedit` +
-Alias: `ce`
+Alias: `ce` +
 
-Return to <<toc,Table of Contents>>  +
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 === Journal
-==== Viewing all journal entries : `jview`
 
-View all journal entries. +
-Format: `jview` +
-Alias: `jv`
+_NUSCouples_ provides you with a space to write, save and view journal entries. The list of saved journal entries will
+be shown in the main window. Read on for more details about how to use this feature.
 
-==== Creating a new journal entry : `jnew`
+[NOTE]
+Saved journal entries can only be edited on the same day. Once saved, a journal entry cannot be deleted.
 
-Creates a new window that allows the user to input and save journal entries. The journal entry is identified by
-the date it was created in the format `yyyymmdd`. If an entry with that date already exists, it will open
-that entry in the new window. Saving not required as the journal entry will be automatically saved when the
+==== Creating a new journal entry : `jnew` [Since v1.2]
+
+Creates a new window that allows the user to input text. The window title will reflect the date
+it was created on in the format `yyyymmdd - journal`. For example, a journal window opened on the 5th of March
+ 2018 will have a title of `20180305 - journal`. If an entry with that date already exists, it will open
+that entry in the window. Saving is not required as the journal entry will be automatically saved when the
 journal window is closed. +
+
+[NOTE]
+If saving fails, a new window will appear containing your last session data with a warning above your text. You should
+copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will not lose your data if you need to
+restart the app.
+
 Format: `jnew` +
 Alias: `jn`
 
-==== Deleting a journal entry : `jdelete`
+==== Viewing journal entries : `jview` [Coming in v1.5]
 
-Deletes a journal entry in the specified index. +
-Format: `jdelete` +
-Alias: `jd`
+Selects a journal entry from the list seen in the GUI. The contents of the journal entry will be shown in the main
+window. +
+Format: `jview` +
+Alias: `jv`
 
-Return to <<toc,Table of Contents>>  +
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
-=== Location
-==== Finding building location : `location`
+=== Motivational Picture
+==== Send motivational picture via app : `motivate`
 
 Shows the location (by building) of the entered classroom name. +
-Format: `location` +
-Alias: `loc`
+Format: `motivate` +
+_There is no alias for this feature currently._
 
-Return to <<toc,Table of Contents>>  +
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
-=== `Coming in v2.0`
+=== Future Features
 // tag::dataencryption[]
+// tag::googleAPI[]
 ==== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+==== Sync the calendar with Google API `[coming in v2.0]`
+
+_{explain how the user can authentic with google API and view and retrieve events from Google}_
+
 
 ==== Archiving journal entries `[coming in v2.0]`
 
@@ -304,31 +349,62 @@ _{explain how the user can use their phones to navigate to a location in NUS by 
 
 Filters journal entries by the specified interval. +
 Format: `jfilter` +
-Alias: `jf`
+Alias: `jf` +
 
-Return to <<toc,Table of Contents>>  +
+==== Finding building location `[coming in v2.0]`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `location` +
+Alias: `loc` +
+
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NUSCouples folder.
+=== Data
+This section is for questions related to _NUSCouples_ data. For more information, refer to <<Saving the data>> +
 
-Return to <<toc,Table of Contents>>  +
+*Q: How do I transfer my data to another Computer?* +
+
+*A:* Install the app in the other computer and overwrite the empty data folder it creates with the folder that contains
+the data of your previous NUSCouples folder. +
+
+*Q: Why is the app not showing my previous session data?* +
+
+*A:* Verify that the .jar file was not moved to a new directory recently. If you have done so, ensure that the data
+folder in the original directory was moved to the new directory. For example, if you have moved _NUSCouples_.jar from
+`C:\Program Files (x86)\NUSCouples` to `C:\Users\[Username]\Desktop\NUSCouples`, you should move the data folder
+`C:\Program Files (x86)\NUSCouples\data` to `C:\Users\[Username]\Desktop\NUSCouples\data` +
+
+If the files in the data folder have been manually edited, _NUSCouples_ may not be able to read the data properly.
+_NUSCouples_ takes no responsibility for data loss/ data corruption due to unintended user behavior affecting the data
+folder, such as deletion or editing of files manually. +
+
+If the solutions above are not related to your issue, it may be due to a bug. Please contact us at //CONTACT US
+and attach the log file that should be stored in the same location as the _NUSCouples_.jar file. The log file is named
+`_NUSCouples_.log.0`. The number at the end may be different. If there are multiple log files, you should attach the
+*latest* one or attach all of them to be safe. +
+
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
 
 == Command Summary
 
 [width="100%",cols="10%,<20%,<35%,<35%",options="header",]
 |=======================================================================
 |Command |Description |Format| Example
-|add, a |Add your partner |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL [t/TAG]...` |
+|add, a |Add your partner |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` |
 `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 tt/http://modsn.us/IO4n5`
 
-|edit, ed |Edit your partner | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL] [t/TAG]…` |
+|edit, ed |Edit your partner | `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` |
 `edit n/John Doe e/johnd@example.com`
 
 |delete, d |Delete your partner |`delete` |
 
-|select, s |Select your partner |`select` |
+|select, s |View your partner's timetable |`select` |
 
 |history, hist |View command history |`history` |
 
@@ -336,13 +412,9 @@ Return to <<toc,Table of Contents>>  +
 
 |redo, r |Reverses the most recent undo command |`redo` |
 
-|tview, tv |View your partner's timetable |`tview` |
+|jview, jv |View a journal entry |`jview` |
 
-|jview, jv |View your journal |`jview` |
-
-|jnew, jn |Create a new journal entry |`jnew` |
-
-|jdelete, jd |Delete a journal entry |`jdelete` |
+|jnew, jn |Create/edit a journal entry |`jnew` |
 
 |cview, cv |Viewing your current calendar |`cview` |
 
@@ -352,11 +424,10 @@ Return to <<toc,Table of Contents>>  +
 
 |cedit, ce |Editing an event from your current calendar |`cedit` |
 
-|location, loc |Finding building location |`location` |
-
 |exit, ex |Exits _NUSCouples_ |`exit` |
 
 |=======================================================================
 
-Return to <<toc,Table of Contents>>  +
-
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
