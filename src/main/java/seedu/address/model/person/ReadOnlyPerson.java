@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
-import seedu.address.model.person.appointment.Appointment;
-import seedu.address.model.person.appointment.AppointmentList;
+import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.Appointment.AppointmentList;
 import seedu.address.model.person.timetable.Timetable;
 
 //@@author chenxing1992

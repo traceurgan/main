@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.model.person.appointment.Appointment;
+import seedu.address.model.person.Appointment.Appointment;
 
 //@@author Chen Xing
 

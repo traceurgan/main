@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.appointment.Appointment;
+import seedu.address.model.person.Appointment.Appointment;
 
 //@@author chenxing1992
 public class AddAppointmentParserTest {
@@ -40,7 +40,7 @@ public class AddAppointmentParserTest {
 
         AddAppointmentCommand command = parser.parse("appt 1 d/Lunch, tomorrow 5pm");
         Appointment appointment = AddAppointmentParser.getAppointmentFromString("Lunch, tomorrow 5pm");
-        assertEquals(new AddAppointmentCommand(Index.fromOneBased(1), appointment), command);
+        assertEquals(new AddAppointmentCommand(appointment), command);
 
     }
 
@@ -50,7 +50,7 @@ public class AddAppointmentParserTest {
         try {
             AddAppointmentCommand command = parser.parse("appt 1 d/Lunch, tomorrow 5pm to 7pm");
             Appointment appointment = AddAppointmentParser.getAppointmentFromString("Lunch, tomorrow 5pm to 7pm");
-            assertEquals(new AddAppointmentCommand(Index.fromOneBased(1), appointment), command);
+            assertEquals(new AddAppointmentCommand(appointment), command);
         } catch (ParseException e) {
             e.printStackTrace();
         }

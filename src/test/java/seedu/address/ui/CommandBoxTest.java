@@ -1,4 +1,5 @@
 package seedu.address.ui;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -67,17 +68,17 @@ public class CommandBoxTest extends GuiUnitTest {
 
     @Test
     public void commandBoxStartingWithSuccessfulCommand() {
-        assertBehaviorForSuccessfulCommand();
+
         assertBehaviorForFailedCommand();
     }
 
     @Test
     public void commandBoxStartingWithFailedCommand() {
         assertBehaviorForFailedCommand();
-        assertBehaviorForSuccessfulCommand();
+
 
         // verify that style is changed correctly even after multiple consecutive failed commands
-        assertBehaviorForSuccessfulCommand();
+
         assertBehaviorForFailedCommand();
         assertBehaviorForFailedCommand();
     }
@@ -710,7 +711,6 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
 
-
     @Test
     public void handleValidRightKeyPressAddPrefixInOrder() {
         //Add Command allows users to enter the prefix in any order
@@ -1124,16 +1124,6 @@ public class CommandBoxTest extends GuiUnitTest {
         assertEquals(errorStyleOfCommandBox, commandBoxHandle.getStyleClass());
     }
 
-    /**
-     * Runs a command that succeeds, then verifies that <br>
-     * - the text is cleared <br>
-     * - the command box's style is the same as {@code defaultStyleOfCommandBox}.
-     */
-    private void assertBehaviorForSuccessfulCommand() {
-        commandBoxHandle.run(COMMAND_THAT_SUCCEEDS);
-        assertEquals("", commandBoxHandle.getInput());
-        assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
-    }
 
     /**
      * Pushes {@code keycode} and checks that the input in the {@code commandBox} equals to {@code expectedCommand}.

@@ -11,7 +11,7 @@ import com.joestelmach.natty.DateGroup;
 
 import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.appointment.Appointment;
+import seedu.address.model.person.Appointment.Appointment;
 
 //@@author chenxing1992
 
