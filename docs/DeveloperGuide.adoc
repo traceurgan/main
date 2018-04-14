@@ -539,6 +539,47 @@ image::CalViewSeq.png[width="650"]
 ** Pros: Reduce latency
 ** Cons: User can't add event to next year
 
+//tag::viewCalendar[]
+
+=== Calendar Add Appointment feature
+==== Proposed Implementation
+
+The Calendar Add Appointment feature is implemented by 'Appointment', which will reside in 'Model'.
+
+The idea of implementing Add Appointment feature is to allow the user to add his/her event on the Calendar.
+
+The AppointmentList class holds an internal list that holds the Appointment class.
+Appointments are made up of 3 internal variables.
+
+image::AddAppointmentClass.png[width="300"]
+
+** Description: It Holds a string about the appointment. This String will be used to identify which Appointment.
+** Start Date: It Holds the starting time of the appointment. Used for sorting appointments and UI.
+** End Date: Holds the end time of the appointment. Used for UI.
+
+The sequence diagram below shows interactions within the `Logic` Component for the `execute' API call.
+
+image::AddAppointmentSeq.png[width="650"]
+
+==== Design Considerations
+===== Aspect: Implementation of Add Event View
+
+* **Alternative 1 (current choice):** Display in Calendar UI.
+** Pros: Easier to implement and Neater.
+** Cons: Doesn't display all events listed on the partner.
+* **Alternative 2:** Create a List to display all events.
+** Pros: User can have an overview of all the events listed
+** Cons: The UI will be blank at initial stage which is ugly.
+
+===== Aspect: Allow duplicate events
+
+* **Alternative 1 (current choice):** On same time of the same day.
+** Pros: User can plan which one is more important to attend
+** Cons: Ambiguous as there are multiple similar events on the same time frame
+* **Alternative 2:** Restrict user to add same event on the same time frame.
+** Pros: More neat
+** Cons: User cant compare or manage well
+
 //tag::timetable[]
 
 === Timetable Viewer feature
