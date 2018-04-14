@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
