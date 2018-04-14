@@ -22,10 +22,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager;
 
 //@@author marlenekoh
 /**
@@ -45,7 +45,7 @@ public class TimetableUtil {
         "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final String SPLIT_QUESTION_MARK = "\\?";
     private static final String SPLIT_AMPERSAND = "&";
     private static final String SPLIT_EQUALS = "=";
@@ -234,7 +234,17 @@ public class TimetableUtil {
     }
 
     public static void setTimetableDisplayInfo(Timetable timetable) {
-        timetable.setTimetableDisplayInfo(convertListOfDaysToString(timetable.getListOfDays()));
+        timetable.setTimetableDisplayInfo(formatTimetableDisplayInfo(
+                convertListOfDaysToString(timetable.getListOfDays())));
+    }
+
+    /**
+     * Formats timetable display info string for use in {@code TimetablePage.html}
+     * @param timetableDisplayInfo the String to format
+     * @return the formatted String
+     */
+    private static String formatTimetableDisplayInfo(String timetableDisplayInfo) {
+        return "timetable = [" + timetableDisplayInfo + "];\n";
     }
 
     /**
@@ -267,7 +277,6 @@ public class TimetableUtil {
                 sb.append(listOfDays.get(DAYS[FRIDAY_INDEX]).get(i).toString());
             }
         }
-        sb.append("\n");
         return sb.toString();
     }
 

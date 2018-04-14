@@ -5,22 +5,23 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 
+//@@author marlenekoh
 /**
  * Deselects your partner from NUSCouples.
  */
-public class DeselectCommand extends Command {
-    public static final String COMMAND_WORD = "deselect";
-    public static final String COMMAND_ALIAS = "des";
+public class ViewCalendarCommand extends Command {
+    public static final String COMMAND_WORD = "cview";
+    public static final String COMMAND_ALIAS = "cv";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deselects your partner and hides his/her timetable.\n"
+            + ": Deselects your partner and shows your calendar view.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_DESELECT_PERSON_SUCCESS = "Deselected Person: %1$s";
 
     private ReadOnlyPerson partner;
 
-    public DeselectCommand() {
+    public ViewCalendarCommand() {
     }
 
     @Override
@@ -38,8 +39,8 @@ public class DeselectCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeselectCommand // instanceof handles nulls
-                && this.partner.equals(((DeselectCommand) other).partner)); // state check
+                || (other instanceof ViewCalendarCommand // instanceof handles nulls
+                && this.partner.equals(((ViewCalendarCommand) other).partner)); // state check
     }
 
 }

@@ -14,14 +14,14 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CompareTimetableCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeselectCommand;
+import seedu.address.logic.commands.ViewCalendarCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ViewTimetableCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -64,13 +64,13 @@ public class AddressBookParser {
         case EditCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new EditCommandParser().parse(arguments); //@@author
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new SelectCommand(); //@@author
+        case ViewTimetableCommand.COMMAND_WORD:
+        case ViewTimetableCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+            return new ViewTimetableCommand(); //@@author
 
-        case DeselectCommand.COMMAND_WORD:
-        case DeselectCommand.COMMAND_ALIAS:
-            return new DeselectCommand();
+        case ViewCalendarCommand.COMMAND_WORD:
+        case ViewCalendarCommand.COMMAND_ALIAS:
+            return new ViewCalendarCommand();
 
         case CompareTimetableCommand.COMMAND_WORD:
         case CompareTimetableCommand.COMMAND_ALIAS:

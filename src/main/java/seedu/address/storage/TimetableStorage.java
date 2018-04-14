@@ -9,9 +9,14 @@ import java.io.FileNotFoundException;
 public interface TimetableStorage {
 
     /**
-     * Updates TimetablePageScript file at path {@code timetablePageJsPath} with new timetable module information
+     * Creates TimetableStyle.css file at path {@code timetablePageCssPath}
      */
-    void setUpTimetablePageScriptFile();
+    void createTimetablePageCssFile();
+
+    /**
+     * Updates TimetablePage.html file at path {@code timetablePageHtmlPath} with new timetable module information
+     */
+    void setUpTimetablePageHtmlFile();
 
     /**
      * Writes the given string to {@code timetableInfoFilePath}
@@ -33,10 +38,12 @@ public interface TimetableStorage {
     String getFileContents(String path) throws FileNotFoundException;
 
     /**
-     * Replaces first line of {@code contents} with {@code replace}
+     * Replaces one line of {@code contents} with {@code replace}
      * @param contents original content of the javascript file
      * @param replace new line
+     * @param startLine of line to replace
+     * @param endLine of line to replace
      * @return new content
      */
-    String replaceFirstLine(String contents, String replace);
+    String replaceLine(String contents, String replace, String startLine, String endLine);
 }

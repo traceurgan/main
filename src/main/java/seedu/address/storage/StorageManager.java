@@ -149,8 +149,13 @@ public class StorageManager extends ComponentManager implements Storage {
 
     //@@author marlenekoh
     @Override
-    public void setUpTimetablePageScriptFile() {
-        timetableStorage.setUpTimetablePageScriptFile();
+    public void createTimetablePageCssFile() {
+        timetableStorage.createTimetablePageCssFile();
+    }
+
+    @Override
+    public void setUpTimetablePageHtmlFile() {
+        timetableStorage.setUpTimetablePageHtmlFile();
     }
 
     @Override
@@ -169,14 +174,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public String replaceFirstLine(String contents, String replace) {
-        return timetableStorage.replaceFirstLine(contents, replace);
+    public String replaceLine(String contents, String replace, String startIndex, String endIndex) {
+        return timetableStorage.replaceLine(contents, replace, startIndex, endIndex);
     }
 
     @Subscribe
     public void handleTimetableChangedEvent(TimetableChangedEvent event) {
         setUpTimetableDisplayFiles(event.timetable.getTimetableDisplayInfo());
-        setUpTimetablePageScriptFile();
+        setUpTimetablePageHtmlFile();
         EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
     }
 }
