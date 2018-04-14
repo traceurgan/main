@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.model.journalentry.Date;
 import seedu.address.model.journalentry.JournalEntry;
@@ -39,5 +40,18 @@ public class JournalEntryView extends UiPart<Region> {
         text.setValue(journalEntry.getText());
         journalDate.textProperty().bind(date);
         journalText.textProperty().bind(text);
+        registerAsAnEventHandler(this);
+    }
+
+    @Subscribe
+    private void handleJournalChangedEvent(JournalChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.data.getJournalEntryList().size() != 0) {
+            int last = event.data.getLast();
+            JournalEntry je = event.data.getJournalEntryList().get(last);
+            Platform.runLater(() -> date.setValue(je.getDate().value));
+            Platform.runLater(() -> text.setValue(je.getText()));
+        }
+
     }
 }

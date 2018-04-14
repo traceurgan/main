@@ -24,6 +24,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowJournalEntryRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -220,17 +221,8 @@ public class MainWindow extends UiPart<Region> {
      */
     private void handleShowJournalEntry(JournalEntry journalEntry) {
         browserPlaceholder.getChildren().clear();
-        JournalEntryView journalEntryView= new JournalEntryView(journalEntry);
+        JournalEntryView journalEntryView = new JournalEntryView(journalEntry);
         browserPlaceholder.getChildren().add(journalEntryView.getRoot());
-    }
-
-    /**
-     * Hides journal entry.
-     */
-    private void handleHideJournalEntry() {
-        browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel(logic.getPartner());
-        browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
     }
 
     //@@author
@@ -274,6 +266,13 @@ public class MainWindow extends UiPart<Region> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    //@@author traceurgan
+    @Subscribe
+    private void handleShowJournalEntryRequestEvent(ShowJournalEntryRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleShowJournalEntry(event.journalEntry);
     }
 
     //@@author marlenekoh

@@ -14,8 +14,8 @@ import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
+import seedu.address.commons.events.ui.ShowJournalEntryRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
-import seedu.address.commons.events.ui.ViewJournalEntryRequestEvent;
 import seedu.address.model.journalentry.Date;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Person;
@@ -67,6 +67,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetJournalData(ReadOnlyJournal newData) {
         journal.resetJournalData(newData);
         indicateJournalChanged();
+        requestHideTimetable();
     }
 
     @Override
@@ -236,7 +237,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void viewJournalEntry(Date date) throws Exception {
         if (contains(date)) {
-            raise (new ViewJournalEntryRequestEvent(date));
+            raise (new ShowJournalEntryRequestEvent(journal.getJournalEntry(date)));
         } else {
             throw new Exception();
         }
