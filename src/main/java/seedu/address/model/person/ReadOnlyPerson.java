@@ -43,7 +43,8 @@ public interface ReadOnlyPerson {
                 && rp.getPhone().equals(this.getPhone())
                 && rp.getEmail().equals(this.getEmail())
                 && rp.getAddress().equals(this.getAddress())
-                && rp.getTimetable().equals((this.getTimetable())));
+                && rp.getTimetable().equals((this.getTimetable()))
+                && rp.getAppointments().equals(this.getAppointments()));
     }
 
     //@@author chenxing1992

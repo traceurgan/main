@@ -51,11 +51,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(ReadOnlyPerson personToCopy) {
         this.person = new Person(personToCopy);
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        timetable = personToCopy.getTimetable();
+        this.name = personToCopy.getName();
+        this.phone = personToCopy.getPhone();
+        this.email = personToCopy.getEmail();
+        this.address = personToCopy.getAddress();
+        this.timetable = personToCopy.getTimetable();
+        this.appointments = personToCopy.getAppointments();
     }
 
     /**
@@ -107,7 +108,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return this.person;
+        return new Person(name, phone, email, address, timetable, appointments);
     }
 
 }

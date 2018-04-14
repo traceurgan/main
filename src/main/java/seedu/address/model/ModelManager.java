@@ -24,7 +24,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.timetable.Timetable;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the NUSCouples data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -242,7 +242,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return partner.equals(other.partner)
+        return ((partner == null && other.partner == null)
+                || (partner != null && other.partner != null && partner.equals(other.partner)))
                 && journal.equals(other.journal);
     }
 
