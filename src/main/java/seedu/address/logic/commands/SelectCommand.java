@@ -1,16 +1,21 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.person.Person.PARTNER_INDEX;
+
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.timetable.TimetableDisplayUtil;
 
 /**
- * Selects a person identified using it's last displayed index from the address book.
+ * Selects your partner from NUSCouples.
  */
 public class SelectCommand extends Command {
 
@@ -18,16 +23,15 @@ public class SelectCommand extends Command {
     public static final String COMMAND_ALIAS = "s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Selects your partner and shows his/her timetable.\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
     private final Index targetIndex;
 
-    public SelectCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public SelectCommand() {
+        this.targetIndex = Index.fromZeroBased(PARTNER_INDEX);
     }
 
     @Override
@@ -39,9 +43,14 @@ public class SelectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        ReadOnlyPerson readOnlyPartner = lastShownList.get(targetIndex.getZeroBased());
+        Person partner = new Person(readOnlyPartner);
+        TimetableDisplayUtil.setUpUnsortedModuleSlotsForViewing(partner.getTimetable());
+        TimetableDisplayUtil.setUpTimetableDisplayInfo(partner.getTimetable());
+        EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
 
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
     }
 
     @Override

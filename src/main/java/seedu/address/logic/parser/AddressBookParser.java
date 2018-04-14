@@ -12,7 +12,9 @@ import seedu.address.logic.commands.CalendarViewCommand;
 import seedu.address.logic.commands.CancelAppointmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CompareTimetableCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeselectCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -23,7 +25,6 @@ import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.ViewTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,11 +68,20 @@ public class AddressBookParser {
 
         case SelectCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new SelectCommandParser().parse(arguments); //@@author
+            return new SelectCommand(); //@@author
+
+        case DeselectCommand.COMMAND_WORD:
+        case DeselectCommand.COMMAND_ALIAS:
+            return new DeselectCommand();
+
+        case CompareTimetableCommand.COMMAND_WORD:
+        case CompareTimetableCommand.COMMAND_ALIAS:
+            return new CompareTimetableCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new DeleteCommandParser().parse(arguments); //@@author
+
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new ClearCommand(); //@@author
@@ -107,10 +117,6 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
         case RedoCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new RedoCommand(); //@@author
-
-        case ViewTimetableCommand.COMMAND_WORD:
-        case ViewTimetableCommand.COMMAND_ALIAS:
-            return new ViewTimetableCommand();
 
         case CalendarViewCommand.COMMAND_WORD:
         case CalendarViewCommand.COMMAND_ALIAS:
