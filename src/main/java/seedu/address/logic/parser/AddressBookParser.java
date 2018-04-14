@@ -22,7 +22,7 @@ import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ShowCalendarCommand;
-import seedu.address.logic.commands.ViewTimetableCommand;
+import seedu.address.logic.commands.ShowTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,9 +64,9 @@ public class AddressBookParser {
         case EditCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new EditCommandParser().parse(arguments); //@@author
 
-        case ViewTimetableCommand.COMMAND_WORD:
-        case ViewTimetableCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
-            return new ViewTimetableCommand(); //@@author
+        case ShowTimetableCommand.COMMAND_WORD:
+        case ShowTimetableCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
+            return new ShowTimetableCommand(); //@@author
 
         case ShowCalendarCommand.COMMAND_WORD:
         case ShowCalendarCommand.COMMAND_ALIAS:

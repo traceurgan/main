@@ -19,7 +19,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.ViewTimetableCommand;
+import seedu.address.logic.commands.ShowTimetableCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -146,16 +146,16 @@ public class AddressBookParserTest {
 
     @Test //@@author
     public void parseCommand_select() throws Exception {
-        ViewTimetableCommand command = (ViewTimetableCommand) parser.parseCommand(
-                ViewTimetableCommand.COMMAND_WORD);
-        assertEquals(new ViewTimetableCommand(), command);
+        ShowTimetableCommand command = (ShowTimetableCommand) parser.parseCommand(
+                ShowTimetableCommand.COMMAND_WORD);
+        assertEquals(new ShowTimetableCommand(), command);
     }
 
     @Test //@@author HEARTOFAL1ON
     public void parseCommand_selectAlias() throws Exception {
-        ViewTimetableCommand command = (ViewTimetableCommand) parser.parseCommand(
-                ViewTimetableCommand.COMMAND_ALIAS);
-        assertEquals(new ViewTimetableCommand(), command);
+        ShowTimetableCommand command = (ShowTimetableCommand) parser.parseCommand(
+                ShowTimetableCommand.COMMAND_ALIAS);
+        assertEquals(new ShowTimetableCommand(), command);
     }
 
     @Test //@@author
