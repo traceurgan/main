@@ -34,6 +34,6 @@ public class TestUtil {
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
     public static ReadOnlyPerson getPerson(Model model) {
-        return model.getPerson();
+        return model.getPartner();
     }
 }

@@ -117,7 +117,6 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author
     @Override
     public synchronized void deletePerson() {
-        requireAllNonNull(this.partner);
         partner = updatePerson(null);
         indicatePersonChanged(partner);
         requestHideTimetable();
