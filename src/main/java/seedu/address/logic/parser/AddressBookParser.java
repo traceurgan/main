@@ -21,7 +21,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.NewJournalCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.ViewCalendarCommand;
+import seedu.address.logic.commands.ShowCalendarCommand;
 import seedu.address.logic.commands.ViewTimetableCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -68,9 +68,9 @@ public class AddressBookParser {
         case ViewTimetableCommand.COMMAND_ALIAS: //@@author HEARTOFAL1ON
             return new ViewTimetableCommand(); //@@author
 
-        case ViewCalendarCommand.COMMAND_WORD:
-        case ViewCalendarCommand.COMMAND_ALIAS:
-            return new ViewCalendarCommand();
+        case ShowCalendarCommand.COMMAND_WORD:
+        case ShowCalendarCommand.COMMAND_ALIAS:
+            return new ShowCalendarCommand();
 
         case CompareTimetableCommand.COMMAND_WORD:
         case CompareTimetableCommand.COMMAND_ALIAS:
@@ -118,6 +118,7 @@ public class AddressBookParser {
         case AddAppointmentCommand.COMMAND_WORD:
         case AddAppointmentCommand.COMMAND_ALIAS:
             return new AddAppointmentParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 

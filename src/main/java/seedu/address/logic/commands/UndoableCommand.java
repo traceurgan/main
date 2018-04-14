@@ -53,7 +53,6 @@ public abstract class UndoableCommand extends Command {
         requireNonNull(model);
         try {
             executeUndoableCommand();
-
         } catch (CommandException ce) {
             throw new AssertionError("The command has been successfully executed previously; "
                     + "it should not fail now");

@@ -9,7 +9,7 @@ import seedu.address.model.person.ReadOnlyPerson;
 /**
  * Deselects your partner from NUSCouples.
  */
-public class ViewCalendarCommand extends Command {
+public class ShowCalendarCommand extends Command {
     public static final String COMMAND_WORD = "cview";
     public static final String COMMAND_ALIAS = "cv";
 
@@ -21,7 +21,7 @@ public class ViewCalendarCommand extends Command {
 
     private ReadOnlyPerson partner;
 
-    public ViewCalendarCommand() {
+    public ShowCalendarCommand() {
     }
 
     @Override
@@ -39,8 +39,8 @@ public class ViewCalendarCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewCalendarCommand // instanceof handles nulls
-                && this.partner.equals(((ViewCalendarCommand) other).partner)); // state check
+                || (other instanceof ShowCalendarCommand // instanceof handles nulls
+                && this.partner.equals(((ShowCalendarCommand) other).partner)); // state check
     }
 
 }

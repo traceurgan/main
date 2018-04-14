@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMETABLE;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.person.timetable.TimetableUtil;
@@ -29,8 +32,13 @@ public class CompareTimetableCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
-        partner = model.getPartner();
+    public CommandResult execute() throws CommandException {
+        try {
+            partner = model.getPartner();
+        } catch (NullPointerException npe) {
+            throw new CommandException(MESSAGE_INVALID_PERSON);
+        }
+        requireNonNull(otherTimetable);
         otherTimetable = TimetableUtil.setUpTimetableInfoCompare(partner.getTimetable(), otherTimetable);
 
         model.indicateTimetableChanged(otherTimetable);
