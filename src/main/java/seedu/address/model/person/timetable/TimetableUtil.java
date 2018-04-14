@@ -22,10 +22,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager;
 
 //@@author marlenekoh
 /**
@@ -45,7 +45,7 @@ public class TimetableUtil {
         "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final String SPLIT_QUESTION_MARK = "\\?";
     private static final String SPLIT_AMPERSAND = "&";
     private static final String SPLIT_EQUALS = "=";

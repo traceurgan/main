@@ -22,7 +22,8 @@ public class FileTimetableStorage implements TimetableStorage {
     private String timetablePageCssPath;
     private String timetableInfoFilePath;
 
-    public FileTimetableStorage(String timetablePageHtmlPath, String timetablePageCssPath, String timetableInfoFilePath) {
+    public FileTimetableStorage(String timetablePageHtmlPath, String timetablePageCssPath,
+                                String timetableInfoFilePath) {
         this.timetablePageHtmlPath = timetablePageHtmlPath;
         this.timetablePageCssPath = timetablePageCssPath;
         this.timetableInfoFilePath = timetableInfoFilePath;

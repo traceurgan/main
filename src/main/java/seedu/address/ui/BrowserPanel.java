@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -41,11 +40,11 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
+    private static final String DATA_FILE_FOLDER = "/data/";
     private static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
-    private final String DATA_FILE_FOLDER = "/data/";
     @FXML
     private WebView browser;
 

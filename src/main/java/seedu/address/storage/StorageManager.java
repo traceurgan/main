@@ -149,7 +149,9 @@ public class StorageManager extends ComponentManager implements Storage {
 
     //@@author marlenekoh
     @Override
-    public void createTimetablePageCssFile() { timetableStorage.createTimetablePageCssFile();}
+    public void createTimetablePageCssFile() {
+        timetableStorage.createTimetablePageCssFile();
+    }
 
     @Override
     public void setUpTimetablePageHtmlFile() {
