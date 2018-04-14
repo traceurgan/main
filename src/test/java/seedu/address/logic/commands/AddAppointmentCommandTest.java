@@ -64,11 +64,6 @@ public class AddAppointmentCommandTest {
 
     }
 
-    @Test
-    public void outOfBoundsIndex() throws CommandException, seedu.address.logic.parser.exceptions.ParseException {
-        thrown.expect(CommandException.class);
-        setCommand(AddAppointmentParser.getAppointmentFromString("lunch,tomorrow 5pm")).execute();
-    }
 
     /**
      * Util methods to set appointment command

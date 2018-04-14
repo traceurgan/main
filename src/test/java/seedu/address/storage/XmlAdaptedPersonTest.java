@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -128,15 +129,13 @@ public class XmlAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidAppointment_throwsIllegalValueException() {
-        List<XmlAdaptedAppointment> invalidAppt = new ArrayList<>(VALID_APPOINTMENT);
-        for (Appointment appointment : getTypicalPerson().getAppointments()) {
-            invalidAppt.add(new XmlAdaptedAppointment(appointment));
-        }
+    public void toModelType_nullAppointment_throwsIllegalValueException() {
+
         XmlAdaptedPerson person =
                 new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMETABLE, invalidAppt);
-        Assert.assertThrows(IllegalValueException.class, person::toModelType);
+                        VALID_TIMETABLE, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Calendar.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }
