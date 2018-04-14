@@ -26,15 +26,6 @@ public class AddAppointmentCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Test
-    public void equals() throws ParseException,  seedu.address.logic.parser.exceptions.ParseException {
-        String arg = "Lunch, tomorrow 5pm";
-
-        AddAppointmentCommand command = new AddAppointmentCommand(setAppointment(arg));
-        AddAppointmentCommand command2 = new AddAppointmentCommand(setAppointment(arg));
-        assertEquals(command, command2);
-        assertNotEquals(command, new AddAppointmentCommand(setAppointment(arg)));
-    }
 
     @Test
     public void execute() throws ParseException, CommandException {

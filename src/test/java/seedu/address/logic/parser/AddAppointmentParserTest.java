@@ -33,7 +33,7 @@ public class AddAppointmentParserTest {
     @Test
     public void nonParsableString() throws ParseException {
         thrown.expect(ParseException.class);
-        parser.parse("appt 1 d/lunch ,cant parse this string");
+        parser.parse("appt d/lunch ,cant parse this string");
     }
     @Test
     public void parseDateExpression() throws ParseException, java.text.ParseException {
