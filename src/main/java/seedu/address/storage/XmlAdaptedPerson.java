@@ -123,11 +123,6 @@ public class XmlAdaptedPerson {
         }
         final Timetable timetable = new Timetable(this.timetable);
 
-        if (this.appointments == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Appointment.class.getSimpleName()));
-        }
-
         final List<Appointment> personAppointmentList = new ArrayList<>();
         for (XmlAdaptedAppointment appointment : appointments) {
             personAppointmentList.add(appointment.toModelType());
