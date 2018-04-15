@@ -18,6 +18,7 @@ public class ShowCalendarCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_DESELECT_PERSON_SUCCESS = "Calendar view displayed.";
+    public static final String MESSAGE_DESELECT_PERSON_FAILURE = "Calendar view is already displayed.";
 
     private ReadOnlyPerson partner;
 
@@ -31,7 +32,7 @@ public class ShowCalendarCommand extends Command {
             partner.getTimetable();
             model.requestHideTimetable();
         } catch (NullPointerException npe) {
-            throw new CommandException(MESSAGE_INVALID_PERSON);
+            throw new CommandException(MESSAGE_DESELECT_PERSON_FAILURE);
         }
         return new CommandResult(MESSAGE_DESELECT_PERSON_SUCCESS);
     }
