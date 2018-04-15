@@ -23,7 +23,9 @@ to create and remember memories with ease amid our *hectic school term*. Imagine
 identify common breaks, schedule meetings and view important dates with your partner, and record your thoughts or
 feelings, *all in the same application* mere keystrokes away. Best of all, *everything* can be controlled from the
 handy Command Line Interface (CLI). Experience the *clarity* that comes with a Graphical User Interface (GUI), with
-none of the *pain* of searching for and remembering where each button is. Interested yet? Jump to <<Quick Start>> to
+none of the *pain* of searching for and remembering where each button is.
+
+Interested yet? Jump to <<Quick Start>> to
 get started. Enjoy!
 
 == Quick Start
