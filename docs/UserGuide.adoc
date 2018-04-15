@@ -411,7 +411,24 @@ image:screenshots/22JnewAfter2.png[width="395"] +
 Selects a journal entry from the list seen in the GUI. The contents of the journal entry will be shown in the main
 window. +
 Format: `jview` +
+
+Alias: `jv`
+
+|===
+| [.small]#Return to <<toc,Table of Contents>># +
+|===
+
+// tag::motivate[]
+=== Motivational Picture
+==== Send motivational picture via app : `motivate`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `motivate` +
+_There is no alias for this feature currently._
+// end::motivate[]
+=======
 Alias: `jv` +
+
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
