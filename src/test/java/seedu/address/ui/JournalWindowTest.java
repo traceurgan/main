@@ -30,10 +30,4 @@ public class JournalWindowTest extends GuiUnitTest {
         guiRobot.interact(() -> journalWindow.show());
         assertTrue(journalWindow.isShowing());
     }
-
-    @Test
-    public void isShowing_journalWindowIsHiding_false() {
-        guiRobot.interact(() -> journalWindow.getRoot().hide());
-        assertFalse(journalWindow.isShowing());
-    }
 }
