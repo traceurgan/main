@@ -440,7 +440,7 @@ Certain properties of the application can be controlled (e.g App name, logging l
 |===
 
 // tag::calendar[]
-=== [Proposed] Calendar Viewer Feature
+=== [Proposed] Calendar Google API Feature
 ==== Proposed Implementation (Appearing in V2.0)
 The Calendar Viewer mechanism is facilitated by `Google Calendar API` and reside in the `ModelManager`.
 It supports viewing/add/editing/deleting capability that modifies the state of _NUSCouples_.
@@ -557,7 +557,7 @@ image::AddAppointmentClass.png[width="300"]
 ** Start Date: It Holds the starting time of the appointment. Used for sorting appointments and UI.
 ** End Date: Holds the end time of the appointment. Used for UI.
 
-The sequence diagram below shows interactions within the `Logic` Component for the `execute' API call.
+The sequence diagram below shows interactions within the `Model` Component for the `AddAppointment' API call.
 
 image::AddAppointmentSeq.png[width="650"]
 
@@ -577,8 +577,34 @@ image::AddAppointmentSeq.png[width="650"]
 ** Pros: User can plan which one is more important to attend
 ** Cons: Ambiguous as there are multiple similar events on the same time frame
 * **Alternative 2:** Restrict user to add same event on the same time frame.
-** Pros: More neat
+** Pros: More neat looking
 ** Cons: User cant compare or manage well
+
+//tag::cancelCalendar[]
+
+=== Calendar Cancel Appointment feature
+==== Proposed Implementation
+
+The Calendar Cancel Appointment feature is implemented by 'Appointment', which will reside in 'Model'.
+
+The idea of implementing a Cancel Appointment feature is to allow the user to remove his/her event on the Calendar when needed.
+
+When the user calls to cancel an appointment in the Calendar, the model will ask AppointmentList to return a list of Appointments.
+However, the AppointmentList will only return a mutable copy of the AppointmentList back to the caller, as a practice of Defensive Programming.
+
+The sequence diagram below shows interactions within the `Model` Component for the `CancelAppointment' API call.
+
+image::CancelApptSeq.png[width="650"]
+
+==== Design Considerations
+===== Aspect: Implementation of Add Event View
+
+* **Alternative 1 (current choice):** Display in Calendar UI.
+** Pros: Easier to implement and Neater.
+** Cons: Have to cancel one by one and thus calendar will refresh over and over again.
+* **Alternative 2:** Create a List to display all events.
+** Pros: User can have an overview of all the events listed to cancel
+** Cons: The UI will be blank at initial stage which is ugly.
 
 //tag::timetable[]
 
@@ -828,8 +854,9 @@ b. Require developers to download those libraries manually (this creates extra w
 |Assignee |Major|Minor
 
 |Chen Xing
-|Scheduler: This app allows user to schedule/edit/delete/view planned meetings
-|Notifications: Allows user to receive notification about important dates from scheduled meetings
+|Scheduler: This app allows user to schedule//delete/view planned meetings
+|Accessibility: Reduce the effort when user enters command on the command box through custom keystrokes.
+|Tracker: The system will update the time on the footer to show when the changes have been made.
 
 |Marlene
 |Timetable viewer: To help couples identify common breaks during school term so they can plan meetings during their free time
@@ -858,7 +885,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |pair of NUS students in a relationship |add/view my partner's NUS timetable for the week |keep track of my partner's free time
 
-|`* * *` |person in a relationship |add,edit,delete and view special events/ meetings (e.g. Valentine's day) in the same month |better plan for these dates
+|`* * *` |person in a relationship |View,Add and Delete special events/ meetings (e.g. Valentine's day) in the same month |better plan for these dates
 
 |`* * *` |person in a relationship |add/view Journal entries |remember special memories
 
@@ -870,7 +897,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
-|`* *` |partner |send a motivational picture via the app | keep their spirits up
+|`* *` |user |able to execute keystrokes to lighten their typing | keep their spirits up
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 
@@ -878,7 +905,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |experienced user |have shortcut keys| do the same thing in a shorter time
 
-|`*` |user |receive notification of upcoming scheduled events| so i can get notified and prepare earlier
+|`*` |user |gets updated upon the changed of event| so he can be verified that changes has been made
 
 |=======================================================================
 
@@ -918,17 +945,13 @@ Use case resumes at step 2.
 +
 Use case ends.
 
-<<<<<<< HEAD
-discrete]
-=======
 [discrete]
->>>>>>> 107717e166fb06c77f6055577cf90d15c9b22ed2
 === Use case: View Calendar of User
 
 *MSS*
 
-1.User inside browser panel enters the command to view calendar.
-2.NUSCouple redirects to google Calendar to retrieve data and display the UI accordingly.
+1.User inside browser panel enters the command to view calendar at different view(s).
+2.NUSCouples displays the Calendar
 
 +
 Use case ends.
@@ -936,20 +959,91 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. The partner already has an existing google calendar hosted in google.
+* 1a. There is an existing user in NUSCouples.
 +
 [none]
-** 1a1. _NUSCouples_ redirects to google calendar account to authenticate using the user credential.
-** 1a2. User confirms change.
-** 1a3. _NUSCouples_ list the calendar in browser panel.
+** 1a1. _NUSCouples_ request to display Calendar of day/week/month/year from CalendarFX.
+** 1a2. _NUSCouples_ populate the calendar on the browser panel
+
 +
 Use case resumes at step 2.
 
-* 1b. The given credential is invalid.
+Use case ends.
+
+[discrete]
+=== Use case: Add Event on Calendar
+
+*MSS*
+
+1.User inside browser panel enters the command to add appointment.
+2.NUSCouples update the appointment list.
+3.NUSCouples displays the Calendar of all the events in the appointment list and update the change of event on the footer.
+
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User didn't specify date of event
 +
 [none]
-** 1b1. _NUSCouples_ shows an error message and close.
+** 1a1. _NUSCouples_ shows an error
+
+[none]
+* 2a. NUSCouples add the new appointment into the list
+
+Use case ends.
+
+[discrete]
+=== Use case: Delete Event on Calendar
+
+*MSS*
+
+1.User inside browser panel enters the command to delete appointment.
+2.NUSCouples update the appointment list.
+3.NUSCouples displays the Calendar of all the events in the appointment list.
+
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User didn't specify date of event
 +
+[none]
+** 1a1. _NUSCouples_ shows an error
+
+[none]
+* 2a. NUSCouples cannot find the appointment into the list
+[none]
+** 2a1. NUSCouples displays error message
+
+Use case ends.
+
+[discrete]
+=== Use case: Keyboard Accessibility
+
+*MSS*
+
+1.User enters a long command but want's to add something at the front or back
+2.User press Shift Ctrl (move cursor to the front) Shift Alt (move cursor to the back)
+
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User is using MAC
++
+[none]
+** 1a1. enter `option` key instead of `Alt` key
+
+[none]
+* 2a. User doesn't have keystroke Shift/Alt/Ctrl.
++
+[none]
+** 2a1. This feature can't be used
+
 Use case ends.
 
 [discrete]
@@ -966,9 +1060,10 @@ Use case ends.
 
 [none]
 * 1a. The specified person does not have a timetable.
-+
-[none]
 ** 1a1. _NUSCouples_ shows an error message.
+[none]
+
+
 +
 Use case ends.
 
@@ -1007,11 +1102,15 @@ Use case ends.
 .  Should have commands that are intuitive and easy to remember.
 .  Should be able to control almost everything from the CLI.
 .  The application should be connected to the internet.
+.  Should able to store <100 appointments
 
 [appendix]
 == Glossary
 [[mainstream-os]] Mainstream OS::
-Windows, Linux, Unix, OS-X, NUSMods, Google Calendar
+Windows, Linux, Unix, OS-X
+
+[[Third-Party-API]] Third-Party API::
+NUSMods, CalendarFX
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
