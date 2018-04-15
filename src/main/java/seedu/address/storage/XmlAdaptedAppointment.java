@@ -39,6 +39,15 @@ public class XmlAdaptedAppointment {
     }
 
     /**
+     * Creates a XmlAdaptedAppointment from the given strings.
+     */
+    public XmlAdaptedAppointment(String description, String appointmentStart, String appointmentEnd) {
+        this.description = description;
+        this.appointmentStart = appointmentStart;
+        this.appointmentEnd = appointmentEnd;
+    }
+
+    /**
      * Converts this jaxb-friendly adapted appointment object into the model's appointment object.
      *
      * @throws ParseException if there were any data constraints violated in the adapted person
