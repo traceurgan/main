@@ -173,8 +173,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public String replaceLine(String contents, String replace, String startIndex, String endIndex) {
-        return timetableStorage.replaceLine(contents, replace, startIndex, endIndex);
+    public String replaceLineExcludingStartEnd(String contents, String replace, String start, String end) {
+        return timetableStorage.replaceLineExcludingStartEnd(contents, replace, start, end);
     }
 
     @Subscribe

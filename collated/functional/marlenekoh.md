@@ -159,7 +159,7 @@ public class TimetableDisplayUtil {
         "2000", "2030", "2100", "2130", "2200", "2230", "2300", "2330"
     };
     public static final String[] WEEKS = {"Odd Week", "Even Week", "Every Week"};
-    private static String timetableInfoFilePath = "src/main/resources/timetableDisplayInfo";
+    private static String timetableDisplayInfoFilePath = "src/main/resources/timetableDisplayInfo";
     private static String timetablePageJsPath = "src/main/resources/view/TimetablePageScript.js";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 ```
@@ -200,7 +200,7 @@ public class TimetableDisplayUtil {
     public static void setUpTimetablePageScriptFile() {
         try {
             String oldContent = getFileContents(timetablePageJsPath);
-            String toReplace = getFileContents(timetableInfoFilePath);
+            String toReplace = getFileContents(timetableDisplayInfoFilePath);
             String newContent = replaceFirstLine(oldContent, toReplace);
             writeToTimetablePageScriptFile(newContent);
         } catch (FileNotFoundException e) {
@@ -214,7 +214,7 @@ public class TimetableDisplayUtil {
      * @param timetable the timetable to convert into string and write
      */
     public static void setUpTimetableDisplayInfoFile(Timetable timetable) {
-        File timetableDisplayInfo = new File(timetableInfoFilePath);
+        File timetableDisplayInfo = new File(timetableDisplayInfoFilePath);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
             String toWrite = convertTimetableToString(timetable);
@@ -224,8 +224,8 @@ public class TimetableDisplayUtil {
         } catch (FileNotFoundException e) {
             logger.warning("File not found, creating new file");
             try {
-                timetableInfoFilePath = "data/timetableDisplayInfo";
-                timetableDisplayInfo = new File(timetableInfoFilePath);
+                timetableDisplayInfoFilePath = "data/timetableDisplayInfo";
+                timetableDisplayInfo = new File(timetableDisplayInfoFilePath);
                 timetableDisplayInfo.createNewFile();
                 setUpTimetableDisplayInfo(timetable);
             } catch (IOException ioe) {
@@ -235,11 +235,11 @@ public class TimetableDisplayUtil {
     }
 
     /**
-     * Writes a string to the file at {@code timetableInfoFilePath}
+     * Writes a string to the file at {@code timetableDisplayInfoFilePath}
      * @param toWrite the String to write
      */
     public static void setUpTimetableDisplayInfoFile(String toWrite) {
-        File timetableDisplayInfo = new File(timetableInfoFilePath);
+        File timetableDisplayInfo = new File(timetableDisplayInfoFilePath);
         try {
             PrintWriter printWriter = new PrintWriter(timetableDisplayInfo);
             printWriter.write(toWrite);
@@ -247,8 +247,8 @@ public class TimetableDisplayUtil {
         } catch (FileNotFoundException e) {
             logger.warning("File not found, creating new file");
             try {
-                timetableInfoFilePath = "data/timetableDisplayInfo";
-                timetableDisplayInfo = new File(timetableInfoFilePath);
+                timetableDisplayInfoFilePath = "data/timetableDisplayInfo";
+                timetableDisplayInfo = new File(timetableDisplayInfoFilePath);
                 timetableDisplayInfo.createNewFile();
                 setUpTimetableDisplayInfoFile(toWrite);
             } catch (IOException ioe) {
