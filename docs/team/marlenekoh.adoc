@@ -33,7 +33,7 @@ stored in NUSCouples along with one other given timetable.
 *** Reimplemented select and created deselect command to view and hide timetable respectively
 (Pull requests https://github.com/CS2103JAN2018-T09-B4/main/pull/127[#127], https://github.com/CS2103JAN2018-T09-B4/main/pull/155[#155])
 *** Add command to compare timetables (Pull request https://github.com/CS2103JAN2018-T09-B4/main/pull/161[#161])
-*** Wrote tests (Pull request https://github.com/CS2103JAN2018-T09-B4/main/pull/74[#74])
+*** Wrote tests (Pull requests https://github.com/CS2103JAN2018-T09-B4/main/pull/74[#74], https://github.com/CS2103JAN2018-T09-B4/main/pull/178[#178])
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/CS2103JAN2018-T09-B4/main/pull/148[#148]
 
