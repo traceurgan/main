@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -123,16 +122,6 @@ public class XmlAdaptedPersonTest {
                 null, VALID_APPOINTMENT);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Timetable.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidAppointment_throwsIllegalValueException() {
-        List<XmlAdaptedAppointment> invalidAppt = new ArrayList<>(VALID_APPOINTMENT);
-        invalidAppt.add(new XmlAdaptedAppointment(INVALID_APPOINTMENT));
-        XmlAdaptedPerson person =
-                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMETABLE, invalidAppt);
-        Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 
 }

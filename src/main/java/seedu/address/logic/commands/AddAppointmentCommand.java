@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import java.util.Calendar;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -31,13 +30,14 @@ public class AddAppointmentCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New appointment added. ";
     public static final String INVALID_PERSON = "This person is not in your address book";
     public static final String INVALID_DATE = "Invalid Date. Please enter a valid date.";
-    public static final String SORT_APPOINTMENT_FEEDBACK = "Rearranged contacts to show upcoming appointments.";
+    public static final String DUPLICATE_APPT = "Duplicate Event found on same timing. Please select other time.";
 
     private final Appointment appointment;
 
     public AddAppointmentCommand(Appointment appointment) {
         this.appointment = appointment;
     }
+
     //@@author chenxing1992
     @Override
     protected CommandResult executeUndoableCommand() throws CommandException {
@@ -58,6 +58,7 @@ public class AddAppointmentCommand extends UndoableCommand {
 
     }
     //@@author chenxing1992
+
     /**
      * Checks if appointment date set to after current time
      */
@@ -73,15 +74,6 @@ public class AddAppointmentCommand extends UndoableCommand {
         return other == this // short circuit if same object
                 || (other instanceof AddAppointmentCommand // instanceof handles nulls
                 && (this.appointment.equals(((AddAppointmentCommand) other).appointment)));
-    }
-
-    //@@author chenxing1992
-    /**
-     * For testing purposes
-     *
-     */
-    public void setData(Model model) {
-        this.model = model;
     }
 
 }

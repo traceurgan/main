@@ -64,8 +64,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        seedu.address.model.person.Person alice = new PersonBuilder().withName("Alice").build();
-        seedu.address.model.person.Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person bob = new PersonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -143,7 +143,7 @@ public class AddCommandTest {
 
         @Override
         public void requestHideTimetable() {
-
+            fail("This method should not be called");
         }
 
         @Override

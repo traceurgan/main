@@ -6,14 +6,19 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
+import seedu.address.commons.events.model.SaveEntryEvent;
 import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.ShowJournalWindowRequestEvent;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Person;
@@ -22,9 +27,11 @@ import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.timetable.Timetable;
+import seedu.address.model.person.timetable.TimetableUtil;
+import seedu.address.ui.JournalWindow;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the NUSCouples data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -116,7 +123,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author
     @Override
-    public synchronized void deletePerson() {
+    public synchronized void deletePerson() throws NullPointerException {
+        if (partner == null) {
+            throw new NullPointerException();
+        }
         partner = updatePerson(null);
         indicatePersonChanged(partner);
         requestHideTimetable();
@@ -174,6 +184,42 @@ public class ModelManager extends ComponentManager implements Model {
             logger.info("Journal entry added.");
         }
         indicateJournalChanged();
+    }
+
+    //@@author marlenekoh
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        TimetableUtil.setUpTimetableInfoView(getPartner().getTimetable());
+        indicateTimetableChanged(getPartner().getTimetable());
+        raise(new ShowTimetableRequestEvent());
+    }
+
+    //@@author traceurgan
+    @Subscribe
+    public void handleSaveEntryEvent(SaveEntryEvent event) {
+        try {
+            addJournalEntry(event.journalEntry);
+        } catch (Exception e) {
+            logger.warning("Save failed");
+            JournalWindow journalWindow =
+                    new JournalWindow(event.journalEntry.getDate(), String.format(
+                            "Save failed. Copy your text and try again.\n" + event.journalEntry.getText()));
+            journalWindow.show();
+        }
+    }
+
+    @Subscribe
+    private void handleShowJournalWindowRequestEvent(ShowJournalWindowRequestEvent event) {
+        JournalWindow journalWindow;
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if ((getJournalEntryList().size() != 0) && (checkDate(getLast()).equals(event.date))) {
+            journalWindow = new JournalWindow(
+                    event.date, getJournal().getJournalEntry(getLast()).getText());
+        } else {
+            journalWindow = new JournalWindow(event.date);
+        }
+        journalWindow.show();
     }
 
     /**
@@ -242,7 +288,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return partner.equals(other.partner)
+        return ((partner == null && other.partner == null)
+                || (partner != null && other.partner != null && partner.equals(other.partner)))
                 && journal.equals(other.journal);
     }
 

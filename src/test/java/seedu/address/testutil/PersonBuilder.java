@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.util.SampleDataUtil.getAppointmentList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.util.SampleDataUtil;
-
 
 /**
  * A utility class to help with building Person objects.
@@ -30,7 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Timetable timetable;
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
     private Person person;
 
     public PersonBuilder() {
@@ -40,9 +40,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         timetable = new Timetable(DEFAULT_TIMETABLE);
-        List<Appointment> defaultAppointments = new ArrayList<>();
         this.person = new Person(name, phone, email,
-                address, timetable, defaultAppointments);
+                address, timetable, appointments);
 
     }
 
@@ -51,11 +50,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(ReadOnlyPerson personToCopy) {
         this.person = new Person(personToCopy);
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        timetable = personToCopy.getTimetable();
+        this.name = personToCopy.getName();
+        this.phone = personToCopy.getPhone();
+        this.email = personToCopy.getEmail();
+        this.address = personToCopy.getAddress();
+        this.timetable = personToCopy.getTimetable();
+        this.appointments = personToCopy.getAppointments();
     }
 
     /**
@@ -102,12 +102,12 @@ public class PersonBuilder {
      * Sets appointment with Date of the person that we are building
      */
     public PersonBuilder withAppointment (String ... appointment) {
-        this.appointments = SampleDataUtil.getAppointmentList(appointment);
+        this.appointments = getAppointmentList(appointment);
         return this;
     }
 
     public Person build() {
-        return this.person;
+        return new Person(name, phone, email, address, timetable, appointments);
     }
 
 }

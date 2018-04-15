@@ -10,7 +10,7 @@ import seedu.address.model.person.timetable.TimetableUtil;
 /**
  * Selects your partner from NUSCouples.
  */
-public class ViewTimetableCommand extends Command {
+public class ShowTimetableCommand extends Command {
 
     public static final String COMMAND_WORD = "tview";
     public static final String COMMAND_ALIAS = "tv";
@@ -21,7 +21,7 @@ public class ViewTimetableCommand extends Command {
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "NUSMods timetable displayed.";
     private ReadOnlyPerson partner;
 
-    public ViewTimetableCommand() { }
+    public ShowTimetableCommand() { }
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -41,7 +41,7 @@ public class ViewTimetableCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewTimetableCommand); // instanceof handles nulls
+                || (other instanceof ShowTimetableCommand); // instanceof handles nulls
     }
 
 }

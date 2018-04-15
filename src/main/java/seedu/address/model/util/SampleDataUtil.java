@@ -59,7 +59,7 @@ public class SampleDataUtil {
      * Returns an appointment list containing the list of appointment given
      */
     public static List<Appointment> getAppointmentList(String... strings) {
-        List<Appointment> list = new ArrayList<Appointment>();
+        List<Appointment> list = new ArrayList<>();
         for (String s : strings) {
             try {
                 list.add(AddAppointmentParser.getAppointmentFromString(s));
@@ -70,6 +70,7 @@ public class SampleDataUtil {
         return list;
     }
 
+    //@@author marlenekoh
     public static String getDefaultTimetablePageHtml() throws IOException {
         URL url = MainApp.class.getResource("/view/TimetablePage.html");
         return Resources.toString(url, Charsets.UTF_8);

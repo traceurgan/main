@@ -30,7 +30,7 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.logic.commands.ViewTimetableCommand;
+import seedu.address.logic.commands.ShowTimetableCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
@@ -134,7 +134,7 @@ public abstract class AddressBookSystemTest {
      * Selects the person at {@code index} of the displayed list.
      */
     protected void selectPerson() {
-        executeCommand(ViewTimetableCommand.COMMAND_WORD);
+        executeCommand(ShowTimetableCommand.COMMAND_WORD);
         assertEquals(getModel().getPartner().getName(), getPersonListPanel().getPersonCardHandle(0).getName());
     }
 
