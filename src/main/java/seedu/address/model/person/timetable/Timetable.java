@@ -23,9 +23,9 @@ public class Timetable {
     public final String value;
     private int currentSemester;
     private HashMap<String, ArrayList<TimetableModuleSlot>>
-            listOfDays; // HashMap of <Day, Sorted list of TimetableModuleSlots>
-    private HashMap<String, TimetableModule> listOfModules; // HashMap of <module code, TimetableModule>
-    private ArrayList<TimetableModuleSlot> allModulesSlots; //ArrayList Containing all TimetableModuleSlots
+            daysToTimetableModuleSlots; // HashMap of <Day, Sorted list of TimetableModuleSlots>
+    private HashMap<String, TimetableModule> moduleCodeToTimetableModule; // contains all TimetableModules
+    private ArrayList<TimetableModuleSlot> allModulesSlots; //ArrayList containing all TimetableModuleSlots
     private String expandedUrl;
     private String timetableDisplayInfo;
 
@@ -34,9 +34,14 @@ public class Timetable {
         requireNonNull(timetableUrl);
         checkArgument(isValidTimetable(timetableUrl), MESSAGE_TIMETABLE_CONSTRAINTS);
         this.value = timetableUrl;
-        TimetableParserUtil.setUpTimetableInfo(this);
-        TimetableDisplayUtil.setUpTimetableDisplayInfo(this);
+        setUpTimetable();
     }
+
+    private void setUpTimetable() {
+        TimetableUtil.setUpTimetableInfo(this);
+    }
+
+    // ================ Getter and Setter methods ==============================
 
     public String getExpandedUrl() {
         return expandedUrl;
@@ -46,12 +51,12 @@ public class Timetable {
         this.expandedUrl = expandedUrl;
     }
 
-    public void setListOfModules(HashMap<String, TimetableModule> listOfModules) {
-        this.listOfModules = listOfModules;
+    public void setModuleCodeToTimetableModule(HashMap<String, TimetableModule> moduleCodeToTimetableModule) {
+        this.moduleCodeToTimetableModule = moduleCodeToTimetableModule;
     }
 
-    public HashMap<String, TimetableModule> getListOfModules() {
-        return listOfModules;
+    public HashMap<String, TimetableModule> getModuleCodeToTimetableModule() {
+        return moduleCodeToTimetableModule;
     }
 
     public int getCurrentSemester() {
@@ -62,12 +67,13 @@ public class Timetable {
         this.currentSemester = currentSemester;
     }
 
-    public void setListOfDays(HashMap<String, ArrayList<TimetableModuleSlot>> listOfDays) {
-        this.listOfDays = listOfDays;
+    public void setDaysToTimetableModuleSlots(
+            HashMap<String, ArrayList<TimetableModuleSlot>> daysToTimetableModuleSlots) {
+        this.daysToTimetableModuleSlots = daysToTimetableModuleSlots;
     }
 
-    public HashMap<String, ArrayList<TimetableModuleSlot>> getListOfDays() {
-        return listOfDays;
+    public HashMap<String, ArrayList<TimetableModuleSlot>> getDaysToTimetableModuleSlots() {
+        return daysToTimetableModuleSlots;
     }
 
     public ArrayList<TimetableModuleSlot> getAllModulesSlots() {
@@ -80,6 +86,10 @@ public class Timetable {
 
     public void setTimetableDisplayInfo(String timetableDisplayInfo) {
         this.timetableDisplayInfo = timetableDisplayInfo;
+    }
+
+    public String getTimetableDisplayInfo() {
+        return timetableDisplayInfo;
     }
 
     /**

@@ -293,7 +293,6 @@ public class CommandBox extends UiPart<Region> {
         return containsEditCommand && containsOnlyNumbers;
     }
     //@@author chenxing1992
-
     /**
      * Checks if sentence starts with " add " or " a ".
      * Accounts for blank space in front.
@@ -631,7 +630,7 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandInputChanged() {
+    private void handleCommandInputChanged() { //here
         try {
             CommandResult commandResult = logic.execute(commandTextField.getText());
             initHistory();
@@ -688,4 +687,7 @@ public class CommandBox extends UiPart<Region> {
         return commandTextField;
     }
 
+    public void commandBoxRequestFocus() {
+        this.commandTextField.requestFocus();
+    }
 }
