@@ -327,8 +327,8 @@ public class CommandBox extends UiPart<Region> {
         return (Character.toString(stringToEvaluate.charAt(0)).equalsIgnoreCase(AddCommand.COMMAND_ALIAS)
                 && Character.toString(stringToEvaluate.charAt(1)).equals(" "));
     }
-    //@@author chenxing1992
 
+    //@@author chenxing1992
     /**
      * Checks if the first four elements of the string are "add ".
      *
@@ -340,7 +340,7 @@ public class CommandBox extends UiPart<Region> {
                 && Character.toString(stringToEvaluate.charAt(3)).equals(" "));
     }
 
-
+    //@@author
     /**
      * @return True if existing input has Date Prefix String.
      */
@@ -349,7 +349,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_DATE.getPrefix());
     }
 
-
+    //@@author
     /**
      * @return True if existing input has Address Prefix String.
      */
@@ -358,7 +358,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_ADDRESS.getPrefix());
     }
 
-
+    //@@author
     /**
      * @return True if existing input has Address Prefix String.
      */
@@ -367,7 +367,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_TIMETABLE.getPrefix());
     }
 
-
+    //@@author
     /**
      * @return True if existing input has Email Prefix String.
      */
@@ -376,7 +376,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_EMAIL.getPrefix());
     }
 
-
+    //@@author
     /**
      * @return True if existing input has Phone Prefix String.
      */
@@ -385,7 +385,7 @@ public class CommandBox extends UiPart<Region> {
         return currentInput.contains(PREFIX_PHONE.getPrefix());
     }
 
-
+    //@@author
     /**
      * @return True if existing input has Name Prefix String.
      */
@@ -393,8 +393,8 @@ public class CommandBox extends UiPart<Region> {
         String currentInput = commandTextField.getText();
         return currentInput.contains(PREFIX_NAME.getPrefix());
     }
-    //@@author chenxing1992
 
+    //@@author chenxing1992
     /**
      * Shifts the caret right to the right of the last character of the next word
      * <p>
@@ -418,8 +418,8 @@ public class CommandBox extends UiPart<Region> {
         newCaretPosition = shiftRightIgnoringWords(newCaretPosition, maxAchievablePosition);
         commandTextField.positionCaret(newCaretPosition);
     }
-    //@@author chenxing1992
 
+    //@@author chenxing1992
     /**
      * Shifts the caret right, ignoring all empty space.
      * <p>
@@ -448,8 +448,8 @@ public class CommandBox extends UiPart<Region> {
         }
         return caretHolder;
     }
-    //@@author chenxing1992
 
+    //@@author chenxing1992
     /**
      * Shifts the caret right, ignoring all char.
      * <p>
@@ -615,7 +615,7 @@ public class CommandBox extends UiPart<Region> {
         replaceText(historySnapshot.next());
     }
 
-
+    //@@author
     /**
      * Sets {@code CommandBox}'s text field with {@code text} and
      * positions the caret to the end of the {@code text}.
@@ -625,7 +625,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(commandTextField.getText().length());
     }
 
-
+    //@@author chenxing1992
     /**
      * Handles the Enter button pressed event.
      */
@@ -649,7 +649,7 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
-
+    //@@author
     /**
      * Initializes the history snapshot.
      */
@@ -659,14 +659,14 @@ public class CommandBox extends UiPart<Region> {
         // the user if she tries to navigate past the most-recent end of the historySnapshot.
         historySnapshot.add("");
     }
-
+    //@@author
     /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
-
+    //@@author
     /**
      * Sets the command box style to indicate a failed command.
      */
@@ -679,7 +679,7 @@ public class CommandBox extends UiPart<Region> {
 
         styleClass.add(ERROR_STYLE_CLASS);
     }
-
+    //@@author
     /**
      * @return the text field for testing purposes
      */

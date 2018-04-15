@@ -13,7 +13,7 @@ import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.appointment.Appointment;
 
-//@@author Chen Xing
+//@@author chenxing1992
 
 /**
  * Parse input arguments and creates a new AddAppointmentCommand Object
