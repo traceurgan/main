@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.model.util.SampleDataUtil.getAppointmentList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.person.Address;
@@ -25,14 +26,13 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TIMETABLE = "http://modsn.us/wNuIW";
-    public static final String DEFAULT_APPOINTMENT = "Lunch, tomorrow 5pm to 7pm";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Timetable timetable;
-    private List<Appointment> appointments;
+    private List<Appointment> appointments = new ArrayList<>();
     private Person person;
 
     public PersonBuilder() {
@@ -42,7 +42,6 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         timetable = new Timetable(DEFAULT_TIMETABLE);
-        appointments = SampleDataUtil.getAppointmentList(DEFAULT_APPOINTMENT);
         this.person = new Person(name, phone, email,
                 address, timetable, appointments);
 

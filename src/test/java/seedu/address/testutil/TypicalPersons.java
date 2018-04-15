@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_BOB;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -42,8 +43,7 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     public static ObservableList<ReadOnlyPerson> getPersonAsList() {
-        List<ReadOnlyPerson> personList =  new ArrayList<ReadOnlyPerson>() {
-        };
+        List<ReadOnlyPerson> personList =  FXCollections.observableArrayList();
         personList.add(ALICE);
         return (ObservableList<ReadOnlyPerson>) personList;
     }
