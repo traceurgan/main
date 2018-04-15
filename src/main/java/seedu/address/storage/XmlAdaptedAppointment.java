@@ -39,6 +39,31 @@ public class XmlAdaptedAppointment {
     }
 
     /**
+     * Creates a XmlAdaptedAppointment from the given strings.
+     */
+    public XmlAdaptedAppointment(String description, String appointmentStart, String appointmentEnd) {
+        this.description = description;
+        this.appointmentStart = appointmentStart;
+        this.appointmentEnd = appointmentEnd;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof XmlAdaptedAppointment)) {
+            return false;
+        }
+
+        XmlAdaptedAppointment otherXmlAdaptedAppointment = (XmlAdaptedAppointment) other;
+        return this.description.equals(otherXmlAdaptedAppointment.description)
+                && this.appointmentStart.equals(otherXmlAdaptedAppointment.appointmentStart)
+                && this.appointmentEnd.equals(otherXmlAdaptedAppointment.appointmentEnd);
+    }
+
+    /**
      * Converts this jaxb-friendly adapted appointment object into the model's appointment object.
      *
      * @throws ParseException if there were any data constraints violated in the adapted person

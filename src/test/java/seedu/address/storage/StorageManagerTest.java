@@ -13,8 +13,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.model.Journal;
+import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
@@ -78,13 +81,24 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
+    public void handlePersonChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(
                 "dummy"), new XmlJournalStorage("Dummy"), new JsonUserPrefsStorage("dummy"),
                 new FileTimetableStorage("dummy1", "dummy2",
                         "dummy3"));
         storage.handlePersonChangedEvent(new PersonChangedEvent(new Person(ALICE)));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
+    @Test
+    public void handleJournalChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlPersonStorage("dummy"),
+            new XmlJournalStorageExceptionThrowingStub("Dummy"), new JsonUserPrefsStorage("dummy"),
+                new FileTimetableStorage("dummy1", "dummy2",
+                        "dummy3"));
+        storage.handleJournalChangedEvent(new JournalChangedEvent(new Journal()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -100,6 +114,21 @@ public class StorageManagerTest {
 
         @Override
         public void savePerson(ReadOnlyPerson person, String filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlJournalStorageExceptionThrowingStub extends XmlJournalStorage {
+
+        public XmlJournalStorageExceptionThrowingStub(String filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveJournal(ReadOnlyJournal readOnlyJournal, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

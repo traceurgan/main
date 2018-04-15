@@ -48,6 +48,7 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, String timetable,
                             List<XmlAdaptedAppointment> appointments) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
