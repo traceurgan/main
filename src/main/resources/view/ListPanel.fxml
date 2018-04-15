@@ -6,12 +6,12 @@
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefWidth="283.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
-   <Label id="partnerLabel" contentDisplay="CENTER" text="Partner" textAlignment="CENTER">
+   <Label id="partnerLabel" contentDisplay="CENTER" text="Partner" textAlignment="CENTER" prefWidth="283.0">
       <font>
          <Font size="24.0" />
       </font></Label>
   <ListView fx:id="personListView" prefHeight="0.0" prefWidth="283.0" VBox.vgrow="ALWAYS" />
-   <Label id="journalLabel" text="Journal" textAlignment="CENTER">
+   <Label id="journalLabel" text="Journal" textAlignment="CENTER" prefWidth="283.0">
       <font>
          <Font size="24.0" />
       </font></Label>
