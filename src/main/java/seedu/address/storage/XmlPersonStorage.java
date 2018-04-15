@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.model.ReadOnlyJournal;
 import seedu.address.model.person.ReadOnlyPerson;
 
 /**
@@ -88,5 +89,4 @@ public class XmlPersonStorage implements PersonStorage {
         XmlFileStorage.saveDataToFile(file, xsp);
 
     }
-
 }

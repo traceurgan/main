@@ -55,42 +55,6 @@ public class LogicManager extends ComponentManager implements Logic {
         }
     }
 
-    //@@author marlenekoh
-    @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        TimetableUtil.setUpTimetableInfoView(model.getPartner().getTimetable());
-        model.indicateTimetableChanged(model.getPartner().getTimetable());
-        raise(new ShowTimetableRequestEvent());
-    }
-
-    //@@author traceurgan
-    @Subscribe
-    public void handleSaveEntryEvent(SaveEntryEvent event) {
-        try {
-            model.addJournalEntry(event.journalEntry);
-        } catch (Exception e) {
-            logger.warning("Save failed");
-            JournalWindow journalWindow =
-                    new JournalWindow(event.journalEntry.getDate(), String.format(
-                            "Save failed. Copy your text and try again.\n" + event.journalEntry.getText()));
-            journalWindow.show();
-        }
-    }
-
-    @Subscribe
-    private void handleShowJournalWindowRequestEvent(ShowJournalWindowRequestEvent event) {
-        JournalWindow journalWindow;
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if ((model.getJournalEntryList().size() != 0) && (model.checkDate(model.getLast()).equals(event.date))) {
-            journalWindow = new JournalWindow(
-                        event.date, model.getJournal().getJournalEntry(model.getLast()).getText());
-        } else {
-            journalWindow = new JournalWindow(event.date);
-        }
-        journalWindow.show();
-    }
-
     @Override
     public ObservableList<JournalEntry> getJournalEntryList() {
         return model.getJournalEntryList();

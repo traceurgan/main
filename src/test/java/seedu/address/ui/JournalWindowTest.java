@@ -24,14 +24,12 @@ public class JournalWindowTest extends GuiUnitTest {
         journalWindowHandle = new JournalWindowHandle(journalWindowStage);
     }
 
-    @Ignore
     @Test
     public void isShowing_journalWindowIsShowing_true() {
         guiRobot.interact(() -> journalWindow.show());
         assertTrue(journalWindow.isShowing());
     }
 
-    @Ignore
     @Test
     public void isShowing_journalWindowIsHiding_false() {
         guiRobot.interact(() -> journalWindow.getRoot().hide());
