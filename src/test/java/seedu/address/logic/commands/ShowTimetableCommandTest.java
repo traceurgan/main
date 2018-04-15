@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalJournalEntries.getTypicalJournal;
 import static seedu.address.testutil.TypicalPersons.getTypicalPerson;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 

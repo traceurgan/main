@@ -124,7 +124,7 @@ public class TimetableUtilTest {
 
         assertDoesNotThrow(() -> TimetableUtil.setExpandedTimetableUrl(actualTimetable));
         assertEquals(VALID_LONG_URL, actualTimetable.getExpandedUrl());
-        assertEquals(expectedListOfModules, actualTimetable.getListOfModules());
+        assertEquals(expectedListOfModules, actualTimetable.getModuleCodeToTimetableModule());
         assertEquals(CURRENT_SEMESTER, actualTimetable.getCurrentSemester());
         assertEquals(expectedTimetableDisplayInfoView.trim(), actualTimetable.getTimetableDisplayInfo().trim());
     }

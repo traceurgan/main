@@ -4,11 +4,7 @@ import static seedu.address.model.util.SampleDataUtil.getAppointmentList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.AddAppointmentParser;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -17,8 +13,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.util.SampleDataUtil;
-
 
 /**
  * A utility class to help with building Person objects.

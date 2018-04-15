@@ -19,12 +19,12 @@ import seedu.address.model.util.SampleDataUtil;
 public class FileTimetableStorageTest {
 
     private static final String TEST_PATH = getFilePathInSandboxFolder("testReadingWriting");
-    private static final String EXPECTED_TIMETABLE_PAGE_HTML_PATH
-            = getFilePathInSandboxFolder("expectedTimetablePage.html");
+    private static final String EXPECTED_TIMETABLE_PAGE_HTML_PATH =
+            getFilePathInSandboxFolder("expectedTimetablePage.html");
     private static final String TIMETABLE_PAGE_HTML_PATH = getFilePathInSandboxFolder("TimetablePage.html");
     private static final String TIMETABLE_PAGE_CSS_PATH = getFilePathInSandboxFolder("TimetableStyle.css");
-    private static final String TIMETABLE_DISPLAY_INFO_FILE_PATH
-            = getFilePathInSandboxFolder("timetableDisplayInfo");
+    private static final String TIMETABLE_DISPLAY_INFO_FILE_PATH =
+            getFilePathInSandboxFolder("timetableDisplayInfo");
     private static String timetableDisplayInfoContents;
     private FileTimetableStorage fileTimetableStorage;
 
@@ -58,8 +58,10 @@ public class FileTimetableStorageTest {
         fileTimetableStorage.setUpTimetableDisplayFiles(timetableDisplayInfoContents);
         assertEquals(FileUtil.readFromFile(new File(EXPECTED_TIMETABLE_PAGE_HTML_PATH)),
                 FileUtil.readFromFile(new File(TIMETABLE_PAGE_HTML_PATH)));
-        assertEquals(timetableDisplayInfoContents, FileUtil.readFromFile(new File(TIMETABLE_DISPLAY_INFO_FILE_PATH)));
-        assertEquals(SampleDataUtil.getDefaultTimetablePageCss(), FileUtil.readFromFile(new File(TIMETABLE_PAGE_CSS_PATH)));
+        assertEquals(timetableDisplayInfoContents,
+                FileUtil.readFromFile(new File(TIMETABLE_DISPLAY_INFO_FILE_PATH)));
+        assertEquals(SampleDataUtil.getDefaultTimetablePageCss(),
+                FileUtil.readFromFile(new File(TIMETABLE_PAGE_CSS_PATH)));
     }
 
     @Test
