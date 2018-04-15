@@ -67,7 +67,8 @@ public class Timetable {
         this.currentSemester = currentSemester;
     }
 
-    public void setDaysToTimetableModuleSlots(HashMap<String, ArrayList<TimetableModuleSlot>> daysToTimetableModuleSlots) {
+    public void setDaysToTimetableModuleSlots(
+            HashMap<String, ArrayList<TimetableModuleSlot>> daysToTimetableModuleSlots) {
         this.daysToTimetableModuleSlots = daysToTimetableModuleSlots;
     }
 

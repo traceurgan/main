@@ -21,7 +21,7 @@ public interface Model {
     void resetPersonData(ReadOnlyPerson newData);
 
     /** Returns the Person */
-    ReadOnlyPerson getPartner();
+    ReadOnlyPerson getPartner() throws NullPointerException;
 
     //@@author traceurgan
     /** Returns the Journal */
@@ -36,7 +36,7 @@ public interface Model {
     ObservableList <ReadOnlyPerson> getPersonAsList();
 
     //@@author
-    void deletePerson();
+    void deletePerson() throws NullPointerException;
 
     /** Adds the given person */
     void addPerson(ReadOnlyPerson person) throws DuplicatePersonException;
