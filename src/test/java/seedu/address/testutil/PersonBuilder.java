@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,9 +41,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         timetable = new Timetable(DEFAULT_TIMETABLE);
-        List<Appointment> defaultAppointments = new ArrayList<>();
+        appointments = new ArrayList<>();
         this.person = new Person(name, phone, email,
-                address, timetable, defaultAppointments);
+                address, timetable, appointments);
 
     }
 
@@ -51,19 +52,18 @@ public class PersonBuilder {
      */
     public PersonBuilder(ReadOnlyPerson personToCopy) {
         this.person = new Person(personToCopy);
-        this.name = personToCopy.getName();
-        this.phone = personToCopy.getPhone();
-        this.email = personToCopy.getEmail();
-        this.address = personToCopy.getAddress();
-        this.timetable = personToCopy.getTimetable();
-        this.appointments = personToCopy.getAppointments();
+        name = personToCopy.getName();
+        phone = personToCopy.getPhone();
+        email = personToCopy.getEmail();
+        address = personToCopy.getAddress();
+        timetable = personToCopy.getTimetable();
     }
 
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
-        this.name = new Name(name);
+        this.person.setName(new Name(name));
         return this;
     }
 
@@ -71,7 +71,7 @@ public class PersonBuilder {
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+        this.person.setAddress(new Address(address));
         return this;
     }
 
@@ -79,7 +79,7 @@ public class PersonBuilder {
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.person.setPhone(new Phone(phone));
         return this;
     }
 
@@ -87,7 +87,7 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.person.setEmail(new Email(email));
         return this;
     }
 
@@ -95,7 +95,7 @@ public class PersonBuilder {
      * Sets the {@code Timetable} of the {@code Person} that we are building.
      */
     public PersonBuilder withTimetable(String timetable) {
-        this.timetable = new Timetable(timetable);
+        this.person.setTimetable(new Timetable(timetable));
         return this;
     }
 
@@ -103,12 +103,20 @@ public class PersonBuilder {
      * Sets appointment with Date of the person that we are building
      */
     public PersonBuilder withAppointment (String ... appointment) {
-        this.appointments = SampleDataUtil.getAppointmentList(appointment);
+        List<Appointment> list = new ArrayList<>();
+        for (String s : appointment) {
+            try {
+                list.add(AddAppointmentParser.getAppointmentFromString(s));
+            } catch (seedu.address.logic.parser.exceptions.ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        this.person.setAppointment(list);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, timetable, appointments);
+        return this.person;
     }
 
 }
