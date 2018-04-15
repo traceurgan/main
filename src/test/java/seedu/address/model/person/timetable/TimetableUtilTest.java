@@ -2,28 +2,40 @@ package seedu.address.model.person.timetable;
 
 import static org.junit.Assert.assertEquals;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_BOB;
+import static seedu.address.testutil.Assert.assertDoesNotThrow;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.TestUtil;
 
 //@@author marlenekoh
 public class TimetableUtilTest {
 
-    public static final String VALID_LONG_URL = "https://nusmods.com/timetable/sem-2/"
+    private static final String VALID_LONG_URL = "https://nusmods.com/timetable/sem-2/"
             + "share?CS2101=SEC:C01&CS2103T=TUT:C01&CS3230=LEC:1,TUT:4&"
             + "CS3241=LAB:3,LEC:1,TUT:3&CS3247=LAB:1,LEC:1&GES1021=LEC:SL1";
-    public static final String VALID_SHORT_URL = "http://modsn.us/wNuIW";
-    public static final String INVALID_SHORT_URL = "http://modsn.us/123";
+    private static final String VALID_SHORT_URL = "http://modsn.us/wNuIW";
+    private static final String INVALID_SHORT_URL = "http://modsn.us/123";
+    private static final String TIMETABLE_DISPLAY_INFO_VIEW_FILE = "expectedTimetableDisplayInfoView";
+    private static final String TIMETABLE_DISPLAY_INFO_COMPARE_FILE = "expectedTimetableDisplayInfoCompare";
     private static final int CURRENT_SEMESTER = 2;
+    private static String expectedTimetableDisplayInfoView;
+    private static String expectedTimetableDisplayInfoCompare;
+
     private static HashMap<String, TimetableModule> expectedListOfModules;
 
     @Before
-    public void setUp() {
+    public void initialize() throws IOException {
+        // set up expectedListOfModules
         expectedListOfModules = new HashMap<String, TimetableModule>();
         HashMap<String, String> tempLessonPair;
 
@@ -60,6 +72,15 @@ public class TimetableUtilTest {
         tempLessonPair.put("Lecture", "SL1");
         expectedListOfModules.put("GES1021", new TimetableModule("GES1021",
                 tempLessonPair));
+
+        //set up expectedTimetableDisplayInfo Strings
+        File timetableDisplayInfoViewFile = new File(TestUtil
+                .getFilePathInSandboxFolder(TIMETABLE_DISPLAY_INFO_VIEW_FILE));
+        expectedTimetableDisplayInfoView = FileUtil.readFromFile(timetableDisplayInfoViewFile);
+
+        File timetableDisplayInfoCompareFile = new File(TestUtil
+                .getFilePathInSandboxFolder(TIMETABLE_DISPLAY_INFO_COMPARE_FILE));
+        expectedTimetableDisplayInfoCompare = FileUtil.readFromFile(timetableDisplayInfoCompareFile);
     }
 
     @Test
@@ -91,10 +112,8 @@ public class TimetableUtilTest {
         assertEquals(timetable.getExpandedUrl(), VALID_LONG_URL);
     }
 
-    @Ignore
     @Test
     public void expandShortTimetableUrl_invalidUrl_throwsParseException() {
-        //TODO: Fix this bug
         Assert.assertThrows(ParseException.class, () ->
                 TimetableUtil.setExpandedTimetableUrl(new Timetable(INVALID_SHORT_URL)));
     }
@@ -103,9 +122,25 @@ public class TimetableUtilTest {
     public void setUpTimetableInfo() {
         Timetable actualTimetable = new Timetable(VALID_SHORT_URL);
 
-        Assert.assertDoesNotThrow(() -> TimetableUtil.setExpandedTimetableUrl(actualTimetable));
+        assertDoesNotThrow(() -> TimetableUtil.setExpandedTimetableUrl(actualTimetable));
         assertEquals(VALID_LONG_URL, actualTimetable.getExpandedUrl());
         assertEquals(expectedListOfModules, actualTimetable.getListOfModules());
         assertEquals(CURRENT_SEMESTER, actualTimetable.getCurrentSemester());
+        assertEquals(expectedTimetableDisplayInfoView.trim(), actualTimetable.getTimetableDisplayInfo().trim());
+    }
+
+    @Test
+    public void setUpTimetableInfoView() {
+        Timetable actualTimetable = new Timetable(VALID_SHORT_URL);
+        actualTimetable = TimetableUtil.setUpTimetableInfoView(actualTimetable);
+        assertEquals(expectedTimetableDisplayInfoView.trim(), actualTimetable.getTimetableDisplayInfo().trim());
+    }
+
+    @Test
+    public void setUpTimetableInfoCompare() {
+        Timetable partnerTimetable = new Timetable(VALID_SHORT_URL);
+        Timetable otherTimetable = new Timetable(VALID_TIMETABLE_BOB);
+        Timetable actualTimetable = TimetableUtil.setUpTimetableInfoCompare(partnerTimetable, otherTimetable);
+        assertEquals(expectedTimetableDisplayInfoCompare.trim(), actualTimetable.getTimetableDisplayInfo().trim());
     }
 }
