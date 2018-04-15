@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOURNAL;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.journalentry.Date;
 
+//@@author traceurgan
 /**
  * Shows a journal entry from a date
  */

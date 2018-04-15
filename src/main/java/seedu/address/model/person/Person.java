@@ -116,8 +116,8 @@ public class Person implements ReadOnlyPerson {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ReadOnlyPerson // instanceof handles nulls
-                && this.equals((ReadOnlyPerson) other));
+                || (other instanceof Person // instanceof handles nulls
+                && this.equals((Person) other));
     }
 
     @Override

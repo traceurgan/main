@@ -3,6 +3,7 @@ package seedu.address.model.journalentry;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author traceurgan
 /**
  * Represents a Journal Entry's Date in the journal.
  */
@@ -26,7 +27,7 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid string of exactly 8 digits.
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);

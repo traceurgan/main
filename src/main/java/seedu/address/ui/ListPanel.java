@@ -33,6 +33,7 @@ public class ListPanel extends UiPart<Region> {
     @FXML
     private ListView<PersonCard> personListView;
 
+    //@@author traceurgan
     @FXML
     private ListView<JournalEntryCard> journalEntryListView;
 
@@ -42,6 +43,7 @@ public class ListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    //@@author
     private void setConnections(
             ObservableList<ReadOnlyPerson> personList, ObservableList<JournalEntry> journalEntryList) {
         ObservableList<PersonCard> mappedList = EasyBind.map(
@@ -128,7 +130,7 @@ public class ListPanel extends UiPart<Region> {
 
     //@@author traceurgan
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Journal Entry Card}.
      */
     class JournalEntryListViewCell extends ListCell<JournalEntryCard> {
 

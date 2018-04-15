@@ -14,8 +14,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /**
- * A ui for the status bar that is displayed at the header of the application.
+ * A ui for displaying the contents of a journal entry.
  */
 public class JournalEntryView extends UiPart<Region> {
 

@@ -3,6 +3,7 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.stage.Stage;
 
+//@@author traceurgan
 /**
  * A handle to the {@code JournalWindow} of the application.
  */

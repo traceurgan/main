@@ -70,6 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
         this(null, new Journal(), new UserPrefs());
     }
 
+    //@@author traceurgan
     @Override
     public void resetJournalData(ReadOnlyJournal newData) {
         journal.resetJournalData(newData);
@@ -77,6 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
         requestHideTimetable();
     }
 
+    //@@author
     @Override
     public void resetPersonData(ReadOnlyPerson newData) {
         partner = new Person(newData);
@@ -116,6 +118,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ShowTimetableRequestEvent());
     }
 
+    //@@author traceurgan
     @Override
     public int getLast() {
         return journal.getLast();
@@ -199,6 +202,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
         journalWindow.show();
     }
+
+    //@@author
     /**
      * Adds appointment to a person in the internal list.
      *
@@ -240,7 +245,6 @@ public class ModelManager extends ComponentManager implements Model {
         return journal.getJournalEntryList();
     }
 
-    //@@author traceurgan
     /**
      * Raises an event to indicate the journal model has changed.
      */
@@ -253,7 +257,6 @@ public class ModelManager extends ComponentManager implements Model {
         return journal.containsJournalEntry(date);
     }
 
-    //@@author traceurgan
     @Override
     public ReadOnlyJournal getJournal() {
         return journal;
@@ -286,6 +289,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    //@@author
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

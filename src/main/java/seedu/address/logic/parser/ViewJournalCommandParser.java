@@ -10,15 +10,16 @@ import seedu.address.logic.commands.ViewJournalCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.journalentry.Date;
 
+//@@author traceurgan
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new View Journal command object
  */
 public class ViewJournalCommandParser implements Parser<ViewJournalCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the ViewJournalCommand
+     * and returns an ViewJournalCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public ViewJournalCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
