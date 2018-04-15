@@ -2,6 +2,7 @@
 :toc:
 :toc-title: Table of Contents
 :toc-placement: preamble
+:toclevels: 3
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
@@ -22,7 +23,9 @@ to create and remember memories with ease amid our *hectic school term*. Imagine
 identify common breaks, schedule meetings and view important dates with your partner, and record your thoughts or
 feelings, *all in the same application* mere keystrokes away. Best of all, *everything* can be controlled from the
 handy Command Line Interface (CLI). Experience the *clarity* that comes with a Graphical User Interface (GUI), with
-none of the *pain* of searching for and remembering where each button is. Interested yet? Jump to <<Quick Start>> to
+none of the *pain* of searching for and remembering where each button is.
+
+Interested yet? Jump to <<Quick Start>> to
 get started. Enjoy!
 
 == Quick Start
@@ -37,7 +40,16 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for _NUSCouples_.
 .  Double-click the file to start the app. The app window should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image:screenshots/0Labels.png[width="790"]
+[width="100%",cols="<20%, <80%",options="header",]
+|===
+|1 | Partner details
+|2 | List of Journal entries
+|3 | Calendar/Timetable display
+|4 | Result display
+|5 | Command box
+|===
+
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -72,13 +84,20 @@ _NUSCouples_, you can type either `add n/John Doe` or `a n/John Doe`.
 ==== Viewing help : `help`
 
 Format: `help` +
-Alias: `hlp`
+Alias: `hlp` +
+image:screenshots/23Help.png[width="790"]
 
 ==== Adding your partner : `add`
 
 Adds your partner to _NUSCouples_. +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
-Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL`
+Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
+
+Screenshot: Before +
+image:screenshots/addcmd.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/2Add.png[width="790"]
 
 ****
 * The timetable url provided has to be a valid https://nusmods.com[NUSMods] short URL.
@@ -94,7 +113,13 @@ Examples:
 
 Edits your existing partner in _NUSCouples_. +
 Format: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
-Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]`
+Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
+
+Screenshot: Before +
+image:screenshots/14EditTT.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/15EditTTAfter.png[width="790"] +
 
 ****
 * At least one of the optional fields must be provided.
@@ -113,7 +138,13 @@ Edits the name of your partner to be `Betsy Crower`.
 
 Deletes your partner from _NUSCouples_. +
 Format: `delete` +
-Alias: `d`
+Alias: `d` +
+
+Screenshot: Before +
+image:screenshots/10Delete.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/11DeleteAfter.png[width="790"] +
 
 ****
 * Deletes your partner.
@@ -124,7 +155,13 @@ Alias: `d`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
-Alias: `hist`
+Alias: `hist` +
+
+Screenshot: Before +
+image:screenshots/histcmd.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/histcmdafter.png[width="790"] +
 
 [NOTE]
 ====
@@ -137,7 +174,13 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 
 Restores _NUSCouples_ to the state before the previous "undoable command" was executed. +
 Format: `undo` +
-Alias: `u`
+Alias: `u` +
+
+Screenshot: Before +
+image:screenshots/16EditUndo.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/17EditUndoAfter.png[width="790"] +
 
 [NOTE]
 ====
@@ -164,6 +207,12 @@ The `undo` command fails as there are no undoable commands executed previously.
 Reverses the most recent `undo` command. +
 Format: `redo` +
 Alias: `r`
+
+Screenshot: Before +
+image:screenshots/18EditRedo.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/19EditRedoAfter.png[width="790"] +
 
 Examples:
 
@@ -220,15 +269,14 @@ Refer to <<Adding your partner : `add`>>
 
 Refer to <<Editing your partner : `edit`>>
 
-==== Viewing your partner's timetable : `select`[Since v1.4]
+==== Viewing your partner's timetable : `tview`[Since v1.4]
 
 Shows the current saved timetable of your partner. +
-Format: `select` +
-Alias: `s`
+Format: `tview` +
+Alias: `tv`
 
-Timetable display will be shown.
 
-==== Comparing timetable : `tcompare` [Coming in v1.5]
+==== Comparing timetable : `tcompare` [Since v1.5]
 
 Displays the common breaks shared by the given timetable and your partner's timetable in a timetable format. +
 Format: `tcompare tt/TIMETABLE_URL` +
@@ -302,11 +350,9 @@ As you can see, after the commands are executed the footer will display the upda
 display `appointment canceled`. When there is no events on that day, the calendar will also display `no entries` too.
 
 Screenshot: Before +
-
 image::beforeCancelCal.png[width="650"]
 
 Screenshot: After +
-
 image::afterCancelCal.png[width="650"]
 
 ==== Accessibility
@@ -343,25 +389,22 @@ copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will 
 restart the app.
 
 Format: `jnew` +
-Alias: `jn`
+Alias: `jn` +
+
+Screenshot: Before +
+image:screenshots/20Jnew.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/21JnewAfter1.png[width="395"]
+image:screenshots/22JnewAfter2.png[width="395"] +
+
 
 ==== Viewing journal entries : `jview` [Coming in v1.5]
 
 Selects a journal entry from the list seen in the GUI. The contents of the journal entry will be shown in the main
 window. +
 Format: `jview` +
-Alias: `jv`
-
-|===
-| [.small]#Return to <<toc,Table of Contents>># +
-|===
-
-=== Motivational Picture
-==== Send motivational picture via app : `motivate`
-
-Shows the location (by building) of the entered classroom name. +
-Format: `motivate` +
-_There is no alias for this feature currently._
+Alias: `jv` +
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
@@ -399,6 +442,12 @@ Alias: `jf` +
 Shows the location (by building) of the entered classroom name. +
 Format: `location` +
 Alias: `loc` +
+
+==== Send motivational picture via app `[coming in v2.90]`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `motivate` +
+_There is no alias for this feature currently._
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
