@@ -504,6 +504,8 @@ image::viewCalendarSeqDiagram.png[width="850"]
 | [.small]#Return to <<toc,Table of Contents>># +
 |===
 
+// end::calendar[]
+
 //tag::viewCalendar[]
 
 === Calendar Viewer feature
@@ -540,7 +542,9 @@ image::CalViewSeq.png[width="650"]
 ** Pros: Reduce latency
 ** Cons: User can't add event to next year
 
-//tag::viewCalendar[]
+// end::viewCalendar[]
+
+//tag::addCalendar[]
 
 === Calendar Add Appointment feature
 ==== Proposed Implementation
@@ -581,6 +585,8 @@ image::AddAppointmentSeq.png[width="650"]
 ** Pros: More neat looking
 ** Cons: User cant compare or manage well
 
+// end::addCalendar[]
+
 //tag::cancelCalendar[]
 
 === Calendar Cancel Appointment feature
@@ -606,6 +612,8 @@ image::CancelApptSeq.png[width="650"]
 * **Alternative 2:** Create a List to display all events.
 ** Pros: User can have an overview of all the events listed to cancel
 ** Cons: The UI will be blank at initial stage which is ugly.
+
+// end::cancelCalendar[]
 
 //tag::timetable[]
 
@@ -854,10 +862,14 @@ b. Require developers to download those libraries manually (this creates extra w
 |===
 |Assignee |Major|Minor
 
+// tag::Major-Minor[]
+
 |Chen Xing
 |Scheduler: This app allows user to schedule//delete/view planned meetings
 |Accessibility: Reduce the effort when user enters command on the command box through custom keystrokes.
 |Tracker: The system will update the time on the footer to show when the changes have been made.
+
+// end::Major-Minor[]
 
 |Marlene
 |Timetable viewer: To help couples identify common breaks during school term so they can plan meetings during their free time
@@ -910,7 +922,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-
+// tag::UseCase[]
 
 [appendix]
 == Use Cases
@@ -1046,6 +1058,8 @@ Use case ends.
 ** 2a1. This feature can't be used
 
 Use case ends.
+
+// end::UseCase[]
 
 [discrete]
 === Use case: View Timetable of Partner

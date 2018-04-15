@@ -366,17 +366,17 @@ _There is no alias for this feature currently._
 
 === Future Features
 // tag::dataencryption[]
-// tag::googleAPI[]
 ==== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+// tag::googleAPI[]
 ==== Sync the calendar with Google API `[coming in v2.0]`
-// tag::calendar[]
+
 _{explain how the user can authentic with google API and view and retrieve events from Google}_
 
-
+// end::googleAPI[]
 ==== Archiving journal entries `[coming in v2.0]`
 
 _{explain how the user can export old journal entries to another storage location in their computer}_
@@ -456,13 +456,11 @@ and attach the log file that should be stored in the same location as the _NUSCo
 
 |jnew, jn |Create/edit a journal entry |`jnew` |
 
-|cview, cv |Viewing your current calendar |`cview` |
+|calendar, cal |Viewing your current calendar |`calendar` | cal w
 
-|cadd, ca |Adding a new event to your current calendar |`cadd` |
+|appointment, appt |Adding a new event to your current calendar |`appointment` | appt 1 d/Checkup, tomorrow 10am to 12pm
 
-|cdelete, cd |Deleting an event from your current calendar |`cdelete` |
-
-|cedit, ce |Editing an event from your current calendar |`cedit` |
+|cancel |Deleting an event from your current calendar |`cancel` |
 
 |exit, ex |Exits _NUSCouples_ |`exit` |
 
