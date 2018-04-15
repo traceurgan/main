@@ -313,12 +313,14 @@ Alias: `jv`
 | [.small]#Return to <<toc,Table of Contents>># +
 |===
 
+// tag::motivate[]
 === Motivational Picture
 ==== Send motivational picture via app : `motivate`
 
 Shows the location (by building) of the entered classroom name. +
 Format: `motivate` +
 _There is no alias for this feature currently._
+// end::motivate[]
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
