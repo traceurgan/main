@@ -2,20 +2,23 @@ package seedu.address.model.person.timetable;
 
 import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertNotNull;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMETABLE_BOB;
 import static seedu.address.testutil.Assert.assertDoesNotThrow;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.commons.util.FileUtil;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+
+import seedu.address.MainApp;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.TestUtil;
 
 //@@author marlenekoh
 public class TimetableUtilTest {
@@ -25,8 +28,10 @@ public class TimetableUtilTest {
             + "CS3241=LAB:3,LEC:1,TUT:3&CS3247=LAB:1,LEC:1&GES1021=LEC:SL1";
     private static final String VALID_SHORT_URL = "http://modsn.us/wNuIW";
     private static final String INVALID_SHORT_URL = "http://modsn.us/123";
-    private static final String TIMETABLE_DISPLAY_INFO_VIEW_FILE = "expectedTimetableDisplayInfoView";
-    private static final String TIMETABLE_DISPLAY_INFO_COMPARE_FILE = "expectedTimetableDisplayInfoCompare";
+    private static final String TIMETABLE_DISPLAY_INFO_VIEW_FILE_PATH =
+            "TimetableTest/expectedTimetableDisplayInfoView";
+    private static final String TIMETABLE_DISPLAY_INFO_COMPARE_FILE_PATH =
+            "TimetableTest/expectedTimetableDisplayInfoCompare";
     private static final int CURRENT_SEMESTER = 2;
     private static String expectedTimetableDisplayInfoView;
     private static String expectedTimetableDisplayInfoCompare;
@@ -74,13 +79,11 @@ public class TimetableUtilTest {
                 tempLessonPair));
 
         //set up expectedTimetableDisplayInfo Strings
-        File timetableDisplayInfoViewFile = new File(TestUtil
-                .getFilePathInSandboxFolder(TIMETABLE_DISPLAY_INFO_VIEW_FILE));
-        expectedTimetableDisplayInfoView = FileUtil.readFromFile(timetableDisplayInfoViewFile);
+        URL timetableDisplayInfoViewUrl = getTestFileUrl(TIMETABLE_DISPLAY_INFO_VIEW_FILE_PATH);
+        expectedTimetableDisplayInfoView = Resources.toString(timetableDisplayInfoViewUrl, Charsets.UTF_8);
 
-        File timetableDisplayInfoCompareFile = new File(TestUtil
-                .getFilePathInSandboxFolder(TIMETABLE_DISPLAY_INFO_COMPARE_FILE));
-        expectedTimetableDisplayInfoCompare = FileUtil.readFromFile(timetableDisplayInfoCompareFile);
+        URL timetableDisplayInfoCompareUrl = getTestFileUrl(TIMETABLE_DISPLAY_INFO_COMPARE_FILE_PATH);
+        expectedTimetableDisplayInfoCompare = Resources.toString(timetableDisplayInfoCompareUrl, Charsets.UTF_8);
     }
 
     @Test
@@ -142,5 +145,16 @@ public class TimetableUtilTest {
         Timetable otherTimetable = new Timetable(VALID_TIMETABLE_BOB);
         Timetable actualTimetable = TimetableUtil.setUpTimetableInfoCompare(partnerTimetable, otherTimetable);
         assertEquals(expectedTimetableDisplayInfoCompare.trim(), actualTimetable.getTimetableDisplayInfo().trim());
+    }
+
+    /**
+     * Returns an url to the test resource
+     * @param testFilePath path of the test resource
+     */
+    private URL getTestFileUrl(String testFilePath) {
+        String testFilePathInView = "/view/" + testFilePath;
+        URL testFileUrl = MainApp.class.getResource(testFilePathInView);
+        assertNotNull(testFilePathInView + " does not exist.", testFileUrl);
+        return testFileUrl;
     }
 }

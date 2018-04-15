@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static seedu.address.testutil.Assert.assertDoesNotThrow;
 import static seedu.address.testutil.TestUtil.getFilePathInSandboxFolder;
 
@@ -8,10 +9,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+
+import seedu.address.MainApp;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,13 +25,16 @@ import seedu.address.model.util.SampleDataUtil;
 public class FileTimetableStorageTest {
 
     private static final String TEST_PATH = getFilePathInSandboxFolder("testReadingWriting");
-    private static final String EXPECTED_TIMETABLE_PAGE_HTML_PATH =
-            getFilePathInSandboxFolder("expectedTimetablePage.html");
+
+    private static final String EXPECTED_TIMETABLE_PAGE_HTML_PATH = "TimetableTest/expectedTimetablePage.html";
+    private static final String EXPECTED_TIMETABLE_DISPLAY_INFO_FILE_PATH =
+            "TimetableTest/expectedTimetableDisplayInfoView";
     private static final String TIMETABLE_PAGE_HTML_PATH = getFilePathInSandboxFolder("TimetablePage.html");
     private static final String TIMETABLE_PAGE_CSS_PATH = getFilePathInSandboxFolder("TimetableStyle.css");
     private static final String TIMETABLE_DISPLAY_INFO_FILE_PATH =
             getFilePathInSandboxFolder("timetableDisplayInfo");
-    private static String timetableDisplayInfoContents;
+    private static String expectedTimetableDisplayInfoContents;
+    private static String expectedTimetableHtmlContents;
     private FileTimetableStorage fileTimetableStorage;
 
     @Before
@@ -48,17 +57,20 @@ public class FileTimetableStorageTest {
         writer.print("");
         writer.close();
 
-        File expectedTimetableDisplayInfo = new File(
-                getFilePathInSandboxFolder("expectedTimetableDisplayInfoView"));
-        timetableDisplayInfoContents = FileUtil.readFromFile(expectedTimetableDisplayInfo);
+        URL timetableDisplayInfoViewUrl = getTestFileUrl(EXPECTED_TIMETABLE_DISPLAY_INFO_FILE_PATH);
+        expectedTimetableDisplayInfoContents = Resources.toString(timetableDisplayInfoViewUrl, Charsets.UTF_8);
+
+        URL timetablePageUrl = getTestFileUrl(EXPECTED_TIMETABLE_PAGE_HTML_PATH);
+        expectedTimetableHtmlContents = Resources.toString(timetablePageUrl, Charsets.UTF_8);
+
     }
 
     @Test
     public void setUpTimetableDisplayFiles() throws IOException {
-        fileTimetableStorage.setUpTimetableDisplayFiles(timetableDisplayInfoContents);
-        assertEquals(FileUtil.readFromFile(new File(EXPECTED_TIMETABLE_PAGE_HTML_PATH)),
+        fileTimetableStorage.setUpTimetableDisplayFiles(expectedTimetableDisplayInfoContents);
+        assertEquals(expectedTimetableHtmlContents,
                 FileUtil.readFromFile(new File(TIMETABLE_PAGE_HTML_PATH)));
-        assertEquals(timetableDisplayInfoContents,
+        assertEquals(expectedTimetableDisplayInfoContents,
                 FileUtil.readFromFile(new File(TIMETABLE_DISPLAY_INFO_FILE_PATH)));
         assertEquals(SampleDataUtil.getDefaultTimetablePageCss(),
                 FileUtil.readFromFile(new File(TIMETABLE_PAGE_CSS_PATH)));
@@ -94,5 +106,17 @@ public class FileTimetableStorageTest {
                 + "Yesterday it didn't rain at all and the sun came out.\n";
         String result = fileTimetableStorage.replaceLineExcludingStartEnd(contents, replace, start, end);
         assertEquals(expected, result);
+    }
+
+
+    /**
+     * Returns an url to the test resource
+     * @param testFilePath path of the test resource
+     */
+    private URL getTestFileUrl(String testFilePath) {
+        String testFilePathInView = "/view/" + testFilePath;
+        URL testFileUrl = MainApp.class.getResource(testFilePathInView);
+        assertNotNull(testFilePathInView + " does not exist.", testFileUrl);
+        return testFileUrl;
     }
 }
