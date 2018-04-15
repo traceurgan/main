@@ -14,10 +14,13 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.PersonChangedEvent;
+import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
+import seedu.address.model.person.timetable.Timetable;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
@@ -88,7 +91,20 @@ public class StorageManagerTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
+    //@@author marlenekoh
+    @Test
+    public void handleTimetableChangedEvent_eventRaised() {
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(
+                "dummy"), new XmlJournalStorage("dummy"), new JsonUserPrefsStorage("dummy"),
+                new FileTimetableStorage("dummy1", "dummy2",
+                        "dummy3"));
+        Person person = new Person(ALICE);
+        storage.handleTimetableChangedEvent(new TimetableChangedEvent(new Timetable(person.getTimetable().value)));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ShowTimetableRequestEvent);
+    }
 
+
+    //@@author
     /**
      * A Stub class to throw an exception when the save method is called
      */

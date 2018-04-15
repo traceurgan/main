@@ -34,15 +34,16 @@ public class Person implements ReadOnlyPerson {
     public Person(Name name, Phone phone, Email email, Address address,
                   Timetable timetable, List<Appointment> appointments) {
 
-        requireAllNonNull(name, phone, email, address, timetable, appointments);
+        requireAllNonNull(name, phone, email, address, timetable);
 
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
         this.email = new SimpleObjectProperty<>(email);
         this.address = new SimpleObjectProperty<>(address);
         this.timetable = new SimpleObjectProperty<>(timetable);
-        this.appointments = new SimpleObjectProperty<>(new AppointmentList(appointments));
-
+        if (appointments != null) {
+            this.appointments = new SimpleObjectProperty<>(new AppointmentList(appointments));
+        }
     }
 
     //@@author chenxing1992

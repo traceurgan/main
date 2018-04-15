@@ -2,7 +2,11 @@ package seedu.address.testutil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.AddAppointmentParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -24,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_TIMETABLE = "http://modsn.us/wNuIW";
+    public static final String DEFAULT_APPOINTMENT = "Lunch, tomorrow 5pm";
 
     private Name name;
     private Phone phone;
@@ -41,6 +46,12 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         timetable = new Timetable(DEFAULT_TIMETABLE);
         List<Appointment> defaultAppointments = new ArrayList<>();
+        try {
+            defaultAppointments.add(AddAppointmentParser.getAppointmentFromString(DEFAULT_APPOINTMENT));
+        } catch (ParseException e) {
+            Logger logger = LogsCenter.getLogger(getClass());
+            logger.severe("Should not catch parse exception here");
+        }
         this.person = new Person(name, phone, email,
                 address, timetable, defaultAppointments);
 

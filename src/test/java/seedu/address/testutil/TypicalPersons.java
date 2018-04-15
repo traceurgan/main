@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -26,16 +28,16 @@ public class TypicalPersons {
     //TODO: ZAC NEEED TO ADD HIS APPTS HERE
     // GO TO MODELMANAGERTEST AND UNIGNORE AND SHOULD BE OK
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("85355255").withTimetable("http://modsn.us/wNuIW").build();
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withPhone("85355255")
+            .withTimetable("http://modsn.us/wNuIW").withAppointment("Lunch, tomorrow 5pm").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTimetable(VALID_TIMETABLE_AMY).build();
+            .withTimetable(VALID_TIMETABLE_AMY).withAddress(VALID_APPOINTMENT_AMY).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTimetable(VALID_TIMETABLE_BOB).build();
+            .withTimetable(VALID_TIMETABLE_BOB).withAppointment(VALID_APPOINTMENT_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

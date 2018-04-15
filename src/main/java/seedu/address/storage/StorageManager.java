@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
@@ -182,6 +181,6 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleTimetableChangedEvent(TimetableChangedEvent event) {
         setUpTimetableDisplayFiles(event.timetable.getTimetableDisplayInfo());
         setUpTimetablePageHtmlFile();
-        EventsCenter.getInstance().post(new ShowTimetableRequestEvent());
+        raise(new ShowTimetableRequestEvent());
     }
 }
