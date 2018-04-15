@@ -69,8 +69,15 @@ include::../UserGuide.adoc[tag=dataencryption]
 
 include::../DeveloperGuide.adoc[tag=calendar]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=viewCalendar]
 
+include::../DeveloperGuide.adoc[tag=addCalendar]
+
+include::../DeveloperGuide.adoc[tag=cancelCalendar]
+
+include::../DeveloperGuide.adoc[tag=Major-Minor]
+
+include::../DeveloperGuide.adoc[tag=UseCase]
 
 == PROJECT: PowerPointLabs
 
