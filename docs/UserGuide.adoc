@@ -305,7 +305,7 @@ Examples:
 === Calendar
 ==== When you want to check which are the available dates you are free: `Calendar`
 
-View calendar. +
+View calendar function. +
 Format: `cview` +
 Alias: `cv` +
 
@@ -321,7 +321,7 @@ in the command box. From the calendar, you can see if there is any events on tha
 image::CalendarView.png[width="650"]
 ==== When you have a date with your partner then you decides to add the event to the Calendar after making sure that there are no clashes with your timetable nor schedules: `Appointment`
 
-Adds new event to calendar. +
+Adds new event to the calendar. +
 Format: `appointment` +
 Alias: `appt`
 
@@ -340,7 +340,7 @@ image::CalendarAdd.png[width="650"]
 
 ==== When your partner suddenly cannot make it on the scheduled event: `cancel`
 
-Delete specified event from calendar. +
+Delete specified event from the calendar. +
 Format: `cancel` +
 Alias: Nil
 
@@ -352,10 +352,14 @@ The images below shows the before and after calendar view after you have execute
 As you can see, after the commands are executed the footer will display the updated time as well and result panel will
 display `appointment canceled`. When there is no events on that day, the calendar will also display `no entries` too.
 
-Screenshot: Before +
+Screenshot: The Calendar View before you enter the Cancel Command  +
+
+
 image::beforeCancelCal.png[width="650"]
 
-Screenshot: After +
+Screenshot: The Calendar View after you enter the Cancel Command +
+
+
 image::afterCancelCal.png[width="650"]
 
 ==== Accessibility
@@ -473,6 +477,9 @@ folder in the original directory was moved to the new directory. For example, if
 `C:\Program Files (x86)\NUSCouples` to `C:\Users\[Username]\Desktop\NUSCouples`, you should move the data folder
 `C:\Program Files (x86)\NUSCouples\data` to `C:\Users\[Username]\Desktop\NUSCouples\data` +
 
+*Q: Can this app run on mobile devices or tablets?* +
+
+*A:* No, this is a desktop app. To be more specific, you are not required to use cursor mouse to handle the App because it is CLI based
 If the files in the data folder have been manually edited, _NUSCouples_ may not be able to read the data properly.
 _NUSCouples_ takes no responsibility for data loss/ data corruption due to unintended user behavior affecting the data
 folder, such as deletion or editing of files manually. +

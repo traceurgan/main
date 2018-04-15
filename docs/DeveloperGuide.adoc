@@ -480,7 +480,7 @@ All applications follow a basic pattern when accessing a Google API using OAuth 
 
 The sequence diagram below shows interactions within the `Logic` Component for Outh 2.0 endpoints:
 
-image::viewCalendarSeqDiagram.png[width="850"]
+image::GoogleCalendarSeqDiagram.png[width="850"]
 
 
 ==== Design Considerations
