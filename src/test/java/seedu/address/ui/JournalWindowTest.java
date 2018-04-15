@@ -9,6 +9,7 @@ import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.JournalWindowHandle;
 import javafx.stage.Stage;
+import seedu.address.model.journalentry.Date;
 
 public class JournalWindowTest extends GuiUnitTest {
 
@@ -17,7 +18,7 @@ public class JournalWindowTest extends GuiUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        guiRobot.interact(() -> journalWindow = new JournalWindow("20180405"));
+        guiRobot.interact(() -> journalWindow = new JournalWindow(new Date("20180405")));
         Stage journalWindowStage = FxToolkit.setupStage((stage) -> stage.setScene(journalWindow.getRoot().getScene()));
         FxToolkit.showStage();
         journalWindowHandle = new JournalWindowHandle(journalWindowStage);
