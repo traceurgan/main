@@ -8,6 +8,7 @@ import seedu.address.model.Journal;
 import seedu.address.model.journalentry.Date;
 import seedu.address.model.journalentry.JournalEntry;
 
+//@@author traceurgan
 /**
  * A utility class containing a list of {@code JournalEntry} objects to be used in tests.
  */

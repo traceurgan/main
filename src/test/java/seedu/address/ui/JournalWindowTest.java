@@ -11,6 +11,7 @@ import guitests.guihandles.JournalWindowHandle;
 import javafx.stage.Stage;
 import seedu.address.model.journalentry.Date;
 
+//@@author traceurgan
 public class JournalWindowTest extends GuiUnitTest {
 
     private JournalWindow journalWindow;
