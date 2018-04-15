@@ -617,8 +617,9 @@ image::CancelApptSeq.png[width="650"]
 
 //tag::timetable[]
 
-=== Timetable Viewer feature
-==== Proposed Implementation
+=== Timetable View and Compare feature
+==== Adding a Timetable
+
 The Timetable Viewer feature is implemented by `Timetable`, which will reside in `ModelManager`.
 
 Users are able to add a shortened https://nusmods.com/[NUSMods] timetable URL to their existing partner in _NUSCouples_. +
@@ -638,10 +639,12 @@ We can parse this expanded NUSMods URL to get the `SEM_NUM`, as well as the
 Using http://api.nusmods.com/[NUSMods API], we can get the `WEEK_TEXT`, `DAY_TEXT`, `START_TIME`, `END_TIME` and
 `VENUE` of each module.
 
-The sequence diagram below shows interactions within the `Logic` Component for the `execute("tadd http://modsn.us/wNuIW")`
-API call.
+The following diagram shows how the Timetable class is represented.
 
-image::AddTimetableSequenceDiagram.png[width="650"]
+image::TimetableClass.png[width="700]
+A TimetableModule represents one NUSMods module. +
+The TimetableModuleSlots represents a particular class session of a TimetableModule. (e.g. Tutorial, Lecture, etc)
+
 
 ==== Design Considerations
 ===== Aspect: Implementation of add NUSMods timetable URL
@@ -653,12 +656,69 @@ image::AddTimetableSequenceDiagram.png[width="650"]
 ** Cons: Difficult to check if given expanded NUSMods URL is a valid.
 
 ===== Aspect: Data Structure to support implementation of Timetable
-* **Alternative 1 (current choice):** Store information by days of the week
+* **Alternative 1 (current choice):** Store information by days of the week and by modules taken
+** Pros: Easy to add new functions on top of this implementation, more flexible.
+** Cons: May be a bit messy to implement due to the need to manage both structures.
+* **Alternative 2:** Store information by days of the week
 ** Pros: Easy to add new functions on top of this implementation such as compare timetables by days.
 ** Cons: Have to sort information by day during parsing which can be tedious.
-* **Alternative 2:** Store information by modules taken
+* **Alternative 3:** Store information by modules taken
 ** Pros: Easier to implement due to how NUSMods API is structured.
 ** Cons: Difficult to extract out information for a particular time slot on a particular day.
+
+==== Viewing a Timetable
+
+The following image shows how the tview Command works.
+
+image::ShowTimetableCommandHighLevelSequenceDiagram.png[width="820"]
+
+The `TimetableChangedEvent` is handled by `StorageManager` which will save the new timetable details into the relevant
+timetable display files.
+[source,java]
+----
+    @Subscribe
+    public void handleTimetableChangedEvent(TimetableChangedEvent event) {
+        setUpTimetableDisplayFiles(event.timetable.getTimetableDisplayInfo());
+        setUpTimetablePageHtmlFile();
+        raise(new ShowTimetableRequestEvent());
+    }
+----
+
+The `ShowTimetableRequestEvent` is handled by both `ListPanel` and `MainWindow`.
+The following code snippets show how they are handled.
+[source,java]
+----
+    @Subscribe
+    private void handleShowTimetableRequestEvent (ShowTimetableRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(PARTNER_INDEX); // selects Partner in ListPanel
+    }
+----
+[source,java]
+----
+    @Subscribe
+    private void handleShowHelpEvent(ShowHelpRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleHelp();
+    }
+
+    public void handleShowTimetable() {
+        browserPanel.loadTimetablePage(); // Loads Timetable Page in Browser Panel
+        if (!browserPlaceholder.getChildren().contains(browserPanel.getRoot())) {
+            browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        }
+    }
+----
+
+==== Comparing Timetables
+
+The sequence diagram below shows interactions within the `Logic` Component for the `execute(“tc tt/http://modsn.us/q7cLP”)`
+API call.
+
+image::CompareTimetableSequenceDiagram.png[width="820"]
+Similar to <<Viewing a Timetable, Viewing a Timetable>>, the CompareTimetableCommand raises two Events:
+`ShowTimetableRequestEvent` and `TimetableChangedEvent`. This updates the relevant files and refreshes the
+Timetable Page displayed.
 
 // end::timetable[]
 |===
@@ -866,14 +926,14 @@ b. Require developers to download those libraries manually (this creates extra w
 
 |Chen Xing
 |Scheduler: This app allows user to schedule//delete/view planned meetings
-|Accessibility: Reduce the effort when user enters command on the command box through custom keystrokes.
-|Tracker: The system will update the time on the footer to show when the changes have been made.
+|Accessibility: Reduce the effort when user enters command on the command box through custom keystrokes. +
+Tracker: The system will update the time on the footer to show when the changes have been made.
 
 // end::Major-Minor[]
 
 |Marlene
-|Timetable viewer: To help couples identify common breaks during school term so they can plan meetings during their free time
-|Data encryption: To protect data and prevent people from accessing and reading plaintext files
+|Timetable viewer: To help you keep updated with your partner's school schedule
+|Timetable comparator: To help couples identify common breaks during school term so they can plan meetings during their free time
 
 |Samuel
 |Journal: Allow couples to record their thoughts and feelings to remember the time spent with their partner
