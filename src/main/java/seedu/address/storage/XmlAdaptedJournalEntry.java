@@ -3,6 +3,7 @@ package seedu.address.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.journalentry.Date;
 import seedu.address.model.journalentry.JournalEntry;
 
 //@@author traceurgan
@@ -36,7 +37,7 @@ public class XmlAdaptedJournalEntry {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedJournalEntry(JournalEntry source) {
-        date = source.getDate();
+        date = source.getDate().value;
         text = source.getText();
     }
 
@@ -65,6 +66,7 @@ public class XmlAdaptedJournalEntry {
         if (this.date == null) { //impossible, date is generated when new journal entry is created
             throw new IllegalValueException("Date missing");
         }
+        final Date date = new Date(this.date);
 
         return new JournalEntry(date, text);
     }
