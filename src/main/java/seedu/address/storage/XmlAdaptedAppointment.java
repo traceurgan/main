@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.appointment.Appointment;
 
 //@@author Chen Xing
@@ -45,6 +46,22 @@ public class XmlAdaptedAppointment {
         this.description = description;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof XmlAdaptedAppointment)) {
+            return false;
+        }
+
+        XmlAdaptedAppointment otherXmlAdaptedAppointment = (XmlAdaptedAppointment) other;
+        return this.description.equals(otherXmlAdaptedAppointment.description)
+                && this.appointmentStart.equals(otherXmlAdaptedAppointment.appointmentStart)
+                && this.appointmentEnd.equals(otherXmlAdaptedAppointment.appointmentEnd);
     }
 
     /**
