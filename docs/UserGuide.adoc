@@ -245,6 +245,8 @@ Examples:
 * `tc tt/http://modsn.us/wNuIW` +
 // end::timetable[]
 
+// tag::CalendarCommands[]
+
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
 |===
@@ -318,6 +320,7 @@ Move Cursor to behind (MAC USERS): `Shift Option` +
 | [.small]#Return to <<toc,Table of Contents>># +
 |===
 
+// end::CalendarCommands[]
 === Journal
 
 _NUSCouples_ provides you with a space to write, save and view journal entries. The list of saved journal entries will
@@ -456,6 +459,8 @@ and attach the log file that should be stored in the same location as the _NUSCo
 
 |jnew, jn |Create/edit a journal entry |`jnew` |
 
+// tag::CommandSummary[]
+
 |calendar, cal |Viewing your current calendar |`calendar` | cal w
 
 |appointment, appt |Adding a new event to your current calendar |`appointment` | appt 1 d/Checkup, tomorrow 10am to 12pm
@@ -463,6 +468,8 @@ and attach the log file that should be stored in the same location as the _NUSCo
 |cancel |Deleting an event from your current calendar |`cancel` |
 
 |exit, ex |Exits _NUSCouples_ |`exit` |
+
+// end::CommandSummary[]
 
 |=======================================================================
 
