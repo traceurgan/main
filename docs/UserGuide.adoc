@@ -40,7 +40,16 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for _NUSCouples_.
 .  Double-click the file to start the app. The app window should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image:screenshots/0Labels.png[width="790"]
+[width="100%",cols="<20%, <80%",options="header",]
+|===
+|1 | Partner details
+|2 | List of Journal entries
+|3 | Calendar/Timetable display
+|4 | Result display
+|5 | Command box
+|===
+
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
