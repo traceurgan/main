@@ -8,13 +8,10 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.JournalChangedEvent;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.model.journalentry.Date;
 import seedu.address.model.journalentry.JournalEntry;
 
 /**
