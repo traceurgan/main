@@ -13,8 +13,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
 import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.timetable.Timetable;
-import seedu.address.model.util.SampleDataUtil;
-
 
 /**
  * A utility class to help with building Person objects.

@@ -2,16 +2,10 @@ package seedu.address.logic;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.ObservableList;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.SaveEntryEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.ShowJournalWindowRequestEvent;
-import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,8 +14,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.timetable.TimetableUtil;
-import seedu.address.ui.JournalWindow;
 
 /**
  * The main LogicManager of the app.

@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
