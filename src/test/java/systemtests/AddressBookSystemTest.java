@@ -10,7 +10,6 @@ import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Date;
@@ -31,11 +30,10 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ShowTimetableCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
@@ -136,7 +134,7 @@ public abstract class AddressBookSystemTest {
      * Selects the person at {@code index} of the displayed list.
      */
     protected void selectPerson() {
-        executeCommand(SelectCommand.COMMAND_WORD);
+        executeCommand(ShowTimetableCommand.COMMAND_WORD);
         assertEquals(getModel().getPartner().getName(), getPersonListPanel().getPersonCardHandle(0).getName());
     }
 

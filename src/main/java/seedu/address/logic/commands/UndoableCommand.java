@@ -7,7 +7,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.exceptions.DuplicateAppointmentFoundException;
 
 /**
  * Represents a command which can be undone and redone.
@@ -54,7 +53,6 @@ public abstract class UndoableCommand extends Command {
         requireNonNull(model);
         try {
             executeUndoableCommand();
-
         } catch (CommandException ce) {
             throw new AssertionError("The command has been successfully executed previously; "
                     + "it should not fail now");

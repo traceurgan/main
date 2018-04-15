@@ -1,8 +1,14 @@
 package seedu.address.model.util;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+
+import seedu.address.MainApp;
 import seedu.address.logic.parser.AddAppointmentParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Journal;
@@ -14,7 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.timetable.Timetable;
 
 /**
@@ -64,29 +70,14 @@ public class SampleDataUtil {
         return list;
     }
 
-    public static String getDefaultTimetablePageScript() {
-        return "//@@author marlenekoh\n"
-                + "timetable = [\n"
-                + "];\n"
-                + "var myTimetable = \"\";\n"
-                + "var nRows = \"\";\n"
-                + "var nCells = \"\";\n"
-                + "function displaySchedule(){\n"
-                + "    for (i=0; i<nRows; i++) {\n"
-                + "        for (n=0; n<nCells; n++) {\n"
-                + "            myTimetable.rows[i+1].cells[n+1].innerHTML = timetable[n+(i*nCells)];\n"
-                + "        }\n"
-                + "    }\n"
-                + "}\n"
-                + "function mapTable(){\n"
-                + "    myTimetable = document.getElementById('myTimetable');\n"
-                + "    nRows = myTimetable.rows.length-1;\n"
-                + "    nCells = myTimetable.rows[0].cells.length-1;\n"
-                + "    displaySchedule();\n"
-                + "}\n"
-                + "document.addEventListener(\"DOMContentLoaded\", function(event) {\n"
-                + "    mapTable();\n"
-                + "});\n";
+    public static String getDefaultTimetablePageHtml() throws IOException {
+        URL url = MainApp.class.getResource("/view/TimetablePage.html");
+        return Resources.toString(url, Charsets.UTF_8);
+    }
+
+    public static String getDefaultTimetablePageCss() throws IOException {
+        URL url = MainApp.class.getResource("/view/TimetableStyle.css");
+        return Resources.toString(url, Charsets.UTF_8);
     }
 
 }

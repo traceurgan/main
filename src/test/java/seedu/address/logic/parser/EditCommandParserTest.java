@@ -48,19 +48,16 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
-
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "some random string", EditCommand.MESSAGE_NOT_EDITED);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "i/ string", EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test

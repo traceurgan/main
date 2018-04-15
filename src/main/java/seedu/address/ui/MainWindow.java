@@ -197,8 +197,6 @@ public class MainWindow extends UiPart<Region> {
      * Replaces the Calendar with Timetable Page in Browser Panel
      */
     public void handleShowTimetable() {
-        browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel(logic.getPartner());
         browserPanel.loadTimetablePage();
         if (!browserPlaceholder.getChildren().contains(browserPanel.getRoot())) {
             browserPlaceholder.getChildren().add(browserPanel.getRoot());
@@ -210,7 +208,6 @@ public class MainWindow extends UiPart<Region> {
      */
     public void handleHideTimetable() {
         browserPlaceholder.getChildren().clear();
-        browserPanel = new BrowserPanel(logic.getPartner());
         browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
     }
 

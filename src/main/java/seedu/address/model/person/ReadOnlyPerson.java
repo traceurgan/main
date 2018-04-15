@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import java.util.List;
 
 import javafx.beans.property.ObjectProperty;
-import seedu.address.model.person.Appointment.Appointment;
-import seedu.address.model.person.Appointment.AppointmentList;
+import seedu.address.model.person.appointment.Appointment;
+import seedu.address.model.person.appointment.AppointmentList;
 import seedu.address.model.person.timetable.Timetable;
 
 //@@author chenxing1992
@@ -43,7 +43,8 @@ public interface ReadOnlyPerson {
                 && rp.getPhone().equals(this.getPhone())
                 && rp.getEmail().equals(this.getEmail())
                 && rp.getAddress().equals(this.getAddress())
-                && rp.getTimetable().equals((this.getTimetable())));
+                && rp.getTimetable().equals((this.getTimetable()))
+                && rp.getAppointments().equals(this.getAppointments()));
     }
 
     //@@author chenxing1992

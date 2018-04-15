@@ -18,13 +18,13 @@ import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.timetable.Timetable;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the NUSCouples data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
@@ -72,6 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
         partner = new Person(newData);
         updatePerson(partner);
         indicatePersonChanged(partner);
+        indicateTimetableChanged(partner.getTimetable());
     }
 
     @Override
@@ -241,7 +242,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return partner.equals(other.partner)
+        return ((partner == null && other.partner == null)
+                || (partner != null && other.partner != null && partner.equals(other.partner)))
                 && journal.equals(other.journal);
     }
 

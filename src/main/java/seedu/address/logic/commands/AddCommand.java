@@ -53,7 +53,7 @@ public class AddCommand extends UndoableCommand {
         try {
             model.addPerson(toAdd);
         } catch (DuplicatePersonException dpe) {
-            return new CommandResult(MESSAGE_MULTIPLE_PERSON);
+            throw new CommandException(MESSAGE_MULTIPLE_PERSON);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

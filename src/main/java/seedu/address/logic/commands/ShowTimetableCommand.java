@@ -10,18 +10,18 @@ import seedu.address.model.person.timetable.TimetableUtil;
 /**
  * Selects your partner from NUSCouples.
  */
-public class SelectCommand extends Command {
+public class ShowTimetableCommand extends Command {
 
-    public static final String COMMAND_WORD = "select";
-    public static final String COMMAND_ALIAS = "s";
+    public static final String COMMAND_WORD = "tview";
+    public static final String COMMAND_ALIAS = "tv";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects your partner and shows his/her timetable.\n"
+            + ": Shows your partner's NUSMods timetable.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Showing timetable of: ";
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "NUSMods timetable displayed.";
     private ReadOnlyPerson partner;
 
-    public SelectCommand() { }
+    public ShowTimetableCommand() { }
 
     @Override
     public CommandResult execute() throws CommandException {
@@ -35,13 +35,13 @@ public class SelectCommand extends Command {
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS + partner.getName()));
+        return new CommandResult(MESSAGE_SELECT_PERSON_SUCCESS);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SelectCommand); // instanceof handles nulls
+                || (other instanceof ShowTimetableCommand); // instanceof handles nulls
     }
 
 }

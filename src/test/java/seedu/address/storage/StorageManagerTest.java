@@ -35,7 +35,7 @@ public class StorageManagerTest {
         XmlJournalStorage journalStorage = new XmlJournalStorage(getTempFilePath("j"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         FileTimetableStorage timetableStorage = new FileTimetableStorage(getTempFilePath("1"),
-                getTempFilePath("2"));
+                getTempFilePath("2"), getTempFilePath("3"));
         storageManager = new StorageManager(personStorage, journalStorage, userPrefsStorage, timetableStorage);
     }
 
@@ -82,8 +82,8 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(
                 "dummy"), new XmlJournalStorage("Dummy"), new JsonUserPrefsStorage("dummy"),
-                new FileTimetableStorage("dummy",
-                        "dummy"));
+                new FileTimetableStorage("dummy1", "dummy2",
+                        "dummy3"));
         storage.handlePersonChangedEvent(new PersonChangedEvent(new Person(ALICE)));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }

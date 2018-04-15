@@ -17,10 +17,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ShowTimetableCommand}.
  */
 @Ignore
-public class SelectCommandTest {
+public class ShowTimetableCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
@@ -31,24 +31,24 @@ public class SelectCommandTest {
         model = new ModelManager(getTypicalPerson(), getTypicalJournal(), new UserPrefs());
     }
 
-    //TODO: SelectCommandTest
+    //TODO: ShowTimetableCommandTest
     @Test
     public void equals() {
-        SelectCommand selectCommand = new SelectCommand();
+        ShowTimetableCommand showTimetableCommand = new ShowTimetableCommand();
 
         // different types -> returns false
-        assertFalse(selectCommand.equals(1));
+        assertFalse(showTimetableCommand.equals(1));
 
         // null -> returns false
-        assertFalse(selectCommand.equals(null));
+        assertFalse(showTimetableCommand.equals(null));
     }
 
     /**
-     * Returns a {@code SelectCommand} with new CommandHistory and new UndoRedoStack.
+     * Returns a {@code ShowTimetableCommand} with new CommandHistory and new UndoRedoStack.
      */
-    private SelectCommand prepareCommand() {
-        SelectCommand selectCommand = new SelectCommand();
-        selectCommand.setData(model, new CommandHistory(), new UndoRedoStack());
-        return selectCommand;
+    private ShowTimetableCommand prepareCommand() {
+        ShowTimetableCommand showTimetableCommand = new ShowTimetableCommand();
+        showTimetableCommand.setData(model, new CommandHistory(), new UndoRedoStack());
+        return showTimetableCommand;
     }
 }

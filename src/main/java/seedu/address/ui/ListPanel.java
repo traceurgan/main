@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Person.PARTNER_INDEX;
+
 import java.util.logging.Logger;
 
 import org.fxmisc.easybind.EasyBind;
@@ -17,6 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.HideTimetableRequestEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.journalentry.JournalEntry;
 import seedu.address.model.person.ReadOnlyPerson;
 
@@ -91,12 +94,20 @@ public class ListPanel extends UiPart<Region> {
         });
     }
 
+    //@@author marlenekoh
+    @Subscribe
+    private void handleShowTimetableRequestEvent (ShowTimetableRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(PARTNER_INDEX);
+    }
+
     @Subscribe
     private void handleHideTimetableRequestEvent (HideTimetableRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         deselect();
     }
 
+    //@@author
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
      */
@@ -115,6 +126,7 @@ public class ListPanel extends UiPart<Region> {
         }
     }
 
+    //@@author traceurgan
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code PersonCard}.
      */
