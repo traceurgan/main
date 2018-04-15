@@ -4,6 +4,7 @@ timetable = ["", "", "", "", "", "", "", "", "", "", "", "", "", "CS2103T", "", 
 var myTimetable = "";
 var nRows = "";
 var nCells = "";
+
 function displaySchedule(){
     for (i=0; i<nRows; i++) {
         for (n=0; n<nCells; n++) {
@@ -17,4 +18,7 @@ function mapTable(){
     nCells = myTimetable.rows[0].cells.length-1;
     displaySchedule();
 }
-onload=mapTable;
+document.addEventListener("DOMContentLoaded", function(event) {
+    mapTable();
+});
+

@@ -2,21 +2,28 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import com.calendarfx.view.CalendarView;
 import com.google.common.eventbus.Subscribe;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.HideTimetableRequestEvent;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
@@ -24,16 +31,18 @@ import seedu.address.model.UserPrefs;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> {
+public class MainWindow extends UiPart<Region> {
 
     private static final String FXML = "MainWindow.fxml";
-
+    private static final int MIN_HEIGHT = 600;
+    private static final int MIN_WIDTH = 450;
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private CalendarView calendarView;
     private BrowserPanel browserPanel;
     private ListPanel listPanel;
     private Config config;
@@ -58,7 +67,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
-        super(FXML, primaryStage);
+        super(FXML);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -68,10 +77,13 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setTitle(config.getAppTitle());
+        setWindowMinSize();
         setWindowDefaultSize(prefs);
-
+        Scene scene = new Scene(getRoot());
+        primaryStage.setScene(scene);
         setAccelerators();
         registerAsAnEventHandler(this);
+
     }
 
     public Stage getPrimaryStage() {
@@ -116,8 +128,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        //browserPanel = new BrowserPanel();
-        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        browserPanel = new BrowserPanel(logic.getFilteredPersonList());
+        browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
 
         listPanel = new ListPanel(logic.getFilteredPersonList(), logic.getJournalEntryList());
         listPanelPlaceholder.getChildren().add(listPanel.getRoot());
@@ -130,6 +142,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        Platform.runLater(() -> commandBox.getCommandTextField().requestFocus());
     }
 
     void hide() {
@@ -151,6 +165,10 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setY(prefs.getGuiSettings().getWindowCoordinates().getY());
         }
     }
+    private void setWindowMinSize() {
+        primaryStage.setMinHeight(MIN_HEIGHT);
+        primaryStage.setMinWidth(MIN_WIDTH);
+    }
 
     /**
      * Returns the current size and the position of the main Window.
@@ -169,6 +187,24 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.show();
     }
 
+    //@@author marlenekoh
+    /**
+     * Replaces the Calendar with Timetable Page in Browser Panel
+     */
+    public void handleShowTimetable() {
+        browserPanel.loadTimetablePage();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+    }
+
+    /**
+     * Replaces the Timetable Page with Calendar in Browser Panel
+     */
+    public void handleHideTimetable() {
+        browserPlaceholder.getChildren().clear();
+        browserPlaceholder.getChildren().add(browserPanel.getCalendarRoot());
+    }
+
+    //@@author
     void show() {
         primaryStage.show();
     }
@@ -195,11 +231,22 @@ public class MainWindow extends UiPart<Stage> {
         handleHelp();
     }
 
-    //@@author traceurgan
-    //    @Subscribe
-    //    private void handleShowJournalWindowRequestEvent (ShowJournalWindowRequestEvent event) {
-    //        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    //        JournalWindow journalWindow = new JournalWindow();
-    //        journalWindow.show();
-    //    }
+    //@@author marlenekoh
+    @Subscribe
+    private void handleShowTimetableRequestEvent(ShowTimetableRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleShowTimetable();
+    }
+
+    @Subscribe
+    private void handleHideTimetableRequestEvent(HideTimetableRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleHideTimetable();
+    }
+
+    @Subscribe
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleShowTimetable();
+    }
 }

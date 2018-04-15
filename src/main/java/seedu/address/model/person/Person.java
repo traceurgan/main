@@ -4,14 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import seedu.address.model.person.Appointment.Appointment;
+import seedu.address.model.person.Appointment.AppointmentList;
 import seedu.address.model.person.timetable.Timetable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+
 
 //@@author chenxing1992
 /**
@@ -20,22 +24,24 @@ import seedu.address.model.tag.UniqueTagList;
  */
 public class Person implements ReadOnlyPerson {
 
+    public static final int PARTNER_INDEX = 0;
+
     private ObjectProperty<Name> name;
     private ObjectProperty<Phone> phone;
     private ObjectProperty<Email> email;
     private ObjectProperty<Address> address;
     private ObjectProperty<Timetable> timetable;
     private ObjectProperty<UniqueTagList> tags;
-
+    private ObjectProperty<AppointmentList> appointments;
 
     //@@author chenxing1992
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Timetable timetable, Set<Tag> tags) {
+                  Timetable timetable, Set<Tag> tags, List<Appointment> appointments) {
 
-        requireAllNonNull(name, phone, email, address, timetable, tags);
+        requireAllNonNull(name, phone, email, address, timetable, tags, appointments);
 
         this.name = new SimpleObjectProperty<>(name);
         this.phone = new SimpleObjectProperty<>(phone);
@@ -44,6 +50,7 @@ public class Person implements ReadOnlyPerson {
         this.timetable = new SimpleObjectProperty<>(timetable);
         // protect internal tags from changes in the arg list
         this.tags = new SimpleObjectProperty<>(new UniqueTagList(tags));
+        this.appointments = new SimpleObjectProperty<>(new AppointmentList(appointments));
 
     }
 
@@ -53,7 +60,7 @@ public class Person implements ReadOnlyPerson {
      */
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),
-                source.getTimetable(), source.getTags());
+                source.getTimetable(), source.getTags(), source.getAppointments());
     }
     public void setName(Name name) {
         this.name.set(requireNonNull(name));
@@ -135,6 +142,20 @@ public class Person implements ReadOnlyPerson {
 
     public ObjectProperty<UniqueTagList> tagProperty() {
         return tags;
+    }
+
+    @Override
+    public ObjectProperty<AppointmentList> appointmentProperty() {
+        return appointments;
+    }
+
+    @Override
+    public List<Appointment> getAppointments() {
+        return appointments.get().toList();
+    }
+
+    public void setAppointment(List<Appointment> appointments) {
+        this.appointments.set(new AppointmentList(appointments));
     }
 
     /**
