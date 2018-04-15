@@ -88,5 +88,4 @@ public class XmlPersonStorage implements PersonStorage {
         XmlFileStorage.saveDataToFile(file, xsp);
 
     }
-
 }

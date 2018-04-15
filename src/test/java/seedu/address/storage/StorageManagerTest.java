@@ -13,9 +13,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
 import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.model.Journal;
+import seedu.address.model.ReadOnlyJournal;
 import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
@@ -91,20 +94,7 @@ public class StorageManagerTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
-    //@@author marlenekoh
-    @Test
-    public void handleTimetableChangedEvent_eventRaised() {
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(
-                "dummy"), new XmlJournalStorage("dummy"), new JsonUserPrefsStorage("dummy"),
-                new FileTimetableStorage("dummy1", "dummy2",
-                        "dummy3"));
-        Person person = new Person(ALICE);
-        storage.handleTimetableChangedEvent(new TimetableChangedEvent(new Timetable(person.getTimetable().value)));
-        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ShowTimetableRequestEvent);
-    }
 
-
-    //@@author
     /**
      * A Stub class to throw an exception when the save method is called
      */
@@ -116,6 +106,21 @@ public class StorageManagerTest {
 
         @Override
         public void savePerson(ReadOnlyPerson person, String filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlJournalStorageExceptionThrowingStub extends XmlJournalStorage {
+
+        public XmlJournalStorageExceptionThrowingStub(String filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveJournal(ReadOnlyJournal readOnlyJournal, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
