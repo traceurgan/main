@@ -48,6 +48,7 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address, String timetable,
                             List<XmlAdaptedAppointment> appointments) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -121,6 +122,11 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Timetable.MESSAGE_TIMETABLE_CONSTRAINTS);
         }
         final Timetable timetable = new Timetable(this.timetable);
+
+        if (this.appointments == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
+        }
 
         final List<Appointment> personAppointmentList = new ArrayList<>();
         for (XmlAdaptedAppointment appointment : appointments) {
