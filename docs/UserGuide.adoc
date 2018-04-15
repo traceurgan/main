@@ -75,13 +75,16 @@ _NUSCouples_, you can type either `add n/John Doe` or `a n/John Doe`.
 ==== Viewing help : `help`
 
 Format: `help` +
-Alias: `hlp`
+Alias: `hlp` +
+image:screenshots/23Help.png[width="790"]
 
 ==== Adding your partner : `add`
 
 Adds your partner to _NUSCouples_. +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
 Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL`
+image:screenshots/addcmd.png[width="790"]
+image:screenshots/2Add.png[width="790"]
 
 ****
 * The timetable url provided has to be a valid https://nusmods.com[NUSMods] short URL.
