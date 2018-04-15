@@ -301,13 +301,16 @@ The images below shows the before and after calendar view after you have execute
 As you can see, after the commands are executed the footer will display the updated time as well and result panel will
 display `appointment canceled`. When there is no events on that day, the calendar will also display `no entries` too.
 
-Screenshot: Before +
+Screenshot: The View of Calendar Before excecuting delete event cammands +
 
 image::beforeCancelCal.png[width="650"]
 
-Screenshot: After +
+
+Screenshot: The View of Calendar After executing delete event commands +
+
 
 image::afterCancelCal.png[width="650"]
+
 
 ==== Accessibility
 
