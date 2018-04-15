@@ -354,6 +354,8 @@ Move Cursor to behind (MAC USERS): `Shift Option` +
 |===
 
 // end::CalendarCommands[]
+
+// tag::journal[]
 === Journal
 
 _NUSCouples_ provides you with a space to write, save and view journal entries. The list of saved journal entries will
@@ -389,6 +391,9 @@ window is closed.+
 
 Format: `jview` +
 Alias: `jv`
+
+// end::journal[]
+
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +

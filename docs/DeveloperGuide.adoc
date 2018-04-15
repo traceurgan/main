@@ -665,6 +665,7 @@ image::AddTimetableSequenceDiagram.png[width="650"]
 | [.small]#Return to <<toc,Table of Contents>># +
 |===
 
+//tag::journal[]
 === Journal feature
 ==== Current Implementation
 
@@ -731,6 +732,8 @@ journal entries.
 * **Alternative 2:** Allow user to name journal entries.
 ** Pros: User can distinguish between files easily.
 ** Cons: If duplicate names are allowed, we need to distinguish them with another method. If duplicate names are not allowed, user may struggle to find unique names for every entry.
+
+// end::journal[]
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
