@@ -13,17 +13,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.JournalChangedEvent;
 import seedu.address.commons.events.model.PersonChangedEvent;
-import seedu.address.commons.events.model.TimetableChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.Journal;
 import seedu.address.model.ReadOnlyJournal;
-import seedu.address.commons.events.ui.ShowTimetableRequestEvent;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.ReadOnlyPerson;
-import seedu.address.model.person.timetable.Timetable;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {

@@ -83,10 +83,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyPerson getPartner() throws NullPointerException {
-        if (partner == null) {
-            throw new NullPointerException();
-        }
+    public ReadOnlyPerson getPartner() {
         return partner;
     }
 

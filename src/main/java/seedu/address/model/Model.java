@@ -21,7 +21,7 @@ public interface Model {
     void resetPersonData(ReadOnlyPerson newData);
 
     /** Returns the Person */
-    ReadOnlyPerson getPartner() throws NullPointerException;
+    ReadOnlyPerson getPartner();
 
     //@@author traceurgan
     /** Returns the Journal */

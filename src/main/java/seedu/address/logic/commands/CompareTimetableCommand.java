@@ -35,10 +35,13 @@ public class CompareTimetableCommand extends Command {
     public CommandResult execute() throws CommandException {
         try {
             partner = model.getPartner();
-
+            if (partner == null) {
+                throw new NullPointerException();
+            }
         } catch (NullPointerException npe) {
             throw new CommandException(MESSAGE_INVALID_PERSON);
         }
+
         if (otherTimetable == null) {
             throw new CommandException(MESSAGE_TIMETABLE_COMPARE_FAILURE);
         }
