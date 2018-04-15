@@ -482,6 +482,7 @@ The sequence diagram below shows interactions within the `Logic` Component for O
 
 image::viewCalendarSeqDiagram.png[width="850"]
 
+
 ==== Design Considerations
 ===== Aspect: Implementation of Google Calendar feature
 * **Alternative 1 (current choice):** Data are not save locally.
