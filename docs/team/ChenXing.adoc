@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Chen Xing - Project Portfolio
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
@@ -57,9 +57,11 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=CalendarCommands]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=googleAPI]
+
+include::../UserGuide.adoc[tag=CommandSummary]
 
 == Contributions to the Developer Guide
 
