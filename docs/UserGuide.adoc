@@ -2,6 +2,7 @@
 :toc:
 :toc-title: Table of Contents
 :toc-placement: preamble
+:toclevels: 3
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
@@ -220,15 +221,14 @@ Refer to <<Adding your partner : `add`>>
 
 Refer to <<Editing your partner : `edit`>>
 
-==== Viewing your partner's timetable : `select`[Since v1.4]
+==== Viewing your partner's timetable : `tview`[Since v1.4]
 
 Shows the current saved timetable of your partner. +
-Format: `select` +
-Alias: `s`
+Format: `tview` +
+Alias: `tv`
 
-Timetable display will be shown.
 
-==== Comparing timetable : `tcompare` [Coming in v1.5]
+==== Comparing timetable : `tcompare` [Since v1.5]
 
 Displays the common breaks shared by the given timetable and your partner's timetable in a timetable format. +
 Format: `tcompare tt/TIMETABLE_URL` +
