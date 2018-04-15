@@ -17,8 +17,8 @@ By: `Team T09-B4`      Since: `Feb 2018`      Licence: `MIT`
 
 Welcome to the User Guide for _NUSCouples_!
 
-_NUSCouples_ is a desktop app *specially made for you*, couples from National University of Singapore (NUS),
-to create and remember memories with ease amid our *hectic school term*. Imagine what it would be like to be able
+_NUSCouples_ is a desktop app *specially made for you*, couples from the National University of Singapore (NUS),
+to create memories easily amid our *hectic school term*. Imagine what it would be like to be able
 identify common breaks, schedule meetings and view important dates with your partner, and record your thoughts or
 feelings, *all in the same application* mere keystrokes away. Best of all, *everything* can be controlled from the
 handy Command Line Interface (CLI). Experience the *clarity* that comes with a Graphical User Interface (GUI), with
