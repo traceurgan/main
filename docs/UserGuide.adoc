@@ -82,8 +82,12 @@ image:screenshots/23Help.png[width="790"]
 
 Adds your partner to _NUSCouples_. +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
-Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL`
-image:screenshots/addcmd.png[width="790"]
+Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
+
+Screenshot: Before +
+image:screenshots/addcmd.png[width="790"] +
+
+Screenshot: After +
 image:screenshots/2Add.png[width="790"]
 
 ****
@@ -100,7 +104,13 @@ Examples:
 
 Edits your existing partner in _NUSCouples_. +
 Format: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
-Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]`
+Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
+
+Screenshot: Before +
+image:screenshots/14EditTT.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/15EditTTAfter.png[width="790"] +
 
 ****
 * At least one of the optional fields must be provided.
@@ -119,7 +129,13 @@ Edits the name of your partner to be `Betsy Crower`.
 
 Deletes your partner from _NUSCouples_. +
 Format: `delete` +
-Alias: `d`
+Alias: `d` +
+
+Screenshot: Before +
+image:screenshots/10Delete.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/11DeleteAfter.png[width="790"] +
 
 ****
 * Deletes your partner.
@@ -130,7 +146,13 @@ Alias: `d`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
-Alias: `hist`
+Alias: `hist` +
+
+Screenshot: Before +
+image:screenshots/histcmd.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/histcmdafter.png[width="790"] +
 
 [NOTE]
 ====
@@ -143,7 +165,13 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 
 Restores _NUSCouples_ to the state before the previous "undoable command" was executed. +
 Format: `undo` +
-Alias: `u`
+Alias: `u` +
+
+Screenshot: Before +
+image:screenshots/16EditUndo.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/17EditUndoAfter.png[width="790"] +
 
 [NOTE]
 ====
@@ -170,6 +198,12 @@ The `undo` command fails as there are no undoable commands executed previously.
 Reverses the most recent `undo` command. +
 Format: `redo` +
 Alias: `r`
+
+Screenshot: Before +
+image:screenshots/18EditRedo.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/19EditRedoAfter.png[width="790"] +
 
 Examples:
 
@@ -307,11 +341,9 @@ As you can see, after the commands are executed the footer will display the upda
 display `appointment canceled`. When there is no events on that day, the calendar will also display `no entries` too.
 
 Screenshot: Before +
-
 image::beforeCancelCal.png[width="650"]
 
 Screenshot: After +
-
 image::afterCancelCal.png[width="650"]
 
 ==== Accessibility
@@ -348,25 +380,22 @@ copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will 
 restart the app.
 
 Format: `jnew` +
-Alias: `jn`
+Alias: `jn` +
+
+Screenshot: Before +
+image:screenshots/20Jnew.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/21JnewAfter1.png[width="395"]
+image:screenshots/22JnewAfter2.png[width="395"] +
+
 
 ==== Viewing journal entries : `jview` [Coming in v1.5]
 
 Selects a journal entry from the list seen in the GUI. The contents of the journal entry will be shown in the main
 window. +
 Format: `jview` +
-Alias: `jv`
-
-|===
-| [.small]#Return to <<toc,Table of Contents>># +
-|===
-
-=== Motivational Picture
-==== Send motivational picture via app : `motivate`
-
-Shows the location (by building) of the entered classroom name. +
-Format: `motivate` +
-_There is no alias for this feature currently._
+Alias: `jv` +
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
@@ -404,6 +433,12 @@ Alias: `jf` +
 Shows the location (by building) of the entered classroom name. +
 Format: `location` +
 Alias: `loc` +
+
+==== Send motivational picture via app `[coming in v2.90]`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `motivate` +
+_There is no alias for this feature currently._
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
