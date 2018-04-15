@@ -41,7 +41,7 @@ public class XmlUtilTest {
     private static final String VALID_ADDRESS = "4th street";
     private static final String VALID_TIMETABLE = "http://modsn.us/wNuIW";
     private static final List<XmlAdaptedAppointment> VALID_APPOINTMENT = AMY.getAppointments().stream()
-            .map(XmlAdaptedAppointment::new).collect(Collectors.toList());;
+            .map(XmlAdaptedAppointment::new).collect(Collectors.toList());
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
