@@ -41,11 +41,16 @@ public class FileTimetableStorageTest {
     public void initialize() throws IOException {
         fileTimetableStorage = new FileTimetableStorage(TIMETABLE_PAGE_HTML_PATH, TIMETABLE_PAGE_CSS_PATH,
                 TIMETABLE_DISPLAY_INFO_FILE_PATH);
+        File testFile = new File(TEST_PATH);
         File file1 = new File(TIMETABLE_PAGE_HTML_PATH);
         File file2 = new File(TIMETABLE_PAGE_CSS_PATH);
         File file3 = new File(TIMETABLE_DISPLAY_INFO_FILE_PATH);
 
-        PrintWriter writer = new PrintWriter(file1);
+        PrintWriter writer = new PrintWriter(testFile);
+        writer.print("hello 123\n");
+        writer.close();
+
+        writer = new PrintWriter(file1);
         writer.print("");
         writer.close();
 
