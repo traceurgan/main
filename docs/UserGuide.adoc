@@ -2,6 +2,7 @@
 :toc:
 :toc-title: Table of Contents
 :toc-placement: preamble
+:toclevels: 3
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
@@ -22,7 +23,9 @@ to create memories easily amid our *hectic school term*. Imagine what it would b
 identify common breaks, schedule meetings and view important dates with your partner, and record your thoughts or
 feelings, *all in the same application* mere keystrokes away. Best of all, *everything* can be controlled from the
 handy Command Line Interface (CLI). Experience the *clarity* that comes with a Graphical User Interface (GUI), with
-none of the *pain* of searching for and remembering where each button is. Interested yet? Jump to <<Quick Start>> to
+none of the *pain* of searching for and remembering where each button is.
+
+Interested yet? Jump to <<Quick Start>> to
 get started. Enjoy!
 
 == Quick Start
@@ -42,7 +45,16 @@ This app will not work with earlier versions of Java 8.
 `C:\Users\[Username]\Desktop\NUSCouples`.
 .  Double-click the file to start the app. The app window as seen below, should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image:screenshots/0Labels.png[width="790"]
+[width="100%",cols="<20%, <80%",options="header",]
+|===
+|1 | Partner details
+|2 | List of Journal entries
+|3 | Calendar/Timetable display
+|4 | Result display
+|5 | Command box
+|===
+
 +
 *Congratulations, you have successfully installed _NUSCouples_. Read on for some examples on commands you can try if
 you are using the app for the first time!*
@@ -89,7 +101,8 @@ This section is for all commands that are not specific to our timetable feature,
 If you are ever unsure of what to do, use this command to display this UserGuide whenever you need it.
 
 Format: `help` +
-Alias: `hlp`
+Alias: `hlp` +
+image:screenshots/23Help.png[width="790"]
 
 ==== Adding your partner : `add`
 
@@ -98,7 +111,13 @@ to our amazing app. *All fields are necessary, but they can be in any order.*
 
 Adds your partner to _NUSCouples_. +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
-Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL`
+Alias: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS tt/TIMETABLE_URL` +
+
+Screenshot: Before +
+image:screenshots/addcmd.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/2Add.png[width="790"]
 
 ****
 * The timetable url provided has to be a valid https://nusmods.com[NUSMods] short URL.
@@ -117,7 +136,13 @@ field must be provided.
 
 Edits your existing partner in _NUSCouples_. +
 Format: `edit [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
-Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]`
+Alias: `ed [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tt/TIMETABLE_URL]` +
+
+Screenshot: Before +
+image:screenshots/14EditTT.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/15EditTTAfter.png[width="790"] +
 
 ****
 * At least one of the optional fields must be provided.
@@ -139,7 +164,13 @@ add them again.
 
 Deletes your partner from _NUSCouples_. +
 Format: `delete` +
-Alias: `d`
+Alias: `d` +
+
+Screenshot: Before +
+image:screenshots/10Delete.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/11DeleteAfter.png[width="790"] +
 
 ****
 * Deletes your partner.
@@ -153,7 +184,13 @@ have entered the wrong command.
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history` +
-Alias: `hist`
+Alias: `hist` +
+
+Screenshot: Before +
+image:screenshots/histcmd.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/histcmdafter.png[width="790"] +
 
 [NOTE]
 ====
@@ -169,7 +206,13 @@ right now. Read on for more details.
 
 Restores _NUSCouples_ to the state before the previous "undoable command" was executed. +
 Format: `undo` +
-Alias: `u`
+Alias: `u` +
+
+Screenshot: Before +
+image:screenshots/16EditUndo.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/17EditUndoAfter.png[width="790"] +
 
 [NOTE]
 ====
@@ -199,6 +242,12 @@ Did you undo a command, only to change your mind? We have a command just for you
 Reverses the most recent `undo` command. +
 Format: `redo` +
 Alias: `r`
+
+Screenshot: Before +
+image:screenshots/18EditRedo.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/19EditRedoAfter.png[width="790"] +
 
 Examples:
 
@@ -253,15 +302,14 @@ Refer to <<Adding your partner : `add`>>
 
 Refer to <<Editing your partner : `edit`>>
 
-==== Viewing your partner's timetable : `select`[Since v1.4]
+==== Viewing your partner's timetable : `tview`[Since v1.4]
 
 Shows the current saved timetable of your partner. +
-Format: `select` +
-Alias: `s`
+Format: `tview` +
+Alias: `tv`
 
-Timetable display will be shown.
 
-==== Comparing timetable : `tcompare` [Coming in v1.5]
+==== Comparing timetable : `tcompare` [Since v1.5]
 
 Displays the common breaks shared by the given timetable and your partner's timetable in a timetable format. +
 Format: `tcompare tt/TIMETABLE_URL` +
@@ -287,7 +335,7 @@ Examples:
 === Calendar
 ==== When you want to check which are the available dates you are free: `Calendar`
 
-View calendar. +
+View calendar function. +
 Format: `calander` +
 Alias: `cal` +
 
@@ -303,7 +351,7 @@ in the command box. From the calendar, you can see if there is any events on tha
 image::CalendarView.png[width="650"]
 ==== When you have a date with your partner then you decides to add the event to the Calendar after making sure that there are no clashes with your timetable nor schedules: `Appointment`
 
-Adds new event to calendar. +
+Adds new event to the calendar. +
 Format: `appointment` +
 Alias: `appt`
 
@@ -322,7 +370,7 @@ image::CalendarAdd.png[width="650"]
 
 ==== When your partner suddenly cannot make it on the scheduled event: `cancel`
 
-Delete specified event from calendar. +
+Delete specified event from the calendar. +
 Format: `cancel` +
 Alias: Nil
 
@@ -334,11 +382,13 @@ The images below shows the before and after calendar view after you have execute
 As you can see, after the commands are executed the footer will display the updated time as well and result panel will
 display `appointment canceled`. When there is no events on that day, the calendar will also display `no entries` too.
 
-Screenshot: Before +
+Screenshot: The Calendar View before you enter the Cancel Command  +
+
 
 image::beforeCancelCal.png[width="650"]
 
-Screenshot: After +
+Screenshot: The Calendar View after you enter the Cancel Command +
+
 
 image::afterCancelCal.png[width="650"]
 
@@ -381,7 +431,15 @@ copy your text to your computer clipboard using kbd:[ctr] + kbd:[c] so you will 
 restart the app.
 
 Format: `jnew` +
-Alias: `jn`
+Alias: `jn` +
+
+Screenshot: Before +
+image:screenshots/20Jnew.png[width="790"] +
+
+Screenshot: After +
+image:screenshots/21JnewAfter1.png[width="395"]
+image:screenshots/22JnewAfter2.png[width="395"] +
+
 
 ==== Viewing journal entries : `jview`
 
@@ -390,21 +448,7 @@ window. Opening a journal window while a journal entry is displayed will display
 window is closed.+
 
 Format: `jview` +
-Alias: `jv`
-
-// end::journal[]
-
-
-|===
-| [.small]#Return to <<toc,Table of Contents>># +
-|===
-
-=== Motivational Picture
-==== Send motivational picture via app : `motivate`
-
-Shows the location (by building) of the entered classroom name. +
-Format: `motivate` +
-_There is no alias for this feature currently._
+Alias: `jv` +
 
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
@@ -443,6 +487,12 @@ Shows the location (by building) of the entered classroom name. +
 Format: `location` +
 Alias: `loc` +
 
+==== Send motivational picture via app `[coming in v2.90]`
+
+Shows the location (by building) of the entered classroom name. +
+Format: `motivate` +
+_There is no alias for this feature currently._
+
 |===
 | [.small]#Return to <<toc,Table of Contents>># +
 |===
@@ -464,6 +514,9 @@ folder in the original directory was moved to the new directory. For example, if
 `C:\Program Files (x86)\NUSCouples` to `C:\Users\[Username]\Desktop\NUSCouples`, you should move the data folder
 `C:\Program Files (x86)\NUSCouples\data` to `C:\Users\[Username]\Desktop\NUSCouples\data` +
 
+*Q: Can this app run on mobile devices or tablets?* +
+
+*A:* No, this is a desktop app. To be more specific, you are not required to use cursor mouse to handle the App because it is CLI based
 If the files in the data folder have been manually edited, _NUSCouples_ may not be able to read the data properly.
 _NUSCouples_ takes no responsibility for data loss/ data corruption due to unintended user behavior affecting the data
 folder, such as deletion or editing of files manually. +
