@@ -710,6 +710,17 @@ The following code snippets show how they are handled.
     }
 ----
 
+==== Design Considerations
+===== Aspect: Implementation of storing Timetable Information
+* **Alternative 1 (current choice):** Stores Information in a HTML file. Edits the javascript array in the HTML file to
+change the contents of the tables.
+** Pros: Easy to implement.
+** Cons: GUI will be a static web page.
+* **Alternative 2:** Use JavaFX
+** Pros: Provides a friendlier GUI (able to drag and drop table view).
+** Cons: Takes longer to load and display.
+
+
 ==== Comparing Timetables
 
 The sequence diagram below shows interactions within the `Logic` Component for the `execute(“tc tt/http://modsn.us/q7cLP”)`
